@@ -1,0 +1,27 @@
+- Features:
+
+1 warp command
+1 warppoint command
+1 heal command
+1 damage command
+1 chatclear command
+1 enderchest command
+1 invsee command
+1 mute command
+1 unmute command
+1 joinmessage command
+1 tphere command
+1 gmc command
+1 gmsp command
+1 gms command
+1 gma command
+
+0 countdown command
+0 tpa command
+0 tpahere command
+0 inventory command
+0 spawnmanager command
+0 destructionmanager-inventory to manage which entities (Creepers, Villagers, TNT...) can destroy what
+0 /freezemobs: (toggle) sets all entities' NoAI to true and disables mob spawns
+0 /repair: repairs the targeted player's items
+0

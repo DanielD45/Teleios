@@ -1,0 +1,256 @@
+name: Teleios
+version: 1.2-WIP
+main: de.daniel_d45.teleios.core.main.Main
+description: Adds many different features to your server which can be turned on and off using the /manageteleios command. The plugin data is stored in the config file.
+api-version: 1.19
+author: Daniel_D45
+
+
+commands:
+
+  chatclear:
+    aliases:
+      - cc
+    permission: teleios.adminfeatures.chatclear
+    description: Clears the chat.
+    usage: /chatclear
+
+  damage:
+    aliases:
+      - d
+      - dam
+    permission: teleios.adminfeatures.damage
+    description: Damages you or another player.
+    usage: /damage [Amount]|([Player]) ([Amount])
+
+  gma:
+    permission: teleios.adminfeatures.gma
+    description: Sets you or another player in adventure mode.
+    usage: /gma ([Player])
+
+  gmc:
+    permission: teleios.adminfeatures.gmc
+    description: Sets you or another player in creative mode.
+    usage: /gmc ([Player])
+
+  gms:
+    permission: teleios.adminfeatures.gms
+    description: Sets you or another player in survival mode.
+    usage: /gms ([Player])
+
+  gmsp:
+    permission: teleios.adminfeatures.gmsp
+    description: Sets you or another player in spectator mode.
+    usage: /gmsp ([Player])
+
+  heal:
+    aliases:
+      - h
+    permission: teleios.adminfeatures.heal
+    description: Heals you or another player.
+    usage: /heal ([Amount])|{[Player])} ({([Amount])})
+
+  inventories:
+    aliases:
+      - invs
+    permission: teleios.adminfeatures.inventories
+    description: Let's you create, open and manage custom inventories with an amount of rows lower than 7.
+    usage: /inventories list|clear|(open)|(remove)|{(create)} ([Name]) {([Rows])}
+
+  joinmessage:
+    aliases:
+      - jm
+    permission: teleios.adminfeatures.joinmessage
+    description: Lets you enable or disable the join message.
+    usage: /joinmessage enable/true|disable/false
+
+  mute:
+    aliases:
+      - m
+    permission: teleios.adminfeatures.mute
+    description: Lets you mute players.
+    usage: /mute [Player]
+
+  openinventory:
+    aliases:
+      - oi
+      - openinv
+    permission: teleios.adminfeatures.openinventory
+    description: Opens the specified player's inventory.
+    usage: /openinventory [Player]
+
+  tphere:
+    aliases:
+      - tph
+    permission: teleios.adminfeatures.tphere
+    description: Teleports another player to you.
+    usage: /tphere [Player]
+
+  unmute:
+    aliases:
+      - um
+    permission: teleios.adminfeatures.unmute
+    description: Lets you unmute players.
+    usage: /unmute [Player]
+
+
+  configureteleporter:
+    aliases:
+      - ctp
+    permission: teleios.bettergameplay.configureteleporter
+    description: Lets you change the name of a teleporter you hold in your hand.
+    usage: /configureteleporter [Name]
+
+  enderchest:
+    aliases:
+      - ec
+    permission: teleios.bettergameplay.enderchest
+    description: Opens your enderchest.
+    usage: /enderchest
+
+  setblocksperpearl:
+    aliases:
+      - setbpp
+      - sbpp
+    permission: teleios.bettergameplay.setblocksperpearl
+    description: Lets you see and change the amount of blocks you have to pay one ender pearl for when warping to a teleporter.
+    usage: /setblocksperpearl ([Amount])
+
+  warp:
+    aliases:
+      - w
+    permission: teleios.bettergameplay.warp
+    description: Lists available teleporters and warppoints and warps you there.
+    usage: /warp list|[Teleporter]|[Warppoint]
+
+  warppoint:
+    aliases:
+      - wp
+    permission: teleios.bettergameplay.warppoint
+    description: Lets you modify warppoints.
+    usage: /warppoint list|clear|(add)|(remove)|(override) ([Name])
+
+  warppouch:
+    aliases:
+      - wpp
+    permission: teleios.bettergameplay.warppouch
+    description: Lets you see and deposit ender pearls in your warppouch.
+    usage: /warppouch (view/show)|{(deposit/put)} {([Amount])}
+
+
+  manageteleios:
+    aliases:
+      - mtl
+    permission: teleios.adminfeatures.manageteleios
+    description: Let's you enable and disable the plugin segments and functionality.
+    usage: /manageteleios
+
+  setdebuglevel:
+    aliases:
+      - sdl
+      - setdl
+    permission: teleios.core.setdebuglevel
+    description: Shows and sets the debug level (affecting the plugin outputs) to the specified integer from 0 to 3, where 0 = only plugin start, 1 = + errors, 2 = + method calls and 3 = + chat messages of everything.
+    usage: /setdebuglevel ([Level])
+
+
+  skills:
+    aliases:
+      - s
+    permission: teleios.passiveskills.skills
+    description: Shows your skills in an inventory.
+    usage: /skills
+
+
+permissions:
+
+  teleios.adminfeatures.chatclear:
+    description: Allows the chatclear command.
+    default: op
+
+  teleios.adminfeatures.damage:
+    description: Allows the damage command.
+    default: op
+
+  teleios.adminfeatures.gma:
+    description: Allows the gma command.
+    default: op
+
+  teleios.adminfeatures.gmc:
+    description: Allows the gmc command.
+    default: op
+
+  teleios.adminfeatures.gms:
+    description: Allows the gms command.
+    default: op
+
+  teleios.adminfeatures.gmsp:
+    description: Allows the gmsp command.
+    default: op
+
+  teleios.adminfeatures.heal:
+    description: Allows the heal command.
+    default: op
+
+  teleios.adminfeatures.inventories:
+    description: Allows the inventories command.
+    default: op
+
+  teleios.adminfeatures.joinmessage:
+    description: Allows the joinmessage command.
+    default: op
+
+  teleios.adminfeatures.mute:
+    description: Allows the mute command.
+    default: op
+
+  teleios.adminfeatures.openinventory:
+    description: Allows the openinventory command.
+    default: op
+
+  teleios.adminfeatures.tphere:
+    description: Allows the tphere command.
+    default: op
+
+  teleios.adminfeatures.unmute:
+    description: Allows the unmute command.
+    default: op
+
+
+  teleios.bettergameplay.configureteleporter:
+    description: Allows the configureteleporter command.
+    default: true
+
+  teleios.bettergameplay.enderchest:
+    description: Allows the enderchest command.
+    default: true
+
+  teleios.bettergameplay.setblocksperpearl:
+    description: Allows the setblocksperpearl command.
+    default: op
+
+  teleios.bettergameplay.warp:
+    description: Allows the warp command.
+    default: true
+
+  teleios.bettergameplay.warppoint:
+    description: Allows the warppoint command.
+    default: op
+
+  teleios.bettergameplay.warppouch:
+    description: Allows the warppouch command.
+    default: true
+
+
+  teleios.core.manageteleios:
+    description: Allows the manageteleios command.
+    default: op
+
+  teleios.core.setdebuglevel:
+    description: Allows the setdebuglevel command.
+    default: op
+
+
+  teleios.passiveskills.skills:
+    description: Allows the skills command.
+    default: true

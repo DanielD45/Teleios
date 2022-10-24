@@ -1,0 +1,44 @@
+- Plugin name:
+
+Greek: Téleios (Τέλειος) = English: complete
+pronounciation: pronounced like TELL|e|os
+
+
+- Debug message colours:
+
+§a - green:		method ran successfully.
+§7 - grey:		method ran without real impact / method skipped.
+§4 - dark red:	method failed.
+
+
+- Features:
+
+1 setdebuglevel command
+1 activationstate enum
+1 manageteleios command
+
+
+- Chat message colours:
+
+§a - green 	/ §6 - gold:		success message.
+§e - yellow / §6 - gold:		skip/info message.
+§c - red 	/ §4 - dark_red:	fail message.
+
+
+- Data structure for the plugin.yml:
+
+commands:
+   [command]:
+      aliases:
+      - [c]
+      permission: teleios.[segment].[command]
+      description: [description]
+      usage: /[command]
+
+permissions:
+   teleios.[segment].[command]:
+      description: Allows the [command] command.
+      default: true
+   teleios.[segment].[command]:
+      description: Allows the [command] command.
+      default: op

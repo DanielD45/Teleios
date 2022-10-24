@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Teleios" pattern="file[Teleios]:*/" />
+</component>

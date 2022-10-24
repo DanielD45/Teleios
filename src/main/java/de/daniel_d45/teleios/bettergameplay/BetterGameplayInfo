@@ -1,0 +1,57 @@
+- Features:
+
+1 Enderchest command
+1 Teleporters:
+    0 teleporters with restricted access
+    0 distance calculation with Pythagoras
+    0 group teleporters by dimension
+    0 show the teleporter's teleportation cost when listing
+0 enchantments on items upgrade over time (xp collected?)
+0 Printstat command: prints the player's stats to the chat
+0 block which can salvage items/blocks (wooden stairs...)
+0 right click on shulker boxes in inventory to open them
+0 a bow which shoots straight (very fast)
+0 chickens rarely drop special loot instead of eggs?
+0 swords can be upgraded in material, keeping the enchantments
+0 quarz blocks can be crafted into 9 quarz
+
+- CreatureEvolution sub segment:
+0 some mobs spawn with different abilities and drops
+0 higher range of health, damage etc.
+0 random events (trigger: listener for specific time + randomness)
+0 some monsters are neutral
+0 some monsters fight each other
+0 green witches that throw supporting potions
+
+
+- PassiveSkills sub segment:
+1 save file: config
+1 list all players with their skills
+1 apply factor and increase BlockValue on block break
+1 test for level-ups
+1 increase the right value on level-up
+1 command to query skills
+1 search and use config on plugin start
+1 command to change DebugLevel
+
+0 command to show skill leaderboards
+0 command to remove players
+
+- Config file structure example:
+
+Players
+	Spieler1
+		LumberJackSkill
+			BlockValue = 64.0
+			BonusMultiplier = 0.05
+		MinerSkill
+			BlockValue = 5.0
+			BonusMultiplier = 0.0
+
+	Spieler2
+		LumberJackSkill
+			BlockValue = 128.0
+			BonusMultiplier = 0.1
+		MinerSkill
+			BlockValue = 1280.0
+			BonusMultiplier = 1.0
