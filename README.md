@@ -1,12 +1,17 @@
 # Teleios
 
 Welcome to the Teleios Minecraft Plugin.
-This is a small project I code on my own, I will update it sporadically.
+This is a small project I code on my own, I will update it sporadically. The design philosophy is: 
+- features and commands should be easy to understand and user friendly
+- all functionality should be optional and precisely selectable
 
+<br/>
 
 ## Current functionality
 Teleios is set up in segments which can be turned on and off individually. Some functionality can be managed more precisely 
 than switching the whole segment on or off. What can be switched on or off is marked with "*" in the following list.
+
+<br/>
 
 ### Core segment (always active)
 - /manageteleios (/mtl) command: opens an inventory to manage all plugin functionality. When you add the plugin to your server, 
@@ -16,6 +21,8 @@ than switching the whole segment on or off. What can be switched on or off is ma
   1 = plugin start / plugin end + error messages will be written to the terminal, <br/>
   2 = plugin start / plugin end + error messages + method calls will be written to the terminal, <br/>
   3 = plugin start / plugin end + error messages + method calls will be written to the terminal and in the in-game chat <br/>
+
+<br/>
 
 ### AdminFeatures segment (*)
 The AdminFeatures segment adds convenient admin-only commands.
@@ -37,6 +44,8 @@ The AdminFeatures segment adds convenient admin-only commands.
   AdminFeature segment must be active. To use the /warp command, the BetterGameplay segment must be active. <br/> 
   Warppoints can be listed alongside teleporters with "/warp list".
 
+<br/>
+
 ### BetterGameplay segment (*)
 The BetterGameplay segment adds features for a better survival experience. Most commands from this segment can be used by everyone if <br/> 
 the respective command has been activated.
@@ -54,8 +63,12 @@ the respective command has been activated.
   - /warp (/w): used to list all warppoints and teleporters and to warp you to them
   - /warppouch (/wpp): lets you see and deposit ender pearls in your warp pouch
 
+<br/>
+
 ### PassiveSkills segment (*)
 The PassiveSkills segment is currently WIP and doesn't work yet.
+
+<br/>
 
 ### WorldMaster segment (*)
 The WorldMaster segment is not implemented yet.
