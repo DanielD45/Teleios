@@ -27,13 +27,6 @@ public class SetblocksperpearlCommand implements CommandExecutor {
                 return true;
             }
 
-            // Sender permission check
-            if (!sender.hasPermission("teleios.bettergameplay.setblocksperpearl")) {
-                sender.sendMessage("§cMissing Permissions!");
-                MessageMaster.sendSkipMessage("SetblocksperpearlCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), the sender doesn't have the needed permissions.");
-                return true;
-            }
-
             switch (args.length) {
                 case 0:
                     // Specifies /setblocksperpearl
@@ -41,7 +34,7 @@ public class SetblocksperpearlCommand implements CommandExecutor {
 
                         // TODO Add Exception handling when BlocksPerPeal has a cursed value
                         // Tells the sender the value of the BlocksPerPearl argument
-                        sender.sendMessage("§aYou can currently teleport §6" + ConfigEditor.get("BlocksPerPearl") + "§a blocks per ender pearl.");
+                        sender.sendMessage("§aYou can currently warp §6" + ConfigEditor.get("BlocksPerPearl") + "§a blocks per ender pearl.");
                         return true;
                     } catch (Exception e) {
                         sender.sendMessage("§cCould not execute the command correctly!");
@@ -52,10 +45,17 @@ public class SetblocksperpearlCommand implements CommandExecutor {
                     // Specifies /setblocksperpearl [Amount]
                     try {
 
+                        // Sender permission check
+                        if (!sender.hasPermission("teleios.bettergameplay.setblocksperpearl")) {
+                            sender.sendMessage("§cMissing Permissions!");
+                            MessageMaster.sendSkipMessage("SetblocksperpearlCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), the sender doesn't have the needed permissions.");
+                            return true;
+                        }
+
                         int bpp = Integer.parseInt(args[0]);
 
                         // Valid argument check
-                        if (bpp < 1) {
+                        if (bpp <= 0) {
                             sender.sendMessage("§cWrong arguments!");
                             MessageMaster.sendSkipMessage("SetblocksperpearlCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), wrong arguments.");
                             return false;

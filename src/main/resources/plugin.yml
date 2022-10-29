@@ -140,7 +140,7 @@ commands:
       - SETBPP
       - sbpp
       - SBPP
-    permission: teleios.bettergameplay.setblocksperpearl
+    permission: teleios.bettergameplay.setblocksperpearlRead
     description: Lets you change the amount of blocks you can travel per ender pearl when teleporting.
     usage: /setblocksperpearl ([Amount])
 
@@ -250,6 +250,10 @@ permissions:
 
   teleios.bettergameplay.enderchest:
     description: Allows the enderchest command.
+    default: true
+
+  teleios.bettergameplay.setblocksperpearlRead:
+    description: Allows the setblocksperpearl command.
     default: true
 
   teleios.bettergameplay.setblocksperpearl:

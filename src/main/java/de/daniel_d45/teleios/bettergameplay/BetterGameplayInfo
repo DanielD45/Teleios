@@ -38,6 +38,8 @@
 0 active power-up/ability which debuffs monsters for a limited time
 0 Mending has multiple levels, higher levels repair more for the same amount of xp
 0 duplication enchantment for bows with a chance to fire two arrows at once
+0 knockback doesn't knock back skeletons
+0 enchantments with higher levels than vanilla (unlockable?)
 
 
 - CreatureEvolution sub segment:
