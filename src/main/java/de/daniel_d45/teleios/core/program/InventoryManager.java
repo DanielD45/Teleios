@@ -3,12 +3,10 @@
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
-package de.daniel_d45.teleios.core.util;
+package de.daniel_d45.teleios.core.program;
 
 import de.daniel_d45.teleios.adminfeatures.SegmentManagerAF;
 import de.daniel_d45.teleios.bettergameplay.SegmentManagerBG;
-import de.daniel_d45.teleios.core.program.ArtificialInventory;
-import de.daniel_d45.teleios.creatureevolution.SegmentManagerCE;
 import de.daniel_d45.teleios.passiveskills.SegmentManagerPS;
 import de.daniel_d45.teleios.worldmaster.SegmentManagerWM;
 import org.bukkit.Bukkit;
@@ -68,12 +66,11 @@ public class InventoryManager {
 
             Inventory inv = InventoryManager.createArtificialInventory(3, "§0Manage Teleios functionality");
 
+            // TODO: make list and dynamically arrange icons in inventory
             // AdminFeatures segment.
             inv.setItem(11, SegmentManagerAF.getSegmentItem());
             // BetterGameplay segment.
             inv.setItem(12, SegmentManagerBG.getSegmentItem());
-            // CreatureEvolution segment.
-            inv.setItem(13, SegmentManagerCE.getSegmentItem());
             // PassiveSkills segment.
             inv.setItem(14, SegmentManagerPS.getSegmentItem());
             // WorldMaster segment.
@@ -231,7 +228,7 @@ public class InventoryManager {
             return 0;
         }
 
-        // Holds all matching ItemStacks
+        // Will hold all matching ItemStacks
         HashMap<Integer, ItemStack> matchingItems = new HashMap<>();
 
         int possibleAmount = 0;
@@ -239,7 +236,7 @@ public class InventoryManager {
         // Iterates firstly through the inventory
         for (int i = 9; i <= 35; ++i) {
             if (isSameItemType(inv.getItem(i), itemStack)) {
-                // Adds the item to the map
+                // Adds the ItemStack to the map
                 matchingItems.put(i, inv.getItem(i));
                 possibleAmount += inv.getItem(i).getAmount();
             }
@@ -258,8 +255,6 @@ public class InventoryManager {
 
             if (possibleAmount <= 0) {
                 MessageMaster.sendSkipMessage("InventoryManager", "removeItemsPlayerSoft(" + inv + ", " + itemStack + ", " + amount + "), the specified inventory doesn't contain this ItemStack.");
-                // TODO: Remove debug line
-                System.out.println("!!!!!" + matchingItems + "!!!!!");
                 return 0;
             }
 

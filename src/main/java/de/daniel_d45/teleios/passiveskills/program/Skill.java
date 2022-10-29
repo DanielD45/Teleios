@@ -5,7 +5,7 @@
 
 package de.daniel_d45.teleios.passiveskills.program;
 
-import de.daniel_d45.teleios.core.util.MessageMaster;
+import de.daniel_d45.teleios.core.program.MessageMaster;
 import de.daniel_d45.teleios.passiveskills.SegmentManagerPS;
 import org.bukkit.Material;
 import org.bukkit.block.Block;

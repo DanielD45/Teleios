@@ -3,9 +3,9 @@
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
-package de.daniel_d45.teleios.core.util;
+package de.daniel_d45.teleios.core.program;
 
-import de.daniel_d45.teleios.core.main.Main;
+import de.daniel_d45.teleios.core.main.Teleios;
 
 
 public class MessageMaster {
@@ -17,13 +17,13 @@ public class MessageMaster {
      * This method sends out a message on plugin start
      */
     public static void sendEnableMessage() {
-        if (Main.getDebugLevel() >= 3) {
+        if (Teleios.getDebugLevel() >= 3) {
             // Prints message to the chat
-            Main.getServerObject().broadcastMessage(pluginPrefix + "§bPlugin enabled");
+            Teleios.getServerObject().broadcastMessage(pluginPrefix + "§bPlugin enabled");
         }
         else {
             // Prints message to the console
-            Main.getServerObject().getConsoleSender().sendMessage(pluginPrefix + "§bPlugin enabled");
+            Teleios.getServerObject().getConsoleSender().sendMessage(pluginPrefix + "§bPlugin enabled");
         }
     }
 
@@ -31,13 +31,13 @@ public class MessageMaster {
      * This method sends out a message on plugin stop
      */
     public static void sendDisableMessage() {
-        if (Main.getDebugLevel() >= 3) {
+        if (Teleios.getDebugLevel() >= 3) {
             // Prints message to the chat
-            Main.getServerObject().broadcastMessage(pluginPrefix + "§3Plugin disabled");
+            Teleios.getServerObject().broadcastMessage(pluginPrefix + "§3Plugin disabled");
         }
         else {
             // Prints message to the console
-            Main.getServerObject().getConsoleSender().sendMessage(pluginPrefix + "§3Plugin disabled");
+            Teleios.getServerObject().getConsoleSender().sendMessage(pluginPrefix + "§3Plugin disabled");
         }
     }
 
@@ -49,13 +49,13 @@ public class MessageMaster {
      * @param message   [String] The message to print.
      */
     public static void sendSkipMessage(String className, String message) {
-        if (Main.getDebugLevel() >= 3) {
+        if (Teleios.getDebugLevel() >= 3) {
             // Prints message to the chat
-            Main.getServerObject().broadcastMessage(pluginPrefix + "§e" + className + " class: " + message);
+            Teleios.getServerObject().broadcastMessage(pluginPrefix + "§e" + className + " class: " + message);
         }
-        else if (Main.getDebugLevel() >= 2) {
+        else if (Teleios.getDebugLevel() >= 2) {
             // Prints message to the console
-            Main.getServerObject().getConsoleSender().sendMessage(pluginPrefix + "§e" + className + " class: " + message);
+            Teleios.getServerObject().getConsoleSender().sendMessage(pluginPrefix + "§e" + className + " class: " + message);
         }
     }
 
@@ -67,13 +67,13 @@ public class MessageMaster {
      * @param methodName [String] The method's name.
      */
     public static void sendSuccessMessage(String className, String methodName) {
-        if (Main.getDebugLevel() >= 3) {
+        if (Teleios.getDebugLevel() >= 3) {
             // Prints message to the chat
-            Main.getServerObject().broadcastMessage(pluginPrefix + "§2" + className + " §aclass: Successfully executed method §2" + methodName + "§a.");
+            Teleios.getServerObject().broadcastMessage(pluginPrefix + "§2" + className + " §aclass: Successfully executed method §2" + methodName + "§a.");
         }
-        else if (Main.getDebugLevel() >= 2) {
+        else if (Teleios.getDebugLevel() >= 2) {
             // Prints message to the console
-            Main.getServerObject().getConsoleSender().sendMessage(pluginPrefix + "§2" + className + "§a" + " class: Successfully executed method " + "§2" + methodName + "§a" + ".");
+            Teleios.getServerObject().getConsoleSender().sendMessage(pluginPrefix + "§2" + className + "§a" + " class: Successfully executed method " + "§2" + methodName + "§a" + ".");
         }
     }
 
@@ -88,13 +88,13 @@ public class MessageMaster {
      * @param exception  [Exception] The exception causing the error.
      */
     public static void sendFailMessage(String className, String methodName, Exception exception) {
-        if (Main.getDebugLevel() >= 3) {
+        if (Teleios.getDebugLevel() >= 3) {
             // Prints message to the chat
-            Main.getServerObject().broadcastMessage(pluginPrefix + "§4" + className + " §cclass: §4" + exception.getClass() + " §coccured while running method §4" + methodName + "§c!");
+            Teleios.getServerObject().broadcastMessage(pluginPrefix + "§4" + className + " §cclass: §4" + exception.getClass() + " §coccured while running method §4" + methodName + "§c!");
         }
-        else if (Main.getDebugLevel() >= 1) {
+        else if (Teleios.getDebugLevel() >= 1) {
             // Prints message to the console
-            Main.getServerObject().getConsoleSender().sendMessage(pluginPrefix + "§4" + className + "§c" + " class: " + "§4" + exception.getClass() + "§c" + " occured while running method " + "§4" + methodName + "§c" + "!");
+            Teleios.getServerObject().getConsoleSender().sendMessage(pluginPrefix + "§4" + className + "§c" + " class: " + "§4" + exception.getClass() + "§c" + " occured while running method " + "§4" + methodName + "§c" + "!");
         }
     }
 

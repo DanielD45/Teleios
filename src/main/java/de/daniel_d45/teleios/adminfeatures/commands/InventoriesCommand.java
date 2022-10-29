@@ -5,9 +5,9 @@
 
 package de.daniel_d45.teleios.adminfeatures.commands;
 
-import de.daniel_d45.teleios.core.util.ConfigEditor;
-import de.daniel_d45.teleios.core.util.InventoryManager;
-import de.daniel_d45.teleios.core.util.MessageMaster;
+import de.daniel_d45.teleios.core.program.ConfigEditor;
+import de.daniel_d45.teleios.core.program.InventoryManager;
+import de.daniel_d45.teleios.core.program.MessageMaster;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -24,23 +24,27 @@ public class InventoriesCommand implements CommandExecutor {
         try {
 
             // Activation state check
-            if (ConfigEditor.isActive("AdminFeatures.All")) {
+            if (!ConfigEditor.isActive("AdminFeatures.All")) {
                 sender.sendMessage("§cThis command is not active.");
                 MessageMaster.sendSkipMessage("InventoriesCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), the command is deactivated.");
                 return true;
             }
 
             // Sender permission check
-            if (sender.hasPermission("teleios.adminfeatures.inventories")) {
+            if (!sender.hasPermission("teleios.adminfeatures.inventories")) {
                 sender.sendMessage("§cMissing Permissions!");
                 MessageMaster.sendSkipMessage("InventoriesCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), the sender doesn't have the needed permissions.");
                 return true;
             }
 
             switch (args.length) {
+                case 0:
+                    // Specifies /inventories
+                    args = new String[1];
+                    args[0] = "list";
                 case 1:
-                    // Specifes /inventories list|clear
-                    if (args[0].equalsIgnoreCase("list")) {
+                    // Specifes /inventories list|clear|remove
+                    if (args[0].equalsIgnoreCase("list") || args[0].equalsIgnoreCase("remove")) {
                         try {
 
                             String[] inventories = ConfigEditor.getSectionKeys("Inventories").toArray(new String[0]);
@@ -144,8 +148,8 @@ public class InventoriesCommand implements CommandExecutor {
                         }
 
                     }
+                    // Specifies /inventories remove [Name]
                     else if (args[0].equalsIgnoreCase("remove")) {
-                        // Specifies /inventories remove [Name]
 
                         String name = args[1];
 
@@ -180,6 +184,7 @@ public class InventoriesCommand implements CommandExecutor {
 
                         String name = args[1];
 
+                        // Inventory unique name check
                         if (ConfigEditor.containsPath("Inventories." + name)) {
                             sender.sendMessage("§cAn inventory with this name already exists!");
                             MessageMaster.sendSkipMessage("InventoriesCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), an inventory with this name already exists.");
@@ -212,8 +217,9 @@ public class InventoriesCommand implements CommandExecutor {
                     // Specifies /inventories modify access|name [InventoryName] [NewName]
                     if (args[0].equalsIgnoreCase("modify")) {
 
+                        // Specifies /inventories modify access
                         if (args[0].equalsIgnoreCase("access")) {
-                            // TODO
+                            // TODO: Implement
 
                         }
                         else {

@@ -5,9 +5,9 @@
 
 package de.daniel_d45.teleios.passiveskills;
 
-import de.daniel_d45.teleios.core.util.ConfigEditor;
-import de.daniel_d45.teleios.core.util.ItemBuilder;
-import de.daniel_d45.teleios.core.util.MessageMaster;
+import de.daniel_d45.teleios.core.program.ConfigEditor;
+import de.daniel_d45.teleios.core.program.ItemBuilder;
+import de.daniel_d45.teleios.core.program.MessageMaster;
 import de.daniel_d45.teleios.passiveskills.program.LumberjackSkill;
 import de.daniel_d45.teleios.passiveskills.program.Skill;
 import org.bukkit.Material;
@@ -75,13 +75,13 @@ public class SegmentManagerPS {
             if (ConfigEditor.isActive(getSegmentName() + ".All")) {
                 // The segment is activated
 
-                item = new ItemBuilder(Material.SPRUCE_LOG, 1).setName("§o§5PassiveSkills").setLore("§fThe PassiveSkills segment adds skills", "§fyou can level up by breaking blocks.", "§fYou can use this segment for", "§fa better survival experience.", "§eActivationstate: §aON", "§7Left click to deactivate the segment.", "§7Right click to manage the functionality more specifically.").addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1).addItemFlags(ItemFlag.HIDE_ENCHANTS).build();
+                item = new ItemBuilder(Material.SPRUCE_LOG, 1).setName("§o§5PassiveSkills").setLore("§fThe PassiveSkills segment adds skills", "§fyou can level up by breaking blocks.", "§fYou can use this segment for", "§fa better survival experience.", "§eActivationstate: §aON", "§7Left click to deactivate the segment.", "§7Right click for more options.").addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1).addItemFlags(ItemFlag.HIDE_ENCHANTS).build();
 
             }
             else {
                 // The segment is deactivated
 
-                item = new ItemBuilder(Material.SPRUCE_LOG, 1).setName("§o§5PassiveSkills").setLore("§fThe PassiveSkills segment adds skills", "§fyou can level up by breaking blocks.", "§fYou can use this segment for", "§fa better survival experience.", "§eActivationstate: §cOFF", "§7Left click to deactivate the segment.", "§7Right click to manage the functionality more specifically.").build();
+                item = new ItemBuilder(Material.SPRUCE_LOG, 1).setName("§o§5PassiveSkills").setLore("§fThe PassiveSkills segment adds skills", "§fyou can level up by breaking blocks.", "§fYou can use this segment for", "§fa better survival experience.", "§eActivationstate: §cOFF", "§7Left click to activate the segment.", "§7Right click for more options.").build();
 
             }
 

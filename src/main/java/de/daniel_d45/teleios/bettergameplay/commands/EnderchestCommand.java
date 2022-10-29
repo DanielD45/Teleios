@@ -5,8 +5,8 @@
 
 package de.daniel_d45.teleios.bettergameplay.commands;
 
-import de.daniel_d45.teleios.core.util.ConfigEditor;
-import de.daniel_d45.teleios.core.util.MessageMaster;
+import de.daniel_d45.teleios.core.program.ConfigEditor;
+import de.daniel_d45.teleios.core.program.MessageMaster;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

@@ -5,7 +5,7 @@
 
 package de.daniel_d45.teleios.adminfeatures;
 
-import de.daniel_d45.teleios.core.util.*;
+import de.daniel_d45.teleios.core.program.*;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -31,11 +31,11 @@ public class SegmentManagerAF {
 
             if (ConfigEditor.isActive(getSegmentName() + ".All")) {
                 // The segment is activated
-                item = new ItemBuilder(Material.NETHER_STAR, 1).setName("§o§5AdminFeatures").setLore("§fThe AdminFeatures segment adds many commands", "§fto manage the server and to allow", "§ffor a better survival experience.", "§eActivationstate: §aON", "§7Left click to deactivate the segment.", "§7Right click to manage the functionality more specifically.").addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1)/* .addItemFlags(ItemFlag.HIDE_ENCHANTS) */.build();
+                item = new ItemBuilder(Material.NETHER_STAR, 1).setName("§o§5AdminFeatures").setLore("§fThe AdminFeatures segment adds", "§fconvenient admin-only commands.", "§eActivationstate: §aON", "§7Left click to deactivate the segment.", "§7Right click for more options.").addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1)/* .addItemFlags(ItemFlag.HIDE_ENCHANTS) */.build();
             }
             else {
                 // The segment is deactivated
-                item = new ItemBuilder(Material.NETHER_STAR, 1).setName("§o§5AdminFeatures").setLore("§fThe AdminFeatures segment adds many commands", "§fto manage the server and to allow", "§ffor a better survival experience.", "§eActivationstate: §cOFF", "§7Left click to activate the segment.", "§7Right click to manage the functionality more specifically.").build();
+                item = new ItemBuilder(Material.NETHER_STAR, 1).setName("§o§5AdminFeatures").setLore("§fThe AdminFeatures segment adds", "§fconvenient admin-only commands.", "§eActivationstate: §cOFF", "§7Left click to activate the segment.", "§7Right click for more options.").build();
 
             }
 

@@ -5,7 +5,7 @@
 
 package de.daniel_d45.teleios.bettergameplay;
 
-import de.daniel_d45.teleios.core.util.*;
+import de.daniel_d45.teleios.core.program.*;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -32,12 +32,12 @@ public class SegmentManagerBG {
 
             if (ConfigEditor.isActive(getSegmentName() + ".All")) {
                 // The segment is activated.
-                item = new ItemBuilder(Material.IRON_PICKAXE, 1).setName("§o§5BetterGameplay").setLore("§fThe BetterGameplay segment adds features", "§fto allow for a better", "§fsurvival experience.", "§eActivationstate: §aON", "§7Left click to deactivate the segment.", "§7Right click to manage the functionality more specifically.").addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1)/* .addItemFlags(ItemFlag.HIDE_ENCHANTS) */.build();
+                item = new ItemBuilder(Material.IRON_PICKAXE, 1).setName("§o§5BetterGameplay").setLore("§fThe BetterGameplay segment adds", "§ffeatures for a better", "§fsurvival experience.", "§eActivationstate: §aON", "§7Left click to deactivate the segment.", "§7Right click for more options.").addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1)/* .addItemFlags(ItemFlag.HIDE_ENCHANTS) */.build();
 
             }
             else {
                 // The segment is deactivated.
-                item = new ItemBuilder(Material.IRON_PICKAXE, 1).setName("§o§5BetterGameplay").setLore("§fThe BetterGameplay segment adds features", "§fto allow for a better", "§fsurvival experience.", "§eActivationstate: §cOFF", "§7Left click to deactivate the segment.", "§7Right click to manage the functionality more specifically.").build();
+                item = new ItemBuilder(Material.IRON_PICKAXE, 1).setName("§o§5BetterGameplay").setLore("§fThe BetterGameplay segment adds", "§ffeatures for a better", "§fsurvival experience.", "§eActivationstate: §cOFF", "§7Left click to activate the segment.", "§7Right click for more options.").build();
 
             }
 
@@ -56,11 +56,11 @@ public class SegmentManagerBG {
 
             if (ConfigEditor.isActive("BetterGameplay.EnderchestCommand")) {
                 // The command is activated.
-                item = new ItemBuilder(Material.ENDER_CHEST, 1).setName("§o§9Enderchest command").setLore("§fThe enderchest command lets every player", "§fopen his enderchest from anywhere.", "§eActivationstate: §aON", "§7Left click to deactivate the command.").addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1).addItemFlags(ItemFlag.HIDE_ENCHANTS).build();
+                item = new ItemBuilder(Material.ENDER_CHEST, 1).setName("§o§9Enderchest command").setLore("§fThe enderchest command lets every player", "§fopen their enderchest from anywhere.", "§eActivationstate: §aON", "§7Left click to deactivate the command.").addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1).addItemFlags(ItemFlag.HIDE_ENCHANTS).build();
             }
             else {
                 // The command is deactivated.
-                item = new ItemBuilder(Material.ENDER_CHEST, 1).setName("§o§9Enderchest command").setLore("§fThe enderchest command lets every player", "§fopen his enderchest from anywhere.", "§eActivationstate: §cOFF", "§7Left click to activate the command.").build();
+                item = new ItemBuilder(Material.ENDER_CHEST, 1).setName("§o§9Enderchest command").setLore("§fThe enderchest command lets every player", "§fopen their enderchest from anywhere.", "§eActivationstate: §cOFF", "§7Left click to activate the command.").build();
             }
 
             MessageMaster.sendSuccessMessage("SegmentManagerBG", "getEnderchestCommandItem()");
@@ -78,11 +78,11 @@ public class SegmentManagerBG {
 
             if (ConfigEditor.isActive("BetterGameplay.Teleporters")) {
                 // The function is activated.
-                item = new ItemBuilder(Material.END_PORTAL_FRAME, 1).setName("§o§9Teleporters").setLore("§fYou can craft teleporters", "§fto which you can teleport", "§ffrom everywhere.", "§fTeleporting costs enderpearls", "§fstored in your warppouch.", "§eActivationstate: §aON", "§7Left click to deactivate the function.").addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1)/* .addItemFlags(ItemFlag.HIDE_ENCHANTS) */.build();
+                item = new ItemBuilder(Material.END_PORTAL_FRAME, 1).setName("§o§9Teleporters").setLore("§fYou can craft teleporters", "§fto which you can teleport", "§ffrom everywhere.", "§fTeleporting costs ender pearls", "§fstored in your warppouch.", "§eActivationstate: §aON", "§7Left click to deactivate the function.").addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1)/* .addItemFlags(ItemFlag.HIDE_ENCHANTS) */.build();
             }
             else {
                 // The function is deactivated.
-                item = new ItemBuilder(Material.END_PORTAL_FRAME, 1).setName("§o§9Teleporters").setLore("§fYou can craft teleporters", "§fto which you can teleport", "§ffrom everywhere.", "§fTeleporting costs enderpearls", "§fstored in your warppouch.", "§eActivationstate: §cOFF", "§7Left click to deactivate the function.").build();
+                item = new ItemBuilder(Material.END_PORTAL_FRAME, 1).setName("§o§9Teleporters").setLore("§fYou can craft teleporters", "§fto which you can teleport", "§ffrom everywhere.", "§fTeleporting costs ender pearls", "§fstored in your warppouch.", "§eActivationstate: §cOFF", "§7Left click to deactivate the function.").build();
             }
 
             MessageMaster.sendSuccessMessage("SegmentManagerBG", "getTeleportersItem()");

@@ -5,9 +5,9 @@
 
 package de.daniel_d45.teleios.bettergameplay.commands;
 
-import de.daniel_d45.teleios.core.util.ConfigEditor;
-import de.daniel_d45.teleios.core.util.InventoryManager;
-import de.daniel_d45.teleios.core.util.MessageMaster;
+import de.daniel_d45.teleios.core.program.ConfigEditor;
+import de.daniel_d45.teleios.core.program.InventoryManager;
+import de.daniel_d45.teleios.core.program.MessageMaster;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -39,7 +39,7 @@ public class WarppouchCommand implements CommandExecutor {
             }
 
             // Player permission check
-            if (!player.hasPermission("teleios.bettergameplay.warppouch")) {
+            if (!player.hasPermission("teleios.bettergameplay.warp pouch")) {
                 player.sendMessage("§cMissing Permissions!");
                 MessageMaster.sendSkipMessage("WarppouchCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), the sender doesn't have the needed permissions.");
                 return true;
@@ -48,28 +48,8 @@ public class WarppouchCommand implements CommandExecutor {
             switch (args.length) {
                 case 0:
                     // Specifies /warppouch
-                    try {
-
-                        int storedEPs = (int) ConfigEditor.get("Warppouch." + player.getName());
-
-                        if (storedEPs == 1) {
-                            player.sendMessage("§aThere is §6" + storedEPs + " §aender pearl in your warppouch.");
-                        }
-                        else {
-                            player.sendMessage("§aThere are §6" + storedEPs + " §aender pearls in your warppouch.");
-                        }
-
-                        MessageMaster.sendSuccessMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
-                        return true;
-                    } catch (NullPointerException e) {
-                        player.sendMessage("§aThere are §60 §aender pearls in your warppouch.");
-                        MessageMaster.sendSkipMessage("WarppouchCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), the Warppouch path doesn't exist for this player.");
-                        return true;
-                    } catch (Exception e) {
-                        player.sendMessage("§cCould not view the warppouch!");
-                        MessageMaster.sendFailMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), viewing the warppouch", e);
-                        return false;
-                    }
+                    args = new String[1];
+                    args[0] = "view";
                 case 1:
                     // Specifies /warppouch view|show
                     if (args[0].equalsIgnoreCase("view") || args[0].equalsIgnoreCase("show")) {
@@ -78,21 +58,21 @@ public class WarppouchCommand implements CommandExecutor {
                             int storedEPs = (int) ConfigEditor.get("Warppouch." + player.getName());
 
                             if (storedEPs == 1) {
-                                player.sendMessage("§aThere is §6" + storedEPs + " §aender pearl in your warppouch.");
+                                player.sendMessage("§aThere is §6" + storedEPs + " §aender pearl in your warp pouch.");
                             }
                             else {
-                                player.sendMessage("§aThere are §6" + storedEPs + " §aender pearls in your warppouch.");
+                                player.sendMessage("§aThere are §6" + storedEPs + " §aender pearls in your warp pouch.");
                             }
 
                             MessageMaster.sendSuccessMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
                             return true;
                         } catch (NullPointerException e) {
-                            player.sendMessage("§aThere are §60 §aender pearls in your warppouch.");
+                            player.sendMessage("§aThere are §60 §aender pearls in your warp pouch.");
                             MessageMaster.sendSkipMessage("WarppouchCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), the Warppouch path doesn't exist for this player.");
                             return true;
                         } catch (Exception e) {
-                            player.sendMessage("§cCould not view the warppouch!");
-                            MessageMaster.sendFailMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), viewing the warppouch", e);
+                            player.sendMessage("§cCould not view the warp pouch!");
+                            MessageMaster.sendFailMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), viewing the warp pouch", e);
                             return false;
                         }
 
@@ -110,14 +90,14 @@ public class WarppouchCommand implements CommandExecutor {
 
                             int specifiedAmount = Integer.parseInt(args[1]);
 
-                            // SpecifiedAmount valid check
+                            // Is SpecifiedAmount valid check
                             if (specifiedAmount <= 0) {
                                 player.sendMessage("§cInvalid amount of ender pearls!");
                                 MessageMaster.sendSkipMessage("WarppouchCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), invalid amount of ender pearls.");
                                 return true;
                             }
 
-                            // TODO: Limit warppouch size?
+                            // TODO: Limit warp pouch size?
                             if (((int) ConfigEditor.get("Warppouch." + player.getName()) + specifiedAmount) > 1000000) {
                                 specifiedAmount = 1000000 - (int) ConfigEditor.get("Warppouch." + player.getName());
                             }
@@ -132,7 +112,7 @@ public class WarppouchCommand implements CommandExecutor {
                                 return true;
                             }
 
-                            // Adds the specified amount of ender pearls to the player's warppouch
+                            // Adds the specified amount of ender pearls to the player's warp pouch
                             ConfigEditor.set("Warppouch." + player.getName(), (int) ConfigEditor.get("Warppouch." + player.getName()) + transferredItems);
 
                             if (specifiedAmount == 1) {
@@ -142,12 +122,12 @@ public class WarppouchCommand implements CommandExecutor {
                                 player.sendMessage("§aDeposited §6" + transferredItems + " §aender pearls.");
                             }
 
-                            player.sendMessage("§aYou now have §6" + ConfigEditor.get("Warppouch." + player.getName()) + " §aender pearls in your warppouch.");
+                            player.sendMessage("§aYou now have §6" + ConfigEditor.get("Warppouch." + player.getName()) + " §aender pearls in your warp pouch.");
                             MessageMaster.sendSuccessMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
                             return true;
                         } catch (Exception e) {
-                            player.sendMessage("§cCould not deposit in your warppouch!");
-                            MessageMaster.sendFailMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), paying in your warppouch", e);
+                            player.sendMessage("§cCould not deposit in your warp pouch!");
+                            MessageMaster.sendFailMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), paying in your warp pouch", e);
                             return false;
                         }
                     }

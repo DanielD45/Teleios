@@ -1,6 +1,6 @@
 name: Teleios
 version: 1.2-WIP
-main: de.daniel_d45.teleios.core.main.Main
+main: de.daniel_d45.teleios.core.main.Teleios
 description: Adds many different features to your server which can be turned on and off using the /manageteleios command. The plugin data is stored in the config file.
 api-version: 1.19
 author: Daniel_D45
@@ -10,35 +10,43 @@ commands:
 
   chatclear:
     aliases:
-      - cc
+      - CC
     permission: teleios.adminfeatures.chatclear
     description: Clears the chat.
     usage: /chatclear
 
   damage:
     aliases:
-      - d
-      - dam
+      - D
+      - DAM
     permission: teleios.adminfeatures.damage
     description: Damages you or another player.
     usage: /damage [Amount]|([Player]) ([Amount])
 
   gma:
+    aliases:
+      - GMA
     permission: teleios.adminfeatures.gma
     description: Sets you or another player in adventure mode.
     usage: /gma ([Player])
 
   gmc:
+    aliases:
+      - GMC
     permission: teleios.adminfeatures.gmc
     description: Sets you or another player in creative mode.
     usage: /gmc ([Player])
 
   gms:
+    aliases:
+      - GMS
     permission: teleios.adminfeatures.gms
     description: Sets you or another player in survival mode.
     usage: /gms ([Player])
 
   gmsp:
+    aliases:
+      - GMSP
     permission: teleios.adminfeatures.gmsp
     description: Sets you or another player in spectator mode.
     usage: /gmsp ([Player])
@@ -46,6 +54,7 @@ commands:
   heal:
     aliases:
       - h
+      - H
     permission: teleios.adminfeatures.heal
     description: Heals you or another player.
     usage: /heal ([Amount])|{[Player])} ({([Amount])})
@@ -53,6 +62,7 @@ commands:
   inventories:
     aliases:
       - invs
+      - INVS
     permission: teleios.adminfeatures.inventories
     description: Let's you create, open and manage custom inventories with an amount of rows lower than 7.
     usage: /inventories list|clear|(open)|(remove)|{(create)} ([Name]) {([Rows])}
@@ -60,13 +70,15 @@ commands:
   joinmessage:
     aliases:
       - jm
+      - JM
     permission: teleios.adminfeatures.joinmessage
-    description: Lets you enable or disable the join message.
+    description: Lets you enable or disable the custom join message.
     usage: /joinmessage enable/true|disable/false
 
   mute:
     aliases:
       - m
+      - M
     permission: teleios.adminfeatures.mute
     description: Lets you mute players.
     usage: /mute [Player]
@@ -74,7 +86,9 @@ commands:
   openinventory:
     aliases:
       - oi
+      - OI
       - openinv
+      - OPENINV
     permission: teleios.adminfeatures.openinventory
     description: Opens the specified player's inventory.
     usage: /openinventory [Player]
@@ -82,6 +96,7 @@ commands:
   tphere:
     aliases:
       - tph
+      - TPH
     permission: teleios.adminfeatures.tphere
     description: Teleports another player to you.
     usage: /tphere [Player]
@@ -89,14 +104,24 @@ commands:
   unmute:
     aliases:
       - um
+      - UM
     permission: teleios.adminfeatures.unmute
     description: Lets you unmute players.
     usage: /unmute [Player]
+
+  warppoint:
+    aliases:
+      - wp
+      - WP
+    permission: teleios.adminfeatures.warppoint
+    description: Lets you modify warppoints.
+    usage: /warppoint list|clear|(add)|(remove)|(override) ([Name])
 
 
   configureteleporter:
     aliases:
       - ctp
+      - CTP
     permission: teleios.bettergameplay.configureteleporter
     description: Lets you change the name of a teleporter you hold in your hand.
     usage: /configureteleporter [Name]
@@ -104,6 +129,7 @@ commands:
   enderchest:
     aliases:
       - ec
+      - EC
     permission: teleios.bettergameplay.enderchest
     description: Opens your enderchest.
     usage: /enderchest
@@ -111,28 +137,25 @@ commands:
   setblocksperpearl:
     aliases:
       - setbpp
+      - SETBPP
       - sbpp
+      - SBPP
     permission: teleios.bettergameplay.setblocksperpearl
-    description: Lets you see and change the amount of blocks you have to pay one ender pearl for when warping to a teleporter.
+    description: Lets you change the amount of blocks you can travel per ender pearl when teleporting.
     usage: /setblocksperpearl ([Amount])
 
   warp:
     aliases:
       - w
+      - W
     permission: teleios.bettergameplay.warp
     description: Lists available teleporters and warppoints and warps you there.
     usage: /warp list|[Teleporter]|[Warppoint]
 
-  warppoint:
-    aliases:
-      - wp
-    permission: teleios.bettergameplay.warppoint
-    description: Lets you modify warppoints.
-    usage: /warppoint list|clear|(add)|(remove)|(override) ([Name])
-
   warppouch:
     aliases:
       - wpp
+      - WPP
     permission: teleios.bettergameplay.warppouch
     description: Lets you see and deposit ender pearls in your warppouch.
     usage: /warppouch (view/show)|{(deposit/put)} {([Amount])}
@@ -141,6 +164,7 @@ commands:
   manageteleios:
     aliases:
       - mtl
+      - MTL
     permission: teleios.adminfeatures.manageteleios
     description: Let's you enable and disable the plugin segments and functionality.
     usage: /manageteleios
@@ -148,7 +172,9 @@ commands:
   setdebuglevel:
     aliases:
       - sdl
+      - SDL
       - setdl
+      - SETDL
     permission: teleios.core.setdebuglevel
     description: Shows and sets the debug level (affecting the plugin outputs) to the specified integer from 0 to 3, where 0 = only plugin start, 1 = + errors, 2 = + method calls and 3 = + chat messages of everything.
     usage: /setdebuglevel ([Level])
@@ -157,6 +183,7 @@ commands:
   skills:
     aliases:
       - s
+      - S
     permission: teleios.passiveskills.skills
     description: Shows your skills in an inventory.
     usage: /skills

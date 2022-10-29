@@ -5,8 +5,6 @@
 
 package de.daniel_d45.teleios.core.program;
 
-import de.daniel_d45.teleios.core.util.MessageMaster;
-
 
 /**
  * This class contains java's main method.

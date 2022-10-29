@@ -6,7 +6,7 @@
 package de.daniel_d45.teleios.core.listeners;
 
 import de.daniel_d45.teleios.core.program.ArtificialInventory;
-import de.daniel_d45.teleios.core.util.MessageMaster;
+import de.daniel_d45.teleios.core.program.MessageMaster;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;

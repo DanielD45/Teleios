@@ -7,10 +7,9 @@ package de.daniel_d45.teleios.core.commands;
 
 import de.daniel_d45.teleios.adminfeatures.SegmentManagerAF;
 import de.daniel_d45.teleios.bettergameplay.SegmentManagerBG;
-import de.daniel_d45.teleios.core.util.ConfigEditor;
-import de.daniel_d45.teleios.core.util.InventoryManager;
-import de.daniel_d45.teleios.core.util.MessageMaster;
-import de.daniel_d45.teleios.creatureevolution.SegmentManagerCE;
+import de.daniel_d45.teleios.core.program.ConfigEditor;
+import de.daniel_d45.teleios.core.program.InventoryManager;
+import de.daniel_d45.teleios.core.program.MessageMaster;
 import de.daniel_d45.teleios.passiveskills.SegmentManagerPS;
 import de.daniel_d45.teleios.worldmaster.SegmentManagerWM;
 import org.bukkit.command.Command;
@@ -122,22 +121,6 @@ public class ManageteleiosCommandListener implements CommandExecutor, Listener {
                     }
 
                     // CREATUREEVOLUTION ITEM
-                }
-                else if (item.equals(SegmentManagerCE.getSegmentItem())) {
-
-                    if (clickType == ClickType.LEFT) {
-                        // TODO
-                        // SegmentManagerCE.switchActivationstateCE();
-                        // player.openInventory(InventoryManager.getManageTeleiosInventory());
-                        return;
-
-                    }
-                    else if (clickType == ClickType.RIGHT) {
-                        player.openInventory(InventoryManager.getManageCEInventory());
-                        return;
-                    }
-
-                    // PASSIVESKILLS ITEM
                 }
                 else if (item.equals(SegmentManagerPS.getSegmentItem())) {
 

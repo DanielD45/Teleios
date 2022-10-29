@@ -1,28 +1,30 @@
 - Plugin name:
 
-Greek: Téleios (Τέλειος) = English: complete
-pronounciation: pronounced like TELL|e|os
+greek: Téleios (Τέλειος) = english: complete
+pronunciation: pronounced like TELL-e-os
 
 
 - Debug message colours:
 
-§a - green:		method ran successfully.
-§7 - grey:		method ran without real impact / method skipped.
-§4 - dark red:	method failed.
+green (§a):		method ran successfully
+grey (§7):		method ran without real impact / method skipped
+dark red (§4):	method failed
+
+- Chat message colors:
+
+green (§a) 	/ gold (§6):		success message
+yellow (§e) / gold (§6):		skip/info message
+red (§c) 	/ dark_red (§4):	fail message
 
 
 - Features:
 
 1 setdebuglevel command
-1 activationstate enum
 1 manageteleios command
-
-
-- Chat message colours:
-
-§a - green 	/ §6 - gold:		success message.
-§e - yellow / §6 - gold:		skip/info message.
-§c - red 	/ §4 - dark_red:	fail message.
+1 activationstate enum
+0 MTL inventory: activated segments have enchanted icons
+0 MTL inventory: icons do not show enchantments or damage specs
+0 command (or MTL inv) to de-implement commands to make space for other plugins' command names
 
 
 - Data structure for the plugin.yml:

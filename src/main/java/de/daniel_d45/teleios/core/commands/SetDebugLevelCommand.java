@@ -5,9 +5,9 @@
 
 package de.daniel_d45.teleios.core.commands;
 
-import de.daniel_d45.teleios.core.main.Main;
-import de.daniel_d45.teleios.core.util.ConfigEditor;
-import de.daniel_d45.teleios.core.util.MessageMaster;
+import de.daniel_d45.teleios.core.main.Teleios;
+import de.daniel_d45.teleios.core.program.ConfigEditor;
+import de.daniel_d45.teleios.core.program.MessageMaster;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -39,7 +39,7 @@ public class SetDebugLevelCommand implements CommandExecutor {
                     // Specifes /setdebuglevel
                     try {
 
-                        int level = Main.getDebugLevel();
+                        int level = Teleios.getDebugLevel();
 
                         sender.sendMessage("§aThe debug level is currently §6" + level + "§a.");
                         MessageMaster.sendSuccessMessage("SetDebugLevelCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
@@ -67,7 +67,7 @@ public class SetDebugLevelCommand implements CommandExecutor {
                             ConfigEditor.setDebugLevel(level);
                         }
 
-                        sender.sendMessage("§aThe debug level is now §6" + Main.getDebugLevel() + "§a.");
+                        sender.sendMessage("§aThe debug level is now §6" + Teleios.getDebugLevel() + "§a.");
                         MessageMaster.sendSuccessMessage("SetDebugLevelCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
                         return true;
                     } catch (Exception e) {

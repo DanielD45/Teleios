@@ -5,9 +5,9 @@
 
 package de.daniel_d45.teleios.worldmaster;
 
-import de.daniel_d45.teleios.core.util.ConfigEditor;
-import de.daniel_d45.teleios.core.util.ItemBuilder;
-import de.daniel_d45.teleios.core.util.MessageMaster;
+import de.daniel_d45.teleios.core.program.ConfigEditor;
+import de.daniel_d45.teleios.core.program.ItemBuilder;
+import de.daniel_d45.teleios.core.program.MessageMaster;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -58,13 +58,13 @@ public class SegmentManagerWM {
             if (ConfigEditor.isActive(getSegmentName() + ".All")) {
                 // The segment is activated
 
-                item = new ItemBuilder(Material.GRASS_BLOCK, 1).setName("§o§5WorldMaster").setLore("§4Not implemented", "§fThe WorldMaster segment adds commands", "§fto manage different worlds on the server.", "§eActivationstate: §aON", "§7Left click to deactivate the segment.", "§7Right click to manage the functionality more specifically.").addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1).addItemFlags(ItemFlag.HIDE_ENCHANTS).build();
+                item = new ItemBuilder(Material.GRASS_BLOCK, 1).setName("§o§5WorldMaster").setLore("§4Not implemented", "§fThe WorldMaster segment adds commands", "§fto manage different worlds on the server.", "§eActivationstate: §aON", "§7Left click to deactivate the segment.", "§7Right click for more options.").addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1).addItemFlags(ItemFlag.HIDE_ENCHANTS).build();
 
             }
             else {
                 // The segment is deactivated
 
-                item = new ItemBuilder(Material.GRASS_BLOCK, 1).setName("§o§5WorldMaster").setLore("§4Not implemented", "§fThe WorldMaster segment adds commands", "§fto manage different worlds on the server.", "§eActivationstate: §cOFF", "§7Left click to deactivate the segment.", "§7Right click to manage the functionality more specifically.").build();
+                item = new ItemBuilder(Material.GRASS_BLOCK, 1).setName("§o§5WorldMaster").setLore("§4Not implemented", "§fThe WorldMaster segment adds commands", "§fto manage different worlds on the server.", "§eActivationstate: §cOFF", "§7Left click to activate the segment.", "§7Right click for more options.").build();
 
             }
 

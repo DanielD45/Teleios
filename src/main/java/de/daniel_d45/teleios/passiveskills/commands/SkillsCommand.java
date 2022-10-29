@@ -6,9 +6,9 @@
 package de.daniel_d45.teleios.passiveskills.commands;
 
 import de.daniel_d45.teleios.core.program.ArtificialInventory;
-import de.daniel_d45.teleios.core.util.ConfigEditor;
-import de.daniel_d45.teleios.core.util.InventoryManager;
-import de.daniel_d45.teleios.core.util.MessageMaster;
+import de.daniel_d45.teleios.core.program.ConfigEditor;
+import de.daniel_d45.teleios.core.program.InventoryManager;
+import de.daniel_d45.teleios.core.program.MessageMaster;
 import de.daniel_d45.teleios.passiveskills.SegmentManagerPS;
 import de.daniel_d45.teleios.passiveskills.program.Skill;
 import org.bukkit.Bukkit;

@@ -5,8 +5,8 @@
 
 package de.daniel_d45.teleios.adminfeatures.commands;
 
-import de.daniel_d45.teleios.core.util.ConfigEditor;
-import de.daniel_d45.teleios.core.util.MessageMaster;
+import de.daniel_d45.teleios.core.program.ConfigEditor;
+import de.daniel_d45.teleios.core.program.MessageMaster;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
@@ -26,14 +26,14 @@ public class HealCommand implements CommandExecutor {
         try {
 
             // Activation state check
-            if (ConfigEditor.isActive("AdminFeatures.All")) {
+            if (!ConfigEditor.isActive("AdminFeatures.All")) {
                 sender.sendMessage("§cThis command is not active.");
                 MessageMaster.sendSkipMessage("HealCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), the command is deactivated.");
                 return true;
             }
 
             // Permission check
-            if (sender.hasPermission("teleios.adminfeatures.heal")) {
+            if (!sender.hasPermission("teleios.adminfeatures.heal")) {
                 sender.sendMessage("§cMissing Permissions!");
                 MessageMaster.sendSkipMessage("HealCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), the sender doesn't have the needed permissions.");
                 return true;

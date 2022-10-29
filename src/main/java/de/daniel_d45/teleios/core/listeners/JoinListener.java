@@ -6,7 +6,7 @@
 package de.daniel_d45.teleios.core.listeners;
 
 import de.daniel_d45.teleios.bettergameplay.SegmentManagerBG;
-import de.daniel_d45.teleios.core.util.MessageMaster;
+import de.daniel_d45.teleios.core.program.MessageMaster;
 import de.daniel_d45.teleios.passiveskills.SegmentManagerPS;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -29,7 +29,7 @@ public class JoinListener implements Listener {
 
             Player player = event.getPlayer();
 
-            // AdvancedCommands segment
+            // BetterGameplay segment
             SegmentManagerBG.initiateWarppouch(player.getName());
 
             // PassiveSkills segment

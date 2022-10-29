@@ -5,8 +5,8 @@
 
 package de.daniel_d45.teleios.adminfeatures.commands;
 
-import de.daniel_d45.teleios.core.util.ConfigEditor;
-import de.daniel_d45.teleios.core.util.MessageMaster;
+import de.daniel_d45.teleios.core.program.ConfigEditor;
+import de.daniel_d45.teleios.core.program.MessageMaster;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -30,7 +30,7 @@ public class UnmuteCommand implements CommandExecutor {
             }
 
             // Sender permission check
-            if (sender.hasPermission("teleios.adminfeatures.unmute")) {
+            if (!sender.hasPermission("teleios.adminfeatures.unmute")) {
                 sender.sendMessage("§cMissing Permissions!");
                 MessageMaster.sendSkipMessage("UnmuteCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), the sender doesn't have the needed permissions.");
                 return true;

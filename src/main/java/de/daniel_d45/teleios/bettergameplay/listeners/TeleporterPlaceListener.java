@@ -3,9 +3,9 @@
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
-package de.daniel_d45.teleios.core.listeners;
+package de.daniel_d45.teleios.bettergameplay.listeners;
 
-import de.daniel_d45.teleios.core.util.*;
+import de.daniel_d45.teleios.core.program.*;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;

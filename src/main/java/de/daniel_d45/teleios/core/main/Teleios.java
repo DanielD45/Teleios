@@ -7,14 +7,14 @@ package de.daniel_d45.teleios.core.main;
 
 import de.daniel_d45.teleios.adminfeatures.commands.*;
 import de.daniel_d45.teleios.bettergameplay.commands.*;
+import de.daniel_d45.teleios.bettergameplay.listeners.PlayerInteractWithTeleporterListener;
+import de.daniel_d45.teleios.bettergameplay.listeners.TeleporterPlaceListener;
 import de.daniel_d45.teleios.core.commands.ManageteleiosCommandListener;
 import de.daniel_d45.teleios.core.commands.SetDebugLevelCommand;
 import de.daniel_d45.teleios.core.listeners.ArtificialInventoryClickListener;
 import de.daniel_d45.teleios.core.listeners.JoinListener;
-import de.daniel_d45.teleios.core.listeners.PlayerInteractWithTeleporterListener;
-import de.daniel_d45.teleios.core.listeners.TeleporterPlaceListener;
-import de.daniel_d45.teleios.core.util.ConfigEditor;
-import de.daniel_d45.teleios.core.util.MessageMaster;
+import de.daniel_d45.teleios.core.program.ConfigEditor;
+import de.daniel_d45.teleios.core.program.MessageMaster;
 import de.daniel_d45.teleios.passiveskills.commands.SkillsCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
@@ -27,9 +27,9 @@ import org.bukkit.plugin.java.JavaPlugin;
  *
  * @author Daniel_D45
  */
-public class Main extends JavaPlugin {
+public class Teleios extends JavaPlugin {
 
-    private static Main plugin;
+    private static Teleios plugin;
     private static Server server;
     private static int standardDebugLevel;
 
@@ -38,7 +38,7 @@ public class Main extends JavaPlugin {
      *
      * @return [Main] The plugin
      */
-    public static Main getPlugin() {
+    public static Teleios getPlugin() {
         return plugin;
     }
 

@@ -3,9 +3,9 @@
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
-package de.daniel_d45.teleios.core.util;
+package de.daniel_d45.teleios.core.program;
 
-import de.daniel_d45.teleios.core.main.Main;
+import de.daniel_d45.teleios.core.main.Teleios;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -27,7 +27,7 @@ public class RecipeManager {
 
             teleporter.setItemMeta(teleporterMeta);
 
-            NamespacedKey key = new NamespacedKey(Main.getPlugin(), "teleporter");
+            NamespacedKey key = new NamespacedKey(Teleios.getPlugin(), "teleporter");
 
             ShapedRecipe teleporterRecipe = new ShapedRecipe(key, teleporter);
             teleporterRecipe.shape("ESE", "SBS", "ESE");

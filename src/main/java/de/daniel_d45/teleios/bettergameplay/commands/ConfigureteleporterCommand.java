@@ -5,10 +5,10 @@
 
 package de.daniel_d45.teleios.bettergameplay.commands;
 
-import de.daniel_d45.teleios.core.util.ConfigEditor;
-import de.daniel_d45.teleios.core.util.ItemBuilder;
-import de.daniel_d45.teleios.core.util.MessageMaster;
-import de.daniel_d45.teleios.core.util.RecipeManager;
+import de.daniel_d45.teleios.core.program.ConfigEditor;
+import de.daniel_d45.teleios.core.program.ItemBuilder;
+import de.daniel_d45.teleios.core.program.MessageMaster;
+import de.daniel_d45.teleios.core.program.RecipeManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -91,6 +91,7 @@ public class ConfigureteleporterCommand implements CommandExecutor {
                         return false;
                     }
                 default:
+                    // Wrong amount of arguments
                     sender.sendMessage("§cWrong amount of arguments!");
                     MessageMaster.sendSkipMessage("ConfigureteleporterCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), wrong amount of arguments.");
                     return false;

@@ -2,20 +2,46 @@
 
 1 Enderchest command
 1 Teleporters:
-    0 teleporters with restricted access
-    0 distance calculation with Pythagoras
-    0 group teleporters by dimension
+    1 distance calculation with Pythagoras
+    0 case insensitive teleporter names
+    0 group teleporters by dimension in the warp list
     0 show the teleporter's teleportation cost when listing
-0 enchantments on items upgrade over time (xp collected?)
+    0 teleporters with restricted access
+0 move config to world folder
+0 "/warppouch put" puts every ender pearl from your inventory in your warppouch
+0 enchantments on items upgrade over time (e.g. Sharpness I->II) (xp collected?)
 0 Printstat command: prints the player's stats to the chat
-0 block which can salvage items/blocks (wooden stairs...)
+0 block which can salvage items/blocks (like wooden stairs)
 0 right click on shulker boxes in inventory to open them
 0 a bow which shoots straight (very fast)
 0 chickens rarely drop special loot instead of eggs?
-0 swords can be upgraded in material, keeping the enchantments
-0 quarz blocks can be crafted into 9 quarz
+0 swords can be upgraded in material, keeping the enchantments (crafting recipe?)
+0 quarz blocks can be crafted into 9 quarz (+others?)
+0 possibility to get player heads and mini blocks for decorations (crafting recipe)
+0 machines which can harvest crops
+0 leveling system
+    0 every different material players collect gives them a reward?
+    0 collection system that unlocks crafting recipes?
+    0 armor with upgrades/modules?
+    0 get skill points to upgrade:
+        0 speed
+        0 health / resistance
+        0 damage
+        0 hunger?
+        0 dodging
+        0 XP collected
+        0 higher chance for good enchantments?
+0 monsters get stronger the more you kill
+0 riding animals (horses, donkeys, pigs) level health, speed and jump height through being ridden
+0 tombstones which save your items on death
+0 elytra with 8 armor value
+0 active power-up/ability which debuffs monsters for a limited time
+0 Mending has multiple levels, higher levels repair more for the same amount of xp
+0 duplication enchantment for bows with a chance to fire two arrows at once
+
 
 - CreatureEvolution sub segment:
+
 0 some mobs spawn with different abilities and drops
 0 higher range of health, damage etc.
 0 random events (trigger: listener for specific time + randomness)
@@ -25,22 +51,22 @@
 
 
 - PassiveSkills sub segment:
-1 save file: config
+
+1 save data to config
 1 list all players with their skills
 1 apply factor and increase BlockValue on block break
 1 test for level-ups
 1 increase the right value on level-up
-1 command to query skills
+1 /skill command to query skills
 1 search and use config on plugin start
-1 command to change DebugLevel
-
 0 command to show skill leaderboards
 0 command to remove players
+
 
 - Config file structure example:
 
 Players
-	Spieler1
+	[PlayerName]
 		LumberJackSkill
 			BlockValue = 64.0
 			BonusMultiplier = 0.05
@@ -48,7 +74,7 @@ Players
 			BlockValue = 5.0
 			BonusMultiplier = 0.0
 
-	Spieler2
+	[PlayerName]
 		LumberJackSkill
 			BlockValue = 128.0
 			BonusMultiplier = 0.1
