@@ -86,4 +86,5 @@ This is a history of the past changes coming with the respective versions. "WIP"
 - "/joinmessage" will now tell you whether the custom join message is enabled or disabled
 - "/warp" will now list the available warppoints and teleporters
 - "/inventories" will now list the available inventories
+- non-admins can now use "/setblocksperpearl" to see the blocks per pearl argument
 - general optimisation
