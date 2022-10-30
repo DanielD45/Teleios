@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
@@ -27,18 +28,39 @@ public class PlayerInteractWithTeleporterListener implements Listener {
         try {
 
             Player player = event.getPlayer();
+            Material itemType = event.getMaterial();
             Block block = event.getClickedBlock();
+            Action action = event.getAction();
 
+
+            // TODO: exception handling
             // Block type check
             if (!block.getType().equals(Material.END_PORTAL_FRAME)) {
                 MessageMaster.sendSkipMessage("PlayerInteractWithTeleporterListener", "Skipped method onPlayerInteractWithTeleporter(" + event + "), wrong block type.");
                 return;
             }
 
+            Location currentLoc;
             // Iterates through the teleporters
             for (String current : ConfigEditor.getSectionKeys("Teleporters")) {
+                currentLoc = (Location) ConfigEditor.get("Teleporters." + current);
+                currentLoc.setYaw(0);
 
-                if (ConfigEditor.get("Teleporters." + current).equals(block.getLocation())) {
+                // Teleporter match check
+                if (currentLoc.equals(block.getLocation())) {
+
+                    // Is not left-click check
+                    if (action.equals(Action.RIGHT_CLICK_BLOCK) && itemType.equals(Material.ENDER_EYE)) {
+                        event.setCancelled(true);
+                        MessageMaster.sendSkipMessage("PlayerInteractWithTeleporterListener", "Skipped method onPlayerInteractWithTeleporter(" + event + "), cannot put an ender eye in a teleporter.");
+                        return;
+                    }
+
+                    // Is not left-click check
+                    if (!action.equals(Action.LEFT_CLICK_BLOCK)) {
+                        MessageMaster.sendSkipMessage("PlayerInteractWithTeleporterListener", "Skipped method onPlayerInteractWithTeleporter(" + event + "), wrong action type.");
+                        return;
+                    }
 
                     event.setCancelled(true);
                     // Opens the "Pick up teleporter?" inventory

@@ -13,6 +13,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
+import java.util.Set;
 
 
 public class WarppointCommand implements CommandExecutor {
@@ -126,18 +127,42 @@ public class WarppointCommand implements CommandExecutor {
                                 return true;
                             }
 
-                            String warppointName = args[1];
+                            Set<String> warppointNames = ConfigEditor.getSectionKeys("Warppoints");
+                            Set<String> teleporterNames = ConfigEditor.getSectionKeys("Teleporters");
 
-                            // Unique warppoint name check
-                            if (ConfigEditor.containsPath("Warppoints." + warppointName) || ConfigEditor.containsPath("Teleporters." + warppointName)) {
-                                player.sendMessage("§cA warppoint or teleporter with this name already exists!");
-                                MessageMaster.sendSkipMessage("WarppointCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), a warppoint or teleporter with this name already exists.");
-                                return true;
+                            String specifiedName = args[1];
+
+                            if (warppointNames != null) {
+                                // Checks for warppoints with the same name
+                                for (String currentWPName : warppointNames) {
+                                    if (currentWPName.equalsIgnoreCase(specifiedName)) {
+                                        // Name match
+                                        player.sendMessage("§cA warppoint with this name already exists!");
+                                        MessageMaster.sendSkipMessage("WarppointCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), a warppoint with this name already exists.");
+                                        return true;
+                                    }
+                                }
+                                // No warppoint name match
                             }
+                            // No warppoints or no warppoint name match
 
-                            // Add a warppoint with the specified name and the player's location
-                            ConfigEditor.set("Warppoints." + warppointName, player.getLocation());
-                            player.sendMessage("§aAdded warppoint §6" + warppointName + "§a!");
+                            if (teleporterNames != null) {
+                                // Checks for teleporters with the same name
+                                for (String currentTPName : teleporterNames) {
+                                    if (currentTPName.equalsIgnoreCase(specifiedName)) {
+                                        // Name match
+                                        player.sendMessage("§cA teleporter with this name already exists!");
+                                        MessageMaster.sendSkipMessage("WarppointCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), a teleporter with this name already exists.");
+                                        return true;
+                                    }
+                                }
+                                // No name matches
+                            }
+                            // No warppoints and/or no teleporters and/or no name matches
+
+                            // Adds a warppoint with the specified name and the player's location
+                            ConfigEditor.set("Warppoints." + specifiedName, player.getLocation());
+                            player.sendMessage("§aAdded warppoint §6" + specifiedName + "§a!");
 
                             MessageMaster.sendSuccessMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
                             return true;

@@ -31,3 +31,4 @@
 0 make unnecessary arguments irrelevant (i.e. /warp list drgsrilz = /warp list)
 0 (terminal) command to make MTL inventory read-only to selected players to restrict admins from activating commands they are not meant to use
 0 print changes in variables (like blocksperpearl) to chat
+0 command to prevent (certain) players from placing TNT, lava...

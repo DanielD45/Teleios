@@ -1,9 +1,9 @@
 - Features:
 
 0 integrate in MTL inventory
-0 rotten flesh, spider eyes, poisonous potatoes are compostable
+0 rotten flesh, spider eyes, poisonous potatoes, bamboo is compostable
 0 players get effects dependent on the biome they're in
-    0 Snowy biomes: faster hunger loss, slower movement, effects stronger in water there
+    0 Snowy biomes: faster hunger loss, slower movement, effects stronger in cold water
     0 Forest biomes: regeneration
     0 Desert biomes: mining fatigue (in the sun)
     0 Villages: resistance?
@@ -31,3 +31,4 @@
 0 crippling effect when at low health (slower)
 0 animals are lured towards hay/food
 0 monsters always drop their equipment
+0 smelting armor gives more resources back, depending on durability

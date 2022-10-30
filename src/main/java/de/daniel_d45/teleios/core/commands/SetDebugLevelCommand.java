@@ -26,19 +26,13 @@ public class SetDebugLevelCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         try {
 
-            // Sender permission check
-            if (!sender.hasPermission("teleios.core.setdebuglevel")) {
-                sender.sendMessage("§cMissing Permissions!");
-                MessageMaster.sendSkipMessage("SetDebugLevelCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), missing permissions.");
-                return true;
-            }
-
             // Switch for the amount of arguments
             switch (args.length) {
                 case 0:
                     // Specifes /setdebuglevel
                     try {
 
+                        // TODO: Add exception handling for invalid values
                         int level = Teleios.getDebugLevel();
 
                         sender.sendMessage("§aThe debug level is currently §6" + level + "§a.");
@@ -51,31 +45,43 @@ public class SetDebugLevelCommand implements CommandExecutor {
 
                 case 1:
                     // Specifies /setdebuglevel [Level]
+
+                    int newDebugLevel;
+
                     try {
+                        // Switches "uppercase number" chars to their corresponding chars
+                        args[0] = args[0].replace('=', '0');
+                        args[0] = args[0].replace('!', '1');
+                        args[0] = args[0].replace('\"', '2');
+                        args[0] = args[0].replace('§', '3');
+                        args[0] = args[0].replace('$', '4');
+                        args[0] = args[0].replace('%', '5');
+                        args[0] = args[0].replace('&', '6');
+                        args[0] = args[0].replace('/', '7');
+                        args[0] = args[0].replace('(', '8');
+                        args[0] = args[0].replace(')', '9');
 
-                        // Try to get the first argument as an int
-                        int level = Integer.parseInt(args[0]);
-
-                        if (level < 0) {
-                            ConfigEditor.setDebugLevel(0);
-                        }
-                        else if (level > 3) {
-                            ConfigEditor.setDebugLevel(3);
-                        }
-                        else {
-                            // The specified integer matches a debug level
-                            ConfigEditor.setDebugLevel(level);
-                        }
-
-                        sender.sendMessage("§aThe debug level is now §6" + Teleios.getDebugLevel() + "§a.");
-                        MessageMaster.sendSuccessMessage("SetDebugLevelCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                        newDebugLevel = Integer.parseInt(args[0]);
+                    } catch (NumberFormatException e) {
+                        sender.sendMessage("§cThis debug level is invalid");
+                        MessageMaster.sendSkipMessage("SetDebugLevelCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), the specified debug level is invalid.");
                         return true;
-                    } catch (Exception e) {
-                        sender.sendMessage("§cWrong arguments!");
-                        MessageMaster.sendSkipMessage("SetDebugLevelCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), wrong arguments.");
-                        return false;
                     }
 
+                    if (newDebugLevel < 0) {
+                        ConfigEditor.setDebugLevel(0);
+                    }
+                    else if (newDebugLevel > 3) {
+                        ConfigEditor.setDebugLevel(3);
+                    }
+                    else {
+                        // The specified integer matches a valid debug level
+                        ConfigEditor.setDebugLevel(newDebugLevel);
+                    }
+
+                    sender.sendMessage("§aThe debug level is now §6" + Teleios.getDebugLevel() + "§a.");
+                    MessageMaster.sendSuccessMessage("SetDebugLevelCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                    return true;
                 default:
                     sender.sendMessage("§cWrong amount of arguments!");
                     MessageMaster.sendSkipMessage("SetDebugLevelCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), wrong amount of arguments.");

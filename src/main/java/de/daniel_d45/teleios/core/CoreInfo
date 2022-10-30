@@ -7,7 +7,7 @@ pronunciation: pronounced like TELL-e-os
 - Debug message colours:
 
 green (§a):		method ran successfully
-grey (§7):		method ran without real impact / method skipped
+yellow (§e):	method ran without real impact / method skipped
 dark red (§4):	method failed
 
 - Chat message colors:
@@ -25,7 +25,13 @@ red (§c) 	/ dark_red (§4):	fail message
 0 MTL inventory: activated segments have enchanted icons
 0 MTL inventory: icons do not show enchantments or damage specs
 0 command (or MTL inv) to de-implement commands to make space for other plugins' command names
+0 remove all permission checks
+0 revise all MessageMaster.sendSkipMessage calls (-"Skipped method ")
 
+- Valid and standard argument values:
+
+ArgumentName (StandardValue): Range
+DebugLevel (1): dl >= 0; dl <= 3;
 
 - Data structure for the plugin.yml:
 

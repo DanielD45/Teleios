@@ -68,13 +68,6 @@ public class ConfigureteleporterCommand implements CommandExecutor {
                             return true;
                         }
 
-                        // Only allows teleporters with a unique name
-                        if (ConfigEditor.containsPath("Teleporters." + teleporterName)) {
-                            player.sendMessage("§cA teleporter with this name already exists!");
-                            MessageMaster.sendSkipMessage("ConfigureteleporterCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), a teleporter with that name already exists.");
-                            return true;
-                        }
-
                         // Checks for invalid names that can cause problems
                         if (teleporterName.equalsIgnoreCase("list")) {
                             player.sendMessage("§cThat name is invalid!");

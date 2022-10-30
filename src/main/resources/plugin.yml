@@ -175,7 +175,7 @@ commands:
       - SDL
       - setdl
       - SETDL
-    permission: teleios.core.setdebuglevel
+    permission: teleios.core.setdebuglevelRead
     description: Shows and sets the debug level (affecting the plugin outputs) to the specified integer from 0 to 3, where 0 = only plugin start, 1 = + errors, 2 = + method calls and 3 = + chat messages of everything.
     usage: /setdebuglevel ([Level])
 
@@ -192,96 +192,100 @@ commands:
 permissions:
 
   teleios.adminfeatures.chatclear:
-    description: Allows the chatclear command.
+    description: Allows use of the chatclear command.
     default: op
 
   teleios.adminfeatures.damage:
-    description: Allows the damage command.
+    description: Allows use of the damage command.
     default: op
 
   teleios.adminfeatures.gma:
-    description: Allows the gma command.
+    description: Allows use of the gma command.
     default: op
 
   teleios.adminfeatures.gmc:
-    description: Allows the gmc command.
+    description: Allows use of the gmc command.
     default: op
 
   teleios.adminfeatures.gms:
-    description: Allows the gms command.
+    description: Allows use of the gms command.
     default: op
 
   teleios.adminfeatures.gmsp:
-    description: Allows the gmsp command.
+    description: Allows use of the gmsp command.
     default: op
 
   teleios.adminfeatures.heal:
-    description: Allows the heal command.
+    description: Allows use of the heal command.
     default: op
 
   teleios.adminfeatures.inventories:
-    description: Allows the inventories command.
+    description: Allows use of the inventories command.
     default: op
 
   teleios.adminfeatures.joinmessage:
-    description: Allows the joinmessage command.
+    description: Allows use of the joinmessage command.
     default: op
 
   teleios.adminfeatures.mute:
-    description: Allows the mute command.
+    description: Allows use of the mute command.
     default: op
 
   teleios.adminfeatures.openinventory:
-    description: Allows the openinventory command.
+    description: Allows use of the openinventory command.
     default: op
 
   teleios.adminfeatures.tphere:
-    description: Allows the tphere command.
+    description: Allows use of the tphere command.
     default: op
 
   teleios.adminfeatures.unmute:
-    description: Allows the unmute command.
+    description: Allows use of the unmute command.
     default: op
 
 
   teleios.bettergameplay.configureteleporter:
-    description: Allows the configureteleporter command.
+    description: Allows use of the configureteleporter command.
     default: true
 
   teleios.bettergameplay.enderchest:
-    description: Allows the enderchest command.
+    description: Allows use of the enderchest command.
     default: true
 
   teleios.bettergameplay.setblocksperpearlRead:
-    description: Allows the setblocksperpearl command.
+    description: Allows querying the BlocksPerPearl argument using /setblocksperpearl.
     default: true
 
   teleios.bettergameplay.setblocksperpearl:
-    description: Allows the setblocksperpearl command.
+    description: Allows use of the setblocksperpearl command.
     default: op
 
   teleios.bettergameplay.warp:
-    description: Allows the warp command.
+    description: Allows use of the warp command.
     default: true
 
   teleios.bettergameplay.warppoint:
-    description: Allows the warppoint command.
+    description: Allows use of the warppoint command.
     default: op
 
   teleios.bettergameplay.warppouch:
-    description: Allows the warppouch command.
+    description: Allows use of the warppouch command.
     default: true
 
 
   teleios.core.manageteleios:
-    description: Allows the manageteleios command.
+    description: Allows use of the manageteleios command.
     default: op
 
   teleios.core.setdebuglevel:
-    description: Allows the setdebuglevel command.
+    description: Allows use of the setdebuglevel command.
+    default: op
+
+  teleios.core.setdebuglevelRead:
+    description: Allows querying the DebugLevel argument using /setdebuglevel.
     default: op
 
 
   teleios.passiveskills.skills:
-    description: Allows the skills command.
+    description: Allows use of the skills command.
     default: true

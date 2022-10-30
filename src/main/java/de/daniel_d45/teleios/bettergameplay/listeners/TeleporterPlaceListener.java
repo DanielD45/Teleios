@@ -17,6 +17,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
+import java.util.Set;
 
 
 public class TeleporterPlaceListener implements Listener {
@@ -35,6 +36,7 @@ public class TeleporterPlaceListener implements Listener {
 
             Player player = event.getPlayer();
             Location loc = block.getLocation();
+            loc.setYaw(player.getLocation().getYaw());
             ItemStack item = event.getItemInHand();
             String itemName = InventoryManager.getCleanString(item.getItemMeta().getDisplayName());
             List<String> itemLore = item.getItemMeta().getLore();
@@ -62,17 +64,50 @@ public class TeleporterPlaceListener implements Listener {
                 return;
             }
 
-            // Only allows teleporters with a unique name
-            if (ConfigEditor.containsPath("Teleporters." + itemName) || ConfigEditor.containsPath("Warppoints." + itemName)) {
+            // Filters invalid teleporter names
+            if (itemName.equals("list")) {
                 event.setCancelled(true);
-                player.sendMessage("§cA teleporter or warppoint with this name already exists!");
-                MessageMaster.sendSkipMessage("TeleporterPlaceListener", "onTeleporterPlace(" + event + "), a teleporter or warppoint with that name already exists.");
+                player.sendMessage("§cThis teleporter name is invalid!");
+                MessageMaster.sendSkipMessage("TeleporterPlaceListener", "onTeleporterPlace(" + event + "), this teleporter name is invalid.");
+                return;
             }
-            else {
-                ConfigEditor.set("Teleporters." + itemName, loc);
-                player.sendMessage("§aTeleporter §6" + itemName + " §ahas been added.");
-                MessageMaster.sendSuccessMessage("TeleporterPlaceListener", "onTeleporterPlace(" + event + ")");
+
+            Set<String> warppointNames = ConfigEditor.getSectionKeys("Warppoints");
+            Set<String> teleporterNames = ConfigEditor.getSectionKeys("Teleporters");
+
+            if (warppointNames != null) {
+                // Checks for warppoints with the same name
+                for (String currentWPName : warppointNames) {
+                    if (currentWPName.equalsIgnoreCase(itemName)) {
+                        // Name match
+                        event.setCancelled(true);
+                        player.sendMessage("§cA warppoint with this name already exists!");
+                        MessageMaster.sendSkipMessage("TeleporterPlaceListener", "onTeleporterPlace(" + event + "), a warppoint with this name already exists.");
+                        return;
+                    }
+                }
+                // No warppoint name match
             }
+            // No warppoints or no warppoint name match
+
+            if (teleporterNames != null) {
+                // Checks for teleporters with the same name
+                for (String currentTPName : teleporterNames) {
+                    if (currentTPName.equalsIgnoreCase(itemName)) {
+                        // Name match
+                        event.setCancelled(true);
+                        player.sendMessage("§cA teleporter with this name already exists!");
+                        MessageMaster.sendSkipMessage("TeleporterPlaceListener", "onTeleporterPlace(" + event + "), a teleporter with this name already exists.");
+                        return;
+                    }
+                }
+                // No name matches
+            }
+            // No warppoints and/or no teleporters and/or no name matches
+
+            ConfigEditor.set("Teleporters." + itemName, loc);
+            player.sendMessage("§aTeleporter §6" + itemName + " §ahas been added.");
+            MessageMaster.sendSuccessMessage("TeleporterPlaceListener", "onTeleporterPlace(" + event + ")");
 
         } catch (Exception e) {
             MessageMaster.sendFailMessage("TeleporterPlaceListener", "onTeleporterPlace(" + event + ")", e);
