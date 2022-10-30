@@ -84,7 +84,11 @@ This is a history of the past changes coming with the respective versions. "WIP"
   by about 42% of the previous value. I advice you to adjust your blocksperpearl argument with /setblocksperpearl.
 - The custom join message now only displays if the join message is enabled **AND the /joinmessage command is active**
 - "/joinmessage" will now tell you whether the custom join message is enabled or disabled
-- "/warp" will now list the available warppoints and teleporters
+- "/warp" will now list the available warppoints and teleporters. "/warp list" will now ignore any added arguments
 - "/inventories" will now list the available inventories
-- non-admins can now use "/setblocksperpearl" to see the blocks per pearl argument
+- non-admins can now use "/setblocksperpearl" to see the BlockPerPearl argument
+- non-admins can now use "/setdebuglevel" to see the DegubLevel argument
+- warppoint and teleporter names are now case insensitive when warping
+- when a player places a teleporter, their yaw is saved to the teleporter and applied when teleporting.
+- only left clicks on teleporters open the "Pick up teleporter?" inventory
 - general optimisation
