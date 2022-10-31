@@ -17,10 +17,10 @@ than switching the whole segment on or off. What can be switched on or off is ma
 - /manageteleios (/mtl) command: opens an inventory to manage all plugin functionality. When you add the plugin to your server, 
   everything will be deactivated standardly.
 - /setdebuglevel (/sdl) command: lets you show and change the debug level affecting the plugin outputs. You can set it from 0 - 3: <br/>
-  0 = plugin start / plugin end messages will be written to the terminal, <br/>
-  1 = plugin start / plugin end + error messages will be written to the terminal, <br/>
-  2 = plugin start / plugin end + error messages + method calls will be written to the terminal, <br/>
-  3 = plugin start / plugin end + error messages + method calls will be written to the terminal and in the in-game chat <br/>
+  0 = plugin start/end messages will be written to the terminal, <br/>
+  1 = plugin start/end + error messages will be written to the terminal, <br/>
+  2 = plugin start/end + error + method success + method skipped messages will be written to the terminal, <br/>
+  3 = plugin start/end + error + method success + method skipped messages will be written to the terminal and the in-game chat <br/>
 
 <br/>
 
@@ -89,6 +89,16 @@ This is a history of the past changes coming with the respective versions. "WIP"
 - non-admins can now use "/setblocksperpearl" to see the BlockPerPearl argument
 - non-admins can now use "/setdebuglevel" to see the DegubLevel argument
 - warppoint and teleporter names are now case insensitive when warping
-- when a player places a teleporter, their yaw is saved to the teleporter and applied when teleporting.
-- only left clicks on teleporters open the "Pick up teleporter?" inventory
+- when a player places a teleporter, their yaw is saved to the teleporter and applied when teleporting
+- only left clicks on teleporters open the "Pick up teleporter?" inventory now
+- the "Main" class (extending the "JavaPlugin" class) is now called "Teleios"
+- WIP: the "Teleios" class is not static anymore
+- WIP: the DebugLevel values and effect have been changed from <br/>
+  0 = plugin start/end messages will be written to the terminal, <br/>
+  1 = plugin start/end + error messages will be written to the terminal, <br/>
+  2 = plugin start/end + error + method success + method skipped messages will be written to the terminal, <br/>
+  3 = plugin start/end + error + method success + method skipped messages will be written to the terminal and the in-game chat <br/>
+  to <br/>
+  0 =
+  
 - general optimisation
