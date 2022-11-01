@@ -92,7 +92,6 @@ This is a history of the past changes coming with the respective versions. "WIP"
 - when a player places a teleporter, their yaw is saved to the teleporter and applied when teleporting
 - only left clicks on teleporters open the "Pick up teleporter?" inventory now
 - the "Main" class (extending the "JavaPlugin" class) is now called "Teleios"
-- WIP: the "Teleios" class is not static anymore
 - WIP: the DebugLevel values and effect have been changed from <br/>
   0 = plugin start/end messages will be written to the terminal, <br/>
   1 = plugin start/end + error messages will be written to the terminal, <br/>
