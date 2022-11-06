@@ -98,6 +98,15 @@ This is a history of the past changes coming with the respective versions. "WIP"
   2 = plugin start/end + error + method success + method skipped messages will be written to the terminal, <br/>
   3 = plugin start/end + error + method success + method skipped messages will be written to the terminal and the in-game chat <br/>
   to <br/>
-  0 =
-  
+  0 = no messages <br/>
+  1 = plugin start/end messages will be written to the terminal <br/>
+  2 = plugin start/end messages will be written to the terminal & in-game chat <br/>
+  3 = plugin start/end + fail messages will be written to the terminal <br/>
+  4 = plugin start/end + fail messages will be written to the terminal & in-game chat <br/>
+  5 = plugin start/end + fail + warning messages will be written to the terminal <br/>
+  6 = plugin start/end + fail + warning messages will be written to the terminal & in-game chat <br/>
+  7 = plugin start/end + fail + warning + info messages will be written to the terminal <br/>
+  8 = plugin start/end + fail + warning + info messages will be written to the terminal & in-game chat <br/>
+  9 = plugin start/end + fail + warning + info + success messages will be written to the terminal <br/>
+  10 = plugin start/end + fail + warning + info + success messages will be written to the terminal & in-game chat <br/>
 - general optimisation
