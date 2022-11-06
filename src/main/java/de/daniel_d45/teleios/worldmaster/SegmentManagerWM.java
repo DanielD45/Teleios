@@ -5,9 +5,9 @@
 
 package de.daniel_d45.teleios.worldmaster;
 
-import de.daniel_d45.teleios.core.program.ConfigEditor;
-import de.daniel_d45.teleios.core.program.ItemBuilder;
-import de.daniel_d45.teleios.core.program.MessageMaster;
+import de.daniel_d45.teleios.core.ConfigEditor;
+import de.daniel_d45.teleios.core.ItemBuilder;
+import de.daniel_d45.teleios.core.MessageMaster;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;

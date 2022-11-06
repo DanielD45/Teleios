@@ -1,7 +1,7 @@
 name: Teleios
 version: 1.2-WIP
 main: de.daniel_d45.teleios.core.main.Teleios
-description: Adds many different features to your server which can be turned on and off using the /manageteleios command. The plugin data is stored in the config file.
+description: Adds many different features to your server which can be turned on and off using the /manageteleios (/mtl) command. The plugin data is stored in the config.yml file.
 api-version: 1.19
 author: Daniel_D45
 

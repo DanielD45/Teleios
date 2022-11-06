@@ -3,43 +3,43 @@
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/scrapyard/WeatherchangeCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/ChatclearCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/CountdownCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/DamageCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/GmaCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/GmcCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/GmsCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/GmspCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/HealCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/InventoriesCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/JoinmessageCommandListener.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/MuteCommandListener.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/OpeninventoryCommand.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/SegmentManagerAF.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/commands/ChatclearCommand.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/commands/CountdownCommand.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/commands/DamageCommand.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/commands/GmaCommand.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/commands/GmcCommand.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/commands/GmsCommand.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/commands/GmspCommand.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/commands/HealCommand.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/commands/InventoriesCommand.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/commands/JoinmessageCommandListener.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/commands/MuteCommandListener.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/commands/OpeninventoryCommand.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/commands/TphereCommand.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/commands/UnmuteCommand.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/commands/WarppointCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/TphereCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/UnmuteCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/WarppointCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/ConfigureteleporterCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/EnderchestCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/PlayerInteractWithTeleporterListener.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/SegmentManagerBG.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/commands/ConfigureteleporterCommand.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/commands/EnderchestCommand.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/commands/SetblocksperpearlCommand.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/commands/WarpCommand.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/commands/WarppouchCommand.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/listeners/PlayerInteractWithTeleporterListener.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/listeners/TeleporterPlaceListener.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/core/CoreInfo" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/core/commands/ManageteleiosCommandListener.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/core/commands/SetDebugLevelCommand.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/core/program/InventoryManager.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/core/program/MessageMaster.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/core/program/RecipeManager.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/SetblocksperpearlCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/TeleporterPlaceListener.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/WarpCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/WarppouchCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/core/1-CoreInfo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/core/InventoryManager.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/core/ManageteleiosCommandListener.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/core/MessageMaster.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/core/RecipeManager.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/core/SetDebugLevelCommand.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/creatureevolution/SegmentManagerCE.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/passiveskills/PassiveSkillsInfo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/passiveskills/1-PassiveSkillsInfo" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/passiveskills/SegmentManagerPS.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/passiveskills/commands/SkillsCommand.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/passiveskills/program/Skill.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/passiveskills/Skill.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/passiveskills/SkillsCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/worldmaster/1-WorldMasterInfo" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/worldmaster/SegmentManagerWM.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/worldmaster/WorldMasterInfo" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

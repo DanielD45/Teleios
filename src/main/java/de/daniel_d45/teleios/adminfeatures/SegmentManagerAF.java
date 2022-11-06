@@ -5,7 +5,7 @@
 
 package de.daniel_d45.teleios.adminfeatures;
 
-import de.daniel_d45.teleios.core.program.*;
+import de.daniel_d45.teleios.core.*;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;

@@ -1,0 +1,36 @@
+- Features:
+
+1 warp command
+1 warppoint command
+1 heal command
+1 damage command
+1 chatclear command
+1 enderchest command
+1 invsee command
+1 mute command
+1 unmute command
+1 joinmessage command
+1 tphere command
+1 gmc command
+1 gmsp command
+1 gms command
+1 gma command
+
+0 countdown command
+0 tpa command
+0 tpahere command
+0 inventories command
+    1 create inventories
+    1 list inventories
+    1 remove inventories
+    1 open inventories
+0 spawnmanager command
+0 destructionmanager inventory to manage which entities (Creepers, Villagers, TNT...) can destroy what
+0 /freezemobs: (toggle) sets all entities' NoAI argument to true and disables mob spawns
+0 /repair: repairs the targeted player's items
+0 make unnecessary arguments irrelevant (i.e. /warp list drgsrilz = /warp list)
+0 (terminal) command to make MTL inventory read-only to selected players to restrict admins from activating commands they are not meant to use
+0 print changes in variables (like blocksperpearl) to chat
+0 command to prevent (certain) players from placing TNT, lava...
+0 /protect command to make yourself or another player invincible
+0 startinghelp function: monsters deal less damage to specified players

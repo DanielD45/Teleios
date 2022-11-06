@@ -1,0 +1,76 @@
+- Plugin name:
+
+greek: Téleios (Τέλειος) = english: complete
+pronunciation: pronounced like TELL-e-os
+
+
+- Features:
+
+1 setdebuglevel command
+1 manageteleios command
+1 activationstate enum
+1 revise DebugLevel:
+    1 add info messages
+    1 odd = terminal output, even = terminal and chat output
+0 fix: MessageMaster.sendEnableMessage() doesn't work in onEnable()
+0 remove all permission checks
+0 rename SegmentManagerPS in PassiveSkills etc.
+0 revise all MessageMaster.sendSkipMessage/MessageMaster.sendWarningMessage calls (-"Skipped method ")
+0 add MessageMaster.sendInfo calls
+0 revise warning messages (remove "Skipped method ")
+0 MTL inventory: activated segments have enchanted icons
+0 MTL inventory: icons do not show enchantments or damage specs
+0 command (or MTL inv) to de-implement commands to make space for other plugins' command names
+
+
+- Debug message colours:
+
+red (§c)    / dark red (§4):	method failed
+green (§a)  / dark green (§2):	method ran successfully
+yellow (§e) / gold (§6):	    method ran without real impact / method skipped
+
+
+- Chat message / command feedback colors:
+
+green (§a) 	/ gold (§6): success message
+yellow (§e) / gold (§6): info message
+red (§c) 	/ gold (§6): fail message
+
+
+- Valid and standard argument values:
+
+ArgumentName (StandardValue): Range
+DebugLevel (1): x >= 0; x <= 10;
+                0  = no messages
+                1  = plugin start/end messages will be written to the terminal
+                2  = plugin start/end messages will be written to the terminal & in-game chat
+                3  = plugin start/end + fail messages will be written to the terminal
+                4  = plugin start/end + fail messages will be written to the terminal & in-game chat
+                5  = plugin start/end + fail + warning messages will be written to the terminal
+                6  = plugin start/end + fail + warning messages will be written to the terminal & in-game chat
+                7  = plugin start/end + fail + warning + info messages will be written to the terminal
+                8  = plugin start/end + fail + warning + info messages will be written to the terminal & in-game chat
+                9  = plugin start/end + fail + warning + info + success messages will be written to the terminal
+                10 = plugin start/end + fail + warning + info + success messages will be written to the terminal & in-game chat
+
+
+- Data structure for the plugin.yml:
+
+commands:
+   [command1]:
+      aliases:
+      - [c1]
+      permission: teleios.[segment1].[command1]
+      description: [description1]
+      usage: /[command1]
+
+permissions:
+   teleios.[segment].[command1]:
+      description: Allows the [command] command.
+      default: true
+   teleios.[segment].[command2]Read:
+      description: Allows the [command] command.
+      default: true
+   teleios.[segment].[command2]:
+      description: Allows the [command] command.
+      default: op

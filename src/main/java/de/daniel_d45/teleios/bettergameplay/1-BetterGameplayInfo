@@ -1,0 +1,116 @@
+- Features:
+
+1 Enderchest command
+1 Teleporters:
+    1 distance calculation with Pythagoras
+    1 only lift-clicking on teleporters opens the interactive inventory
+    1 case insensitive warping
+    1 the teleporter orientation is the player's orientation when placing it
+    0 tablist for /warp [TeleporterName]|[WarppointName]
+    0 teleporters with restricted access
+    0 bug fix: yaw reset on interacton with teleporter
+    0 list teleporters in grey if they are not reachable
+        1 obstructed
+        1 dimension
+        0 cost to high
+        0 no access
+0 move config to world folder
+0 "/warppouch put" puts every ender pearl from your inventory in your warppouch
+0 enchantments on items upgrade over time (e.g. Sharpness I->II) (xp collected?)
+0 Printstat command: prints the player's stats to the chat
+0 block which can salvage items/blocks (like wooden stairs)
+0 right click on shulker boxes in inventory to open them
+0 a bow which shoots straight (very fast)
+0 chickens rarely drop special loot instead of eggs?
+0 swords can be upgraded in material, keeping the enchantments (crafting recipe?)
+0 quarz blocks can be crafted into 9 quarz (+others?)
+0 possibility to get player heads and mini blocks for decorations (crafting recipe)
+0 machines which can harvest crops
+0 leveling system
+    0 every different material players collect gives them a reward?
+    0 collection system that unlocks crafting recipes?
+    0 armor with upgrades/modules?
+    0 get skill points to upgrade:
+        0 speed
+        0 health / resistance
+        0 damage
+        0 crit chance / crit damage
+        0 faster attack speed
+        0 hunger?
+        0 dodging
+        0 XP collected
+        0 higher chance for good enchantments?
+0 monsters get stronger the more you kill
+0 riding animals (horses, donkeys, pigs) level health, speed and jump height through being ridden
+0 tombstones which save your items on death
+0 elytra with 8 armor value
+0 active power-up/ability which debuffs monsters for a limited time
+0 Mending has multiple levels, higher levels repair more for the same amount of xp
+0 duplication enchantment for bows with a chance to fire two arrows at once
+0 knockback doesn't knock back skeletons
+0 enchantments with higher levels than vanilla (unlockable?)
+0 throwable item to build temporary floating blocks
+0 compass that shows the way to the (players') nearest shulker box
+0 jungle saplings drop more often
+0 heal iron golems with iron
+0 craft dirt from bone meal and wood
+0 special monsters:
+    0 Tanky Creeper (less knockback)
+    0 Magic Zombie (boosts nearby monsters)
+    0 Invisible Spider
+    0 Wizard Skeleton (every Skeleton uses special effect arrows)
+0 craft dirt from bone meal and wood
+0 colors in item names
+0 waypoints players can place
+0 weapons upgrade with damage dealt, unlocking a random element effect
+0 weapons level damage dealt to monsters they killed a lot of
+0 portals in special dimensions
+0 crit damage scales per distance fallen
+0 eliminate trading limits
+
+
+- CreatureEvolution sub segment:
+
+0 some mobs spawn with different abilities and drops
+0 higher range of health, damage etc.
+0 random events (trigger: listener for specific time + randomness)
+0 some monsters are neutral
+0 some monsters fight each other
+0 green witches that throw supporting potions
+
+
+- PassiveSkills sub segment:
+
+1 save data to config
+1 list all players with their skills
+1 apply factor and increase BlockValue on block break
+1 test for level-ups
+1 increase the right value on level-up
+1 /skill command to query skills
+1 search and use config on plugin start
+0 command to show skill leaderboards
+0 command to remove players
+
+- Valid and standard argument values:
+
+ArgumentName (StandardValue): Range
+BlocksPerPearl (): bpp > 0; bpp <= Integer.MAX_VALUE;
+
+- Config file structure example:
+
+Players
+	[PlayerName]
+		LumberJackSkill
+			BlockValue = 64.0
+			BonusMultiplier = 0.05
+		MinerSkill
+			BlockValue = 5.0
+			BonusMultiplier = 0.0
+
+	[PlayerName]
+		LumberJackSkill
+			BlockValue = 128.0
+			BonusMultiplier = 0.1
+		MinerSkill
+			BlockValue = 1280.0
+			BonusMultiplier = 1.0

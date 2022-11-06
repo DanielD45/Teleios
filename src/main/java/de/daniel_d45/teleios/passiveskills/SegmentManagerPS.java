@@ -5,11 +5,9 @@
 
 package de.daniel_d45.teleios.passiveskills;
 
-import de.daniel_d45.teleios.core.program.ConfigEditor;
-import de.daniel_d45.teleios.core.program.ItemBuilder;
-import de.daniel_d45.teleios.core.program.MessageMaster;
-import de.daniel_d45.teleios.passiveskills.program.LumberjackSkill;
-import de.daniel_d45.teleios.passiveskills.program.Skill;
+import de.daniel_d45.teleios.core.ConfigEditor;
+import de.daniel_d45.teleios.core.ItemBuilder;
+import de.daniel_d45.teleios.core.MessageMaster;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -107,7 +105,7 @@ public class SegmentManagerPS {
 
                 // Checks whether the specified skill is already listed
                 if (currentSkill.equals(skill)) {
-                    MessageMaster.sendSkipMessage("SegmentManagerPS", "Skipped method addUsedSkill(" + skill + "), the specified skill is already listed.");
+                    MessageMaster.sendWarningMessage("SegmentManagerPS", "Skipped method addUsedSkill(" + skill + ")", "the specified skill is already listed.");
                     return;
                 }
 
@@ -166,7 +164,7 @@ public class SegmentManagerPS {
                 }
                 else {
                     // Both paths exist
-                    MessageMaster.sendSkipMessage("SegmentManagerPS", "Skipped method initiatePlayerRecords(" + playerName + "), both paths already exist.");
+                    MessageMaster.sendWarningMessage("SegmentManagerPS", "Skipped method initiatePlayerRecords(" + playerName + ")", "both paths already exist.");
                 }
                 // After checking for data structure
             }
@@ -296,7 +294,7 @@ public class SegmentManagerPS {
             else {
                 // Method getBonusMultiplier() failed
 
-                MessageMaster.sendSkipMessage("SegmentManagerPS", "Skipped method computeBonusItemAmount(" + playerName + ", " + skillName + "), method getBonusMultiplier(" + playerName + ", " + skillName + ") failed.");
+                MessageMaster.sendWarningMessage("SegmentManagerPS", "computeBonusItemAmount(" + playerName + ", " + skillName + ")", "method getBonusMultiplier(" + playerName + ", " + skillName + ") failed.");
             }
 
             return itemMultiplier;
@@ -333,7 +331,7 @@ public class SegmentManagerPS {
 
                 level = -1;
 
-                MessageMaster.sendSkipMessage("SegmentManagerPS", "Skipped method getLevel(" + playerName + ", " + skillName + "), method getBlockValue(" + playerName + ", " + skillName + ") failed.");
+                MessageMaster.sendWarningMessage("SegmentManagerPS", "Skipped method getLevel(" + playerName + ", " + skillName + ")", "method getBlockValue(" + playerName + ", " + skillName + ") failed.");
             }
 
             return level;

@@ -5,7 +5,7 @@
 
 package de.daniel_d45.teleios.bettergameplay;
 
-import de.daniel_d45.teleios.core.program.*;
+import de.daniel_d45.teleios.core.*;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -149,7 +149,7 @@ public class SegmentManagerBG {
             }
             else {
                 // Both paths exist
-                MessageMaster.sendSkipMessage("SegmentManagerBG", "Skipped method initiateWarppouch(" + playerName + "), the path already exists.");
+                MessageMaster.sendWarningMessage("SegmentManagerBG", "initiateWarppouch(" + playerName + ")", "the path already exists.");
             }
 
             MessageMaster.sendSuccessMessage("SegmentManagerBG", "initiateWarppouch(" + playerName + ")");
