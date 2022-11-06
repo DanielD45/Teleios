@@ -30,13 +30,6 @@ public class InventoriesCommand implements CommandExecutor {
                 return true;
             }
 
-            // Sender permission check
-            if (!sender.hasPermission("teleios.adminfeatures.inventories")) {
-                sender.sendMessage("§cMissing Permissions!");
-                MessageMaster.sendWarningMessage("InventoriesCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender doesn't have the needed permissions.");
-                return true;
-            }
-
             switch (args.length) {
                 case 0:
                     // Specifies /inventories

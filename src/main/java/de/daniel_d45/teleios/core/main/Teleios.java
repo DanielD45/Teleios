@@ -145,7 +145,7 @@ public class Teleios extends JavaPlugin {
 
             MessageMaster.sendEnableMessage();
             // Program test room
-
+            
             // End of program test room
         } catch (Exception e) {
             System.out.println("§cAn error occured while starting the plugin!");

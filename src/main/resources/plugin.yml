@@ -71,7 +71,7 @@ commands:
     aliases:
       - jm
       - JM
-    permission: teleios.adminfeatures.joinmessage
+    permission: teleios.adminfeatures.joinmessageRead
     description: Lets you enable or disable the custom join message.
     usage: /joinmessage enable/true|disable/false
 
@@ -222,6 +222,10 @@ permissions:
   teleios.adminfeatures.inventories:
     description: Allows use of the inventories command.
     default: op
+
+  teleios.adminfeatures.joinmessageRead:
+    description: Allows querying the JoinMessage argument using /joinmessage.
+    default: true
 
   teleios.adminfeatures.joinmessage:
     description: Allows use of the joinmessage command.

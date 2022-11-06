@@ -30,13 +30,6 @@ public class DamageCommand implements CommandExecutor {
                 return true;
             }
 
-            // Permission check
-            if (!sender.hasPermission("teleios.adminfeatures.damage")) {
-                sender.sendMessage("§cMissing Permissions!");
-                MessageMaster.sendWarningMessage("DamageCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender doesn't have the needed permissions.");
-                return true;
-            }
-
             // Switch for arguments
             switch (args.length) {
                 case 1:

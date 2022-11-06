@@ -30,13 +30,6 @@ public class GmaCommand implements CommandExecutor {
                 return true;
             }
 
-            // Permission check
-            if (!sender.hasPermission("teleios.adminfeatures.gma")) {
-                sender.sendMessage("§cMissing Permissions!");
-                MessageMaster.sendWarningMessage("GmaCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender doesn't have the needed permissions.");
-                return true;
-            }
-
             switch (args.length) {
                 case 0:
                     // Specifies /gma

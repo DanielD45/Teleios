@@ -31,13 +31,6 @@ public class WarpCommand implements CommandExecutor {
                 return true;
             }
 
-            // Player permission check
-            if (!sender.hasPermission("teleios.bettergameplay.warp")) {
-                sender.sendMessage("§cMissing Permissions!");
-                MessageMaster.sendWarningMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender doesn't have the needed permissions.");
-                return true;
-            }
-
             // Sender player check (for computing if teleporters are unreachable)
             if (!(sender instanceof Player player)) {
                 sender.sendMessage("§cYou are no player!");

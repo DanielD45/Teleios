@@ -31,13 +31,6 @@ public class ConfigureteleporterCommand implements CommandExecutor {
                 return true;
             }
 
-            // Sender permission check
-            if (!sender.hasPermission("teleios.bettergameplay.configureteleporter")) {
-                sender.sendMessage("§cMissing Permissions!");
-                MessageMaster.sendWarningMessage("ConfigureteleporterCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender doesn't have the needed permissions.");
-                return true;
-            }
-
             // Sender player check
             if (!(sender instanceof Player player)) {
                 sender.sendMessage("§cYou are no player!");

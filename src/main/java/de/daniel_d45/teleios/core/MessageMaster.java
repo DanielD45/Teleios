@@ -21,20 +21,16 @@ public class MessageMaster {
      * This method sends out a message on plugin start if the DebugLevel is high enough.
      */
     public static void sendEnableMessage() {
-        try {
-            String message = pluginPrefix + "§bPlugin enabled§r";
-            int debugLevel = ConfigEditor.getDebugLevel();
+        String message = pluginPrefix + "§bPlugin enabled§r";
+        int debugLevel = ConfigEditor.getDebugLevel();
 
-            if (debugLevel % 2 == 0 && debugLevel >= 2) {
-                // Prints message to the chat and in the console
-                Teleios.getServerObject().broadcastMessage(message);
-            }
-            else if (debugLevel >= 1) {
-                // Prints message to the console
-                Teleios.getServerObject().getConsoleSender().sendMessage(message);
-            }
-        } catch (Exception e) {
-            Teleios.getServerObject().getConsoleSender().sendMessage("ERROR");
+        if (debugLevel % 2 == 0 && debugLevel >= 2) {
+            // Prints message to the chat and in the console
+            Teleios.getServerObject().broadcastMessage(message);
+        }
+        else if (debugLevel >= 1) {
+            // Prints message to the console
+            Teleios.getServerObject().getConsoleSender().sendMessage(message);
         }
     }
 

@@ -36,30 +36,11 @@ public class ManageteleiosCommandListener implements CommandExecutor, Listener {
                 return true;
             }
 
-            // Sender permission check
-            if (!sender.hasPermission("teleios.core.manageteleios")) {
-                sender.sendMessage("§cError: Missing Permissions!");
-                MessageMaster.sendWarningMessage("ManageteleiosCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player doesn't have the needed permissions.");
-            }
+            // Specifies /manageteleios
+            player.openInventory(InventoryManager.getManageTeleiosInventory());
 
-            switch (args.length) {
-                case 0:
-                    // Specifies /manageteleios
-                    try {
-
-                        player.openInventory(InventoryManager.getManageTeleiosInventory());
-
-                        MessageMaster.sendSuccessMessage("ManageteleiosCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
-                        return true;
-                    } catch (Exception e) {
-                        MessageMaster.sendFailMessage("ManageteleiosCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", e);
-                        return false;
-                    }
-                default:
-                    MessageMaster.sendWarningMessage("ManageteleiosCommand", "SonCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong amount of arguments.");
-                    return false;
-            }
-
+            MessageMaster.sendSuccessMessage("ManageteleiosCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+            return true;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("ManageteleiosCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", e);
             return false;

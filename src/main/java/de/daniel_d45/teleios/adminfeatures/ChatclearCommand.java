@@ -27,13 +27,6 @@ public class ChatclearCommand implements CommandExecutor {
             return true;
         }
 
-        // Permission check
-        if (!sender.hasPermission("teleios.adminfeatures.chatclear")) {
-            sender.sendMessage("§cMissing Permissions!");
-            MessageMaster.sendWarningMessage("ChatclearCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender doesn't have the needed permissions.");
-            return true;
-        }
-
         // Specifies /chatclear
         for (int i = 0; i <= 60; ++i) {
             Bukkit.broadcastMessage("");

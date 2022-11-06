@@ -29,13 +29,6 @@ public class WarppointCommand implements CommandExecutor {
                 return true;
             }
 
-            // Sender permission check
-            if (!sender.hasPermission("teleios.bettergameplay.warppoint")) {
-                sender.sendMessage("§cMissing Permissions!");
-                MessageMaster.sendWarningMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender doesn't have the needed permissions.");
-                return true;
-            }
-
             switch (args.length) {
                 case 1:
                     // Specifies /warppoint list|clear

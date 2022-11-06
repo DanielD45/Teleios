@@ -29,13 +29,6 @@ public class UnmuteCommand implements CommandExecutor {
                 return true;
             }
 
-            // Sender permission check
-            if (!sender.hasPermission("teleios.adminfeatures.unmute")) {
-                sender.sendMessage("§cMissing Permissions!");
-                MessageMaster.sendWarningMessage("UnmuteCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender doesn't have the needed permissions.");
-                return true;
-            }
-
             // Sender player check
             if (!(sender instanceof Player player)) {
                 sender.sendMessage("§cYou are no player!");

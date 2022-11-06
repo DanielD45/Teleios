@@ -29,13 +29,6 @@ public class OpeninventoryCommand implements CommandExecutor {
                 return true;
             }
 
-            // Sender permission check
-            if (!sender.hasPermission("teleios.adminfeatures.openinventory")) {
-                sender.sendMessage("§cMissing Permissions!");
-                MessageMaster.sendWarningMessage("OpenInventoryCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender doesn't have the needed permissions.");
-                return true;
-            }
-
             // Sender player check
             if (!(sender instanceof Player player)) {
                 sender.sendMessage("§cYou are no player!");

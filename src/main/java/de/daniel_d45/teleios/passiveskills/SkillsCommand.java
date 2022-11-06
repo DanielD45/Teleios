@@ -39,42 +39,19 @@ public class SkillsCommand implements CommandExecutor {
                 MessageMaster.sendWarningMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
                 return true;
             }
+            
+            // Only runs when a skill is activated
+            if (SegmentManagerPS.usedSkills.size() > 0) {
 
-            // Player permission check
-            if (player.hasPermission("teleios.passiveskills.skills")) {
-                player.sendMessage("§cMissing Permissions!");
-                MessageMaster.sendWarningMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player doesn't have the needed permissions.");
-                return true;
+                player.openInventory(getSkillsInventory(player));
+                MessageMaster.sendSuccessMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+            }
+            else {
+                player.sendMessage("§eNo skill is beeing used!");
+                MessageMaster.sendWarningMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "no skills are beeing used.");
             }
 
-            switch (args.length) {
-                case 0:
-                    // Specifies /skills
-                    try {
-
-                        // Only runs when a skill is activated
-                        if (SegmentManagerPS.usedSkills.size() > 0) {
-
-                            player.openInventory(getSkillsInventory(player));
-                            MessageMaster.sendSuccessMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
-                        }
-                        else {
-                            player.sendMessage("§eNo skill is beeing used!");
-                            MessageMaster.sendWarningMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "no skills are beeing used.");
-                        }
-
-                        return true;
-                    } catch (Exception e) {
-                        player.sendMessage("§cCould not show your skills.");
-                        MessageMaster.sendFailMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), showing skills", e);
-                        return false;
-                    }
-                default:
-                    player.sendMessage("§cWrong amount of arguments!");
-                    MessageMaster.sendWarningMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong amount of arguments.");
-                    return false;
-            }
-
+            return true;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", e);
             return false;

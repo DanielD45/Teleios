@@ -32,13 +32,6 @@ public class HealCommand implements CommandExecutor {
                 return true;
             }
 
-            // Permission check
-            if (!sender.hasPermission("teleios.adminfeatures.heal")) {
-                sender.sendMessage("§cMissing Permissions!");
-                MessageMaster.sendWarningMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender doesn't have the needed permissions.");
-                return true;
-            }
-
             switch (args.length) {
                 case 0:
                     // Specifies /heal

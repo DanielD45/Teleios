@@ -17,6 +17,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 
 public class JoinmessageCommandListener implements CommandExecutor, Listener {
@@ -51,16 +52,17 @@ public class JoinmessageCommandListener implements CommandExecutor, Listener {
                 return true;
             }
 
-            // Sender permission check
-            if (!sender.hasPermission("teleios.adminfeatures.joinmessage")) {
-                sender.sendMessage("§cMissing Permissions!");
-                MessageMaster.sendWarningMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender doesn't have the needed permissions.");
-                return true;
-            }
-
             // Specifies /joinmessage
             if (args.length == 0) {
-                if (ConfigEditor.hasValue("JoinMessage", true)) {
+                boolean joinMessageEnabled;
+                try {
+                    joinMessageEnabled = (boolean) Objects.requireNonNull(ConfigEditor.get("JoinMessage"));
+                } catch (Exception e) {
+                    sender.sendMessage("§cThe JoinMessage argument is invalid! Set it using §6/joinmessage true|false§c.");
+                    return true;
+                }
+
+                if (joinMessageEnabled) {
                     sender.sendMessage("§aThe custom join message is §6enabled§a.");
                 }
                 else {
@@ -68,6 +70,13 @@ public class JoinmessageCommandListener implements CommandExecutor, Listener {
                 }
 
                 MessageMaster.sendSuccessMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                return true;
+            }
+
+            // Sender permission check
+            if (!sender.hasPermission("teleios.adminfeatures.joinmessage")) {
+                sender.sendMessage("§cMissing Permissions!");
+                MessageMaster.sendWarningMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender doesn't have the needed permissions.");
                 return true;
             }
 
@@ -91,7 +100,6 @@ public class JoinmessageCommandListener implements CommandExecutor, Listener {
             sender.sendMessage("§cWrong arguments!");
             MessageMaster.sendWarningMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
             return false;
-
         } catch (Exception e) {
             MessageMaster.sendFailMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", e);
             return false;

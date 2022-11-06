@@ -50,13 +50,6 @@ public class MuteCommandListener implements CommandExecutor, Listener {
                 return true;
             }
 
-            // Sender permission check
-            if (!sender.hasPermission("teleios.adminfeatures.mute")) {
-                sender.sendMessage("§cMissing Permissions!");
-                MessageMaster.sendWarningMessage("MuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender doesn't have the needed permissions.");
-                return true;
-            }
-
             // Sender player check
             if (!(sender instanceof Player player)) {
                 sender.sendMessage("§cYou are no player!");

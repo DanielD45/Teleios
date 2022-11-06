@@ -39,13 +39,6 @@ public class WarppouchCommand implements CommandExecutor {
                 return true;
             }
 
-            // Player permission check
-            if (!player.hasPermission("teleios.bettergameplay.warp pouch")) {
-                player.sendMessage("§cMissing Permissions!");
-                MessageMaster.sendWarningMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender doesn't have the needed permissions.");
-                return true;
-            }
-
             int storedEPs;
             try {
                 storedEPs = (int) Objects.requireNonNull(ConfigEditor.get("Warppouch." + player.getName()));
