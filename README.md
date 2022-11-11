@@ -87,7 +87,7 @@ This is a history of the past changes coming with the respective versions. "WIP"
 - "/warp" will now list the available warppoints and teleporters. "/warp list" will now ignore any added arguments
 - "/inventories" will now list the available inventories
 - non-admins can now use "/setblocksperpearl" to see the BlockPerPearl argument
-- non-admins can now use "/setdebuglevel" to see the DegubLevel argument
+- non-admins can now use "/setdebuglevel" to see the DebugLevel argument
 - warppoint and teleporter names are now case insensitive when warping
 - when a player places a teleporter, their yaw is saved to the teleporter and applied when teleporting
 - only left clicks on teleporters open the "Pick up teleporter?" inventory now
