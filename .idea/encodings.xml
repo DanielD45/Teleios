@@ -3,6 +3,7 @@
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/scrapyard/WeatherchangeCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/AdminFeatures.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/ChatclearCommand.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/CountdownCommand.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/DamageCommand.java" charset="UTF-8" />
@@ -15,14 +16,13 @@
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/JoinmessageCommandListener.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/MuteCommandListener.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/OpeninventoryCommand.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/SegmentManagerAF.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/TphereCommand.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/UnmuteCommand.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/adminfeatures/WarppointCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/BetterGameplay.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/ConfigureteleporterCommand.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/EnderchestCommand.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/PlayerInteractWithTeleporterListener.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/SegmentManagerBG.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/SetblocksperpearlCommand.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/TeleporterPlaceListener.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/WarpCommand.java" charset="UTF-8" />
@@ -35,11 +35,11 @@
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/core/SetDebugLevelCommand.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/creatureevolution/SegmentManagerCE.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/passiveskills/1-PassiveSkillsInfo" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/passiveskills/SegmentManagerPS.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/passiveskills/PassiveSkills.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/passiveskills/Skill.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/passiveskills/SkillsCommand.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/worldmaster/1-WorldMasterInfo" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/worldmaster/SegmentManagerWM.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/worldmaster/WorldMaster.java" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

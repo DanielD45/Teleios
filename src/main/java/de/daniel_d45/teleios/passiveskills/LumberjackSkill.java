@@ -59,7 +59,7 @@ public class LumberjackSkill extends Skill {
         try {
 
             // Adds an object of this class to the list of used skills for access to this class's variables
-            SegmentManagerPS.addUsedSkill(new LumberjackSkill());
+            PassiveSkills.addUsedSkill(new LumberjackSkill());
 
             MessageMaster.sendSuccessMessage("LumberjackSkill", "use()");
         } catch (Exception e) {
@@ -147,7 +147,7 @@ public class LumberjackSkill extends Skill {
     public void increaseBlockValue(Player player, Material material) {
         try {
 
-            SegmentManagerPS.increaseBlockValue(player.getName(), skillName, listedMaterials.get(material));
+            PassiveSkills.increaseBlockValue(player.getName(), skillName, listedMaterials.get(material));
 
             MessageMaster.sendSuccessMessage("LumberjackSkill", "increaseBlockValue(" + player + ", " + material + ")");
         } catch (Exception e) {

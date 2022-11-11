@@ -28,7 +28,6 @@ public class Teleios extends JavaPlugin {
 
     private static Teleios plugin;
     private static Server server;
-    private static PluginManager pluginManager;
     private static int standardDebugLevel;
     private static FileConfiguration config;
 
@@ -44,10 +43,6 @@ public class Teleios extends JavaPlugin {
 
     public static Server getServerObject() {
         return server;
-    }
-
-    public static PluginManager getPluginManager() {
-        return pluginManager;
     }
 
     public static int getStandardDebugLevel() {
@@ -72,9 +67,11 @@ public class Teleios extends JavaPlugin {
             // Instantiates the variables of this class
             plugin = this;
             server = plugin.getServer();
-            pluginManager = Bukkit.getPluginManager();
-            standardDebugLevel = 1;
+            standardDebugLevel = 3;
             config = plugin.getConfig();
+            PluginManager pluginManager = Bukkit.getPluginManager();
+
+            // Config setup
             ConfigEditor.setupConfig();
 
             // Variables for multi-use
@@ -88,6 +85,7 @@ public class Teleios extends JavaPlugin {
 
                 // AdminFeatures commands
                 Objects.requireNonNull(getCommand("chatclear")).setExecutor(new ChatclearCommand());
+                //getCommand("chatclear").unregister();
                 //getCommand("countdown").setExecutor(new ChatclearCommand());
                 Objects.requireNonNull(getCommand("damage")).setExecutor(new DamageCommand());
                 Objects.requireNonNull(getCommand("gma")).setExecutor(new GmaCommand());
@@ -145,7 +143,12 @@ public class Teleios extends JavaPlugin {
 
             MessageMaster.sendEnableMessage();
             // Program test room
-            
+            //FileConfiguration testConfig = plugin.getConfig();
+            //testConfig.load("teleios");
+            MessageMaster.sendFailMessage("fail", "fail", new NullPointerException());
+            MessageMaster.sendWarningMessage("warning", "warning", "warning");
+            MessageMaster.sendInfoMessage("Info", "info", "info");
+            MessageMaster.sendSuccessMessage("success", "success");
             // End of program test room
         } catch (Exception e) {
             System.out.println("§cAn error occured while starting the plugin!");

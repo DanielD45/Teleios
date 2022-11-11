@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
 
-public class SegmentManagerBG {
+public class BetterGameplay {
 
     private static final String[] activationstatePaths = {"BetterGameplay.All", "BetterGameplay.EnderchestCommand", "BetterGameplay.Teleporters"};
 

@@ -21,16 +21,22 @@ public class MessageMaster {
      * This method sends out a message on plugin start if the DebugLevel is high enough.
      */
     public static void sendEnableMessage() {
-        String message = pluginPrefix + "§bPlugin enabled§r";
+        String outputMessage = pluginPrefix + "§bPlugin enabled§r";
         int debugLevel = ConfigEditor.getDebugLevel();
 
         if (debugLevel % 2 == 0 && debugLevel >= 2) {
-            // Prints message to the chat and in the console
-            Teleios.getServerObject().broadcastMessage(message);
+            if (Teleios.getServerObject().getOnlinePlayers().isEmpty()) {
+                // Prints the message to the console
+                Teleios.getServerObject().getConsoleSender().sendMessage(outputMessage);
+            }
+            else {
+                // Prints the message to the chat and therefore in the console
+                Teleios.getServerObject().broadcastMessage(outputMessage);
+            }
         }
         else if (debugLevel >= 1) {
-            // Prints message to the console
-            Teleios.getServerObject().getConsoleSender().sendMessage(message);
+            // Prints the message to the console
+            Teleios.getServerObject().getConsoleSender().sendMessage(outputMessage);
         }
     }
 
@@ -38,16 +44,22 @@ public class MessageMaster {
      * This method sends out a message on plugin stop if the DebugLevel is high enough.
      */
     public static void sendDisableMessage() {
-        String message = pluginPrefix + "§3Plugin disabled§r";
+        String outputMessage = pluginPrefix + "§3Plugin disabled§r";
         int debugLevel = ConfigEditor.getDebugLevel();
 
         if (debugLevel % 2 == 0 && debugLevel >= 2) {
-            // Prints message to the chat and in the console
-            Teleios.getServerObject().broadcastMessage(message);
+            if (Teleios.getServerObject().getOnlinePlayers().isEmpty()) {
+                // Prints the message to the console
+                Teleios.getServerObject().getConsoleSender().sendMessage(outputMessage);
+            }
+            else {
+                // Prints the message to the chat and therefore in the console
+                Teleios.getServerObject().broadcastMessage(outputMessage);
+            }
         }
         else if (debugLevel >= 1) {
-            // Prints message to the console
-            Teleios.getServerObject().getConsoleSender().sendMessage(message);
+            // Prints the message to the console
+            Teleios.getServerObject().getConsoleSender().sendMessage(outputMessage);
         }
     }
 
@@ -62,17 +74,24 @@ public class MessageMaster {
      * @param exception  [Exception] The exception causing the error.
      */
     public static void sendFailMessage(String className, String methodName, Exception exception) {
-        String message = pluginPrefix + "§4" + className + "§c.§4" + methodName + "§c failed due to §4" + exception.getClass() + "§c!";
-        exception.printStackTrace();
+        String outputMessage = pluginPrefix + "§4" + className + "§c.§4" + methodName + "§c failed due to §4" + exception.getClass() + "§c!";
         int debugLevel = ConfigEditor.getDebugLevel();
 
         if (debugLevel % 2 == 0 && debugLevel >= 4) {
-            // Prints message to the chat and in the console
-            Teleios.getServerObject().broadcastMessage(message);
+            if (Teleios.getServerObject().getOnlinePlayers().isEmpty()) {
+                // Prints the message to the console
+                Teleios.getServerObject().getConsoleSender().sendMessage(outputMessage);
+                exception.printStackTrace();
+            }
+            else {
+                // Prints the message to the chat and therefore in the console
+                Teleios.getServerObject().broadcastMessage(outputMessage);
+                exception.printStackTrace();
+            }
         }
         else if (debugLevel >= 3) {
-            // Prints message to the console
-            Teleios.getServerObject().getConsoleSender().sendMessage(message);
+            // Prints the message to the console
+            Teleios.getServerObject().getConsoleSender().sendMessage(outputMessage);
         }
     }
 
@@ -89,11 +108,17 @@ public class MessageMaster {
         int debugLevel = ConfigEditor.getDebugLevel();
 
         if (debugLevel % 2 == 0 && debugLevel >= 6) {
-            // Prints message to the chat and in the console
-            Teleios.getServerObject().broadcastMessage(outputMessage);
+            if (Teleios.getServerObject().getOnlinePlayers().isEmpty()) {
+                // Prints the message to the console
+                Teleios.getServerObject().getConsoleSender().sendMessage(outputMessage);
+            }
+            else {
+                // Prints the message to the chat and therefore in the console
+                Teleios.getServerObject().broadcastMessage(outputMessage);
+            }
         }
         else if (debugLevel >= 5) {
-            // Prints message to the console
+            // Prints the message to the console
             Teleios.getServerObject().getConsoleSender().sendMessage(outputMessage);
         }
     }
@@ -110,11 +135,17 @@ public class MessageMaster {
         int debugLevel = ConfigEditor.getDebugLevel();
 
         if (debugLevel % 2 == 0 && debugLevel >= 8) {
-            // Prints message to the chat and in the console
-            Teleios.getServerObject().broadcastMessage(outputMessage);
+            if (Teleios.getServerObject().getOnlinePlayers().isEmpty()) {
+                // Prints the message to the console
+                Teleios.getServerObject().getConsoleSender().sendMessage(outputMessage);
+            }
+            else {
+                // Prints the message to the chat and therefore in the console
+                Teleios.getServerObject().broadcastMessage(outputMessage);
+            }
         }
         else if (debugLevel >= 7) {
-            // Prints message to the console
+            // Prints the message to the console
             Teleios.getServerObject().getConsoleSender().sendMessage(outputMessage);
         }
     }
@@ -126,16 +157,22 @@ public class MessageMaster {
      * @param methodName [String] The method's name.
      */
     public static void sendSuccessMessage(String className, String methodName) {
-        String message = pluginPrefix + "§2" + className + "§a.§2" + methodName + "§a ran successfully.§r";
+        String outputMessage = pluginPrefix + "§2" + className + "§a.§2" + methodName + "§a ran successfully.§r";
         int debugLevel = ConfigEditor.getDebugLevel();
 
         if (debugLevel % 2 == 0 && debugLevel >= 10) {
-            // Prints message to the chat and in the console
-            Teleios.getServerObject().broadcastMessage(message);
+            if (Teleios.getServerObject().getOnlinePlayers().isEmpty()) {
+                // Prints the message to the console
+                Teleios.getServerObject().getConsoleSender().sendMessage(outputMessage);
+            }
+            else {
+                // Prints the message to the chat and therefore in the console
+                Teleios.getServerObject().broadcastMessage(outputMessage);
+            }
         }
         else if (debugLevel >= 9) {
-            // Prints message to the console
-            Teleios.getServerObject().getConsoleSender().sendMessage(message);
+            // Prints the message to the console
+            Teleios.getServerObject().getConsoleSender().sendMessage(outputMessage);
         }
     }
 

@@ -5,10 +5,10 @@
 
 package de.daniel_d45.teleios.core;
 
-import de.daniel_d45.teleios.adminfeatures.SegmentManagerAF;
-import de.daniel_d45.teleios.bettergameplay.SegmentManagerBG;
-import de.daniel_d45.teleios.passiveskills.SegmentManagerPS;
-import de.daniel_d45.teleios.worldmaster.SegmentManagerWM;
+import de.daniel_d45.teleios.adminfeatures.AdminFeatures;
+import de.daniel_d45.teleios.bettergameplay.BetterGameplay;
+import de.daniel_d45.teleios.passiveskills.PassiveSkills;
+import de.daniel_d45.teleios.worldmaster.WorldMaster;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
@@ -68,13 +68,13 @@ public class InventoryManager {
 
             // TODO: make list and dynamically arrange icons in inventory
             // AdminFeatures segment.
-            inv.setItem(11, SegmentManagerAF.getSegmentItem());
+            inv.setItem(11, AdminFeatures.getSegmentItem());
             // BetterGameplay segment.
-            inv.setItem(12, SegmentManagerBG.getSegmentItem());
+            inv.setItem(12, BetterGameplay.getSegmentItem());
             // PassiveSkills segment.
-            inv.setItem(14, SegmentManagerPS.getSegmentItem());
+            inv.setItem(14, PassiveSkills.getSegmentItem());
             // WorldMaster segment.
-            inv.setItem(15, SegmentManagerWM.getSegmentItem());
+            inv.setItem(15, WorldMaster.getSegmentItem());
 
             InventoryManager.fillEmptySlots(inv);
 
@@ -103,7 +103,7 @@ public class InventoryManager {
         try {
 
             // TODO: Add Items
-            Inventory inv = createSegmentInventory("BetterGameplay", SegmentManagerBG.getEnderchestCommandItem(), SegmentManagerBG.getTeleportersItem());
+            Inventory inv = createSegmentInventory("BetterGameplay", BetterGameplay.getEnderchestCommandItem(), BetterGameplay.getTeleportersItem());
 
             MessageMaster.sendSuccessMessage("ManageteleiosCommand", "getManageAFInventory()");
             return inv;
@@ -181,7 +181,6 @@ public class InventoryManager {
 
     public static void fillInventory(Inventory inventory, ItemStack... itemStacks) {
         try {
-
             ArrayList<Integer> emptySlots = new ArrayList<>();
 
             // Saves the empty slots in the ArrayList
@@ -320,7 +319,7 @@ public class InventoryManager {
             MessageMaster.sendWarningMessage("InventoryManager", "isSameItemType(" + itemStack1 + ", " + itemStack2 + ")", "the items are not of the same type.");
             return false;
         } catch (NullPointerException e) {
-            MessageMaster.sendWarningMessage("Skipped method InventoryManager", "isSameItemType(" + itemStack1 + ", " + itemStack2 + ")", "the items are not of the same type.");
+            MessageMaster.sendWarningMessage("InventoryManager", "isSameItemType(" + itemStack1 + ", " + itemStack2 + ")", "the items are not of the same type.");
             return false;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("InventoryManager", "isSameItemType(" + itemStack1 + ", " + itemStack2 + ")", e);

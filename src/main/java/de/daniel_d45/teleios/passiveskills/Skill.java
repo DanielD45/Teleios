@@ -6,7 +6,6 @@
 package de.daniel_d45.teleios.passiveskills;
 
 import de.daniel_d45.teleios.core.MessageMaster;
-import de.daniel_d45.teleios.passiveskills.SegmentManagerPS;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -70,7 +69,7 @@ public abstract class Skill {
 
             // Copies the objects from blockDrops to newDrops while changing the amount
             for (ItemStack currentItem : blockDrops) {
-                int amount = currentItem.getAmount() * SegmentManagerPS.computeBonusItemMultiplier(player.getName(), getSkillName());
+                int amount = currentItem.getAmount() * PassiveSkills.computeBonusItemMultiplier(player.getName(), getSkillName());
                 // The current ItemStack with the new amount
                 ItemStack itemStack = new ItemStack(currentItem.getType(), amount);
 
@@ -96,7 +95,7 @@ public abstract class Skill {
 
             String message;
             // Represents the bonusMultiplier of the player and the skill
-            double bonusMultiplier = SegmentManagerPS.getBonusMultiplier(playerName, getSkillName());
+            double bonusMultiplier = PassiveSkills.getBonusMultiplier(playerName, getSkillName());
 
             // Checks whether the BonusMultiplier is an integer
             if (bonusMultiplier == Math.floor(bonusMultiplier)) {
@@ -105,12 +104,12 @@ public abstract class Skill {
                 // Casts the BonusMultiplier to int
                 bonusMultiplier = (int) bonusMultiplier;
 
-                message = "§eYour §3" + getMessageName() + " §eis on level §3" + SegmentManagerPS.getLevel(playerName, getSkillName()) + "§e! Your bonus items multiplier is at §3" + bonusMultiplier + " §e meaning you'll get §3" + bonusMultiplier + "x §3the block drops of any kind of " + getBlocksType() + "!";
+                message = "§eYour §3" + getMessageName() + " §eis on level §3" + PassiveSkills.getLevel(playerName, getSkillName()) + "§e! Your bonus items multiplier is at §3" + bonusMultiplier + " §e meaning you'll get §3" + bonusMultiplier + "x §3the block drops of any kind of " + getBlocksType() + "!";
             }
             else {
                 // Bonus Multiplier is not an integer
 
-                message = "§eYour §3" + getMessageName() + " §eis on level §3" + SegmentManagerPS.getLevel(playerName, getSkillName()) + "§e! Your bonus items multiplier is at §3" + bonusMultiplier + " §e meaning you'll get §3" + (int) Math.floor(bonusMultiplier) + "x §ethe block drops of any kind of " + getBlocksType() + " and a chance of §3" + (bonusMultiplier - Math.floor(bonusMultiplier)) * 100 + "% §eto get §3" + (int) Math.floor(bonusMultiplier) + 1 + "x §ethe block drops!";
+                message = "§eYour §3" + getMessageName() + " §eis on level §3" + PassiveSkills.getLevel(playerName, getSkillName()) + "§e! Your bonus items multiplier is at §3" + bonusMultiplier + " §e meaning you'll get §3" + (int) Math.floor(bonusMultiplier) + "x §ethe block drops of any kind of " + getBlocksType() + " and a chance of §3" + (bonusMultiplier - Math.floor(bonusMultiplier)) * 100 + "% §eto get §3" + (int) Math.floor(bonusMultiplier) + 1 + "x §ethe block drops!";
             }
 
             MessageMaster.sendSuccessMessage("Skill", "getMessage()");
@@ -134,10 +133,10 @@ public abstract class Skill {
             // Gives the xp specified by bonusXp to the player
             player.giveExp(bonusXp);
             // Represents the bonusMultiplier of the player and the skill
-            double bonusMultiplier = SegmentManagerPS.getBonusMultiplier(player.getName(), getSkillName());
+            double bonusMultiplier = PassiveSkills.getBonusMultiplier(player.getName(), getSkillName());
             // Represents the messages to send the player with a level-up
             String[] messages = new String[2];
-            messages[0] = "§eYour §3" + getMessageName() + " §eis now on level §3" + SegmentManagerPS.getLevel(player.getName(), getSkillName() + "§e!");
+            messages[0] = "§eYour §3" + getMessageName() + " §eis now on level §3" + PassiveSkills.getLevel(player.getName(), getSkillName() + "§e!");
 
             // Checks whether the BonusMultiplier is an integer
             if (bonusMultiplier == Math.floor(bonusMultiplier)) {
@@ -174,7 +173,7 @@ public abstract class Skill {
 
             ItemStack item;
             ItemMeta itemMeta;
-            double bonusMultiplier = SegmentManagerPS.getBonusMultiplier(player.getName(), getSkillName());
+            double bonusMultiplier = PassiveSkills.getBonusMultiplier(player.getName(), getSkillName());
             ArrayList<String> strList = new ArrayList<>();
 
             // Instantiates the ItemStack with the skill type's material
@@ -187,7 +186,7 @@ public abstract class Skill {
 
             itemMeta.setDisplayName("§o§5" + getMessageName());
             // Sets the item lore.
-            strList.add("§eLevel: §3" + SegmentManagerPS.getLevel(player.getName(), getSkillName()));
+            strList.add("§eLevel: §3" + PassiveSkills.getLevel(player.getName(), getSkillName()));
             strList.add("§eBonusMultiplier: §3" + bonusMultiplier);
             strList.add("");
 

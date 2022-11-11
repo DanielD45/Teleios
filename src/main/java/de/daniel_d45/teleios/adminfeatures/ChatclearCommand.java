@@ -23,7 +23,7 @@ public class ChatclearCommand implements CommandExecutor {
         // Activation state check
         if (!ConfigEditor.isActive("AdminFeatures.All")) {
             sender.sendMessage("§cThis command is not active.");
-            MessageMaster.sendWarningMessage("ChatclearCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
+            MessageMaster.sendWarningMessage("ChatclearCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
             return true;
         }
 

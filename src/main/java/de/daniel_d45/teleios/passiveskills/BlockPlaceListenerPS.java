@@ -30,7 +30,7 @@ public class BlockPlaceListenerPS implements Listener {
             // TODO: Only log a limited amount of blocks at a time and override?
             // Activationstate check
             if (!ConfigEditor.isActive("PassiveSkills.All")) {
-                MessageMaster.sendWarningMessage("BlockPlaceListenerPS", "Skipped method onBlockPlacePS(" + event + ")", "the PassiveSkills segment is not active.");
+                MessageMaster.sendWarningMessage("BlockPlaceListenerPS", "onBlockPlacePS(" + event + ")", "the PassiveSkills segment is not active.");
                 return;
             }
 

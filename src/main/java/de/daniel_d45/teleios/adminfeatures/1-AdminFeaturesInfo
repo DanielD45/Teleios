@@ -34,3 +34,4 @@
 0 command to prevent (certain) players from placing TNT, lava...
 0 /protect command to make yourself or another player invincible
 0 startinghelp function: monsters deal less damage to specified players
+0 /inventories command: make inventories case insensitive

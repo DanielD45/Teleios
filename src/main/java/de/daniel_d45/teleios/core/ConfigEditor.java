@@ -5,11 +5,11 @@
 
 package de.daniel_d45.teleios.core;
 
-import de.daniel_d45.teleios.adminfeatures.SegmentManagerAF;
-import de.daniel_d45.teleios.bettergameplay.SegmentManagerBG;
+import de.daniel_d45.teleios.adminfeatures.AdminFeatures;
+import de.daniel_d45.teleios.bettergameplay.BetterGameplay;
 import de.daniel_d45.teleios.core.main.Teleios;
-import de.daniel_d45.teleios.passiveskills.SegmentManagerPS;
-import de.daniel_d45.teleios.worldmaster.SegmentManagerWM;
+import de.daniel_d45.teleios.passiveskills.PassiveSkills;
+import de.daniel_d45.teleios.worldmaster.WorldMaster;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -52,8 +52,8 @@ public class ConfigEditor {
             initiateBlocksPerPearl();
 
             for (Player currentPlayer : Bukkit.getOnlinePlayers()) {
-                SegmentManagerBG.initiateWarppouch(currentPlayer.getName());
-                SegmentManagerPS.initiatePlayerRecords(currentPlayer.getName());
+                BetterGameplay.initiateWarppouch(currentPlayer.getName());
+                PassiveSkills.initiatePlayerRecords(currentPlayer.getName());
             }
 
         } catch (Exception e) {
@@ -67,10 +67,10 @@ public class ConfigEditor {
             // Tries to get the debug level
             int debugLevel = Integer.parseInt(config.get("DebugLevel").toString());
 
-            if (debugLevel > 3 || debugLevel < 0) {
+            if (debugLevel > 10 || debugLevel < 0) {
                 // Debug level is out of bounds
-                // Sets the debug level to the standard value of 1
-                ConfigEditor.set("DebugLevel", 1);
+                // Sets the debug level to the standard value
+                ConfigEditor.set("DebugLevel", Teleios.getStandardDebugLevel());
             }
         } catch (NullPointerException e) {
             // Sets the debug level to the standard value of 1
@@ -99,13 +99,13 @@ public class ConfigEditor {
             ArrayList<String> paths = new ArrayList<>();
 
             // TODO: Keep up-to-date
-            Collections.addAll(paths, SegmentManagerAF.getActivationstatePaths());
+            Collections.addAll(paths, AdminFeatures.getActivationstatePaths());
 
-            Collections.addAll(paths, SegmentManagerBG.getActivationstatePaths());
+            Collections.addAll(paths, BetterGameplay.getActivationstatePaths());
 
-            Collections.addAll(paths, SegmentManagerPS.getActivationstatePaths());
+            Collections.addAll(paths, PassiveSkills.getActivationstatePaths());
 
-            Collections.addAll(paths, SegmentManagerWM.getActivationstatePaths());
+            Collections.addAll(paths, WorldMaster.getActivationstatePaths());
 
             // Initiates the Activationstates for all the segments and functions
             for (String current : paths) {
@@ -118,7 +118,7 @@ public class ConfigEditor {
 
             MessageMaster.sendSuccessMessage("ConfigEditor", "initiateActivationstates()");
         } catch (IllegalStateException e) {
-            MessageMaster.sendWarningMessage("ConfigEditor", "Skipped method initiateActivationstates()", "IllegalStateException");
+            MessageMaster.sendWarningMessage("ConfigEditor", "initiateActivationstates()", "IllegalStateException");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("ConfigEditor", "initiateActivationstates()", e);
         }

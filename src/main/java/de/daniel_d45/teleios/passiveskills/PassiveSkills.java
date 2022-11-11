@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 
 
-public class SegmentManagerPS {
+public class PassiveSkills {
 
     private static final String[] activationstatePaths = {"PassiveSkills.All"};
     // An ArrayList with an object of every skill class in it
@@ -105,7 +105,7 @@ public class SegmentManagerPS {
 
                 // Checks whether the specified skill is already listed
                 if (currentSkill.equals(skill)) {
-                    MessageMaster.sendWarningMessage("SegmentManagerPS", "Skipped method addUsedSkill(" + skill + ")", "the specified skill is already listed.");
+                    MessageMaster.sendWarningMessage("SegmentManagerPS", "addUsedSkill(" + skill + ")", "the specified skill is already listed.");
                     return;
                 }
 
@@ -164,7 +164,7 @@ public class SegmentManagerPS {
                 }
                 else {
                     // Both paths exist
-                    MessageMaster.sendWarningMessage("SegmentManagerPS", "Skipped method initiatePlayerRecords(" + playerName + ")", "both paths already exist.");
+                    MessageMaster.sendWarningMessage("SegmentManagerPS", "initiatePlayerRecords(" + playerName + ")", "both paths already exist.");
                 }
                 // After checking for data structure
             }
@@ -331,7 +331,7 @@ public class SegmentManagerPS {
 
                 level = -1;
 
-                MessageMaster.sendWarningMessage("SegmentManagerPS", "Skipped method getLevel(" + playerName + ", " + skillName + ")", "method getBlockValue(" + playerName + ", " + skillName + ") failed.");
+                MessageMaster.sendWarningMessage("SegmentManagerPS", "getLevel(" + playerName + ", " + skillName + ")", "method getBlockValue(" + playerName + ", " + skillName + ") failed.");
             }
 
             return level;

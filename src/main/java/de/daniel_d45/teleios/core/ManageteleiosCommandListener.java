@@ -5,10 +5,10 @@
 
 package de.daniel_d45.teleios.core;
 
-import de.daniel_d45.teleios.adminfeatures.SegmentManagerAF;
-import de.daniel_d45.teleios.bettergameplay.SegmentManagerBG;
-import de.daniel_d45.teleios.passiveskills.SegmentManagerPS;
-import de.daniel_d45.teleios.worldmaster.SegmentManagerWM;
+import de.daniel_d45.teleios.adminfeatures.AdminFeatures;
+import de.daniel_d45.teleios.bettergameplay.BetterGameplay;
+import de.daniel_d45.teleios.passiveskills.PassiveSkills;
+import de.daniel_d45.teleios.worldmaster.WorldMaster;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -23,8 +23,7 @@ import java.util.Arrays;
 
 
 public class ManageteleiosCommandListener implements CommandExecutor, Listener {
-
-
+    
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         try {
@@ -62,7 +61,7 @@ public class ManageteleiosCommandListener implements CommandExecutor, Listener {
 
             // Item null check
             if (item == null) {
-                MessageMaster.sendWarningMessage("onManageTeleiosInventoryClick", "onManageTeleiosInventoryClick(" + event + ")", "no item clicked.");
+                MessageMaster.sendWarningMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "no item clicked.");
                 return;
             }
 
@@ -70,10 +69,10 @@ public class ManageteleiosCommandListener implements CommandExecutor, Listener {
             if (event.getView().getTitle().equals("§0Manage Teleios functionality")) {
 
                 // ADMINFEATURES ITEM
-                if (item.equals(SegmentManagerAF.getSegmentItem())) {
+                if (item.equals(AdminFeatures.getSegmentItem())) {
 
                     if (clickType == ClickType.LEFT) {
-                        SegmentManagerAF.switchActivationstateAF();
+                        AdminFeatures.switchActivationstateAF();
                         player.openInventory(InventoryManager.getManageTeleiosInventory());
                         return;
 
@@ -85,10 +84,10 @@ public class ManageteleiosCommandListener implements CommandExecutor, Listener {
 
                     // BETTERGAMEPLAY ITEM
                 }
-                else if (item.equals(SegmentManagerBG.getSegmentItem())) {
+                else if (item.equals(BetterGameplay.getSegmentItem())) {
 
                     if (clickType == ClickType.LEFT) {
-                        SegmentManagerBG.switchActivationstateBG();
+                        BetterGameplay.switchActivationstateBG();
                         player.openInventory(InventoryManager.getManageTeleiosInventory());
                         return;
 
@@ -100,10 +99,10 @@ public class ManageteleiosCommandListener implements CommandExecutor, Listener {
 
                     // CREATUREEVOLUTION ITEM
                 }
-                else if (item.equals(SegmentManagerPS.getSegmentItem())) {
+                else if (item.equals(PassiveSkills.getSegmentItem())) {
 
                     if (clickType == ClickType.LEFT) {
-                        SegmentManagerPS.switchActivationstatePS();
+                        PassiveSkills.switchActivationstatePS();
                         player.openInventory(InventoryManager.getManageTeleiosInventory());
                         return;
 
@@ -115,7 +114,7 @@ public class ManageteleiosCommandListener implements CommandExecutor, Listener {
 
                     // WORLDMASTER ITEM
                 }
-                else if (item.equals(SegmentManagerWM.getSegmentItem())) {
+                else if (item.equals(WorldMaster.getSegmentItem())) {
 
                     if (clickType == ClickType.LEFT) {
                         // TODO
@@ -131,7 +130,7 @@ public class ManageteleiosCommandListener implements CommandExecutor, Listener {
 
                 }
                 else {
-                    MessageMaster.sendWarningMessage("onManageTeleiosInventoryClick", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
+                    MessageMaster.sendWarningMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
                     return;
                 }
 
@@ -146,7 +145,7 @@ public class ManageteleiosCommandListener implements CommandExecutor, Listener {
 
                 }
                 else {
-                    MessageMaster.sendWarningMessage("onManageTeleiosInventoryClick", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
+                    MessageMaster.sendWarningMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
                     return;
                 }
 
@@ -155,15 +154,15 @@ public class ManageteleiosCommandListener implements CommandExecutor, Listener {
             else if (event.getView().getTitle().equals("§0Manage BetterGameplay")) {
 
                 // ENDERCHESTCOMMAND ITEM
-                if (item.equals(SegmentManagerBG.getEnderchestCommandItem())) {
+                if (item.equals(BetterGameplay.getEnderchestCommandItem())) {
                     ConfigEditor.switchActivationstate("BetterGameplay.EnderchestCommand");
                     player.openInventory(InventoryManager.getManageBGInventory());
                     return;
 
                     // TELEPORTERS ITEM
                 }
-                else if (item.equals(SegmentManagerBG.getTeleportersItem())) {
-                    SegmentManagerBG.switchActivationstateTeleporters();
+                else if (item.equals(BetterGameplay.getTeleportersItem())) {
+                    BetterGameplay.switchActivationstateTeleporters();
                     player.openInventory(InventoryManager.getManageBGInventory());
                     return;
 
@@ -175,7 +174,7 @@ public class ManageteleiosCommandListener implements CommandExecutor, Listener {
 
                 }
                 else {
-                    MessageMaster.sendWarningMessage("onManageTeleiosInventoryClick", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
+                    MessageMaster.sendWarningMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
                     return;
                 }
 
@@ -192,7 +191,7 @@ public class ManageteleiosCommandListener implements CommandExecutor, Listener {
 
                 }
                 else {
-                    MessageMaster.sendWarningMessage("onManageTeleiosInventoryClick", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
+                    MessageMaster.sendWarningMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
                     return;
                 }
 
@@ -210,7 +209,7 @@ public class ManageteleiosCommandListener implements CommandExecutor, Listener {
 
                 }
                 else {
-                    MessageMaster.sendWarningMessage("onManageTeleiosInventoryClick", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
+                    MessageMaster.sendWarningMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
                     return;
                 }
 
@@ -227,19 +226,19 @@ public class ManageteleiosCommandListener implements CommandExecutor, Listener {
 
                 }
                 else {
-                    MessageMaster.sendWarningMessage("onManageTeleiosInventoryClick", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
+                    MessageMaster.sendWarningMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
                     return;
                 }
 
             }
             else {
-                MessageMaster.sendWarningMessage("onManageTeleiosInventoryClick", "onManageTeleiosInventoryClick(" + event + ")", "wrong inventory.");
+                MessageMaster.sendWarningMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "wrong inventory.");
                 return;
             }
 
-            MessageMaster.sendSuccessMessage("onManageTeleiosInventoryClick", "onInventoryClick(" + event + ")");
+            MessageMaster.sendSuccessMessage("ManageteleiosCommandListener", "onInventoryClick(" + event + ")");
         } catch (Exception e) {
-            MessageMaster.sendFailMessage("onManageTeleiosInventoryClick", "onInventoryClick(" + event + ")", e);
+            MessageMaster.sendFailMessage("ManageteleiosCommandListener", "onInventoryClick(" + event + ")", e);
         }
     }
 

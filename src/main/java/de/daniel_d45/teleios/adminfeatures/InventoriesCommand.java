@@ -26,7 +26,7 @@ public class InventoriesCommand implements CommandExecutor {
             // Activation state check
             if (!ConfigEditor.isActive("AdminFeatures.All")) {
                 sender.sendMessage("§cThis command is not active.");
-                MessageMaster.sendWarningMessage("InventoriesCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
+                MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
                 return true;
             }
 
@@ -45,7 +45,7 @@ public class InventoriesCommand implements CommandExecutor {
                             // Inventory existance check
                             if (inventories.length <= 0) {
                                 sender.sendMessage("§eThere are no inventories yet! Add one by using §6/inventories create [name] [rows]§e!");
-                                MessageMaster.sendWarningMessage("InventoriesCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "there are no inventories.");
+                                MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "there are no inventories.");
                             }
 
                             // Creates a string of inventories
@@ -71,7 +71,7 @@ public class InventoriesCommand implements CommandExecutor {
                             return true;
                         } catch (NullPointerException e) {
                             sender.sendMessage("§eThere are no inventories yet! Add one by using §6/inventories create [name] [rows]§e!");
-                            MessageMaster.sendWarningMessage("InventoriesCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "there are no inventories.");
+                            MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "there are no inventories.");
                             return true;
                         } catch (Exception e) {
                             sender.sendMessage("§cCould not list all inventories!");
@@ -106,7 +106,7 @@ public class InventoriesCommand implements CommandExecutor {
                     }
                     else {
                         sender.sendMessage("§cWrong arguments!");
-                        MessageMaster.sendWarningMessage("InventoriesCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
+                        MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
                         return false;
                     }
                 case 2:
@@ -116,7 +116,7 @@ public class InventoriesCommand implements CommandExecutor {
 
                         if (!(sender instanceof Player player)) {
                             sender.sendMessage("§cYou are no player!");
-                            MessageMaster.sendWarningMessage("InventoriesCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
+                            MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
                             return true;
                         }
 
@@ -126,7 +126,7 @@ public class InventoriesCommand implements CommandExecutor {
 
                             if (inventory == null) {
                                 player.sendMessage("§cCould not find the inventory §6" + args[1] + "§c!");
-                                MessageMaster.sendWarningMessage("InventoriesCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "inventory doesn't exist.");
+                                MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "inventory doesn't exist.");
                                 return true;
                             }
 
@@ -136,7 +136,7 @@ public class InventoriesCommand implements CommandExecutor {
                             return true;
                         } catch (Exception e) {
                             player.sendMessage("§cCould not open the inventory §6" + args[1] + "§c!");
-                            MessageMaster.sendFailMessage("InventoriesCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", e);
+                            MessageMaster.sendFailMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", e);
                             return false;
                         }
 
@@ -163,7 +163,7 @@ public class InventoriesCommand implements CommandExecutor {
                         }
 
                         sender.sendMessage("§cCould not find the inventory §6" + name + "§c!");
-                        MessageMaster.sendWarningMessage("InventoriesCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "couldn't find an inventory with this name.");
+                        MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "couldn't find an inventory with this name.");
                         return true;
                     }
                     else {
@@ -180,7 +180,7 @@ public class InventoriesCommand implements CommandExecutor {
                         // Inventory unique name check
                         if (ConfigEditor.containsPath("Inventories." + name)) {
                             sender.sendMessage("§cAn inventory with this name already exists!");
-                            MessageMaster.sendWarningMessage("InventoriesCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "an inventory with this name already exists.");
+                            MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "an inventory with this name already exists.");
                             return true;
                         }
 
@@ -203,7 +203,7 @@ public class InventoriesCommand implements CommandExecutor {
                     }
                     else {
                         sender.sendMessage("§cWrong arguments!");
-                        MessageMaster.sendWarningMessage("InventoriesCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
+                        MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
                         return false;
                     }
                 case 4:
@@ -221,13 +221,13 @@ public class InventoriesCommand implements CommandExecutor {
                     }
                     else {
                         sender.sendMessage("§cWrong arguments!");
-                        MessageMaster.sendWarningMessage("InventoriesCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
+                        MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
                         return false;
                     }
                     break;
                 default:
                     sender.sendMessage("§cWrong amount of arguments!");
-                    MessageMaster.sendWarningMessage("InventoriesCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong amount of arguments.");
+                    MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong amount of arguments.");
                     return false;
             }
 

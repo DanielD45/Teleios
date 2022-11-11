@@ -11,7 +11,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
 
-public class SegmentManagerAF {
+public class AdminFeatures {
 
     private static final String[] activationstatePaths = {"AdminFeatures.All"};
 

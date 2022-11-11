@@ -14,7 +14,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
 
-public class SegmentManagerWM {
+public class WorldMaster {
 
     private static final String[] activationstatePaths = {"WorldMaster.All"};
 

@@ -24,14 +24,14 @@ public class EnderchestCommand implements CommandExecutor {
             // Activation state check
             if (!ConfigEditor.isActive("BetterGameplay.EnderchestCommand")) {
                 sender.sendMessage("§cThis command is not active.");
-                MessageMaster.sendWarningMessage("EnderchestCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
+                MessageMaster.sendWarningMessage("EnderchestCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
                 return true;
             }
 
             // Sender player check
             if (!(sender instanceof Player player)) {
                 sender.sendMessage("§cYou are no player!");
-                MessageMaster.sendWarningMessage("EnderchestCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
+                MessageMaster.sendWarningMessage("EnderchestCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
                 return true;
             }
 

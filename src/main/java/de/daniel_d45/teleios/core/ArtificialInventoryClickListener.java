@@ -28,7 +28,7 @@ public class ArtificialInventoryClickListener implements Listener {
             // TODO: Necessary?
             // No inventory check
             if (inventory == null) {
-                MessageMaster.sendWarningMessage("ArtificialInventoryClickListener", "Skipped method onArtificialInventoryClick(" + event + ")", "no inventory clicked.");
+                MessageMaster.sendWarningMessage("ArtificialInventoryClickListener", "onArtificialInventoryClick(" + event + ")", "no inventory clicked.");
                 return;
             }
 

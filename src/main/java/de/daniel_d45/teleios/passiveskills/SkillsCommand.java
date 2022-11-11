@@ -39,9 +39,9 @@ public class SkillsCommand implements CommandExecutor {
                 MessageMaster.sendWarningMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
                 return true;
             }
-            
+
             // Only runs when a skill is activated
-            if (SegmentManagerPS.usedSkills.size() > 0) {
+            if (PassiveSkills.usedSkills.size() > 0) {
 
                 player.openInventory(getSkillsInventory(player));
                 MessageMaster.sendSuccessMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
@@ -64,12 +64,12 @@ public class SkillsCommand implements CommandExecutor {
             ItemStack item;
 
             // Sets the start slot. Only works fine up to 9 skills
-            int slot = (int) (13 - Math.floor(SegmentManagerPS.usedSkills.size() / 2.0));
+            int slot = (int) (13 - Math.floor(PassiveSkills.usedSkills.size() / 2.0));
             // TODO: Dynamically adjust the inventory's rows.
             Inventory inventory = Bukkit.createInventory(new ArtificialInventory(), 3 * 9, "Your Skills");
 
             // Iterates through the used skills
-            for (Skill currentSkill : SegmentManagerPS.usedSkills) {
+            for (Skill currentSkill : PassiveSkills.usedSkills) {
 
                 item = currentSkill.getSkillInfo(player);
 
@@ -77,7 +77,7 @@ public class SkillsCommand implements CommandExecutor {
                 inventory.setItem(slot, item);
 
                 // Increases the value of the slot variable
-                if (SegmentManagerPS.usedSkills.size() % 2 == 0 && slot == 12) {
+                if (PassiveSkills.usedSkills.size() % 2 == 0 && slot == 12) {
                     // Skips the middle (13.) slot when the amount of used skills is even
                     slot += 2;
                 }

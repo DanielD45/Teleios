@@ -19,7 +19,7 @@ public class RecipeManager {
     public static ShapedRecipe getTeleporterRecipe() {
         try {
 
-            ItemStack teleporter = new ItemBuilder(Material.END_PORTAL_FRAME, 1).setLore("§fChange this teleporter's name", "§fby using the §6/configureteleporter §fcommand").build();
+            ItemStack teleporter = new ItemBuilder(Material.END_PORTAL_FRAME, 1).setLore("§fChange this teleporter's name", "§fby using the §6/configureteleporter §fcommand§r").build();
 
             ItemMeta teleporterMeta = teleporter.getItemMeta();
 

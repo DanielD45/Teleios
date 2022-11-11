@@ -33,7 +33,7 @@ public class BlockBreakListenerPS implements Listener {
 
             // Activationstate check
             if (!ConfigEditor.isActive("PassiveSkills.All")) {
-                MessageMaster.sendWarningMessage("BlockBreakListenerPS", "Skipped method onBlockBreakPS(" + event + ")", "the PassiveSkills segment is not active.");
+                MessageMaster.sendWarningMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + ")", "the PassiveSkills segment is not active.");
                 return;
             }
 
@@ -75,13 +75,13 @@ public class BlockBreakListenerPS implements Listener {
                 String entryName = block.getWorld().getName() + "," + block.getX() + "," + block.getY() + "," + block.getZ();
                 ConfigEditor.clearPath("PlacedBlocks." + entryName);
 
-                MessageMaster.sendSuccessMessage("BlockBreakListenerPS", "Skipped method onBlockBreakPS(" + event + "), the block has been removed from the PlacedBlocks path.");
+                MessageMaster.sendSuccessMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + "), the block has been removed from the PlacedBlocks path.");
             }
             else {
 
                 // Player survival mode check
                 if (player.getGameMode() != GameMode.SURVIVAL) {
-                    MessageMaster.sendWarningMessage("BlockBreakListenerPS", "Skipped method onBlockBreakPS(" + event + ")", "the player is not in survival mode.");
+                    MessageMaster.sendWarningMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + ")", "the player is not in survival mode.");
                     return;
                 }
 
@@ -90,7 +90,7 @@ public class BlockBreakListenerPS implements Listener {
                 try {
 
                     // Iterates through the usedSkills ArrayList
-                    for (Skill currentSkill : SegmentManagerPS.usedSkills) {
+                    for (Skill currentSkill : PassiveSkills.usedSkills) {
 
                         // Iterates through every used skill's listed materials
                         for (Material currentMaterial : currentSkill.getListedMaterials().keySet()) {
@@ -99,7 +99,7 @@ public class BlockBreakListenerPS implements Listener {
                             if (block.getType() == currentMaterial) {
 
                                 // Represents the level before increasing the BlockValue
-                                preLevel = SegmentManagerPS.getLevel(player.getName(), currentSkill.getSkillName());
+                                preLevel = PassiveSkills.getLevel(player.getName(), currentSkill.getSkillName());
 
                                 // TODO: Remove Try-catch
                                 // CANCELS THE BLOCK DROPS AND REPLACES THEM WITH THE NEW DROPS
@@ -125,14 +125,14 @@ public class BlockBreakListenerPS implements Listener {
                                 try {
 
                                     // Increases the BlockValue by the material's value specified by the skill type
-                                    SegmentManagerPS.increaseBlockValue(player.getName(), currentSkill.getSkillName(), currentSkill.getListedMaterials().get(currentMaterial));
+                                    PassiveSkills.increaseBlockValue(player.getName(), currentSkill.getSkillName(), currentSkill.getListedMaterials().get(currentMaterial));
                                 } catch (Exception e) {
                                     MessageMaster.sendFailMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + "): Increasing the BlockValue.", e);
                                     return;
                                 }
 
                                 // Represents the level after increasing the BlockValue
-                                postLevel = SegmentManagerPS.getLevel(player.getName(), currentSkill.getSkillName());
+                                postLevel = PassiveSkills.getLevel(player.getName(), currentSkill.getSkillName());
 
                                 // TODO: Remove Try-catch
                                 // CHECKS FOR A LEVEL-UP
@@ -160,7 +160,7 @@ public class BlockBreakListenerPS implements Listener {
                     return;
                 }
 
-                MessageMaster.sendWarningMessage("BlockBreakListenerPS", "Skipped method onBlockBreakPS(" + event + ")", "no material match.");
+                MessageMaster.sendWarningMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + ")", "no material match.");
             }
 
         } catch (Exception e) {

@@ -25,14 +25,14 @@ public class UnmuteCommand implements CommandExecutor {
             // Activation state check
             if (!ConfigEditor.isActive("AdminFeatures.All")) {
                 sender.sendMessage("§cThis command is not active.");
-                MessageMaster.sendWarningMessage("UnmuteCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
+                MessageMaster.sendWarningMessage("UnmuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
                 return true;
             }
 
             // Sender player check
             if (!(sender instanceof Player player)) {
                 sender.sendMessage("§cYou are no player!");
-                MessageMaster.sendWarningMessage("UnmuteCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
+                MessageMaster.sendWarningMessage("UnmuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
                 return true;
             }
 
@@ -44,13 +44,13 @@ public class UnmuteCommand implements CommandExecutor {
                 // Target online check
                 if (target == null) {
                     player.sendMessage("§cThis player is not online!");
-                    MessageMaster.sendWarningMessage("UnmuteCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified player is not online.");
+                    MessageMaster.sendWarningMessage("UnmuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified player is not online.");
                     return true;
                 }
 
                 if (!ConfigEditor.containsPath("MutedPlayers." + player.getName())) {
                     player.sendMessage("§6" + target.getName() + " §ais not muted!");
-                    MessageMaster.sendWarningMessage("UnmuteCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified player is not muted.");
+                    MessageMaster.sendWarningMessage("UnmuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified player is not muted.");
                 }
                 else {
                     // Removes the player from the muted players list
@@ -64,7 +64,7 @@ public class UnmuteCommand implements CommandExecutor {
                 return true;
             } catch (Exception e) {
                 player.sendMessage("§cWrong arguments!");
-                MessageMaster.sendWarningMessage("UnmuteCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
+                MessageMaster.sendWarningMessage("UnmuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
                 return false;
             }
 

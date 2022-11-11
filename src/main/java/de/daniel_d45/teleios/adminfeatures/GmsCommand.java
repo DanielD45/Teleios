@@ -26,7 +26,7 @@ public class GmsCommand implements CommandExecutor {
             // Activation state check
             if (!ConfigEditor.isActive("AdminFeatures.All")) {
                 sender.sendMessage("§cThis command is not active.");
-                MessageMaster.sendWarningMessage("GmsCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
+                MessageMaster.sendWarningMessage("GmsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
                 return true;
             }
 
@@ -38,14 +38,14 @@ public class GmsCommand implements CommandExecutor {
                         // Sender player check
                         if (!(sender instanceof Player player)) {
                             sender.sendMessage("§cYou are no player!");
-                            MessageMaster.sendWarningMessage("GmsCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
+                            MessageMaster.sendWarningMessage("GmsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
                             return true;
                         }
 
                         // Player gamemode check
                         if (player.getGameMode() == GameMode.SURVIVAL) {
                             player.sendMessage("§cYou are already in survival mode!");
-                            MessageMaster.sendWarningMessage("GmsCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player is already in survival mode.");
+                            MessageMaster.sendWarningMessage("GmsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player is already in survival mode.");
                             return true;
                         }
 
@@ -71,14 +71,14 @@ public class GmsCommand implements CommandExecutor {
                             // Target online check
                             if (target == null) {
                                 sender.sendMessage("§cThis player is not online!");
-                                MessageMaster.sendWarningMessage("GmsCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified player is not online.");
+                                MessageMaster.sendWarningMessage("GmsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified player is not online.");
                                 return true;
                             }
 
                             // Target gamemode check
                             if (target.getGameMode() == GameMode.SURVIVAL) {
                                 sender.sendMessage("§cYour target is already in survival mode!");
-                                MessageMaster.sendWarningMessage("GmsCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the target is already in survival mode.");
+                                MessageMaster.sendWarningMessage("GmsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the target is already in survival mode.");
                                 return true;
                             }
 
@@ -96,7 +96,7 @@ public class GmsCommand implements CommandExecutor {
                             // Player gamemode check
                             if (player.getGameMode() == GameMode.SURVIVAL) {
                                 sender.sendMessage("§cYou are already in survival mode!");
-                                MessageMaster.sendWarningMessage("GmsCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player is already in survival mode.");
+                                MessageMaster.sendWarningMessage("GmsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player is already in survival mode.");
                                 return true;
                             }
 
@@ -113,7 +113,7 @@ public class GmsCommand implements CommandExecutor {
                 default:
                     // Wrong amount of arguments
                     sender.sendMessage("§cWrong amount of arguments!");
-                    MessageMaster.sendWarningMessage("GmsCommand", "Skipped method onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong amount of arguments.");
+                    MessageMaster.sendWarningMessage("GmsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong amount of arguments.");
                     return false;
             }
 

@@ -9,18 +9,19 @@ pronunciation: pronounced like TELL-e-os
 1 setdebuglevel command
 1 manageteleios command
 1 activationstate enum
+1 remove all permission checks
 1 revise DebugLevel:
     1 add info messages
     1 odd = terminal output, even = terminal and chat output
-0 fix: MessageMaster.sendEnableMessage() doesn't work in onEnable()
-0 remove all permission checks
-0 rename SegmentManagerPS in PassiveSkills etc.
-0 revise all MessageMaster.sendSkipMessage/MessageMaster.sendWarningMessage calls (-"Skipped method ")
+1 rename SegmentManagerPS in PassiveSkills etc.
+1 revise all MessageMaster.sendWarningMessage calls (-"Skipped method ")
 0 add MessageMaster.sendInfo calls
-0 revise warning messages (remove "Skipped method ")
 0 MTL inventory: activated segments have enchanted icons
 0 MTL inventory: icons do not show enchantments or damage specs
 0 command (or MTL inv) to de-implement commands to make space for other plugins' command names
+0 fix: teleporter recipe being created multiplie times
+0 fix: remove loading time when listing a lot of teleporters
+0 fix: debug levels >= 4
 
 
 - Debug message colours:
