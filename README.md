@@ -16,11 +16,18 @@ than switching the whole segment on or off. What can be switched on or off is ma
 ### Core segment (always active)
 - /manageteleios (/mtl) command: opens an inventory to manage all plugin functionality. When you add the plugin to your server, 
   everything will be deactivated standardly.
-- /setdebuglevel (/sdl) command: lets you show and change the debug level affecting the plugin outputs. You can set it from 0 - 3: <br/>
-  0 = plugin start/end messages will be written to the terminal, <br/>
-  1 = plugin start/end + error messages will be written to the terminal, <br/>
-  2 = plugin start/end + error + method success + method skipped messages will be written to the terminal, <br/>
-  3 = plugin start/end + error + method success + method skipped messages will be written to the terminal and the in-game chat <br/>
+- /setdebuglevel (/sdl) command: lets you show and change the debug level affecting the plugin outputs. You can set it from 0 - 10: <br/>
+  0 = no messages <br/>
+  1 = plugin start/end messages will be written to the terminal <br/>
+  2 = plugin start/end messages will be written to the terminal & in-game chat <br/>
+  3 = plugin start/end + fail messages will be written to the terminal <br/>
+  4 = plugin start/end + fail messages will be written to the terminal & in-game chat <br/>
+  5 = plugin start/end + fail + warning messages will be written to the terminal <br/>
+  6 = plugin start/end + fail + warning messages will be written to the terminal & in-game chat <br/>
+  7 = plugin start/end + fail + warning + info messages will be written to the terminal <br/>
+  8 = plugin start/end + fail + warning + info messages will be written to the terminal & in-game chat <br/>
+  9 = plugin start/end + fail + warning + info + success messages will be written to the terminal <br/>
+  10 = plugin start/end + fail + warning + info + success messages will be written to the terminal & in-game chat <br/>
 
 <br/>
 
@@ -91,8 +98,7 @@ This is a history of the past changes coming with the respective versions. "WIP"
 - warppoint and teleporter names are now case insensitive when warping
 - when a player places a teleporter, their yaw is saved to the teleporter and applied when teleporting
 - only left clicks on teleporters open the "Pick up teleporter?" inventory now
-- the "Main" class (extending the "JavaPlugin" class) is now called "Teleios"
-- WIP: the DebugLevel values and effect have been changed from <br/>
+- the DebugLevel values and their effect have been changed from <br/>
   0 = plugin start/end messages will be written to the terminal, <br/>
   1 = plugin start/end + error messages will be written to the terminal, <br/>
   2 = plugin start/end + error + method success + method skipped messages will be written to the terminal, <br/>
