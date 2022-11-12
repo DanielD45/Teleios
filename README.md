@@ -86,6 +86,7 @@ The WorldMaster segment is not implemented yet.
 This is a history of the past changes coming with the respective versions. "WIP" (Work In Progress) versions are not available yet.
 
 ### v1.2
+Server owners should adjust their SetBlocksPerPearl and DebugLevel arguments.
 - When warping to teleporters, the distance is now computed as a straight line to the teleporter instead of <br/> 
   the added difference of the x, y and z coordinates of you and the teleporter. This lowers the teleportation cost <br/> 
   by about 42% of the previous value. **I advice you to adjust your blocksperpearl argument with /setblocksperpearl.**
