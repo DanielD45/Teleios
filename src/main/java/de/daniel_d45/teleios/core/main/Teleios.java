@@ -142,13 +142,8 @@ public class Teleios extends JavaPlugin {
             }
 
             MessageMaster.sendEnableMessage();
+
             // Program test room
-            //FileConfiguration testConfig = plugin.getConfig();
-            //testConfig.load("teleios");
-            MessageMaster.sendFailMessage("fail", "fail", new NullPointerException());
-            MessageMaster.sendWarningMessage("warning", "warning", "warning");
-            MessageMaster.sendInfoMessage("Info", "info", "info");
-            MessageMaster.sendSuccessMessage("success", "success");
             // End of program test room
         } catch (Exception e) {
             System.out.println("§cAn error occured while starting the plugin!");

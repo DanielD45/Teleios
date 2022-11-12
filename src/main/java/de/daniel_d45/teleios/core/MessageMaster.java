@@ -11,7 +11,7 @@ import de.daniel_d45.teleios.core.main.Teleios;
 public class MessageMaster {
 
     // The plugin name displayed when the plugin prints something to the console or the in-game chat
-    public static String pluginPrefix = "§5[DD's Teleios Plugin]§r ";
+    public static String pluginPrefix = "§5[Teleios Plugin]§r ";
 
     public static String getPluginPrefix() {
         return pluginPrefix;
@@ -131,7 +131,7 @@ public class MessageMaster {
      * @param message    [String] A part of the message to send
      */
     public static void sendInfoMessage(String className, String methodName, String message) {
-        String outputMessage = pluginPrefix + "§f" + className + "§7.§f" + methodName + "§7: §f" + message + "§r";
+        String outputMessage = pluginPrefix + "§7" + className + "§8.§7" + methodName + "§8: §7" + message + "§r";
         int debugLevel = ConfigEditor.getDebugLevel();
 
         if (debugLevel % 2 == 0 && debugLevel >= 8) {
