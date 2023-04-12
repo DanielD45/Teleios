@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -78,6 +78,7 @@ public class Teleios extends JavaPlugin {
             MuteCommandListener muteCommandListener = new MuteCommandListener();
             JoinmessageCommandListener joinmessageCommandListener = new JoinmessageCommandListener();
             ManageteleiosCommandListener manageteleiosCommandListener = new ManageteleiosCommandListener();
+            MakePersonalLootChestCmdLst makePersonalLootChestCmdLst = new MakePersonalLootChestCmdLst();
 
             // Command instantiation
             try {
@@ -95,6 +96,7 @@ public class Teleios extends JavaPlugin {
                 Objects.requireNonNull(getCommand("heal")).setExecutor(new HealCommand());
                 Objects.requireNonNull(getCommand("inventories")).setExecutor(new InventoriesCommand());
                 Objects.requireNonNull(getCommand("joinmessage")).setExecutor(joinmessageCommandListener);
+                Objects.requireNonNull(getCommand("makepersonallootchest")).setExecutor(makePersonalLootChestCmdLst);
                 Objects.requireNonNull(getCommand("mute")).setExecutor(muteCommandListener);
                 Objects.requireNonNull(getCommand("openinventory")).setExecutor(new OpeninventoryCommand());
                 Objects.requireNonNull(getCommand("tphere")).setExecutor(new TphereCommand());
@@ -119,16 +121,20 @@ public class Teleios extends JavaPlugin {
                 MessageMaster.sendFailMessage("Teleios", "onEnable(): Command instantiation", e);
             }
 
-            // Event listener instantiation
+            // Event Listener instantiation
             try {
 
+                // TODO: reorganise
                 // Core Listeners
                 pluginManager.registerEvents(new ArtificialInventoryClickListener(), plugin);
-                pluginManager.registerEvents(joinmessageCommandListener, plugin);
                 pluginManager.registerEvents(manageteleiosCommandListener, plugin);
                 pluginManager.registerEvents(new JoinListener(), plugin);
 
-                // AdvancedCommands Listeners
+                // AdminFeatures Listeners
+                pluginManager.registerEvents(joinmessageCommandListener, plugin);
+                pluginManager.registerEvents(makePersonalLootChestCmdLst, plugin);
+
+                // BetterGameplay Listeners
                 pluginManager.registerEvents(muteCommandListener, plugin);
                 pluginManager.registerEvents(new PlayerInteractWithTeleporterListener(), plugin);
                 pluginManager.registerEvents(new TeleporterPlaceListener(), plugin);

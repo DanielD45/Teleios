@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -44,6 +44,32 @@ public class InventoryManager {
         } catch (Exception e) {
             MessageMaster.sendFailMessage("InventoryManager", "getCleanString(" + string + ")", e);
             return null;
+        }
+    }
+
+    public static ItemStack getYesItem() {
+        try {
+
+            ItemStack item = new ItemBuilder(Material.GREEN_CONCRETE, 1).setName("§aYes").build();
+
+            MessageMaster.sendSuccessMessage("InventoryManager", "getYesItem()");
+            return item;
+        } catch (Exception e) {
+            MessageMaster.sendFailMessage("InventoryManager", "getYesItem()", e);
+            return getErrorItem();
+        }
+    }
+
+    public static ItemStack getNoItem() {
+        try {
+
+            ItemStack item = new ItemBuilder(Material.RED_CONCRETE, 1).setName("§cNo").build();
+
+            MessageMaster.sendSuccessMessage("InventoryManager", "getNoItem()");
+            return item;
+        } catch (Exception e) {
+            MessageMaster.sendFailMessage("InventoryManager", "getNoItem()", e);
+            return getErrorItem();
         }
     }
 
@@ -342,7 +368,7 @@ public class InventoryManager {
 
     public static Inventory createArtificialInventory(int rows, String name) {
         try {
-
+            
             Inventory inv = Bukkit.createInventory(new ArtificialInventory(), rows * 9, name);
 
             MessageMaster.sendSuccessMessage("InventoryManager", "createArtificialInventory(" + rows + ", " + name + ")");

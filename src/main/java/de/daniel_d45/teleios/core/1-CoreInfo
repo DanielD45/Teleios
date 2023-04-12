@@ -13,6 +13,8 @@ pronunciation: pronounced like TELL-e-os
 1 new DebugLevel system:
     1 add info messages
     1 odd = terminal output, even = terminal and chat output
+0 rename Command -> cmd, Listener -> Lst
+0 make more specialised listeners?
 0 add MessageMaster.sendInfo calls
 0 MTL inventory: activated segments have enchanted icons
 0 MTL inventory: icons do not show enchantments or damage specs
@@ -20,6 +22,11 @@ pronunciation: pronounced like TELL-e-os
 0 fix: teleporter recipe being created multiplie times
 0 fix: remove loading time when listing a lot of teleporters
 0 fix: broadcasting doesn't work in onEnable()
+
+
+- Interesting classes and methods:
+LivingEntity
+ addPotionEffect(PotionEffect effect)
 
 
 - Debug message colours:

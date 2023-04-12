@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -19,6 +19,7 @@ import java.util.Arrays;
 
 public class InventoriesCommand implements CommandExecutor {
 
+    // TODO: Fix inventory is not recognised when reloading
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         try {

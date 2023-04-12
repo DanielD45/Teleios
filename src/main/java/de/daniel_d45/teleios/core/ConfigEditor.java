@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -55,6 +55,8 @@ public class ConfigEditor {
                 BetterGameplay.initiateWarppouch(currentPlayer.getName());
                 PassiveSkills.initiatePlayerRecords(currentPlayer.getName());
             }
+
+            initiatePersonalLootChests();
 
         } catch (Exception e) {
             MessageMaster.sendFailMessage("ConfigEditor", "setupConfig()", e);
@@ -159,6 +161,19 @@ public class ConfigEditor {
 
         } catch (Exception e) {
             MessageMaster.sendFailMessage("ConfigEditor", "initiateBlocksPerPearl()", e);
+        }
+    }
+
+    private static void initiatePersonalLootChests() {
+        try {
+
+            if (!ConfigEditor.containsPath("PersonalLootChests")) {
+                ConfigEditor.set("PersonalLootChests.Setup", "setup");
+                ConfigEditor.set("PersonalLootChests.Setup", null);
+            }
+
+        } catch (Exception e) {
+            MessageMaster.sendFailMessage("ConfigEditor", "initiatePersonalLootChests()", e);
         }
     }
 

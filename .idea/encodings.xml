@@ -27,7 +27,7 @@
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/TeleporterPlaceListener.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/WarpCommand.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/bettergameplay/WarppouchCommand.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/core/1-CoreInfo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/core/1-CoreInfoBugged" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/core/InventoryManager.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/core/ManageteleiosCommandListener.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/de/daniel_d45/teleios/core/MessageMaster.java" charset="UTF-8" />

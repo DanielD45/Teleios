@@ -75,6 +75,16 @@ commands:
     description: Lets you enable or disable the custom join message.
     usage: /joinmessage enable/true|disable/false
 
+  makepersonallootchest:
+    aliases:
+      - mplc
+      - MPLC
+      - makeplc
+      - MAKEPLC
+    permission: teleios.adminfeatures.makepersonallootchest
+    description: Lets you change a chest into a personal loot chest.
+    usage: /makepersonallootchest
+
   mute:
     aliases:
       - m
@@ -229,6 +239,10 @@ permissions:
 
   teleios.adminfeatures.joinmessage:
     description: Allows use of the joinmessage command.
+    default: op
+
+  teleios.adminfeatures.makepersonallootchest:
+    description: Allows use of the makepersonallootchest command.
     default: op
 
   teleios.adminfeatures.mute:

@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -27,9 +27,8 @@ import java.util.Set;
 public class PlayerInteractWithTeleporterListener implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
-    public void onPlayerInteractWithTeleporter(PlayerInteractEvent event) {
+    public void onPlayerInteractTeleporter(PlayerInteractEvent event) {
         try {
-
             Player player = event.getPlayer();
             Material itemType = event.getMaterial();
             Action action = event.getAction();
@@ -110,7 +109,7 @@ public class PlayerInteractWithTeleporterListener implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.NORMAL)
     public void onPickupTeleporterInventoryClick(InventoryClickEvent event) {
         try {
 
@@ -118,48 +117,50 @@ public class PlayerInteractWithTeleporterListener implements Listener {
             Inventory inventory = event.getClickedInventory();
             ItemStack item = event.getCurrentItem();
 
-            if (event.getView().getTitle().equals("§0Pick up teleporter?")) {
-
-                String teleporterName = InventoryManager.getCleanString(inventory.getItem(4).getItemMeta().getDisplayName());
-
-                // YES ITEM
-                if (item.equals(getYesItem())) {
-
-                    // Iterates through the teleporters
-                    for (String current : ConfigEditor.getSectionKeys("Teleporters")) {
-
-                        if (teleporterName.equals(current)) {
-                            // There is a teleporter with this name
-
-                            Location location = (Location) ConfigEditor.get("Teleporters." + current);
-                            World world = location.getWorld();
-
-                            // Deletes the teleporter entry
-                            ConfigEditor.clearPath("Teleporters." + current);
-
-                            // Drops a teleporter item
-                            world.dropItemNaturally(location, inventory.getItem(4));
-
-                            // Destroys the teleporter
-                            location.getBlock().setType(Material.AIR);
-
-                            player.closeInventory();
-
-                            MessageMaster.sendSuccessMessage("PlayerInteractWithTeleporterListener", "onPickupTeleporterInventoryClick(" + event + "), player chose \"Yes\"");
-                            return;
-                        }
-                    }
-
-                    // NO ITEM
-                }
-                else if (item.equals(getNoItem())) {
-
-                    player.closeInventory();
-                    MessageMaster.sendSuccessMessage("PlayerInteractWithTeleporterListener", "onPickupTeleporterInventoryClick(" + event + "), player chose \"No\"");
-                }
+            // TODO: Make more specific? (&& event.getInventory() instanceof ArtificialInventory)
+            if (!(event.getView().getTitle().equals("§0Pick up teleporter?"))) {
+                MessageMaster.sendWarningMessage("PlayerInteractWithTeleporterListener", "onPickupTeleporterInventoryClick(" + event + ")", "wrong item clicked.");
+                return;
             }
 
-            MessageMaster.sendWarningMessage("PlayerInteractWithTeleporterListener", "onPickupTeleporterInventoryClick(" + event + ")", "wrong item clicked.");
+            String teleporterName = InventoryManager.getCleanString(inventory.getItem(4).getItemMeta().getDisplayName());
+
+            // YES ITEM
+            if (item.equals(InventoryManager.getYesItem())) {
+
+                // Iterates through the teleporters
+                for (String current : ConfigEditor.getSectionKeys("Teleporters")) {
+
+                    if (teleporterName.equals(current)) {
+                        // There is a teleporter with this name
+
+                        Location location = (Location) ConfigEditor.get("Teleporters." + current);
+                        World world = location.getWorld();
+
+                        // Deletes the teleporter entry
+                        ConfigEditor.clearPath("Teleporters." + current);
+
+                        // Drops a teleporter item
+                        world.dropItemNaturally(location, inventory.getItem(4));
+
+                        // Destroys the teleporter
+                        location.getBlock().setType(Material.AIR);
+
+                        player.closeInventory();
+
+                        MessageMaster.sendSuccessMessage("PlayerInteractWithTeleporterListener", "onPickupTeleporterInventoryClick(" + event + "), player chose \"Yes\"");
+                        return;
+                    }
+                }
+
+                // NO ITEM
+            }
+            else if (item.equals(InventoryManager.getNoItem())) {
+
+                player.closeInventory();
+                MessageMaster.sendSuccessMessage("PlayerInteractWithTeleporterListener", "onPickupTeleporterInventoryClick(" + event + "), player chose \"No\"");
+            }
+
         } catch (NullPointerException e) {
             MessageMaster.sendWarningMessage("PlayerInteractWithTeleporterListener", "onPickupTeleporterInventoryClick(" + event + ")", "no item has been clicked.");
         } catch (Exception e) {
@@ -172,9 +173,9 @@ public class PlayerInteractWithTeleporterListener implements Listener {
 
             Inventory inv = InventoryManager.createArtificialInventory(1, "§0Pick up teleporter?");
 
-            inv.setItem(0, getYesItem());
+            inv.setItem(0, InventoryManager.getYesItem());
             inv.setItem(4, getTeleporterItem(teleporterName));
-            inv.setItem(8, getNoItem());
+            inv.setItem(8, InventoryManager.getNoItem());
 
             InventoryManager.fillEmptySlots(inv);
 
@@ -195,32 +196,6 @@ public class PlayerInteractWithTeleporterListener implements Listener {
             return item;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("PlayerInteractWithTeleporterListener", "getTeleporterItem(" + teleporterName + ")", e);
-            return InventoryManager.getErrorItem();
-        }
-    }
-
-    private ItemStack getYesItem() {
-        try {
-
-            ItemStack item = new ItemBuilder(Material.GREEN_CONCRETE, 1).setName("§aYes").build();
-
-            MessageMaster.sendSuccessMessage("PlayerInteractWithTeleporterListener", "getYesItem()");
-            return item;
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("PlayerInteractWithTeleporterListener", "getYesItem()", e);
-            return InventoryManager.getErrorItem();
-        }
-    }
-
-    private ItemStack getNoItem() {
-        try {
-
-            ItemStack item = new ItemBuilder(Material.RED_CONCRETE, 1).setName("§cNo").build();
-
-            MessageMaster.sendSuccessMessage("PlayerInteractWithTeleporterListener", "getNoItem()");
-            return item;
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("PlayerInteractWithTeleporterListener", "getNoItem()", e);
             return InventoryManager.getErrorItem();
         }
     }

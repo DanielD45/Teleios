@@ -3,7 +3,7 @@
 1 Enderchest command
 1 Teleporters:
     1 distance calculation with Pythagoras
-    1 only lift-clicking on teleporters opens the interactive inventory
+    1 left-clicking on teleporters opens the interactive inventory
     1 case insensitive warping
     1 the teleporter orientation is the player's orientation when placing it
     0 tablist for /warp [TeleporterName]|[WarppointName]
@@ -14,8 +14,12 @@
         1 dimension
         0 cost to high
         0 no access
+    0 "/warppouch put" puts every ender pearl from your inventory in your warppouch
+    0 /warp tells you how many additional ender pearls are needed
+    0 bug hunter script:
+        0 search teleporter positions, if (cave) air: drop teleporter and delete from config
+
 0 move config to world folder
-0 "/warppouch put" puts every ender pearl from your inventory in your warppouch
 0 enchantments on items upgrade over time (e.g. Sharpness I->II) (xp collected?)
 0 Printstat command: prints the player's stats to the chat
 0 block which can salvage items/blocks (like wooden stairs)
@@ -26,7 +30,34 @@
 0 quarz blocks can be crafted into 9 quarz (+others?)
 0 possibility to get player heads and mini blocks for decorations (crafting recipe)
 0 machines which can harvest crops
-0 leveling system
+0 an item with charge building over time which is used to accelerate the player
+0 special noob mode?
+    0 certain players can be specified
+    0 less damage through monsters?
+    0 more durability?
+    0 less hunger?
+    0 faster health regen?
+
+0 Flow:
+    0 prevents dropping iron tools and up from the hotbar when not in inventory
+    0 when falling into the void with or dropping the dragon egg -> replaces the dragon egg
+
+0 Upgrade Coins:
+    0 ? item
+    0 obtainable through:
+        0 killing
+        0 mining
+        0 loot chests
+    0 /upgrade to open an upgrade inventory
+    0 can be used in upgrade inv to upgrade:
+        0 worse targeting by certain monsters
+        0 speed
+        0 health regen?
+        0 food consumption?
+        0 potion resistance?
+        0 potion affinity?
+
+0 [levelling system]
     0 every different material players collect gives them a reward?
     0 collection system that unlocks crafting recipes?
     0 armor with upgrades/modules?
@@ -40,6 +71,7 @@
         0 dodging
         0 XP collected
         0 higher chance for good enchantments?
+
 0 monsters get stronger the more you kill
 0 riding animals (horses, donkeys, pigs) level health, speed and jump height through being ridden
 0 tombstones which save your items on death
@@ -54,11 +86,6 @@
 0 jungle saplings drop more often
 0 heal iron golems with iron
 0 craft dirt from bone meal and wood
-0 special monsters:
-    0 Tanky Creeper (less knockback)
-    0 Magic Zombie (boosts nearby monsters)
-    0 Invisible Spider
-    0 Wizard Skeleton (every Skeleton uses special effect arrows)
 0 craft dirt from bone meal and wood
 0 colors in item names
 0 waypoints players can place
@@ -67,29 +94,57 @@
 0 portals in special dimensions
 0 crit damage scales per distance fallen
 0 eliminate trading limits
+0 elytra's armor can be upgraded with nether stars
+0 loot chests with player-specific inventories
 
+0 Emerald Weapons:
+    0 emerald ore sometimes drops "energised emerald" (enchanted emerald) used to craft equipment on diamond basis
+    0 emerald sword:
+        0 levels through killing slime with it
+        0 levelling increases chance of stunning targets on hit
+    0 emerald pickaxe:
+        0 levels luck through breaking emerald ore, limit: luck 5
+        0 luck 1: 10 ores, luck 2: +20 (30) ores, luck 3: +30 (60) ores, luck 4: +40 (100) ores, luck 5: +50 (150) ores ?
+    0 luck potion:
+        0 gives you the effects of luck and looting, combines with enchantments
+    0 emerald monsters:
+        0 drop "energised emerald"
+        0 spawn in random events
+        0 visible health bar / boss bar?
+        0 have a name tag
+        0 3x health?
+        0 3x damage?
+        0 50% armor ignore?
+        0 emerald block in helmet slot (0 doesn't drop)
+0 Emerald Weapons alt version:
+    0 tools are charged by "energised emerald" and use charge when using their abilities
+    0 emerald monsters drop "energised emerald blocks"
+    0 tools' charge meter and charge rate can be upgraded by combining the tool with an "energised emerald block" in an anvil
 
-- CreatureEvolution sub segment:
+0 Immersive Monsters:
+    0 some mobs spawn with different abilities? and drops
+    0 higher range of health, damage etc.
+    0 random events with special mobs and drops (trigger: listener for specific time? + randomness)
+    0 some monsters are neutral
+    0 some monsters fight each other
+    0 green witches which throw supporting potions
 
-0 some mobs spawn with different abilities and drops
-0 higher range of health, damage etc.
-0 random events (trigger: listener for specific time + randomness)
-0 some monsters are neutral
-0 some monsters fight each other
-0 green witches that throw supporting potions
+0 Special Monsters:
+    0 Tanky Creeper (less knockback)
+    0 Magic Zombie (boosts nearby monsters)
+    0 Invisible Spider
+    0 Wizard Skeleton (every Skeleton uses special effect arrows)
 
-
-- PassiveSkills sub segment:
-
-1 save data to config
-1 list all players with their skills
-1 apply factor and increase BlockValue on block break
-1 test for level-ups
-1 increase the right value on level-up
-1 /skill command to query skills
-1 search and use config on plugin start
-0 command to show skill leaderboards
-0 command to remove players
+0 PassiveSkills:
+    1 save data to config
+    1 list all players with their skills
+    1 apply factor and increase BlockValue on block break
+    1 test for level-ups
+    1 increase the right value on level-up
+    1 /skill command to query skills
+    1 search and use config on plugin start
+    0 command to show skill leaderboards
+    0 command to remove players
 
 - Valid and standard argument values:
 
