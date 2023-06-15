@@ -86,7 +86,7 @@ The WorldMaster segment is not implemented yet.
 This is a history of the past changes coming with the respective versions. "WIP" (Work In Progress) versions are not available yet.
 
 ### v1.3WIP
-- This version is native to Minecraft 1.20.1
+- this version is native to Minecraft 1.20.1
 - the DebugLevel values and their effect have been changed from <br/>
   0 = no messages <br/>
   1 = plugin start/end messages will be written to the terminal <br/>
@@ -113,11 +113,11 @@ This is a history of the past changes coming with the respective versions. "WIP"
 
 ### v1.2
 **Server owners should adjust their SetBlocksPerPearl and DebugLevel arguments.**
-- This version is native to Minecraft 1.19
-- When warping to teleporters, the distance is now computed as a straight line to the teleporter instead of <br/> 
+- this version is native to Minecraft 1.19
+- when warping to teleporters, the distance is now computed as a straight line to the teleporter instead of <br/> 
   the added difference of the x, y and z coordinates of you and the teleporter. This lowers the teleportation cost <br/> 
   by about 42% of the previous value. I advice you to adjust your blocksperpearl argument with /setblocksperpearl.
-- The custom join message now only displays if the join message is enabled AND the /joinmessage command is active
+- the custom join message now only displays if the join message is enabled AND the /joinmessage command is active
 - "/joinmessage" will now tell you whether the custom join message is enabled or disabled
 - "/warp" will now list the available warppoints and teleporters. "/warp list" will now ignore any added arguments
 - "/inventories" will now list the available inventories
