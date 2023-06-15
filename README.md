@@ -85,6 +85,32 @@ The WorldMaster segment is not implemented yet.
 ## Version updates
 This is a history of the past changes coming with the respective versions. "WIP" (Work In Progress) versions are not available yet.
 
+### v1.3WIP
+- This version is native to Minecraft 1.20.1
+- the DebugLevel values and their effect have been changed from <br/>
+  0 = no messages <br/>
+  1 = plugin start/end messages will be written to the terminal <br/>
+  2 = plugin start/end messages will be written to the terminal & in-game chat <br/>
+  3 = plugin start/end + fail messages will be written to the terminal <br/>
+  4 = plugin start/end + fail messages will be written to the terminal & in-game chat <br/>
+  5 = plugin start/end + fail + warning messages will be written to the terminal <br/>
+  6 = plugin start/end + fail + warning messages will be written to the terminal & in-game chat <br/>
+  7 = plugin start/end + fail + warning + info messages will be written to the terminal <br/>
+  8 = plugin start/end + fail + warning + info messages will be written to the terminal & in-game chat <br/>
+  9 = plugin start/end + fail + warning + info + success messages will be written to the terminal <br/>
+  10 = plugin start/end + fail + warning + info + success messages will be written to the terminal & in-game chat <br/>
+  to <br/>
+  0 = no messages <br/>
+  1 = plugin start/end messages will be written to the terminal <br/>
+  2 = plugin start/end messages will be written to the terminal & in-game chat <br/>
+  3 = plugin start/end + fail messages will be written to the terminal <br/>
+  4 = plugin start/end + fail messages will be written to the terminal & in-game chat <br/>
+  5 = plugin start/end + fail + warning messages will be written to the terminal <br/>
+  6 = plugin start/end + fail + warning messages will be written to the terminal & in-game chat <br/>
+  7 = plugin start/end + fail + warning + exit messages will be written to the terminal <br/>
+  8 = plugin start/end + fail + warning + exit messages will be written to the terminal & in-game chat <br/>
+  Please adjust your DebugLevel accordingly.
+
 ### v1.2
 **Server owners should adjust their SetBlocksPerPearl and DebugLevel arguments.**
 - This version is native to Minecraft 1.19
