@@ -90,6 +90,7 @@ The WorldMaster segment is not implemented yet.
 This is a history of the past changes coming with the respective versions. "WIP" (Work In Progress) versions are not available yet.
 
 ### v1.3WIP
+**Server owners should adjust their DebugLevel arguments.**
 - this version is native to Minecraft 1.20.1
 - the DebugLevel values and their effect have been changed from <br/>
   0 = no messages <br/>
