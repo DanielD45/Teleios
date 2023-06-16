@@ -31,7 +31,7 @@ than switching the whole segment on or off. What can be switched on or off is ma
   
   Fail messages print a short message and the exception stack trace on encountered exception. <br/>
   Warning messages inform the console that something unexpected happened or action is necessary. <br/>
-  Exit messages inform the console that and how a method finished.
+  Exit messages (v1.3WIP) inform the console that and how a method finished.
 
 <br/>
 
