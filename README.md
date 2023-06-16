@@ -29,8 +29,8 @@ than switching the whole segment on or off. What can be switched on or off is ma
   9 = plugin start/end + fail + warning + info + success messages will be written to the terminal <br/>
   10 = plugin start/end + fail + warning + info + success messages will be written to the terminal & in-game chat <br/>
   
-  Fail messages print a short message and the exception stack trace on encountered exception.
-  Warning messages inform the console that something unexpected happened or action is necessary.
+  Fail messages print a short message and the exception stack trace on encountered exception. <br/>
+  Warning messages inform the console that something unexpected happened or action is necessary. <br/>
   Exit messages inform the console that and how a method finished.
 
 <br/>
