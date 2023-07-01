@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -15,7 +15,7 @@ import org.bukkit.entity.Player;
 import java.util.Arrays;
 
 
-public class EnderchestCommand implements CommandExecutor {
+public class EnderchestCmd implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -24,21 +24,21 @@ public class EnderchestCommand implements CommandExecutor {
             // Activation state check
             if (!ConfigEditor.isActive("BetterGameplay.EnderchestCommand")) {
                 sender.sendMessage("§cThis command is not active.");
-                MessageMaster.sendWarningMessage("EnderchestCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
+                MessageMaster.sendExitMessage("EnderchestCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
                 return true;
             }
 
             // Sender player check
             if (!(sender instanceof Player player)) {
                 sender.sendMessage("§cYou are no player!");
-                MessageMaster.sendWarningMessage("EnderchestCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
+                MessageMaster.sendExitMessage("EnderchestCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
                 return true;
             }
 
             try {
                 // Specifies /enderchest
                 player.openInventory(player.getEnderChest());
-                MessageMaster.sendSuccessMessage("EnderchestCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                MessageMaster.sendExitMessage("EnderchestCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                 return true;
             } catch (Exception e) {
                 MessageMaster.sendFailMessage("EnderchestCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", e);

@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.Set;
 
 
-public class WarppointCommand implements CommandExecutor {
+public class WarppointCmd implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -25,7 +25,7 @@ public class WarppointCommand implements CommandExecutor {
             // Activationstate check
             if (!ConfigEditor.isActive("AdminFeatures.All")) {
                 sender.sendMessage("§cThis command is not active.");
-                MessageMaster.sendWarningMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
+                MessageMaster.sendExitMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
                 return true;
             }
 
@@ -40,7 +40,7 @@ public class WarppointCommand implements CommandExecutor {
                             // Warppoints existance check
                             if (warppoints.length <= 0) {
                                 sender.sendMessage("§eThere are no warppoints yet! Add one by using §6/warppoint add [name]§e!");
-                                MessageMaster.sendWarningMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "there are no warppoints.");
+                                MessageMaster.sendExitMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "there are no warppoints.");
                                 return true;
                             }
 
@@ -63,12 +63,12 @@ public class WarppointCommand implements CommandExecutor {
                             sender.sendMessage(message.toString());
                             sender.sendMessage("§a--------------------");
 
-                            MessageMaster.sendSuccessMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                            MessageMaster.sendExitMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                             return true;
                         } catch (NullPointerException e) {
                             // TODO: Necessary?
                             sender.sendMessage("§eThere are no warppoints yet! Add one by using §6/warppoint add [name]§e!");
-                            MessageMaster.sendWarningMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "there are no warppoints.");
+                            MessageMaster.sendExitMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "there are no warppoints.");
                             return true;
                         } catch (Exception e) {
                             sender.sendMessage("§cCould not list all warppoints!");
@@ -83,7 +83,7 @@ public class WarppointCommand implements CommandExecutor {
                             // Warppoints existance check
                             if (ConfigEditor.getSectionKeys("Warppoints") == null) {
                                 sender.sendMessage("§cThere are no warppoints!");
-                                MessageMaster.sendWarningMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "there are no warppoints.");
+                                MessageMaster.sendExitMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "there are no warppoints.");
                                 return true;
                             }
 
@@ -93,7 +93,7 @@ public class WarppointCommand implements CommandExecutor {
                             }
 
                             sender.sendMessage("§aAll warppoints have been removed!");
-                            MessageMaster.sendSuccessMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                            MessageMaster.sendExitMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                             return true;
                         } catch (Exception e) {
                             sender.sendMessage("§cCould not clear all warppoints!");
@@ -104,7 +104,7 @@ public class WarppointCommand implements CommandExecutor {
                     else {
                         // Wrong arguments
                         sender.sendMessage("§cWrong arguments!");
-                        MessageMaster.sendWarningMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
+                        MessageMaster.sendExitMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
                         return false;
                     }
                 case 2:
@@ -116,7 +116,7 @@ public class WarppointCommand implements CommandExecutor {
                             // Sender player check
                             if (!(sender instanceof Player player)) {
                                 sender.sendMessage("§cYou are no player!");
-                                MessageMaster.sendWarningMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
+                                MessageMaster.sendExitMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
                                 return true;
                             }
 
@@ -131,7 +131,7 @@ public class WarppointCommand implements CommandExecutor {
                                     if (currentWPName.equalsIgnoreCase(specifiedName)) {
                                         // Name match
                                         player.sendMessage("§cA warppoint with this name already exists!");
-                                        MessageMaster.sendWarningMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "a warppoint with this name already exists.");
+                                        MessageMaster.sendExitMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "a warppoint with this name already exists.");
                                         return true;
                                     }
                                 }
@@ -145,7 +145,7 @@ public class WarppointCommand implements CommandExecutor {
                                     if (currentTPName.equalsIgnoreCase(specifiedName)) {
                                         // Name match
                                         player.sendMessage("§cA teleporter with this name already exists!");
-                                        MessageMaster.sendWarningMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "a teleporter with this name already exists.");
+                                        MessageMaster.sendExitMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "a teleporter with this name already exists.");
                                         return true;
                                     }
                                 }
@@ -157,7 +157,7 @@ public class WarppointCommand implements CommandExecutor {
                             ConfigEditor.set("Warppoints." + specifiedName, player.getLocation());
                             player.sendMessage("§aAdded warppoint §6" + specifiedName + "§a!");
 
-                            MessageMaster.sendSuccessMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                            MessageMaster.sendExitMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                             return true;
                         } catch (Exception e) {
                             sender.sendMessage("§cCould not add the warppoint!");
@@ -174,13 +174,13 @@ public class WarppointCommand implements CommandExecutor {
                             // Warppoint exists check
                             if (!ConfigEditor.containsPath("Warppoints." + warppointName)) {
                                 sender.sendMessage("§cThe warppoint §e" + warppointName + " §cdoesn't exist!");
-                                MessageMaster.sendWarningMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified warppoint doesn't exist.");
+                                MessageMaster.sendExitMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified warppoint doesn't exist.");
                                 return true;
                             }
 
                             ConfigEditor.clearPath("Warppoints." + warppointName);
                             sender.sendMessage("§aRemoved warppoint §6" + warppointName + "§a!");
-                            MessageMaster.sendSuccessMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                            MessageMaster.sendExitMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                             return true;
                         } catch (Exception e) {
                             sender.sendMessage("§cCould not remove the warppoint §e" + args[1] + "§c!");
@@ -195,7 +195,7 @@ public class WarppointCommand implements CommandExecutor {
                             // Sender player check
                             if (!(sender instanceof Player player)) {
                                 sender.sendMessage("§cYou are no player!");
-                                MessageMaster.sendWarningMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
+                                MessageMaster.sendExitMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
                                 return true;
                             }
 
@@ -204,7 +204,7 @@ public class WarppointCommand implements CommandExecutor {
                             // Warppoint existance check
                             if (!ConfigEditor.containsPath("Warppoints." + warppointName)) {
                                 player.sendMessage("§cA warppoint with this name doesn't exist!");
-                                MessageMaster.sendWarningMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "a warppoint with this name doesn't exist.");
+                                MessageMaster.sendExitMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "a warppoint with this name doesn't exist.");
                                 return true;
                             }
 
@@ -212,7 +212,7 @@ public class WarppointCommand implements CommandExecutor {
                             ConfigEditor.set("Warppoints." + warppointName, player.getLocation());
                             player.sendMessage("§aOverrode the location of warppoint §6" + warppointName + "§a!");
 
-                            MessageMaster.sendSuccessMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                            MessageMaster.sendExitMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                             return true;
                         } catch (Exception e) {
                             sender.sendMessage("§cCould not override the warppoint §e" + args[1] + "§c!");
@@ -222,14 +222,14 @@ public class WarppointCommand implements CommandExecutor {
                     }
                     else {
                         sender.sendMessage("§cWrong arguments!");
-                        MessageMaster.sendWarningMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
+                        MessageMaster.sendExitMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
                         return false;
                     }
 
                 default:
                     // Wrong amount of arguments
                     sender.sendMessage("§cWrong amount of arguments!");
-                    MessageMaster.sendWarningMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong amount of arguments.");
+                    MessageMaster.sendExitMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong amount of arguments.");
                     return false;
             }
         } catch (Exception e) {

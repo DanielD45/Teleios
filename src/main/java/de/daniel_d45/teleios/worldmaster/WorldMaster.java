@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -35,7 +35,7 @@ public class WorldMaster {
                     ConfigEditor.set("Activationstates." + current, "OFF");
                 }
 
-                MessageMaster.sendSuccessMessage("SegmentManagerWM", "switchActivationstateWM()");
+                MessageMaster.sendExitMessage("SegmentManagerWM", "switchActivationstateWM()", "success");
             }
             else {
 
@@ -43,7 +43,7 @@ public class WorldMaster {
                     ConfigEditor.set("Activationstates." + current, "ON");
                 }
 
-                MessageMaster.sendSuccessMessage("SegmentManagerWM", "switchActivationstateWM()");
+                MessageMaster.sendExitMessage("SegmentManagerWM", "switchActivationstateWM()", "success");
             }
         } catch (Exception e) {
             MessageMaster.sendFailMessage("SegmentManagerWM", "switchActivationstateWM()", e);
@@ -68,7 +68,7 @@ public class WorldMaster {
 
             }
 
-            MessageMaster.sendSuccessMessage("SegmentManagerPS", "getSegmentItem()");
+            MessageMaster.sendExitMessage("SegmentManagerPS", "getSegmentItem()", "success");
             return item;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("SegmentManagerPS", "getSegmentItem()", e);

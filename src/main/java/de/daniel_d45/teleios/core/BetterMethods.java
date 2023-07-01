@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -19,17 +19,17 @@ public class BetterMethods {
         try {
 
             if (obj1 == null && obj2 == null) {
-                MessageMaster.sendSuccessMessage("BetterMethods", "betterEquals(" + obj1 + ", " + obj2 + ")");
+                MessageMaster.sendExitMessage("BetterMethods", "betterEquals(" + obj1 + ", " + obj2 + ")", "success");
                 return true;
             }
 
             boolean equal = obj1.equals(obj2);
 
-            MessageMaster.sendSuccessMessage("BetterMethods", "betterEquals(" + obj1 + ", " + obj2 + ")");
+            MessageMaster.sendExitMessage("BetterMethods", "betterEquals(" + obj1 + ", " + obj2 + ")", "success");
             return equal;
         } catch (NullPointerException e) {
             // One of the objects is null, the other is not
-            MessageMaster.sendSuccessMessage("BetterMethods", "betterEquals(" + obj1 + ", " + obj2 + ")");
+            MessageMaster.sendExitMessage("BetterMethods", "betterEquals(" + obj1 + ", " + obj2 + ")", "success");
             return false;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("BetterMethods", "betterEquals(" + obj1 + ", " + obj2 + ")", e);

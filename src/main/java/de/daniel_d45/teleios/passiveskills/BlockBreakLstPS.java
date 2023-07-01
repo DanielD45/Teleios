@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -18,7 +18,8 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
 
-public class BlockBreakListenerPS implements Listener {
+// TODO: WIP
+public class BlockBreakLstPS implements Listener {
 
     /**
      * Method fires when a player breaks a block, checks if the broken block is listed in a skill's
@@ -33,7 +34,7 @@ public class BlockBreakListenerPS implements Listener {
 
             // Activationstate check
             if (!ConfigEditor.isActive("PassiveSkills.All")) {
-                MessageMaster.sendWarningMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + ")", "the PassiveSkills segment is not active.");
+                MessageMaster.sendExitMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + ")", "the PassiveSkills segment is not active.");
                 return;
             }
 
@@ -75,13 +76,13 @@ public class BlockBreakListenerPS implements Listener {
                 String entryName = block.getWorld().getName() + "," + block.getX() + "," + block.getY() + "," + block.getZ();
                 ConfigEditor.clearPath("PlacedBlocks." + entryName);
 
-                MessageMaster.sendSuccessMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + "), the block has been removed from the PlacedBlocks path.");
+                MessageMaster.sendExitMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + "), the block has been removed from the PlacedBlocks path.", "success");
             }
             else {
 
                 // Player survival mode check
                 if (player.getGameMode() != GameMode.SURVIVAL) {
-                    MessageMaster.sendWarningMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + ")", "the player is not in survival mode.");
+                    MessageMaster.sendExitMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + ")", "the player is not in survival mode.");
                     return;
                 }
 
@@ -146,7 +147,7 @@ public class BlockBreakListenerPS implements Listener {
                                     return;
                                 }
 
-                                MessageMaster.sendSuccessMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + ")");
+                                MessageMaster.sendExitMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + ")", "success");
                                 return;
                             }
                             // Else: the block's material doesn't match the current material
@@ -160,7 +161,7 @@ public class BlockBreakListenerPS implements Listener {
                     return;
                 }
 
-                MessageMaster.sendWarningMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + ")", "no material match.");
+                MessageMaster.sendExitMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + ")", "no material match.");
             }
 
         } catch (Exception e) {

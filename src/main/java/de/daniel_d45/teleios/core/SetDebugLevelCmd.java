@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -17,7 +17,7 @@ import java.util.Arrays;
  *
  * @author Daniel_D45
  */
-public class SetDebugLevelCommand implements CommandExecutor {
+public class SetDebugLevelCmd implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -35,14 +35,14 @@ public class SetDebugLevelCommand implements CommandExecutor {
                 }
 
                 sender.sendMessage("§aThe debug level is currently §6" + debugLevel + "§a.");
-                MessageMaster.sendSuccessMessage("SetDebugLevelCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                MessageMaster.sendExitMessage("SetDebugLevelCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                 return true;
             }
 
             // Sender permission check
             if (!sender.hasPermission("teleios.core.setdebuglevel")) {
                 sender.sendMessage("§cMissing Permissions!");
-                MessageMaster.sendWarningMessage("SetDebugLevelCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender doesn't have the needed permissions.");
+                MessageMaster.sendExitMessage("SetDebugLevelCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender doesn't have the needed permissions.");
                 return true;
             }
 
@@ -65,7 +65,7 @@ public class SetDebugLevelCommand implements CommandExecutor {
                 newDebugLevel = Integer.parseInt(args[0]);
             } catch (Exception e) {
                 sender.sendMessage("§cThis debug level is invalid");
-                MessageMaster.sendWarningMessage("SetDebugLevelCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified debug level is invalid.");
+                MessageMaster.sendExitMessage("SetDebugLevelCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified debug level is invalid.");
                 return true;
             }
 
@@ -80,7 +80,7 @@ public class SetDebugLevelCommand implements CommandExecutor {
             ConfigEditor.set("DebugLevel", newDebugLevel);
 
             sender.sendMessage("§aThe debug level is now §6" + newDebugLevel + "§a.");
-            MessageMaster.sendSuccessMessage("SetDebugLevelCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+            MessageMaster.sendExitMessage("SetDebugLevelCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
             return true;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("SetDebugLevelCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", e);

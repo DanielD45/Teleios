@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 
-public class WarpCommand implements CommandExecutor {
+public class WarpCmd implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -27,14 +27,14 @@ public class WarpCommand implements CommandExecutor {
             // Activation state check
             if (!ConfigEditor.isActive("BetterGameplay.All")) {
                 sender.sendMessage("§cThis command is not active.");
-                MessageMaster.sendWarningMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
+                MessageMaster.sendExitMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
                 return true;
             }
 
             // Sender player check (for computing if teleporters are unreachable)
             if (!(sender instanceof Player player)) {
                 sender.sendMessage("§cYou are no player!");
-                MessageMaster.sendWarningMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
+                MessageMaster.sendExitMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
                 return true;
             }
 
@@ -68,7 +68,7 @@ public class WarpCommand implements CommandExecutor {
             // Are there warppoints or teleporters check
             if (!WPsExist && !TPsExist) {
                 sender.sendMessage("§eThere are no warppoints or teleporters yet!");
-                MessageMaster.sendWarningMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "there are no warppoints or teleporters.");
+                MessageMaster.sendExitMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "there are no warppoints or teleporters.");
                 return true;
             }
 
@@ -143,7 +143,7 @@ public class WarpCommand implements CommandExecutor {
                 }
 
                 sender.sendMessage(listMessage.toString());
-                MessageMaster.sendSuccessMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                MessageMaster.sendExitMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                 return true;
 
             }
@@ -172,7 +172,7 @@ public class WarpCommand implements CommandExecutor {
                         // Teleports the player to the warppoint
                         player.teleport(WPLoc);
                         player.sendMessage("§aYou have been warped to §6" + currentWP + "§a.");
-                        MessageMaster.sendSuccessMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                        MessageMaster.sendExitMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                         return true;
                     }
                 }
@@ -202,7 +202,7 @@ public class WarpCommand implements CommandExecutor {
                         // Warping only works intradimensional
                         if (!player.getWorld().equals(TPLoc.getWorld())) {
                             player.sendMessage("§cYou are not in the same dimension as this teleporter!");
-                            MessageMaster.sendWarningMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "player is in the wrong dimension.");
+                            MessageMaster.sendExitMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "player is in the wrong dimension.");
                             return true;
                         }
 
@@ -233,7 +233,7 @@ public class WarpCommand implements CommandExecutor {
                         // Enough ender pearls check
                         if (possessedPearls < requiredPearls) {
                             player.sendMessage("§cYou don't have enough ender pearls in your warppouch! Use §6/warppouch deposit [Amount]§c to put ender pearls in your warp pouch.");
-                            MessageMaster.sendWarningMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player doesn't have enough ender pearls in their warp pouch.");
+                            MessageMaster.sendExitMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player doesn't have enough ender pearls in their warp pouch.");
                             return true;
                         }
 
@@ -249,7 +249,7 @@ public class WarpCommand implements CommandExecutor {
                             //headLoc.setY(headLoc.getY() - 2);
 
                             player.sendMessage("§cThis teleporter is obstructed!");
-                            MessageMaster.sendWarningMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "that teleporter is obstructed.");
+                            MessageMaster.sendExitMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "that teleporter is obstructed.");
                             return true;
                         }
 
@@ -268,21 +268,21 @@ public class WarpCommand implements CommandExecutor {
                         //ConfigEditor.set("Teleporters." + currentTP, TPLoc);
 
                         player.sendMessage("§aYou have been warped to §6" + currentTP + " §afor §6" + requiredPearls + " ender pearl(s).");
-                        MessageMaster.sendSuccessMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                        MessageMaster.sendExitMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                         return true;
                     }
                 }
 
                 // No warppoint or teleporter match
                 sender.sendMessage("§cThere is no warppoint or teleporter with this name!");
-                MessageMaster.sendWarningMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
+                MessageMaster.sendExitMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
                 return true;
             }
 
 
             // Wrong arguments
             sender.sendMessage("§cWrong arguments!");
-            MessageMaster.sendWarningMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
+            MessageMaster.sendExitMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
             return false;
 
         } catch (Exception e) {
@@ -311,7 +311,7 @@ public class WarpCommand implements CommandExecutor {
 
             int requiredPearls = (int) Math.ceil((Math.sqrt(Math.pow(yDist, 2) + Math.pow(zDist, 2) + Math.pow(xDist, 2))) / blocksPerPearl);
 
-            MessageMaster.sendSuccessMessage("WarpCommand", "getRequiredPearls(" + tpLoc + ", " + playerLoc + ")");
+            MessageMaster.sendExitMessage("WarpCommand", "getRequiredPearls(" + tpLoc + ", " + playerLoc + ")", "success");
             return requiredPearls;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("WarpCommand", "getRequiredPearls(" + tpLoc + ", " + playerLoc + ")", e);

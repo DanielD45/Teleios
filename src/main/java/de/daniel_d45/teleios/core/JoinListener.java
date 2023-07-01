@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -34,7 +34,7 @@ public class JoinListener implements Listener {
             // PassiveSkills segment
             PassiveSkills.initiatePlayerRecords(player.getName());
 
-            MessageMaster.sendSuccessMessage("JoinListener", "onPlayerJoin(" + event + ")");
+            MessageMaster.sendExitMessage("JoinListener", "onPlayerJoin(" + event + ")", "success");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("JoinListener", "onPlayerJoin(" + event + ")", e);
         }

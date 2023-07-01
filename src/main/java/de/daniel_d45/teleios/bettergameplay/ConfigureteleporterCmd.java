@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -18,7 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.Arrays;
 
 
-public class ConfigureteleporterCommand implements CommandExecutor {
+public class ConfigureteleporterCmd implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -27,21 +27,21 @@ public class ConfigureteleporterCommand implements CommandExecutor {
             // Activation state check
             if (!ConfigEditor.isActive("BetterGameplay.Teleporters")) {
                 sender.sendMessage("§cThis function is not active!");
-                MessageMaster.sendWarningMessage("ConfigureteleporterCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is not active.");
+                MessageMaster.sendExitMessage("ConfigureteleporterCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is not active.");
                 return true;
             }
 
             // Sender player check
             if (!(sender instanceof Player player)) {
                 sender.sendMessage("§cYou are no player!");
-                MessageMaster.sendWarningMessage("ConfigureteleporterCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
+                MessageMaster.sendExitMessage("ConfigureteleporterCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
                 return true;
             }
 
             // Checks if the item lore is right
             if (!player.getItemInHand().getItemMeta().getLore().equals(RecipeManager.getTeleporterRecipe().getResult().getItemMeta().getLore())) {
                 sender.sendMessage("§cYou have to hold a teleporter in your hand!");
-                MessageMaster.sendWarningMessage("ConfigureteleporterCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player doesn't hold a teleporter.");
+                MessageMaster.sendExitMessage("ConfigureteleporterCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player doesn't hold a teleporter.");
                 return true;
             }
 
@@ -57,20 +57,20 @@ public class ConfigureteleporterCommand implements CommandExecutor {
                         // The teleporter's name can't be longer than x characters
                         if (teleporterName.length() > 30) {
                             player.sendMessage("§cThis name is too long!");
-                            MessageMaster.sendWarningMessage("ConfigureteleporterCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "specified name is too long.");
+                            MessageMaster.sendExitMessage("ConfigureteleporterCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "specified name is too long.");
                             return true;
                         }
 
                         // Checks for invalid names that can cause problems
                         if (teleporterName.equalsIgnoreCase("list")) {
                             player.sendMessage("§cThat name is invalid!");
-                            MessageMaster.sendWarningMessage("ConfigureteleporterCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "teleporter name is invalid.");
+                            MessageMaster.sendExitMessage("ConfigureteleporterCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "teleporter name is invalid.");
                             return true;
                         }
 
                         ItemStack teleporterNew = new ItemBuilder(teleporter).setName("§5" + teleporterName).build();
                         player.setItemInHand(teleporterNew);
-                        MessageMaster.sendSuccessMessage("ConfigureteleporterCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                        MessageMaster.sendExitMessage("ConfigureteleporterCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                         return true;
                     } catch (Exception e) {
                         MessageMaster.sendFailMessage("ConfigureteleporterCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", e);
@@ -79,7 +79,7 @@ public class ConfigureteleporterCommand implements CommandExecutor {
                 default:
                     // Wrong amount of arguments
                     sender.sendMessage("§cWrong amount of arguments!");
-                    MessageMaster.sendWarningMessage("ConfigureteleporterCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong amount of arguments.");
+                    MessageMaster.sendExitMessage("ConfigureteleporterCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong amount of arguments.");
                     return false;
             }
 

@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -50,7 +50,7 @@ public class PassiveSkills {
                     ConfigEditor.set("Activationstates." + current, "OFF");
                 }
 
-                MessageMaster.sendSuccessMessage("SegmentManagerAC", "switchActivationstateAC()");
+                MessageMaster.sendExitMessage("SegmentManagerAC", "switchActivationstateAC()", "success");
             }
             else {
 
@@ -58,7 +58,7 @@ public class PassiveSkills {
                     ConfigEditor.set("Activationstates." + current, "ON");
                 }
 
-                MessageMaster.sendSuccessMessage("SegmentManagerPS", "switchActivationstatePS()");
+                MessageMaster.sendExitMessage("SegmentManagerPS", "switchActivationstatePS()", "success");
             }
         } catch (Exception e) {
             MessageMaster.sendFailMessage("SegmentManagerPS", "switchActivationstatePS()", e);
@@ -83,7 +83,7 @@ public class PassiveSkills {
 
             }
 
-            MessageMaster.sendSuccessMessage("SegmentManagerPS", "getSegmentItem()");
+            MessageMaster.sendExitMessage("SegmentManagerPS", "getSegmentItem()", "success");
             return item;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("SegmentManagerPS", "getSegmentItem()", e);
@@ -105,7 +105,7 @@ public class PassiveSkills {
 
                 // Checks whether the specified skill is already listed
                 if (currentSkill.equals(skill)) {
-                    MessageMaster.sendWarningMessage("SegmentManagerPS", "addUsedSkill(" + skill + ")", "the specified skill is already listed.");
+                    MessageMaster.sendExitMessage("SegmentManagerPS", "addUsedSkill(" + skill + ")", "the specified skill is already listed.");
                     return;
                 }
 
@@ -115,7 +115,7 @@ public class PassiveSkills {
             // Calls the setup method in the subclass of the Skill class
             skill.setup();
 
-            MessageMaster.sendSuccessMessage("SegmentManagerPS", "addUsedSkill(" + skill + ")");
+            MessageMaster.sendExitMessage("SegmentManagerPS", "addUsedSkill(" + skill + ")", "success");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("SegmentManagerPS", "addUsedSkill(" + skill + ")", e);
         }
@@ -131,7 +131,7 @@ public class PassiveSkills {
 
             usedSkills.remove(skill);
 
-            MessageMaster.sendSuccessMessage("SegmentManagerPS", "removeUsedSkill(" + skill + ")");
+            MessageMaster.sendExitMessage("SegmentManagerPS", "removeUsedSkill(" + skill + ")", "success");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("SegmentManagerPS", "removeUsedSkill(" + skill + ")", e);
         }
@@ -160,11 +160,11 @@ public class PassiveSkills {
                     ConfigEditor.set("Players." + playerName + "." + skillName + ".BlockValue", 0.0);
                     ConfigEditor.set("Players." + playerName + "." + skillName + ".BonusMultiplier", 1.0);
 
-                    MessageMaster.sendSuccessMessage("SegmentManagerPS", "initiatePlayerRecords(" + playerName + ")");
+                    MessageMaster.sendExitMessage("SegmentManagerPS", "initiatePlayerRecords(" + playerName + ")", "success");
                 }
                 else {
                     // Both paths exist
-                    MessageMaster.sendWarningMessage("SegmentManagerPS", "initiatePlayerRecords(" + playerName + ")", "both paths already exist.");
+                    MessageMaster.sendExitMessage("SegmentManagerPS", "initiatePlayerRecords(" + playerName + ")", "both paths already exist.");
                 }
                 // After checking for data structure
             }
@@ -185,7 +185,7 @@ public class PassiveSkills {
 
             ConfigEditor.clearPath("Players." + playerName);
 
-            MessageMaster.sendSuccessMessage("SegmentManagerPS", "removePlayer(" + playerName + ")");
+            MessageMaster.sendExitMessage("SegmentManagerPS", "removePlayer(" + playerName + ")", "success");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("SegmentManagerPS", "removePlayer(" + playerName + ")", e);
         }
@@ -205,7 +205,7 @@ public class PassiveSkills {
 
             double blockValue = (double) ConfigEditor.get("Players." + playerName + "." + skillName + ".BlockValue");
 
-            MessageMaster.sendSuccessMessage("SegmentManagerPS", "getBlockValue(" + playerName + ", " + skillName + ")");
+            MessageMaster.sendExitMessage("SegmentManagerPS", "getBlockValue(" + playerName + ", " + skillName + ")", "success");
 
             return blockValue;
         } catch (Exception e) {
@@ -227,7 +227,7 @@ public class PassiveSkills {
             // Increases the BlockValue by the specified value
             ConfigEditor.set("Players." + playerName + "." + skillName + ".BlockValue", getBlockValue(playerName, skillName) + value);
 
-            MessageMaster.sendSuccessMessage("SegmentManagerPS", "increaseBlockValue(" + playerName + ", " + skillName + ", " + value + ")");
+            MessageMaster.sendExitMessage("SegmentManagerPS", "increaseBlockValue(" + playerName + ", " + skillName + ", " + value + ")", "success");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("SegmentManagerPS", "increaseBlockValue(" + playerName + ", " + skillName + ", " + value + ")", e);
         }
@@ -247,7 +247,7 @@ public class PassiveSkills {
 
             double bonusMultiplier = (double) ConfigEditor.get("Players." + playerName + "." + skillName + ".BonusMultiplier");
 
-            MessageMaster.sendSuccessMessage("SegmentManagerPS", "getBonusMultiplier(" + playerName + ", " + skillName + ")");
+            MessageMaster.sendExitMessage("SegmentManagerPS", "getBonusMultiplier(" + playerName + ", " + skillName + ")", "success");
 
             return bonusMultiplier;
         } catch (Exception e) {
@@ -288,7 +288,7 @@ public class PassiveSkills {
                     itemMultiplier++;
                 }
 
-                MessageMaster.sendSuccessMessage("SegmentManagerPS", "computeBonusItemMultiplier(" + playerName + ", " + skillName + ")");
+                MessageMaster.sendExitMessage("SegmentManagerPS", "computeBonusItemMultiplier(" + playerName + ", " + skillName + ")", "success");
 
             }
             else {
@@ -324,7 +324,7 @@ public class PassiveSkills {
                 // The level limit is every 64 BlockValue
                 level = (int) Math.floor(getBlockValue(playerName, skillName) / 64) + 1;
 
-                MessageMaster.sendSuccessMessage("SegmentManagerPS", "getLevel(" + playerName + ", " + skillName + ")");
+                MessageMaster.sendExitMessage("SegmentManagerPS", "getLevel(" + playerName + ", " + skillName + ")", "success");
             }
             else {
                 // The getBlockValue() method failed

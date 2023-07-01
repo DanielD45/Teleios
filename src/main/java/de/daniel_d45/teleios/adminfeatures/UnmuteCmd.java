@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
 import java.util.Arrays;
 
 
-public class UnmuteCommand implements CommandExecutor {
+public class UnmuteCmd implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -25,14 +25,14 @@ public class UnmuteCommand implements CommandExecutor {
             // Activation state check
             if (!ConfigEditor.isActive("AdminFeatures.All")) {
                 sender.sendMessage("§cThis command is not active.");
-                MessageMaster.sendWarningMessage("UnmuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
+                MessageMaster.sendExitMessage("UnmuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
                 return true;
             }
 
             // Sender player check
             if (!(sender instanceof Player player)) {
                 sender.sendMessage("§cYou are no player!");
-                MessageMaster.sendWarningMessage("UnmuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
+                MessageMaster.sendExitMessage("UnmuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
                 return true;
             }
 
@@ -44,13 +44,13 @@ public class UnmuteCommand implements CommandExecutor {
                 // Target online check
                 if (target == null) {
                     player.sendMessage("§cThis player is not online!");
-                    MessageMaster.sendWarningMessage("UnmuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified player is not online.");
+                    MessageMaster.sendExitMessage("UnmuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified player is not online.");
                     return true;
                 }
 
                 if (!ConfigEditor.containsPath("MutedPlayers." + player.getName())) {
                     player.sendMessage("§6" + target.getName() + " §ais not muted!");
-                    MessageMaster.sendWarningMessage("UnmuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified player is not muted.");
+                    MessageMaster.sendExitMessage("UnmuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified player is not muted.");
                 }
                 else {
                     // Removes the player from the muted players list
@@ -58,13 +58,13 @@ public class UnmuteCommand implements CommandExecutor {
                     player.sendMessage("§aUnmuted §6" + target.getName() + "§a!");
                     target.sendMessage("§aYou have been unmuted!");
 
-                    MessageMaster.sendSuccessMessage("UnmuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                    MessageMaster.sendExitMessage("UnmuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                 }
 
                 return true;
             } catch (Exception e) {
                 player.sendMessage("§cWrong arguments!");
-                MessageMaster.sendWarningMessage("UnmuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
+                MessageMaster.sendExitMessage("UnmuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
                 return false;
             }
 

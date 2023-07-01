@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -49,7 +49,7 @@ public class LumberjackSkill extends Skill {
             listedMaterials.put(Material.CRIMSON_STEM, 1.0);
             listedMaterials.put(Material.WARPED_STEM, 1.0);
 
-            MessageMaster.sendSuccessMessage("LumberjackSkill", "fillMaterials()");
+            MessageMaster.sendExitMessage("LumberjackSkill", "fillMaterials()", "success");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("LumberjackSkill", "fillMaterials()", e);
         }
@@ -61,7 +61,7 @@ public class LumberjackSkill extends Skill {
             // Adds an object of this class to the list of used skills for access to this class's variables
             PassiveSkills.addUsedSkill(new LumberjackSkill());
 
-            MessageMaster.sendSuccessMessage("LumberjackSkill", "use()");
+            MessageMaster.sendExitMessage("LumberjackSkill", "use()", "success");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("LumberjackSkill", "use()", e);
         }
@@ -76,7 +76,7 @@ public class LumberjackSkill extends Skill {
 
             fillMaterials();
 
-            MessageMaster.sendSuccessMessage("LumberjackSkill", "setup()");
+            MessageMaster.sendExitMessage("LumberjackSkill", "setup()", "success");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("LumberjackSkill", "setup()", e);
         }
@@ -107,7 +107,7 @@ public class LumberjackSkill extends Skill {
 
             String name = skillName;
 
-            MessageMaster.sendSuccessMessage("LumberjackSkill", "getSkillName()");
+            MessageMaster.sendExitMessage("LumberjackSkill", "getSkillName()", "success");
             return name;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("LumberjackSkill", "getSkillName()", e);
@@ -126,7 +126,7 @@ public class LumberjackSkill extends Skill {
 
             HashMap<Material, Double> ret = listedMaterials;
 
-            MessageMaster.sendSuccessMessage("LumberjackSkill", "getListedMaterials()");
+            MessageMaster.sendExitMessage("LumberjackSkill", "getListedMaterials()", "success");
 
             return ret;
         } catch (Exception e) {
@@ -149,7 +149,7 @@ public class LumberjackSkill extends Skill {
 
             PassiveSkills.increaseBlockValue(player.getName(), skillName, listedMaterials.get(material));
 
-            MessageMaster.sendSuccessMessage("LumberjackSkill", "increaseBlockValue(" + player + ", " + material + ")");
+            MessageMaster.sendExitMessage("LumberjackSkill", "increaseBlockValue(" + player + ", " + material + ")", "success");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("LumberjackSkill", "increaseBlockValue(" + player + ", " + material + ")", e);
         }

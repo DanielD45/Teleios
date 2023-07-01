@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -77,7 +77,7 @@ public abstract class Skill {
                 newDrops.add(itemStack);
             }
 
-            MessageMaster.sendSuccessMessage("Skill", "modifyBlockDrops(" + block + ", " + tool + ", " + player + ")");
+            MessageMaster.sendExitMessage("Skill", "modifyBlockDrops(" + block + ", " + tool + ", " + player + ")", "success");
             return newDrops;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("Skill", "modifyBlockDrops(" + block + ", " + tool + ", " + player + ")", e);
@@ -112,7 +112,7 @@ public abstract class Skill {
                 message = "§eYour §3" + getMessageName() + " §eis on level §3" + PassiveSkills.getLevel(playerName, getSkillName()) + "§e! Your bonus items multiplier is at §3" + bonusMultiplier + " §e meaning you'll get §3" + (int) Math.floor(bonusMultiplier) + "x §ethe block drops of any kind of " + getBlocksType() + " and a chance of §3" + (bonusMultiplier - Math.floor(bonusMultiplier)) * 100 + "% §eto get §3" + (int) Math.floor(bonusMultiplier) + 1 + "x §ethe block drops!";
             }
 
-            MessageMaster.sendSuccessMessage("Skill", "getMessage()");
+            MessageMaster.sendExitMessage("Skill", "getMessage()", "success");
 
             return message;
         } catch (Exception e) {
@@ -156,7 +156,7 @@ public abstract class Skill {
             // Sends the player the messages
             player.sendMessage(messages);
 
-            MessageMaster.sendSuccessMessage("Skill", "levelUp(" + player + ")");
+            MessageMaster.sendExitMessage("Skill", "levelUp(" + player + ")", "success");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("Skill", "levelUp(" + player + ")", e);
         }

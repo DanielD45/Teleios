@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -17,7 +17,7 @@ import org.bukkit.entity.Player;
 import java.util.Arrays;
 
 
-public class GmspCommand implements CommandExecutor {
+public class GmspCmd implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -26,7 +26,7 @@ public class GmspCommand implements CommandExecutor {
             // Activation state check
             if (!ConfigEditor.isActive("AdminFeatures.All")) {
                 sender.sendMessage("§cThis command is not active.");
-                MessageMaster.sendWarningMessage("GmspCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
+                MessageMaster.sendExitMessage("GmspCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
                 return true;
             }
 
@@ -38,21 +38,21 @@ public class GmspCommand implements CommandExecutor {
                         // Sender player check
                         if (!(sender instanceof Player player)) {
                             sender.sendMessage("§cYou are no player!");
-                            MessageMaster.sendWarningMessage("GmspCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
+                            MessageMaster.sendExitMessage("GmspCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
                             return true;
                         }
 
                         // Player gamemode check
                         if (player.getGameMode() == GameMode.SPECTATOR) {
                             player.sendMessage("§cYou are already in spectator mode!");
-                            MessageMaster.sendWarningMessage("GmspCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player is already in spectator mode.");
+                            MessageMaster.sendExitMessage("GmspCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player is already in spectator mode.");
                             return true;
                         }
 
                         // Changes gamemode to spectator
                         player.setGameMode(GameMode.SPECTATOR);
                         player.sendMessage("§aYour gamemode has been set to §6spectator§a!");
-                        MessageMaster.sendSuccessMessage("GmspCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                        MessageMaster.sendExitMessage("GmspCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                         return true;
 
                     } catch (Exception e) {
@@ -71,14 +71,14 @@ public class GmspCommand implements CommandExecutor {
                             // Target online check
                             if (target == null) {
                                 sender.sendMessage("§cThis player is not online!");
-                                MessageMaster.sendWarningMessage("GmspCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified player is not online.");
+                                MessageMaster.sendExitMessage("GmspCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified player is not online.");
                                 return true;
                             }
 
                             // Target gamemode check
                             if (target.getGameMode() == GameMode.SPECTATOR) {
                                 sender.sendMessage("§cYour target is already in spectator mode!");
-                                MessageMaster.sendWarningMessage("GmspCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the target is already in spectator mode.");
+                                MessageMaster.sendExitMessage("GmspCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the target is already in spectator mode.");
                                 return true;
                             }
 
@@ -86,7 +86,7 @@ public class GmspCommand implements CommandExecutor {
                             target.setGameMode(GameMode.SPECTATOR);
                             target.sendMessage("§aYour gamemode has been set to §6spectator§a!");
                             sender.sendMessage("§6" + target.getName() + "§a's gamemode has been set to §6spectator§a!");
-                            MessageMaster.sendSuccessMessage("GmcCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                            MessageMaster.sendExitMessage("GmcCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
 
                         }
                         else {
@@ -96,14 +96,14 @@ public class GmspCommand implements CommandExecutor {
                             // Player gamemode check
                             if (player.getGameMode() == GameMode.SPECTATOR) {
                                 sender.sendMessage("§cYou are already in spectator mode!");
-                                MessageMaster.sendWarningMessage("GmspCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player is already in spectator mode.");
+                                MessageMaster.sendExitMessage("GmspCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player is already in spectator mode.");
                                 return true;
                             }
 
                             // Changes gamemode to spectator
                             player.setGameMode(GameMode.SPECTATOR);
                             player.sendMessage("§aYour gamemode has been set to §6spectator§a!");
-                            MessageMaster.sendSuccessMessage("GmspCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                            MessageMaster.sendExitMessage("GmspCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                         }
                         return true;
                     } catch (Exception e) {
@@ -113,7 +113,7 @@ public class GmspCommand implements CommandExecutor {
                 default:
                     // Wrong amount of arguments
                     sender.sendMessage("§cWrong amount of arguments!");
-                    MessageMaster.sendWarningMessage("GmspCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong amount of arguments.");
+                    MessageMaster.sendExitMessage("GmspCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong amount of arguments.");
                     return false;
             }
 

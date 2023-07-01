@@ -39,7 +39,7 @@ public class InventoryManager {
                 return string.substring(2);
             }
 
-            MessageMaster.sendSuccessMessage("InventoryManager", "getCleanString(" + string + ")");
+            MessageMaster.sendExitMessage("InventoryManager", "getCleanString(" + string + ")", "success");
             return string;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("InventoryManager", "getCleanString(" + string + ")", e);
@@ -52,7 +52,7 @@ public class InventoryManager {
 
             ItemStack item = new ItemBuilder(Material.GREEN_CONCRETE, 1).setName("§aYes").build();
 
-            MessageMaster.sendSuccessMessage("InventoryManager", "getYesItem()");
+            MessageMaster.sendExitMessage("InventoryManager", "getYesItem()", "success");
             return item;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("InventoryManager", "getYesItem()", e);
@@ -65,7 +65,7 @@ public class InventoryManager {
 
             ItemStack item = new ItemBuilder(Material.RED_CONCRETE, 1).setName("§cNo").build();
 
-            MessageMaster.sendSuccessMessage("InventoryManager", "getNoItem()");
+            MessageMaster.sendExitMessage("InventoryManager", "getNoItem()", "success");
             return item;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("InventoryManager", "getNoItem()", e);
@@ -78,7 +78,7 @@ public class InventoryManager {
 
             ItemStack item = new ItemBuilder(Material.HOPPER, 1).setName("§7<- Previous page").build();
 
-            MessageMaster.sendSuccessMessage("InventoryManager", "getBackItem()");
+            MessageMaster.sendExitMessage("InventoryManager", "getBackItem()", "success");
             return item;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("InventoryManager", "getBackItem()", e);
@@ -117,7 +117,7 @@ public class InventoryManager {
             // TODO: Add Items
             Inventory inv = createSegmentInventory("AdminFeatures");
 
-            MessageMaster.sendSuccessMessage("ManageteleiosCommand", "getManageAFInventory()");
+            MessageMaster.sendExitMessage("ManageteleiosCommand", "getManageAFInventory()", "success");
             return inv;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("ManageteleiosCommand", "getManageAFInventory()", e);
@@ -131,7 +131,7 @@ public class InventoryManager {
             // TODO: Add Items
             Inventory inv = createSegmentInventory("BetterGameplay", BetterGameplay.getEnderchestCommandItem(), BetterGameplay.getTeleportersItem());
 
-            MessageMaster.sendSuccessMessage("ManageteleiosCommand", "getManageAFInventory()");
+            MessageMaster.sendExitMessage("ManageteleiosCommand", "getManageAFInventory()", "success");
             return inv;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("ManageteleiosCommand", "getManageAFInventory()", e);
@@ -145,7 +145,7 @@ public class InventoryManager {
             // TODO: Add Items
             Inventory inv = createSegmentInventory("CreatureEvolution");
 
-            MessageMaster.sendSuccessMessage("ManageteleiosCommand", "getManageCEInventory()");
+            MessageMaster.sendExitMessage("ManageteleiosCommand", "getManageCEInventory()", "success");
             return inv;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("ManageteleiosCommand", "getManageCEInventory()", e);
@@ -159,7 +159,7 @@ public class InventoryManager {
             // TODO: Add Items
             Inventory inv = createSegmentInventory("PassiveSkills");
 
-            MessageMaster.sendSuccessMessage("ManageteleiosCommand", "getManagePSInventory()");
+            MessageMaster.sendExitMessage("ManageteleiosCommand", "getManagePSInventory()", "success");
             return inv;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("ManageteleiosCommand", "getManagePSInventory()", e);
@@ -173,7 +173,7 @@ public class InventoryManager {
             // TODO: Add Items
             Inventory inv = createSegmentInventory("WorldMaster");
 
-            MessageMaster.sendSuccessMessage("ManageteleiosCommand", "getManageWMInventory()");
+            MessageMaster.sendExitMessage("ManageteleiosCommand", "getManageWMInventory()", "success");
             return inv;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("ManageteleiosCommand", "getManageWMInventory()", e);
@@ -197,7 +197,7 @@ public class InventoryManager {
                 }
             }
 
-            MessageMaster.sendSuccessMessage("InventoryManager", "fillEmptySlots(" + inventory + ")");
+            MessageMaster.sendExitMessage("InventoryManager", "fillEmptySlots(" + inventory + ")", "success");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("InventoryManager", "fillEmptySlots(" + inventory + ")", e);
         }
@@ -225,10 +225,10 @@ public class InventoryManager {
                     ++i;
                 }
 
-                MessageMaster.sendSuccessMessage("InventoryManager", "fillInventory(" + inventory + ", " + Arrays.toString(itemStacks) + ")");
+                MessageMaster.sendExitMessage("InventoryManager", "fillInventory(" + inventory + ", " + Arrays.toString(itemStacks) + ")", "success");
             }
             else {
-                MessageMaster.sendWarningMessage("InventoryManager", "fillInventory(" + inventory + ", " + Arrays.toString(itemStacks) + ")", "too many items to add.");
+                MessageMaster.sendExitMessage("InventoryManager", "fillInventory(" + inventory + ", " + Arrays.toString(itemStacks) + ")", "too many items to add.");
             }
 
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -249,7 +249,7 @@ public class InventoryManager {
      */
     public static int removeItemsPlayerSoft(Inventory inv, ItemStack itemStack, int amount) {
         if (amount <= 0) {
-            MessageMaster.sendWarningMessage("InventoryManager", "removeItemsPlayerSoft(" + inv + ", " + itemStack + ", " + amount + ")", "the specified amount is 0 or less.");
+            MessageMaster.sendExitMessage("InventoryManager", "removeItemsPlayerSoft(" + inv + ", " + itemStack + ", " + amount + ")", "the specified amount is 0 or less.");
             return 0;
         }
 
@@ -279,7 +279,7 @@ public class InventoryManager {
         try {
 
             if (possibleAmount <= 0) {
-                MessageMaster.sendWarningMessage("InventoryManager", "removeItemsPlayerSoft(" + inv + ", " + itemStack + ", " + amount + ")", "the specified inventory doesn't contain this ItemStack.");
+                MessageMaster.sendExitMessage("InventoryManager", "removeItemsPlayerSoft(" + inv + ", " + itemStack + ", " + amount + ")", "the specified inventory doesn't contain this ItemStack.");
                 return 0;
             }
 
@@ -303,12 +303,12 @@ public class InventoryManager {
                 }
                 else {
                     currentItem.setAmount(currentItem.getAmount() - restAmount);
-                    MessageMaster.sendSuccessMessage("InventoryManager", "removeItemsPlayerSoft(" + inv + ", " + itemStack + ", " + amount + ")");
+                    MessageMaster.sendExitMessage("InventoryManager", "removeItemsPlayerSoft(" + inv + ", " + itemStack + ", " + amount + ")", "success");
                     return amount;
                 }
 
                 if (restAmount == 0) {
-                    MessageMaster.sendSuccessMessage("InventoryManager", "removeItemsPlayerSoft(" + inv + ", " + itemStack + ", " + amount + ")");
+                    MessageMaster.sendExitMessage("InventoryManager", "removeItemsPlayerSoft(" + inv + ", " + itemStack + ", " + amount + ")", "success");
                     return amount;
                 }
 
@@ -338,14 +338,14 @@ public class InventoryManager {
         try {
 
             if (BetterMethods.betterEquals(itemStack1.getType(), itemStack2.getType()) && BetterMethods.betterEquals(itemStack1.getEnchantments(), itemStack2.getEnchantments()) && BetterMethods.betterEquals(itemStack1.getItemMeta().getAttributeModifiers(), itemStack2.getItemMeta().getAttributeModifiers()) && BetterMethods.betterEquals(itemStack1.getItemMeta().getDisplayName(), itemStack2.getItemMeta().getDisplayName()) && BetterMethods.betterEquals(itemStack1.getItemMeta().getEnchants(), itemStack2.getItemMeta().getEnchants()) && BetterMethods.betterEquals(itemStack1.getItemMeta().getItemFlags(), itemStack2.getItemMeta().getItemFlags()) && BetterMethods.betterEquals(itemStack1.getItemMeta().getLore(), itemStack2.getItemMeta().getLore())) {
-                MessageMaster.sendSuccessMessage("InventoryManager", "isSameItemType(" + itemStack1 + ", " + itemStack2 + ")");
+                MessageMaster.sendExitMessage("InventoryManager", "isSameItemType(" + itemStack1 + ", " + itemStack2 + ")", "success");
                 return true;
             }
 
-            MessageMaster.sendWarningMessage("InventoryManager", "isSameItemType(" + itemStack1 + ", " + itemStack2 + ")", "the items are not of the same type.");
+            MessageMaster.sendExitMessage("InventoryManager", "isSameItemType(" + itemStack1 + ", " + itemStack2 + ")", "the items are not of the same type.");
             return false;
         } catch (NullPointerException e) {
-            MessageMaster.sendWarningMessage("InventoryManager", "isSameItemType(" + itemStack1 + ", " + itemStack2 + ")", "the items are not of the same type.");
+            MessageMaster.sendExitMessage("InventoryManager", "isSameItemType(" + itemStack1 + ", " + itemStack2 + ")", "the items are not of the same type.");
             return false;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("InventoryManager", "isSameItemType(" + itemStack1 + ", " + itemStack2 + ")", e);
@@ -358,7 +358,7 @@ public class InventoryManager {
 
             Inventory inv = Bukkit.createInventory(null, 9 * rows, name);
 
-            MessageMaster.sendSuccessMessage("InventoryManager", "createArtificialInventory(" + rows + ", " + name + ")");
+            MessageMaster.sendExitMessage("InventoryManager", "createArtificialInventory(" + rows + ", " + name + ")", "success");
             return inv;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("InventoryManager", "createArtificialInventory(" + rows + ", " + name + ")", e);
@@ -368,10 +368,10 @@ public class InventoryManager {
 
     public static Inventory createArtificialInventory(int rows, String name) {
         try {
-            
+
             Inventory inv = Bukkit.createInventory(new ArtificialInventory(), rows * 9, name);
 
-            MessageMaster.sendSuccessMessage("InventoryManager", "createArtificialInventory(" + rows + ", " + name + ")");
+            MessageMaster.sendExitMessage("InventoryManager", "createArtificialInventory(" + rows + ", " + name + ")", "success");
             return inv;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("InventoryManager", "createArtificialInventory(" + rows + ", " + name + ")", e);

@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -14,7 +14,7 @@ import org.bukkit.command.CommandSender;
 import java.util.Arrays;
 
 
-public class SetblocksperpearlCommand implements CommandExecutor {
+public class SetblocksperpearlCmd implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -23,7 +23,7 @@ public class SetblocksperpearlCommand implements CommandExecutor {
             // Activation state check
             if (!ConfigEditor.isActive("BetterGameplay.All")) {
                 sender.sendMessage("§cThis command is not active.");
-                MessageMaster.sendWarningMessage("SetblocksperpearlCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
+                MessageMaster.sendExitMessage("SetblocksperpearlCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
                 return true;
             }
 
@@ -51,7 +51,7 @@ public class SetblocksperpearlCommand implements CommandExecutor {
                         // Sender permission check
                         if (!sender.hasPermission("teleios.bettergameplay.setblocksperpearl")) {
                             sender.sendMessage("§cMissing Permissions!");
-                            MessageMaster.sendWarningMessage("SetblocksperpearlCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender doesn't have the needed permissions.");
+                            MessageMaster.sendExitMessage("SetblocksperpearlCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender doesn't have the needed permissions.");
                             return true;
                         }
 
@@ -60,18 +60,18 @@ public class SetblocksperpearlCommand implements CommandExecutor {
                         // Invalid argument check
                         if (bpp <= 0) {
                             sender.sendMessage("§cWrong arguments!");
-                            MessageMaster.sendWarningMessage("SetblocksperpearlCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
+                            MessageMaster.sendExitMessage("SetblocksperpearlCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
                             return false;
                         }
 
                         // Sets the BlocksPerPearl argument to the specified value
                         ConfigEditor.set("BlocksPerPearl", bpp);
                         sender.sendMessage("§aThe BlocksPerPearl have been set to §6" + bpp + "§a.");
-                        MessageMaster.sendSuccessMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                        MessageMaster.sendExitMessage("WarpCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                         return true;
                     } catch (NumberFormatException e) {
                         sender.sendMessage("§cWrong argument!");
-                        MessageMaster.sendWarningMessage("SetblocksperpearlCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the first argument is not an integer.");
+                        MessageMaster.sendExitMessage("SetblocksperpearlCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the first argument is not an integer.");
                         return false;
                     } catch (Exception e) {
                         sender.sendMessage("§cCould not execute the command correctly!");
@@ -80,7 +80,7 @@ public class SetblocksperpearlCommand implements CommandExecutor {
                     }
                 default:
                     sender.sendMessage("§cWrong amount of arguments!");
-                    MessageMaster.sendWarningMessage("SetblocksperpearlCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong amount of arguments.");
+                    MessageMaster.sendExitMessage("SetblocksperpearlCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong amount of arguments.");
                     return false;
             }
 

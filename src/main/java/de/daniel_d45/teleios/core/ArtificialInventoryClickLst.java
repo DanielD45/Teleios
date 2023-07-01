@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -12,7 +12,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
 
-public class ArtificialInventoryClickListener implements Listener {
+public class ArtificialInventoryClickLst implements Listener {
 
     /**
      * This listener cancels the item movement in artificial inventories.
@@ -28,14 +28,14 @@ public class ArtificialInventoryClickListener implements Listener {
             // TODO: Necessary?
             // No inventory check
             if (inventory == null) {
-                MessageMaster.sendWarningMessage("ArtificialInventoryClickListener", "onArtificialInventoryClick(" + event + ")", "no inventory clicked.");
+                MessageMaster.sendExitMessage("ArtificialInventoryClickListener", "onArtificialInventoryClick(" + event + ")", "no inventory clicked.");
                 return;
             }
 
             if (inventory.getHolder() instanceof ArtificialInventory) {
                 // Cancels interaction with artificial inventories
                 event.setCancelled(true);
-                MessageMaster.sendSuccessMessage("ArtificialInventoryClickListener", "onArtificialInventoryClick(" + event + ")");
+                MessageMaster.sendExitMessage("ArtificialInventoryClickListener", "onArtificialInventoryClick(" + event + ")", "success");
             }
 
         } catch (Exception e) {

@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -41,7 +41,7 @@ public class BetterGameplay {
 
             }
 
-            MessageMaster.sendSuccessMessage("SegmentManagerBG", "getSegmentItem()");
+            MessageMaster.sendExitMessage("SegmentManagerBG", "getSegmentItem()", "success");
             return item;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("SegmentManagerBG", "getSegmentItem()", e);
@@ -63,7 +63,7 @@ public class BetterGameplay {
                 item = new ItemBuilder(Material.ENDER_CHEST, 1).setName("§o§9Enderchest command").setLore("§fThe enderchest command lets every player", "§fopen their enderchest from anywhere.", "§eActivationstate: §cOFF", "§7Left click to activate the command.").build();
             }
 
-            MessageMaster.sendSuccessMessage("SegmentManagerBG", "getEnderchestCommandItem()");
+            MessageMaster.sendExitMessage("SegmentManagerBG", "getEnderchestCommandItem()", "success");
             return item;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("SegmentManagerBG", "getEnderchestCommandItem()", e);
@@ -85,7 +85,7 @@ public class BetterGameplay {
                 item = new ItemBuilder(Material.END_PORTAL_FRAME, 1).setName("§o§9Teleporters").setLore("§fYou can craft teleporters", "§fto which you can teleport", "§ffrom everywhere.", "§fTeleporting costs ender pearls", "§fstored in your warppouch.", "§eActivationstate: §cOFF", "§7Left click to deactivate the function.").build();
             }
 
-            MessageMaster.sendSuccessMessage("SegmentManagerBG", "getTeleportersItem()");
+            MessageMaster.sendExitMessage("SegmentManagerBG", "getTeleportersItem()", "success");
             return item;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("SegmentManagerBG", "getTeleportersItem()", e);
@@ -104,7 +104,7 @@ public class BetterGameplay {
                 }
 
                 RecipeManager.enableTeleporterRecipe(false);
-                MessageMaster.sendSuccessMessage("SegmentManagerBG", "switchActivationstateBG()");
+                MessageMaster.sendExitMessage("SegmentManagerBG", "switchActivationstateBG()", "success");
             }
             else {
 
@@ -113,7 +113,7 @@ public class BetterGameplay {
                 }
 
                 RecipeManager.enableTeleporterRecipe(true);
-                MessageMaster.sendSuccessMessage("SegmentManagerBG", "switchActivationstateBG()");
+                MessageMaster.sendExitMessage("SegmentManagerBG", "switchActivationstateBG()", "success");
             }
         } catch (Exception e) {
             MessageMaster.sendFailMessage("SegmentManagerBG", "switchActivationstateBG()", e);
@@ -127,13 +127,13 @@ public class BetterGameplay {
 
                 ConfigEditor.set("Activationstates." + getSegmentName() + ".Teleporters", "OFF");
                 RecipeManager.enableTeleporterRecipe(false);
-                MessageMaster.sendSuccessMessage("SegmentManagerBG", "switchActivationstateTeleporters()");
+                MessageMaster.sendExitMessage("SegmentManagerBG", "switchActivationstateTeleporters()", "success");
             }
             else {
 
                 ConfigEditor.set("Activationstates." + getSegmentName() + ".Teleporters", "ON");
                 RecipeManager.enableTeleporterRecipe(true);
-                MessageMaster.sendSuccessMessage("SegmentManagerBG", "switchActivationstateTeleporters()");
+                MessageMaster.sendExitMessage("SegmentManagerBG", "switchActivationstateTeleporters()", "success");
             }
         } catch (Exception e) {
             MessageMaster.sendFailMessage("SegmentManagerBG", "switchActivationstateTeleporters()", e);
@@ -149,10 +149,10 @@ public class BetterGameplay {
             }
             else {
                 // Both paths exist
-                MessageMaster.sendWarningMessage("SegmentManagerBG", "initiateWarppouch(" + playerName + ")", "the path already exists.");
+                MessageMaster.sendExitMessage("SegmentManagerBG", "initiateWarppouch(" + playerName + ")", "the path already exists.");
             }
 
-            MessageMaster.sendSuccessMessage("SegmentManagerBG", "initiateWarppouch(" + playerName + ")");
+            MessageMaster.sendExitMessage("SegmentManagerBG", "initiateWarppouch(" + playerName + ")", "success");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("SegmentManagerBG", "initiateWarppouch(" + playerName + ")", e);
         }

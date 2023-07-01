@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -20,7 +20,8 @@ import org.bukkit.inventory.ItemStack;
 import java.util.Arrays;
 
 
-public class SkillsCommand implements CommandExecutor {
+// TODO: WIP
+public class SkillsCmd implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -29,14 +30,14 @@ public class SkillsCommand implements CommandExecutor {
             // Activationstate check
             if (!ConfigEditor.isActive("PassiveSkills.All")) {
                 sender.sendMessage("§cThis command is not active!");
-                MessageMaster.sendWarningMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "this command is not active");
+                MessageMaster.sendExitMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "this command is not active");
                 return true;
             }
 
             // Sender player check
             if (!(sender instanceof Player player)) {
                 sender.sendMessage("§cYou are no player!");
-                MessageMaster.sendWarningMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
+                MessageMaster.sendExitMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
                 return true;
             }
 
@@ -44,11 +45,11 @@ public class SkillsCommand implements CommandExecutor {
             if (PassiveSkills.usedSkills.size() > 0) {
 
                 player.openInventory(getSkillsInventory(player));
-                MessageMaster.sendSuccessMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                MessageMaster.sendExitMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
             }
             else {
                 player.sendMessage("§eNo skill is beeing used!");
-                MessageMaster.sendWarningMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "no skills are beeing used.");
+                MessageMaster.sendExitMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "no skills are beeing used.");
             }
 
             return true;
@@ -89,7 +90,7 @@ public class SkillsCommand implements CommandExecutor {
 
             InventoryManager.fillEmptySlots(inventory);
 
-            MessageMaster.sendSuccessMessage("SkillsCommand", "getInventory(" + player + ")");
+            MessageMaster.sendExitMessage("SkillsCommand", "getInventory(" + player + ")", "success");
             return inventory;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("SkillsCommand", "getInventory(" + player + ")", e);

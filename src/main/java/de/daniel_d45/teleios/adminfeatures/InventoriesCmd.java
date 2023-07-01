@@ -17,7 +17,7 @@ import org.bukkit.inventory.Inventory;
 import java.util.Arrays;
 
 
-public class InventoriesCommand implements CommandExecutor {
+public class InventoriesCmd implements CommandExecutor {
 
     // TODO: Fix inventory is not recognised when reloading
     @Override
@@ -27,7 +27,7 @@ public class InventoriesCommand implements CommandExecutor {
             // Activation state check
             if (!ConfigEditor.isActive("AdminFeatures.All")) {
                 sender.sendMessage("§cThis command is not active.");
-                MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
+                MessageMaster.sendExitMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
                 return true;
             }
 
@@ -46,7 +46,7 @@ public class InventoriesCommand implements CommandExecutor {
                             // Inventory existance check
                             if (inventories.length <= 0) {
                                 sender.sendMessage("§eThere are no inventories yet! Add one by using §6/inventories create [name] [rows]§e!");
-                                MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "there are no inventories.");
+                                MessageMaster.sendExitMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "there are no inventories.");
                             }
 
                             // Creates a string of inventories
@@ -68,11 +68,11 @@ public class InventoriesCommand implements CommandExecutor {
                             sender.sendMessage(message.toString());
                             sender.sendMessage("§a--------------------");
 
-                            MessageMaster.sendSuccessMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                            MessageMaster.sendExitMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                             return true;
                         } catch (NullPointerException e) {
                             sender.sendMessage("§eThere are no inventories yet! Add one by using §6/inventories create [name] [rows]§e!");
-                            MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "there are no inventories.");
+                            MessageMaster.sendExitMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "there are no inventories.");
                             return true;
                         } catch (Exception e) {
                             sender.sendMessage("§cCould not list all inventories!");
@@ -87,7 +87,7 @@ public class InventoriesCommand implements CommandExecutor {
                             // Inventories existance check
                             if (ConfigEditor.getSectionKeys("Inventories") == null) {
                                 sender.sendMessage("§cThere are no inventories!");
-                                MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "there are no inventories.");
+                                MessageMaster.sendExitMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "there are no inventories.");
                                 return true;
                             }
 
@@ -97,7 +97,7 @@ public class InventoriesCommand implements CommandExecutor {
                             }
 
                             sender.sendMessage("§aAll inventories have been removed!");
-                            MessageMaster.sendSuccessMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                            MessageMaster.sendExitMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                             return true;
                         } catch (Exception e) {
                             sender.sendMessage("§cCould not clear all inventories!");
@@ -107,7 +107,7 @@ public class InventoriesCommand implements CommandExecutor {
                     }
                     else {
                         sender.sendMessage("§cWrong arguments!");
-                        MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
+                        MessageMaster.sendExitMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
                         return false;
                     }
                 case 2:
@@ -117,7 +117,7 @@ public class InventoriesCommand implements CommandExecutor {
 
                         if (!(sender instanceof Player player)) {
                             sender.sendMessage("§cYou are no player!");
-                            MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
+                            MessageMaster.sendExitMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
                             return true;
                         }
 
@@ -127,13 +127,13 @@ public class InventoriesCommand implements CommandExecutor {
 
                             if (inventory == null) {
                                 player.sendMessage("§cCould not find the inventory §6" + args[1] + "§c!");
-                                MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "inventory doesn't exist.");
+                                MessageMaster.sendExitMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "inventory doesn't exist.");
                                 return true;
                             }
 
                             player.openInventory(inventory);
 
-                            MessageMaster.sendSuccessMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                            MessageMaster.sendExitMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                             return true;
                         } catch (Exception e) {
                             player.sendMessage("§cCould not open the inventory §6" + args[1] + "§c!");
@@ -149,7 +149,7 @@ public class InventoriesCommand implements CommandExecutor {
 
                         if (ConfigEditor.getSectionKeys("Inventories") == null) {
                             sender.sendMessage("§cThere are no inventories!");
-                            MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "there are no inventories.");
+                            MessageMaster.sendExitMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "there are no inventories.");
                             return true;
                         }
 
@@ -158,18 +158,18 @@ public class InventoriesCommand implements CommandExecutor {
                             if (current.equals(name)) {
                                 ConfigEditor.clearPath("Inventories." + name);
                                 sender.sendMessage("§aRemoved the inventory §6" + name + "§a!");
-                                MessageMaster.sendSuccessMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                                MessageMaster.sendExitMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                                 return true;
                             }
                         }
 
                         sender.sendMessage("§cCould not find the inventory §6" + name + "§c!");
-                        MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "couldn't find an inventory with this name.");
+                        MessageMaster.sendExitMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "couldn't find an inventory with this name.");
                         return true;
                     }
                     else {
                         sender.sendMessage("§cWrong arguments!");
-                        MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
+                        MessageMaster.sendExitMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
                         return false;
                     }
                 case 3:
@@ -181,7 +181,7 @@ public class InventoriesCommand implements CommandExecutor {
                         // Inventory unique name check
                         if (ConfigEditor.containsPath("Inventories." + name)) {
                             sender.sendMessage("§cAn inventory with this name already exists!");
-                            MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "an inventory with this name already exists.");
+                            MessageMaster.sendExitMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "an inventory with this name already exists.");
                             return true;
                         }
 
@@ -194,7 +194,7 @@ public class InventoriesCommand implements CommandExecutor {
                             ConfigEditor.set("Inventories." + name, inventory);
 
                             sender.sendMessage("§aCreated inventory §6" + name + "§a!");
-                            MessageMaster.sendSuccessMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                            MessageMaster.sendExitMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                             return true;
                         } catch (Exception e) {
                             sender.sendMessage("§cCouldn't create an inventory with the arguments §6name = " + name + "§c, §6rows = " + args[2] + "§c!");
@@ -204,7 +204,7 @@ public class InventoriesCommand implements CommandExecutor {
                     }
                     else {
                         sender.sendMessage("§cWrong arguments!");
-                        MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
+                        MessageMaster.sendExitMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
                         return false;
                     }
                 case 4:
@@ -222,13 +222,13 @@ public class InventoriesCommand implements CommandExecutor {
                     }
                     else {
                         sender.sendMessage("§cWrong arguments!");
-                        MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
+                        MessageMaster.sendExitMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
                         return false;
                     }
                     break;
                 default:
                     sender.sendMessage("§cWrong amount of arguments!");
-                    MessageMaster.sendWarningMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong amount of arguments.");
+                    MessageMaster.sendExitMessage("InventoriesCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong amount of arguments.");
                     return false;
             }
 

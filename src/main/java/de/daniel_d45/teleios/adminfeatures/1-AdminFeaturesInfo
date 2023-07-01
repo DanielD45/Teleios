@@ -36,3 +36,11 @@
 0 startinghelp function: monsters deal less damage to specified players
 0 /inventories command: make inventories case insensitive
 0 /spawnmob command: allows you to spawn <=100 entities at a time
+0 Guardian: for critical security
+    0 block usage of "/kill @e" and "/tp @e" without selectors
+    0 undo command to undo the last run command (+ older commands?)
+0 Vision: simplify quests and structure building. Mode which can be entered using /vison cmd. Player's state (location, inventory, health, xp...) is saved at entering, player is set to creative/spectator? mode with temp inv
+    0 easy Villager trades
+    0 easy Villager dialogue
+    0 make sure player doesn't get items from creative
+    0 teleporters are free

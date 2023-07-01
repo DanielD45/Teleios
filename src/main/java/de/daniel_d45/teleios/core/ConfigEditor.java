@@ -77,7 +77,7 @@ public class ConfigEditor {
         } catch (NullPointerException e) {
             // Sets the debug level to the standard value of 1
             ConfigEditor.set("DebugLevel", 1);
-            MessageMaster.sendWarningMessage("ConfigEditor", "initiateDebugLevel()", "the DebugLevel path doesn't exist.");
+            MessageMaster.sendExitMessage("ConfigEditor", "initiateDebugLevel()", "the DebugLevel path doesn't exist.");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("ConfigEditor", "initiateDebugLevel()", e);
         }
@@ -118,7 +118,7 @@ public class ConfigEditor {
 
             RecipeManager.enableTeleporterRecipe(isActive("BetterGameplay.Teleporters"));
 
-            MessageMaster.sendSuccessMessage("ConfigEditor", "initiateActivationstates()");
+            MessageMaster.sendExitMessage("ConfigEditor", "initiateActivationstates()", "success");
         } catch (IllegalStateException e) {
             MessageMaster.sendWarningMessage("ConfigEditor", "initiateActivationstates()", "IllegalStateException");
         } catch (Exception e) {
@@ -190,11 +190,11 @@ public class ConfigEditor {
             // TODO: Is null check working?
             if (get("Activationstates." + subPath) != null && get("Activationstates." + subPath).equals("ON")) {
 
-                MessageMaster.sendSuccessMessage("ConfigEditor", "isActive(" + subPath + "), segment is active");
+                MessageMaster.sendExitMessage("ConfigEditor", "isActive(" + subPath + "), segment is active", "success");
                 return true;
             }
             else {
-                MessageMaster.sendSuccessMessage("ConfigEditor", "isActive(" + subPath + "), segment is not active");
+                MessageMaster.sendExitMessage("ConfigEditor", "isActive(" + subPath + "), segment is not active", "success");
                 return false;
             }
 
@@ -216,7 +216,7 @@ public class ConfigEditor {
                 return;
             }
 
-            MessageMaster.sendSuccessMessage("ConfigEditor", "setDebugLevel(" + level + ")");
+            MessageMaster.sendExitMessage("ConfigEditor", "setDebugLevel(" + level + ")");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("ConfigEditor", "setDebugLevel(" + level + ")", e);
             ConfigEditor.set("DebugLevel", Teleios.getStandardDebugLevel());
@@ -251,7 +251,7 @@ public class ConfigEditor {
             config.set(path, value);
             saveConfig();
 
-            MessageMaster.sendSuccessMessage("ConfigEditor", "set(" + path + ", " + value + ")");
+            MessageMaster.sendExitMessage("ConfigEditor", "set(" + path + ", " + value + ")", "success");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("ConfigEditor", "set(" + path + ", " + value + ")", e);
         }
@@ -267,7 +267,7 @@ public class ConfigEditor {
 
             Object value = config.get(path);
 
-            //MessageMaster.sendSuccessMessage("ConfigEditor", "get(" + path + ")");
+            //MessageMaster.sendExitMessage("ConfigEditor", "get(" + path + ")");
             return value;
         } catch (Exception e) {
             // MessageMaster.sendFailMessage("ConfigEditor", "get(" + path + ")", e);
@@ -290,16 +290,16 @@ public class ConfigEditor {
 
             if (keys.toArray().length > 0) {
                 // Found keys
-                MessageMaster.sendSuccessMessage("ConfigEditor", "getSectionKeys(" + path + ")");
+                MessageMaster.sendExitMessage("ConfigEditor", "getSectionKeys(" + path + ")", "success");
             }
             else {
                 // No keys found
-                MessageMaster.sendWarningMessage("ConfigEditor", "getSectionKeys(" + path + ")", "no keys found");
+                MessageMaster.sendExitMessage("ConfigEditor", "getSectionKeys(" + path + ")", "no keys found");
             }
 
             return keys;
         } catch (NullPointerException e) {
-            MessageMaster.sendWarningMessage("ConfigEditor", "getSectionKeys(" + path + ")", "the path doesn't exist.");
+            MessageMaster.sendExitMessage("ConfigEditor", "getSectionKeys(" + path + ")", "the path doesn't exist.");
             return null;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("ConfigEditor", "getSectionKeys(" + path + ")", e);
@@ -318,10 +318,10 @@ public class ConfigEditor {
 
             boolean isThere = config.contains(path, false);
 
-            MessageMaster.sendSuccessMessage("ConfigEditor", "containsPath(" + path + ")");
+            MessageMaster.sendExitMessage("ConfigEditor", "containsPath(" + path + ")", "success");
             return isThere;
         } catch (NullPointerException e) {
-            MessageMaster.sendWarningMessage("ConfigEditor", "containsPath(" + path + ")", "the path doesn't exist.");
+            MessageMaster.sendExitMessage("ConfigEditor", "containsPath(" + path + ")", "the path doesn't exist.");
             return false;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("ConfigEditor", "containsPath(" + path + ")", e);
@@ -342,10 +342,10 @@ public class ConfigEditor {
             Object foundValue = get(path);
             boolean hasValue = BetterMethods.betterEquals(foundValue, value);
 
-            MessageMaster.sendSuccessMessage("ConfigEditor", "hasValue(" + path + ")");
+            MessageMaster.sendExitMessage("ConfigEditor", "hasValue(" + path + ")", "success");
             return hasValue;
         } catch (NullPointerException e) {
-            MessageMaster.sendWarningMessage("ConfigEditor", "hasValue(" + path + ")", "the path doesn't exist.");
+            MessageMaster.sendExitMessage("ConfigEditor", "hasValue(" + path + ")", "the path doesn't exist.");
             return false;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("ConfigEditor", "hasValue(" + path + ")", e);
@@ -363,7 +363,7 @@ public class ConfigEditor {
             config.set(path, null);
             saveConfig();
 
-            MessageMaster.sendSuccessMessage("ConfigEditor", "clearPath(" + path + ")");
+            MessageMaster.sendExitMessage("ConfigEditor", "clearPath(" + path + ")", "success");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("ConfigEditor", "clearPath(" + path + ")", e);
         }
@@ -377,7 +377,7 @@ public class ConfigEditor {
 
             Teleios.getPlugin().saveConfig();
 
-            MessageMaster.sendSuccessMessage("ConfigEditor", "saveConfig()");
+            MessageMaster.sendExitMessage("ConfigEditor", "saveConfig()", "success");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("ConfigEditor", "saveConfig()", e);
         }

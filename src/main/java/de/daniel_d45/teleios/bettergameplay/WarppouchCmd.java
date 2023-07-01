@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 
-public class WarppouchCommand implements CommandExecutor {
+public class WarppouchCmd implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -28,14 +28,14 @@ public class WarppouchCommand implements CommandExecutor {
             // Activationstate check
             if (!ConfigEditor.isActive("BetterGameplay.Teleporters")) {
                 sender.sendMessage("§cThis command is not active.");
-                MessageMaster.sendWarningMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
+                MessageMaster.sendExitMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
                 return true;
             }
 
             // Sender player check
             if (!(sender instanceof Player player)) {
                 sender.sendMessage("§cYou are no player!");
-                MessageMaster.sendWarningMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
+                MessageMaster.sendExitMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
                 return true;
             }
 
@@ -60,7 +60,7 @@ public class WarppouchCommand implements CommandExecutor {
                     player.sendMessage("§aThere are §6" + storedEPs + " §aender pearls in your warp pouch.");
                 }
 
-                MessageMaster.sendSuccessMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                MessageMaster.sendExitMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                 return true;
             }
 
@@ -76,7 +76,7 @@ public class WarppouchCommand implements CommandExecutor {
                         // Is specifiedAmount valid check
                         if (specifiedAmount <= 0) {
                             player.sendMessage("§cInvalid amount of ender pearls!");
-                            MessageMaster.sendWarningMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "invalid amount of ender pearls.");
+                            MessageMaster.sendExitMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "invalid amount of specified ender pearls.");
                             return true;
                         }
                     } catch (NumberFormatException e) {
@@ -91,7 +91,7 @@ public class WarppouchCommand implements CommandExecutor {
                     // Is specifiedAmount valid check
                     if (specifiedAmount <= 0) {
                         player.sendMessage("§cInvalid amount of ender pearls!");
-                        MessageMaster.sendWarningMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "invalid amount of ender pearls.");
+                        MessageMaster.sendExitMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "invalid amount of ender pearls.");
                         return true;
                     }
                 }
@@ -102,7 +102,7 @@ public class WarppouchCommand implements CommandExecutor {
                 // Ender pearl amount check
                 if (actualAmount == 0) {
                     player.sendMessage("§cYou don't have enough ender pearls in your inventory!");
-                    MessageMaster.sendWarningMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player doesn't have enough ender pearls.");
+                    MessageMaster.sendExitMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player doesn't have enough ender pearls.");
                     return true;
                 }
 
@@ -117,12 +117,12 @@ public class WarppouchCommand implements CommandExecutor {
                 }
 
                 player.sendMessage("§aYou now have §6" + ConfigEditor.get("Warppouch." + player.getName()) + " §aender pearls in your warp pouch.");
-                MessageMaster.sendSuccessMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                MessageMaster.sendExitMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                 return true;
             }
 
             player.sendMessage("§cWrong arguments!");
-            MessageMaster.sendWarningMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
+            MessageMaster.sendExitMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
             return false;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", e);

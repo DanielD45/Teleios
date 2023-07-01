@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
 import java.util.Arrays;
 
 
-public class TphereCommand implements CommandExecutor {
+public class TphereCmd implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -25,14 +25,14 @@ public class TphereCommand implements CommandExecutor {
             // Activation state check
             if (!ConfigEditor.isActive("AdminFeatures.All")) {
                 sender.sendMessage("§cThis command is not active.");
-                MessageMaster.sendWarningMessage("TphereCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
+                MessageMaster.sendExitMessage("TphereCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
                 return true;
             }
 
             // Sender player check
             if (!(sender instanceof Player player)) {
                 sender.sendMessage("§cYou are no player!");
-                MessageMaster.sendWarningMessage("TphereCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
+                MessageMaster.sendExitMessage("TphereCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
                 return true;
             }
 
@@ -44,7 +44,7 @@ public class TphereCommand implements CommandExecutor {
                 // Target online check
                 if (target == null) {
                     sender.sendMessage("§cThis player is not online!");
-                    MessageMaster.sendWarningMessage("TphereCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified player is not online.");
+                    MessageMaster.sendExitMessage("TphereCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified player is not online.");
                     return true;
                 }
 
@@ -52,12 +52,12 @@ public class TphereCommand implements CommandExecutor {
                 if (target == sender) {
                     // The player wants to teleport to himself
                     player.sendMessage("§cCan't teleport you to yourself!");
-                    MessageMaster.sendWarningMessage("TphereCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender wants to teleport to himself.");
+                    MessageMaster.sendExitMessage("TphereCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender wants to teleport to himself.");
                 }
                 else {
                     target.teleport(player.getLocation());
                     target.sendMessage("§aTeleported §6" + target.getName() + " §ato you!");
-                    MessageMaster.sendSuccessMessage("TphereCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                    MessageMaster.sendExitMessage("TphereCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                 }
 
                 return true;

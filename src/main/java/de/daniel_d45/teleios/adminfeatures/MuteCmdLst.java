@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -19,7 +19,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import java.util.Arrays;
 
 
-public class MuteCommandListener implements CommandExecutor, Listener {
+public class MuteCmdLst implements CommandExecutor, Listener {
 
     @EventHandler
     public void onMutedChat(AsyncPlayerChatEvent event) {
@@ -32,7 +32,7 @@ public class MuteCommandListener implements CommandExecutor, Listener {
                 // Mutes the player
                 event.setCancelled(true);
                 player.sendMessage("§cYou are muted!");
-                MessageMaster.sendSuccessMessage("MuteCommandListener", "onMutedChat(" + event + ")");
+                MessageMaster.sendExitMessage("MuteCommandListener", "onMutedChat(" + event + ")", "success");
             }
         } catch (Exception e) {
             MessageMaster.sendFailMessage("MuteCommandListener", "onCommand(" + event + ")", e);
@@ -46,14 +46,14 @@ public class MuteCommandListener implements CommandExecutor, Listener {
             // Activation state check
             if (!ConfigEditor.isActive("AdminFeatures.All")) {
                 sender.sendMessage("§cThis command is not active.");
-                MessageMaster.sendWarningMessage("MuteCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
+                MessageMaster.sendExitMessage("MuteCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
                 return true;
             }
 
             // Sender player check
             if (!(sender instanceof Player player)) {
                 sender.sendMessage("§cYou are no player!");
-                MessageMaster.sendWarningMessage("MuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
+                MessageMaster.sendExitMessage("MuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
                 return true;
             }
 
@@ -65,14 +65,14 @@ public class MuteCommandListener implements CommandExecutor, Listener {
                 // Target online check
                 if (target == null) {
                     player.sendMessage("§cThis player is not online!");
-                    MessageMaster.sendWarningMessage("MuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified player is not online.");
+                    MessageMaster.sendExitMessage("MuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified player is not online.");
                     return true;
                 }
 
                 // Player already muted check
                 if (ConfigEditor.containsPath("MutedPlayers." + player.getName())) {
                     player.sendMessage("§6" + target.getName() + " §ais already muted!");
-                    MessageMaster.sendWarningMessage("MuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified player is already muted.");
+                    MessageMaster.sendExitMessage("MuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified player is already muted.");
                     return true;
                 }
 
@@ -81,11 +81,11 @@ public class MuteCommandListener implements CommandExecutor, Listener {
                 player.sendMessage("§aMuted §6" + target.getName() + "§a!");
                 target.sendMessage("§cYou have been muted!");
 
-                MessageMaster.sendSuccessMessage("MuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                MessageMaster.sendExitMessage("MuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                 return true;
             } catch (Exception e) {
                 player.sendMessage("§cWrong arguments!");
-                MessageMaster.sendWarningMessage("MuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
+                MessageMaster.sendExitMessage("MuteCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
                 return false;
             }
 

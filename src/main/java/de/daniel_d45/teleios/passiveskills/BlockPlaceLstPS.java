@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -14,7 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 
-public class BlockPlaceListenerPS implements Listener {
+public class BlockPlaceLstPS implements Listener {
 
     // TODO: Care for falling blocks
 
@@ -30,7 +30,7 @@ public class BlockPlaceListenerPS implements Listener {
             // TODO: Only log a limited amount of blocks at a time and override?
             // Activationstate check
             if (!ConfigEditor.isActive("PassiveSkills.All")) {
-                MessageMaster.sendWarningMessage("BlockPlaceListenerPS", "onBlockPlacePS(" + event + ")", "the PassiveSkills segment is not active.");
+                MessageMaster.sendExitMessage("BlockPlaceListenerPS", "onBlockPlacePS(" + event + ")", "the PassiveSkills segment is not active.");
                 return;
             }
 
@@ -39,7 +39,7 @@ public class BlockPlaceListenerPS implements Listener {
             // Logs the block as placed
             ConfigEditor.set("PlacedBlocks." + entryName, block.getLocation());
 
-            MessageMaster.sendSuccessMessage("BlockPlaceListenerPS", "onBlockPlacePS(" + event + ")");
+            MessageMaster.sendExitMessage("BlockPlaceListenerPS", "onBlockPlacePS(" + event + ")", "success");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("BlockPlaceListenerPS", "onBlockPlacePS(" + event + ")", e);
         }

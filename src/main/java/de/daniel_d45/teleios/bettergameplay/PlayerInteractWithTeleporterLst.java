@@ -24,7 +24,7 @@ import java.util.Objects;
 import java.util.Set;
 
 
-public class PlayerInteractWithTeleporterListener implements Listener {
+public class PlayerInteractWithTeleporterLst implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerInteractTeleporter(PlayerInteractEvent event) {
@@ -48,7 +48,7 @@ public class PlayerInteractWithTeleporterListener implements Listener {
 
             // Block type check
             if (!block.getType().equals(Material.END_PORTAL_FRAME)) {
-                MessageMaster.sendInfoMessage("PlayerInteractWithTeleporterListener", "onPlayerInteractWithTeleporter(" + event + ")", "The block is not an end portal frame.");
+                MessageMaster.sendExitMessage("PlayerInteractWithTeleporterListener", "onPlayerInteractWithTeleporter(" + event + ")", "The block is not an end portal frame.");
                 return;
             }
 
@@ -56,8 +56,8 @@ public class PlayerInteractWithTeleporterListener implements Listener {
             try {
                 teleporterNames = Objects.requireNonNull(ConfigEditor.getSectionKeys("Teleporters"));
             } catch (NullPointerException e) {
-                MessageMaster.sendInfoMessage(this.getClass().getName(), "onPlayerInteractWithTeleporter(" + event + ")", "The \"Teleporters\" path in the config file is empty.");
-                MessageMaster.sendSuccessMessage("PlayerInteractWithTeleporterListener", "onPlayerInteractWithTeleporter(" + event + ")");
+                MessageMaster.sendExitMessage(this.getClass().getName(), "onPlayerInteractWithTeleporter(" + event + ")", "The \"Teleporters\" path in the config file is empty.");
+                MessageMaster.sendExitMessage("PlayerInteractWithTeleporterListener", "onPlayerInteractWithTeleporter(" + event + ")", "success");
                 return;
             }
 
@@ -84,13 +84,13 @@ public class PlayerInteractWithTeleporterListener implements Listener {
                     // Is right click with ender eye check
                     if (action.equals(Action.RIGHT_CLICK_BLOCK) && itemType.equals(Material.ENDER_EYE)) {
                         event.setCancelled(true);
-                        MessageMaster.sendWarningMessage("PlayerInteractWithTeleporterListener", "onPlayerInteractWithTeleporter(" + event + ")", "cannot put an ender eye in a teleporter.");
+                        MessageMaster.sendExitMessage("PlayerInteractWithTeleporterListener", "onPlayerInteractWithTeleporter(" + event + ")", "cannot put an ender eye in a teleporter.");
                         return;
                     }
 
                     // Is not left-click check
                     if (!action.equals(Action.LEFT_CLICK_BLOCK)) {
-                        MessageMaster.sendWarningMessage("PlayerInteractWithTeleporterListener", "onPlayerInteractWithTeleporter(" + event + ")", "wrong action type.");
+                        MessageMaster.sendExitMessage("PlayerInteractWithTeleporterListener", "onPlayerInteractWithTeleporter(" + event + ")", "wrong action type.");
                         return;
                     }
 
@@ -98,12 +98,12 @@ public class PlayerInteractWithTeleporterListener implements Listener {
                     // Opens the "Pick up teleporter?" inventory
                     player.openInventory(getPickupTeleporterInventory("§5" + current));
 
-                    MessageMaster.sendSuccessMessage("PlayerInteractWithTeleporterListener", "onPlayerInteractWithTeleporter(" + event + ")");
+                    MessageMaster.sendExitMessage("PlayerInteractWithTeleporterListener", "onPlayerInteractWithTeleporter(" + event + ")", "success");
                     return;
                 }
             }
 
-            MessageMaster.sendWarningMessage("PlayerInteractWithTeleporterListener", "onPlayerInteractWithTeleporter(" + event + ")", "wrong block.");
+            MessageMaster.sendExitMessage("PlayerInteractWithTeleporterListener", "onPlayerInteractWithTeleporter(" + event + ")", "wrong block.");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("PlayerInteractWithTeleporterListener", "onPlayerInteractWithTeleporter(" + event + ")", e);
         }
@@ -119,7 +119,7 @@ public class PlayerInteractWithTeleporterListener implements Listener {
 
             // TODO: Make more specific? (&& event.getInventory() instanceof ArtificialInventory)
             if (!(event.getView().getTitle().equals("§0Pick up teleporter?"))) {
-                MessageMaster.sendWarningMessage("PlayerInteractWithTeleporterListener", "onPickupTeleporterInventoryClick(" + event + ")", "wrong item clicked.");
+                MessageMaster.sendExitMessage("PlayerInteractWithTeleporterListener", "onPickupTeleporterInventoryClick(" + event + ")", "wrong item clicked.");
                 return;
             }
 
@@ -148,7 +148,7 @@ public class PlayerInteractWithTeleporterListener implements Listener {
 
                         player.closeInventory();
 
-                        MessageMaster.sendSuccessMessage("PlayerInteractWithTeleporterListener", "onPickupTeleporterInventoryClick(" + event + "), player chose \"Yes\"");
+                        MessageMaster.sendExitMessage("PlayerInteractWithTeleporterListener", "onPickupTeleporterInventoryClick(" + event + "), player chose \"Yes\"", "success");
                         return;
                     }
                 }
@@ -158,11 +158,11 @@ public class PlayerInteractWithTeleporterListener implements Listener {
             else if (item.equals(InventoryManager.getNoItem())) {
 
                 player.closeInventory();
-                MessageMaster.sendSuccessMessage("PlayerInteractWithTeleporterListener", "onPickupTeleporterInventoryClick(" + event + "), player chose \"No\"");
+                MessageMaster.sendExitMessage("PlayerInteractWithTeleporterListener", "onPickupTeleporterInventoryClick(" + event + "), player chose \"No\"", "success");
             }
 
         } catch (NullPointerException e) {
-            MessageMaster.sendWarningMessage("PlayerInteractWithTeleporterListener", "onPickupTeleporterInventoryClick(" + event + ")", "no item has been clicked.");
+            MessageMaster.sendExitMessage("PlayerInteractWithTeleporterListener", "onPickupTeleporterInventoryClick(" + event + ")", "no item has been clicked.");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("PlayerInteractWithTeleporterListener", "onPickupTeleporterInventoryClick(" + event + ")", e);
         }
@@ -179,7 +179,7 @@ public class PlayerInteractWithTeleporterListener implements Listener {
 
             InventoryManager.fillEmptySlots(inv);
 
-            MessageMaster.sendSuccessMessage("PlayerInteractWithTeleporterListener", "getDestroyTeleporterInventory()");
+            MessageMaster.sendExitMessage("PlayerInteractWithTeleporterListener", "getDestroyTeleporterInventory()", "success");
             return inv;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("PlayerInteractWithTeleporterListener", "getDestroyTeleporterInventory()", e);
@@ -192,7 +192,7 @@ public class PlayerInteractWithTeleporterListener implements Listener {
 
             ItemStack item = new ItemBuilder(RecipeManager.getTeleporterRecipe().getResult()).setName(teleporterName).build();
 
-            MessageMaster.sendSuccessMessage("PlayerInteractWithTeleporterListener", "getTeleporterItem(" + teleporterName + ")");
+            MessageMaster.sendExitMessage("PlayerInteractWithTeleporterListener", "getTeleporterItem(" + teleporterName + ")", "success");
             return item;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("PlayerInteractWithTeleporterListener", "getTeleporterItem(" + teleporterName + ")", e);

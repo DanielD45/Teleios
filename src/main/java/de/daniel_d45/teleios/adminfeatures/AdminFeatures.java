@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -39,7 +39,7 @@ public class AdminFeatures {
 
             }
 
-            MessageMaster.sendSuccessMessage("SegmentManagerAC", "getSegmentItem()");
+            MessageMaster.sendExitMessage("SegmentManagerAC", "getSegmentItem()", "success");
             return item;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("SegmentManagerAC", "getSegmentItem()", e);
@@ -60,7 +60,7 @@ public class AdminFeatures {
 
                 RecipeManager.enableTeleporterRecipe(false);
 
-                MessageMaster.sendSuccessMessage("SegmentManagerAC", "switchActivationstateAC()");
+                MessageMaster.sendExitMessage("SegmentManagerAC", "switchActivationstateAC()", "success");
             }
             else {
 
@@ -71,7 +71,7 @@ public class AdminFeatures {
 
                 RecipeManager.enableTeleporterRecipe(true);
 
-                MessageMaster.sendSuccessMessage("SegmentManagerAC", "switchActivationstateAC()");
+                MessageMaster.sendExitMessage("SegmentManagerAC", "switchActivationstateAC()", "success");
             }
         } catch (Exception e) {
             MessageMaster.sendFailMessage("SegmentManagerAC", "switchActivationstateAC()", e);

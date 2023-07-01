@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -17,7 +17,7 @@ import org.bukkit.entity.Player;
 import java.util.Arrays;
 
 
-public class HealCommand implements CommandExecutor {
+public class HealCmd implements CommandExecutor {
 
     // TODO: Make doubles possible as input
     @SuppressWarnings("deprecation")
@@ -28,7 +28,7 @@ public class HealCommand implements CommandExecutor {
             // Activation state check
             if (!ConfigEditor.isActive("AdminFeatures.All")) {
                 sender.sendMessage("§cThis command is not active.");
-                MessageMaster.sendWarningMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
+                MessageMaster.sendExitMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
                 return true;
             }
 
@@ -40,14 +40,14 @@ public class HealCommand implements CommandExecutor {
                         // Sender player check
                         if (!(sender instanceof Player player)) {
                             sender.sendMessage("§cYou are no player!");
-                            MessageMaster.sendWarningMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the target is no player.");
+                            MessageMaster.sendExitMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the target is no player.");
                             return true;
                         }
 
                         // Player gamemode check
                         if (wrongGamemode(player)) {
                             player.sendMessage("§cCould not heal you as you are not in a suitable gamemode!");
-                            MessageMaster.sendWarningMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player is not in a suitable gamemode.");
+                            MessageMaster.sendExitMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player is not in a suitable gamemode.");
                             return true;
                         }
 
@@ -55,7 +55,7 @@ public class HealCommand implements CommandExecutor {
                         player.setHealth(player.getMaxHealth());
                         player.sendMessage("§aYou've been fully healed!");
 
-                        MessageMaster.sendSuccessMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                        MessageMaster.sendExitMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                         return true;
                     } catch (Exception e) {
                         MessageMaster.sendFailMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + "), /heal", e);
@@ -70,14 +70,14 @@ public class HealCommand implements CommandExecutor {
                         // Sender player check
                         if (!(sender instanceof Player player)) {
                             sender.sendMessage("§cYou are no player!");
-                            MessageMaster.sendWarningMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player");
+                            MessageMaster.sendExitMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player");
                             return true;
                         }
 
                         // Player gamemode check
                         if (wrongGamemode(player)) {
                             player.sendMessage("§cCould not heal you as you are not in a suitable mode!");
-                            MessageMaster.sendWarningMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player is not in a suitable gamemode.");
+                            MessageMaster.sendExitMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player is not in a suitable gamemode.");
                             return true;
                         }
 
@@ -91,7 +91,7 @@ public class HealCommand implements CommandExecutor {
                             player.sendMessage("§aYou healed yourself by §6" + amount + " §ahp!");
                         }
 
-                        MessageMaster.sendSuccessMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                        MessageMaster.sendExitMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                         return true;
                     } catch (NumberFormatException e) {
                         // Specifies /heal [Amount], args[0] is not a double.
@@ -103,7 +103,7 @@ public class HealCommand implements CommandExecutor {
                             // Target online check
                             if (target == null) {
                                 sender.sendMessage("§cThis player is not online!");
-                                MessageMaster.sendWarningMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified player is not online.");
+                                MessageMaster.sendExitMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified player is not online.");
                                 return true;
                             }
 
@@ -112,7 +112,7 @@ public class HealCommand implements CommandExecutor {
 
                                 if (wrongGamemode(target)) {
                                     sender.sendMessage("§cCould not heal your target as it is not in a suitable gamemode!");
-                                    MessageMaster.sendWarningMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the target is not in a suitable gamemode.");
+                                    MessageMaster.sendExitMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the target is not in a suitable gamemode.");
                                     return true;
                                 }
 
@@ -128,7 +128,7 @@ public class HealCommand implements CommandExecutor {
                                 // Player gamemode check
                                 if (wrongGamemode(player)) {
                                     player.sendMessage("§cCould not heal you as you are not in a suitable gamemode!");
-                                    MessageMaster.sendWarningMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player is not in a suitable gamemode.");
+                                    MessageMaster.sendExitMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player is not in a suitable gamemode.");
                                     return true;
                                 }
 
@@ -137,7 +137,7 @@ public class HealCommand implements CommandExecutor {
                                 player.sendMessage("§aYou fully healed yourself!");
                             }
 
-                            MessageMaster.sendSuccessMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                            MessageMaster.sendExitMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                             return true;
                         } catch (Exception e2) {
                             sender.sendMessage("§cCould not heal player §6" + args[0] + "§c!");
@@ -159,7 +159,7 @@ public class HealCommand implements CommandExecutor {
                         // Target online check
                         if (target == null) {
                             sender.sendMessage("§cThis player is not online!");
-                            MessageMaster.sendWarningMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified player is not online.");
+                            MessageMaster.sendExitMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the specified player is not online.");
                             return true;
                         }
 
@@ -168,7 +168,7 @@ public class HealCommand implements CommandExecutor {
 
                             if (wrongGamemode(target)) {
                                 sender.sendMessage("§cCould not heal your target as it is not in a suitable gamemode!");
-                                MessageMaster.sendWarningMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the target is not in a suitable gamemode.");
+                                MessageMaster.sendExitMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the target is not in a suitable gamemode.");
                                 return true;
                             }
 
@@ -192,7 +192,7 @@ public class HealCommand implements CommandExecutor {
 
                             if (wrongGamemode(player)) {
                                 sender.sendMessage("§cCould not heal you as you are not in a suitable gamemode!");
-                                MessageMaster.sendWarningMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player is not in a suitable gamemode.");
+                                MessageMaster.sendExitMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player is not in a suitable gamemode.");
                                 return true;
                             }
 
@@ -207,17 +207,17 @@ public class HealCommand implements CommandExecutor {
 
                         }
 
-                        MessageMaster.sendSuccessMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                        MessageMaster.sendExitMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                         return true;
                     } catch (Exception e) {
                         sender.sendMessage("§cWrong arguments!");
-                        MessageMaster.sendWarningMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
+                        MessageMaster.sendExitMessage("HealCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
                         return false;
                     }
                 default:
                     // Wrong amount of arguments.
                     sender.sendMessage("§cWrong amount of arguments!");
-                    MessageMaster.sendWarningMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong amount of arguments.");
+                    MessageMaster.sendExitMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong amount of arguments.");
                     return false;
             }
 
@@ -238,7 +238,7 @@ public class HealCommand implements CommandExecutor {
 
             boolean rGM = player.getGameMode() == GameMode.SURVIVAL || player.getGameMode() == GameMode.ADVENTURE;
 
-            MessageMaster.sendSuccessMessage("HealCommand", "rightGamemode(" + player + ")");
+            MessageMaster.sendExitMessage("HealCommand", "rightGamemode(" + player + ")", "success");
             return !rGM;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("HealCommand", "rightGamemode(" + player + ")", e);

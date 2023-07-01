@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -35,7 +35,7 @@ public class RecipeManager {
             teleporterRecipe.setIngredient('S', Material.SANDSTONE);
             teleporterRecipe.setIngredient('B', Material.BLAZE_POWDER);
 
-            MessageMaster.sendSuccessMessage("RecipeManager", "getTeleporterRecipe()");
+            MessageMaster.sendExitMessage("RecipeManager", "getTeleporterRecipe()", "success");
             return teleporterRecipe;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("RecipeManager", "getTeleporterRecipe()", e);
@@ -54,7 +54,7 @@ public class RecipeManager {
                 Bukkit.removeRecipe(getTeleporterRecipe().getKey());
             }
 
-            MessageMaster.sendSuccessMessage("RecipeManager", "enableTeleporterRecipe(" + b + ")");
+            MessageMaster.sendExitMessage("RecipeManager", "enableTeleporterRecipe(" + b + ")", "success");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("RecipeManager", "enableTeleporterRecipe(" + b + ")", e);
         }

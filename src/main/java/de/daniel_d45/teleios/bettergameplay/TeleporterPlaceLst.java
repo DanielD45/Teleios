@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Set;
 
 
-public class TeleporterPlaceListener implements Listener {
+public class TeleporterPlaceLst implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onTeleporterPlace(BlockPlaceEvent event) {
@@ -30,7 +30,7 @@ public class TeleporterPlaceListener implements Listener {
 
             // Block material check
             if (!block.getType().equals(Material.END_PORTAL_FRAME)) {
-                MessageMaster.sendWarningMessage("TeleporterPlaceListener", "onTeleporterPlace(" + event + ")", "wrong block type.");
+                MessageMaster.sendExitMessage("TeleporterPlaceListener", "onTeleporterPlace(" + event + ")", "wrong block type.");
                 return;
             }
 
@@ -44,7 +44,7 @@ public class TeleporterPlaceListener implements Listener {
 
             // Item lore check
             if (!BetterMethods.betterEquals(RecipeManager.getTeleporterRecipe().getResult().getItemMeta().getLore(), itemLore)) {
-                MessageMaster.sendWarningMessage("TeleporterPlaceListener", "onTeleporterPlace(" + event + ")", "wrong item lore.");
+                MessageMaster.sendExitMessage("TeleporterPlaceListener", "onTeleporterPlace(" + event + ")", "wrong item lore.");
                 return;
             }
 
@@ -52,7 +52,7 @@ public class TeleporterPlaceListener implements Listener {
             if (!ConfigEditor.isActive("BetterGameplay.Teleporters")) {
                 event.setCancelled(true);
                 player.sendMessage("§cThis function is not active.");
-                MessageMaster.sendWarningMessage("WarppointCommand", "onTeleporterPlace(" + event + ")", "the function is deactivated.");
+                MessageMaster.sendExitMessage("WarppointCommand", "onTeleporterPlace(" + event + ")", "the function is deactivated.");
                 return;
             }
 
@@ -60,7 +60,7 @@ public class TeleporterPlaceListener implements Listener {
             if (itemName.equals(standardName)) {
                 event.setCancelled(true);
                 player.sendMessage("§cChange the teleporter's name with the §6/configureteleporter §ccommand before placing it!");
-                MessageMaster.sendWarningMessage("TeleporterPlaceListener", "onTeleporterPlace(" + event + ")", "this teleporter has not been renamed.");
+                MessageMaster.sendExitMessage("TeleporterPlaceListener", "onTeleporterPlace(" + event + ")", "this teleporter has not been renamed.");
                 return;
             }
 
@@ -68,7 +68,7 @@ public class TeleporterPlaceListener implements Listener {
             if (itemName.equals("list")) {
                 event.setCancelled(true);
                 player.sendMessage("§cThis teleporter name is invalid!");
-                MessageMaster.sendWarningMessage("TeleporterPlaceListener", "onTeleporterPlace(" + event + ")", "this teleporter name is invalid.");
+                MessageMaster.sendExitMessage("TeleporterPlaceListener", "onTeleporterPlace(" + event + ")", "this teleporter name is invalid.");
                 return;
             }
 
@@ -82,7 +82,7 @@ public class TeleporterPlaceListener implements Listener {
                         // Name match
                         event.setCancelled(true);
                         player.sendMessage("§cA warppoint with this name already exists!");
-                        MessageMaster.sendWarningMessage("TeleporterPlaceListener", "onTeleporterPlace(" + event + ")", "a warppoint with this name already exists.");
+                        MessageMaster.sendExitMessage("TeleporterPlaceListener", "onTeleporterPlace(" + event + ")", "a warppoint with this name already exists.");
                         return;
                     }
                 }
@@ -97,7 +97,7 @@ public class TeleporterPlaceListener implements Listener {
                         // Name match
                         event.setCancelled(true);
                         player.sendMessage("§cA teleporter with this name already exists!");
-                        MessageMaster.sendWarningMessage("TeleporterPlaceListener", "onTeleporterPlace(" + event + ")", "a teleporter with this name already exists.");
+                        MessageMaster.sendExitMessage("TeleporterPlaceListener", "onTeleporterPlace(" + event + ")", "a teleporter with this name already exists.");
                         return;
                     }
                 }
@@ -107,7 +107,7 @@ public class TeleporterPlaceListener implements Listener {
 
             ConfigEditor.set("Teleporters." + itemName, loc);
             player.sendMessage("§aTeleporter §6" + itemName + " §ahas been added.");
-            MessageMaster.sendSuccessMessage("TeleporterPlaceListener", "onTeleporterPlace(" + event + ")");
+            MessageMaster.sendExitMessage("TeleporterPlaceListener", "onTeleporterPlace(" + event + ")", "success");
 
         } catch (Exception e) {
             MessageMaster.sendFailMessage("TeleporterPlaceListener", "onTeleporterPlace(" + event + ")", e);

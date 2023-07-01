@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -22,8 +22,8 @@ import org.bukkit.inventory.ItemStack;
 import java.util.Arrays;
 
 
-public class ManageteleiosCommandListener implements CommandExecutor, Listener {
-    
+public class ManageteleiosCmdLst implements CommandExecutor, Listener {
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         try {
@@ -31,14 +31,14 @@ public class ManageteleiosCommandListener implements CommandExecutor, Listener {
             // Sender player check
             if (!(sender instanceof Player player)) {
                 sender.sendMessage("§cYou are no player!");
-                MessageMaster.sendWarningMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
+                MessageMaster.sendExitMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
                 return true;
             }
 
             // Specifies /manageteleios
             player.openInventory(InventoryManager.getManageTeleiosInventory());
 
-            MessageMaster.sendSuccessMessage("ManageteleiosCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+            MessageMaster.sendExitMessage("ManageteleiosCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
             return true;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("ManageteleiosCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", e);
@@ -61,7 +61,7 @@ public class ManageteleiosCommandListener implements CommandExecutor, Listener {
 
             // Item null check
             if (item == null) {
-                MessageMaster.sendWarningMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "no item clicked.");
+                MessageMaster.sendExitMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "no item clicked.");
                 return;
             }
 
@@ -130,7 +130,7 @@ public class ManageteleiosCommandListener implements CommandExecutor, Listener {
 
                 }
                 else {
-                    MessageMaster.sendWarningMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
+                    MessageMaster.sendExitMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
                     return;
                 }
 
@@ -145,7 +145,7 @@ public class ManageteleiosCommandListener implements CommandExecutor, Listener {
 
                 }
                 else {
-                    MessageMaster.sendWarningMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
+                    MessageMaster.sendExitMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
                     return;
                 }
 
@@ -174,7 +174,7 @@ public class ManageteleiosCommandListener implements CommandExecutor, Listener {
 
                 }
                 else {
-                    MessageMaster.sendWarningMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
+                    MessageMaster.sendExitMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
                     return;
                 }
 
@@ -191,7 +191,7 @@ public class ManageteleiosCommandListener implements CommandExecutor, Listener {
 
                 }
                 else {
-                    MessageMaster.sendWarningMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
+                    MessageMaster.sendExitMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
                     return;
                 }
 
@@ -209,7 +209,7 @@ public class ManageteleiosCommandListener implements CommandExecutor, Listener {
 
                 }
                 else {
-                    MessageMaster.sendWarningMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
+                    MessageMaster.sendExitMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
                     return;
                 }
 
@@ -226,17 +226,17 @@ public class ManageteleiosCommandListener implements CommandExecutor, Listener {
 
                 }
                 else {
-                    MessageMaster.sendWarningMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
+                    MessageMaster.sendExitMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "the clicked item has no function.");
                     return;
                 }
 
             }
             else {
-                MessageMaster.sendWarningMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "wrong inventory.");
+                MessageMaster.sendExitMessage("ManageteleiosCommandListener", "onManageTeleiosInventoryClick(" + event + ")", "wrong inventory.");
                 return;
             }
 
-            MessageMaster.sendSuccessMessage("ManageteleiosCommandListener", "onInventoryClick(" + event + ")");
+            MessageMaster.sendExitMessage("ManageteleiosCommandListener", "onInventoryClick(" + event + ")", "success");
         } catch (Exception e) {
             MessageMaster.sendFailMessage("ManageteleiosCommandListener", "onInventoryClick(" + event + ")", e);
         }

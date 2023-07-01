@@ -11,7 +11,7 @@
 
     <groupId>io.github.Daniel_D45</groupId>
     <artifactId>Teleios</artifactId>
-    <version>v1.3-WIP</version>
+    <version>v1.3WIP</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -29,7 +29,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.19.2-R0.1-SNAPSHOT</version>
+            <version>1.19.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -42,7 +42,7 @@
                 <version>3.2.0</version>
                 <configuration>
                     <!--> Data security warning: this path is visible when uploaded! <!-->
-                    <outputDirectory>C:\Users\danie\OneDrive\Daniel\Gaming\Minecraft\Servers\Spigot_1.19.4\plugins</outputDirectory>
+                    <outputDirectory>C:\Users\danie\OneDrive\Daniel\Gaming\Minecraft\Servers\Spigot_1.20.1\plugins</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>

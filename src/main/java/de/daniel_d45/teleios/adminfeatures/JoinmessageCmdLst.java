@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
+ Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
  Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
  */
 
@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 
-public class JoinmessageCommandListener implements CommandExecutor, Listener {
+public class JoinmessageCmdLst implements CommandExecutor, Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
@@ -48,7 +48,7 @@ public class JoinmessageCommandListener implements CommandExecutor, Listener {
             // Activation state check
             if (!ConfigEditor.isActive("AdminFeatures.All")) {
                 sender.sendMessage("§cThis command is not active.");
-                MessageMaster.sendWarningMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
+                MessageMaster.sendExitMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
                 return true;
             }
 
@@ -69,14 +69,14 @@ public class JoinmessageCommandListener implements CommandExecutor, Listener {
                     sender.sendMessage("§aThe custom join message is §6disabled§a.");
                 }
 
-                MessageMaster.sendSuccessMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                MessageMaster.sendExitMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                 return true;
             }
 
             // Sender permission check
             if (!sender.hasPermission("teleios.adminfeatures.joinmessage")) {
                 sender.sendMessage("§cMissing Permissions!");
-                MessageMaster.sendWarningMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender doesn't have the needed permissions.");
+                MessageMaster.sendExitMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender doesn't have the needed permissions.");
                 return true;
             }
 
@@ -84,7 +84,7 @@ public class JoinmessageCommandListener implements CommandExecutor, Listener {
             if (args[0].equalsIgnoreCase("enable") || args[0].equalsIgnoreCase("true")) {
                 ConfigEditor.set("JoinMessage", true);
                 sender.sendMessage("§aThe custom join message is now §6enabled§a!");
-                MessageMaster.sendSuccessMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                MessageMaster.sendExitMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                 return true;
             }
 
@@ -92,13 +92,13 @@ public class JoinmessageCommandListener implements CommandExecutor, Listener {
             else if (args[0].equalsIgnoreCase("disable") || args[0].equalsIgnoreCase("false")) {
                 ConfigEditor.set("JoinMessage", false);
                 sender.sendMessage("§aThe custom join message is now §6disabled§a!");
-                MessageMaster.sendSuccessMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")");
+                MessageMaster.sendExitMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                 return true;
             }
 
             // Wrong arguments
             sender.sendMessage("§cWrong arguments!");
-            MessageMaster.sendWarningMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
+            MessageMaster.sendExitMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
             return false;
         } catch (Exception e) {
             MessageMaster.sendFailMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", e);

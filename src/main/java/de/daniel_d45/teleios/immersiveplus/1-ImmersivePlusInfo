@@ -33,3 +33,11 @@
 0 monsters always drop their equipment
 0 smelting armor gives more resources back, depending on durability
 0 animals sometimes fight back or are aggressive
+0 seasons (different length of days, temperature?)
+0 Immersive Monsters:
+    0 some mobs spawn with different abilities? and drops
+    0 higher range of health, damage etc.
+    0 random events with special mobs and drops (trigger: listener for specific time? + randomness)
+    0 some monsters are neutral
+    0 some monsters fight each other
+    0 green witches which throw supporting potions
