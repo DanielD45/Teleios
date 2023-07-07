@@ -61,8 +61,8 @@ The AdminFeatures segment adds convenient admin-only commands.
 The BetterGameplay segment adds features for a better survival experience. Most commands from this segment can be used by everyone if <br/> 
 the respective command has been activated.
 - /enderchest (/ec) (*): opens your enderchest
-- Teleporters (*): you can craft teleporters with the scheme "ESE", "SBS", "ESE" where E = ender pearl, <br/>
-  S = sandstone and B = blaze powder. <br/>
+- Teleporters (*): you can craft teleporters with the scheme "ESE", "SBS", "ESE" where <br/>
+  E = ender pearl, S = sandstone and B = blaze powder. <br/>
   To set up the teleporter, hold it in your hand and use "/configureteleporter *TeleporterName*". The specified name must be unique. <br/> 
   To list all available (warppoints and) teleporters, use "/warp list". Warping to a teleporter costs ender pearls which are stored in your <br/> 
   warp pouch. To put ender pearls in your warp pouch, have some in your inventory and use the command "/warppouch put *Amount*". <br/> 
