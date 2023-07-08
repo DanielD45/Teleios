@@ -61,7 +61,8 @@ The AdminFeatures segment adds convenient admin-only commands.
 The BetterGameplay segment adds features for a better survival experience. Most commands from this segment can be used by everyone if <br/> 
 the respective command has been activated.
 - /enderchest (/ec) (*): opens your enderchest
-- Teleporters (*): you can craft teleporters with the scheme "ESE", "SBS", "ESE" where E = ender pearl, S = sandstone and B = blaze powder. <br/>
+- Teleporters (*): you can craft teleporters with the scheme "ESE", "SBS", "ESE" where <br/>
+  E = ender pearl, S = sandstone and B = blaze powder. <br/>
   To set up the teleporter, hold it in your hand and use "/configureteleporter *TeleporterName*". The specified name must be unique. <br/> 
   To list all available (warppoints and) teleporters, use "/warp list". Warping to a teleporter costs ender pearls which are stored in your <br/> 
   warp pouch. To put ender pearls in your warp pouch, have some in your inventory and use the command "/warppouch put *Amount*". <br/> 
@@ -91,7 +92,7 @@ This is a history of the past changes coming with the respective versions. "WIP"
 
 ### v1.3WIP
 **Server owners should adjust their DebugLevel arguments.**
-- this version is native to Minecraft 1.20.1
+- this version is native to Minecraft 1.20
 - the DebugLevel values and their effect have been changed from <br/>
   0 = no messages <br/>
   1 = plugin start/end messages will be written to the terminal <br/>
@@ -115,6 +116,7 @@ This is a history of the past changes coming with the respective versions. "WIP"
   7 = plugin start/end + fail + warning + exit messages will be written to the terminal <br/>
   8 = plugin start/end + fail + warning + exit messages will be written to the terminal & in-game chat <br/>
   Please adjust your DebugLevel accordingly.
+- added /oplist (/opl): lets you store ops on a list. These people can op themselves anytime.
 
 ### v1.2
 **Server owners should adjust their SetBlocksPerPearl and DebugLevel arguments.**
