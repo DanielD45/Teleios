@@ -92,7 +92,7 @@ This is a history of the past changes coming with the respective versions. "WIP"
 
 ### v1.3WIP
 **Server owners should adjust their DebugLevel arguments.**
-- this version is native to Minecraft 1.20.1
+- this version is native to Minecraft 1.20
 - the DebugLevel values and their effect have been changed from <br/>
   0 = no messages <br/>
   1 = plugin start/end messages will be written to the terminal <br/>
@@ -116,6 +116,7 @@ This is a history of the past changes coming with the respective versions. "WIP"
   7 = plugin start/end + fail + warning + exit messages will be written to the terminal <br/>
   8 = plugin start/end + fail + warning + exit messages will be written to the terminal & in-game chat <br/>
   Please adjust your DebugLevel accordingly.
+- added /oplist (/opl): lets you store ops on a list. These people can op themselves anytime.
 
 ### v1.2
 **Server owners should adjust their SetBlocksPerPearl and DebugLevel arguments.**
