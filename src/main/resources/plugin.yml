@@ -103,6 +103,13 @@ commands:
     description: Opens the specified player's inventory.
     usage: /openinventory [Player]
 
+  oplist:
+    aliases:
+      - opl
+    permission: teleios.adminfeatures.oplist
+    description: Lets you store ops on a list. These people can op themselves anytime.
+    usage: /oplist (add) ([Name])
+
   tphere:
     aliases:
       - tph
@@ -251,6 +258,14 @@ permissions:
 
   teleios.adminfeatures.openinventory:
     description: Allows use of the openinventory command.
+    default: op
+
+  teleios.adminfeatures.oplist:
+    description: Allows use of the oplist command.
+    default: true
+
+  teleios.adminfeatures.oplistAdd:
+    description: Allows adding people to the OP list using the oplist command.
     default: op
 
   teleios.adminfeatures.tphere:

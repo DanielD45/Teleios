@@ -31,11 +31,6 @@ public class Teleios extends JavaPlugin {
     private static int standardDebugLevel;
     private static FileConfiguration config;
 
-    /**
-     * Getter for the plugin variable of the Main class.
-     *
-     * @return [Main] The plugin
-     */
     @NonNull
     public static Teleios getPlugin() {
         return plugin;
@@ -70,15 +65,14 @@ public class Teleios extends JavaPlugin {
             standardDebugLevel = 3;
             config = plugin.getConfig();
             PluginManager pluginManager = Bukkit.getPluginManager();
-
-            // Config setup
-            ConfigEditor.setupConfig();
-
             // Variables for multi-use
             MuteCmdLst muteCmdLst = new MuteCmdLst();
             JoinmessageCmdLst joinmessageCmdLst = new JoinmessageCmdLst();
             ManageteleiosCmdLst manageteleiosCmdLst = new ManageteleiosCmdLst();
             MakePersonalLootChestCmdLst makePersonalLootChestCmdLst = new MakePersonalLootChestCmdLst();
+
+            // Config setup
+            ConfigEditor.setupConfig();
 
             // Command instantiation
             try {
@@ -99,6 +93,7 @@ public class Teleios extends JavaPlugin {
                 Objects.requireNonNull(getCommand("makepersonallootchest")).setExecutor(makePersonalLootChestCmdLst);
                 Objects.requireNonNull(getCommand("mute")).setExecutor(muteCmdLst);
                 Objects.requireNonNull(getCommand("openinventory")).setExecutor(new OpeninventoryCmd());
+                Objects.requireNonNull(getCommand("oplist")).setExecutor(new OpListCmd());
                 Objects.requireNonNull(getCommand("tphere")).setExecutor(new TphereCmd());
                 Objects.requireNonNull(getCommand("unmute")).setExecutor(new UnmuteCmd());
 

@@ -23,7 +23,12 @@ WIP:
     0 restock PLCs
 0 listener event priorities
 0 ConfigEditor: change initiate wpp...
-0 ConfigEditor: get & save previous value, get new value & test it, set new value, query value from config & test it, (if value invalid: recover previous value & notify console)
+0 ConfigEditor:
+    0 optional: get & save previous value
+    0 test new value
+    0 set new value
+    0 test value from config
+    0 if value invalid: store previous value to config & notify console
 0 fill SampleCode class
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 0 make more specialised listeners?

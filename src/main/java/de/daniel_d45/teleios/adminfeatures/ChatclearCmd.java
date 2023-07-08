@@ -5,9 +5,14 @@
 
 package de.daniel_d45.teleios.adminfeatures;
 
+import de.daniel_d45.teleios.core.ConfigEditor;
+import de.daniel_d45.teleios.core.MessageMaster;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+
+import java.util.Arrays;
 
 
 public class ChatclearCmd implements CommandExecutor {
@@ -15,8 +20,7 @@ public class ChatclearCmd implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        throw new NullPointerException();
-        /*
+
         // Activation state check
         if (!ConfigEditor.isActive("AdminFeatures.All")) {
             sender.sendMessage("§cThis command is not active.");
@@ -32,7 +36,7 @@ public class ChatclearCmd implements CommandExecutor {
         Bukkit.broadcastMessage("§aThe chat has been cleared!");
         MessageMaster.sendExitMessage("ChatclearCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
         return true;
-    */
+
     }
 
 }

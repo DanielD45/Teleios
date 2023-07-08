@@ -65,6 +65,8 @@ public class HealCmd implements CommandExecutor {
                     // Specifies /heal [Player]
                     try {
 
+                        // TODO: heal the specified player, not the sender
+
                         double amount = Double.parseDouble(args[0]);
 
                         // Sender player check
@@ -151,6 +153,7 @@ public class HealCmd implements CommandExecutor {
                     }
                 case 2:
                     // Specifies /heal [Player]|[Amount]
+                    // TODO: revise
                     try {
 
                         Player target = Bukkit.getPlayer(args[0]);
@@ -186,7 +189,7 @@ public class HealCmd implements CommandExecutor {
 
                         }
                         else {
-                            // The sender is the target.
+                            // The sender is the target
 
                             Player player = (Player) sender;
 
@@ -215,7 +218,7 @@ public class HealCmd implements CommandExecutor {
                         return false;
                     }
                 default:
-                    // Wrong amount of arguments.
+                    // Wrong amount of arguments
                     sender.sendMessage("§cWrong amount of arguments!");
                     MessageMaster.sendExitMessage("WarppointCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong amount of arguments.");
                     return false;

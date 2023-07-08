@@ -50,16 +50,14 @@ public class TphereCmd implements CommandExecutor {
 
                 // Target sender check
                 if (target == sender) {
-                    // The player wants to teleport to himself
                     player.sendMessage("§cCan't teleport you to yourself!");
                     MessageMaster.sendExitMessage("TphereCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender wants to teleport to himself.");
-                }
-                else {
-                    target.teleport(player.getLocation());
-                    target.sendMessage("§aTeleported §6" + target.getName() + " §ato you!");
-                    MessageMaster.sendExitMessage("TphereCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
+                    return true;
                 }
 
+                target.teleport(player.getLocation());
+                target.sendMessage("§aTeleported §6" + target.getName() + " §ato you!");
+                MessageMaster.sendExitMessage("TphereCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
                 return true;
             } catch (Exception e) {
                 MessageMaster.sendFailMessage("TphereCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", e);
