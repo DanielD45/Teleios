@@ -1,11 +1,11 @@
 /*
- Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
- Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
+ 2020-2023
+ Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
+ Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
 
 package de.daniel_d45.teleios.passiveskills;
 
-import de.daniel_d45.teleios.core.MessageMaster;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -36,35 +36,22 @@ public class LumberjackSkill extends Skill {
      * LumberjackSkill includes all types of log and stem.
      */
     private static void fillMaterials() {
-        try {
 
-            // TODO: Keep up-to-date
-            listedMaterials.clear();
-            listedMaterials.put(Material.OAK_LOG, 1.0);
-            listedMaterials.put(Material.BIRCH_LOG, 1.0);
-            listedMaterials.put(Material.SPRUCE_LOG, 1.0);
-            listedMaterials.put(Material.DARK_OAK_LOG, 1.0);
-            listedMaterials.put(Material.ACACIA_LOG, 1.0);
-            listedMaterials.put(Material.JUNGLE_LOG, 1.0);
-            listedMaterials.put(Material.CRIMSON_STEM, 1.0);
-            listedMaterials.put(Material.WARPED_STEM, 1.0);
-
-            MessageMaster.sendExitMessage("LumberjackSkill", "fillMaterials()", "success");
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("LumberjackSkill", "fillMaterials()", e);
-        }
+        // TODO: Keep up-to-date
+        listedMaterials.clear();
+        listedMaterials.put(Material.OAK_LOG, 1.0);
+        listedMaterials.put(Material.BIRCH_LOG, 1.0);
+        listedMaterials.put(Material.SPRUCE_LOG, 1.0);
+        listedMaterials.put(Material.DARK_OAK_LOG, 1.0);
+        listedMaterials.put(Material.ACACIA_LOG, 1.0);
+        listedMaterials.put(Material.JUNGLE_LOG, 1.0);
+        listedMaterials.put(Material.CRIMSON_STEM, 1.0);
+        listedMaterials.put(Material.WARPED_STEM, 1.0);
     }
 
     public static void use() {
-        try {
-
-            // Adds an object of this class to the list of used skills for access to this class's variables
-            PassiveSkills.addUsedSkill(new LumberjackSkill());
-
-            MessageMaster.sendExitMessage("LumberjackSkill", "use()", "success");
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("LumberjackSkill", "use()", e);
-        }
+        // Adds an object of this class to the list of used skills for access to this class's variables
+        PassiveSkills.addUsedSkill(new LumberjackSkill());
     }
 
     /**
@@ -72,14 +59,7 @@ public class LumberjackSkill extends Skill {
      * operating the LumberSkill class to prevent problems.
      */
     public void setup() {
-        try {
-
-            fillMaterials();
-
-            MessageMaster.sendExitMessage("LumberjackSkill", "setup()", "success");
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("LumberjackSkill", "setup()", e);
-        }
+        fillMaterials();
     }
 
     @Override
@@ -103,16 +83,7 @@ public class LumberjackSkill extends Skill {
      */
     @Override
     public String getSkillName() {
-        try {
-
-            String name = skillName;
-
-            MessageMaster.sendExitMessage("LumberjackSkill", "getSkillName()", "success");
-            return name;
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("LumberjackSkill", "getSkillName()", e);
-            return null;
-        }
+        return skillName;
     }
 
     /**
@@ -123,14 +94,8 @@ public class LumberjackSkill extends Skill {
     @Override
     public HashMap<Material, Double> getListedMaterials() {
         try {
-
-            HashMap<Material, Double> ret = listedMaterials;
-
-            MessageMaster.sendExitMessage("LumberjackSkill", "getListedMaterials()", "success");
-
-            return ret;
+            return listedMaterials;
         } catch (Exception e) {
-            MessageMaster.sendFailMessage("LumberjackSkill", "getListedMaterials()", e);
             return null;
         }
     }
@@ -145,14 +110,7 @@ public class LumberjackSkill extends Skill {
      */
     @Override
     public void increaseBlockValue(Player player, Material material) {
-        try {
-
-            PassiveSkills.increaseBlockValue(player.getName(), skillName, listedMaterials.get(material));
-
-            MessageMaster.sendExitMessage("LumberjackSkill", "increaseBlockValue(" + player + ", " + material + ")", "success");
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("LumberjackSkill", "increaseBlockValue(" + player + ", " + material + ")", e);
-        }
+        PassiveSkills.increaseBlockValue(player.getName(), skillName, listedMaterials.get(material));
     }
 
 }

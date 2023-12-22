@@ -1,12 +1,12 @@
 /*
- Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
- Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
+ 2020-2023
+ Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
+ Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
 
 package de.daniel_d45.teleios.passiveskills;
 
 import de.daniel_d45.teleios.core.ConfigEditor;
-import de.daniel_d45.teleios.core.MessageMaster;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -25,24 +25,18 @@ public class BlockPlaceLstPS implements Listener {
      */
     @EventHandler(priority = EventPriority.NORMAL)
     public void onBlockPlacePS(BlockPlaceEvent event) {
-        try {
 
-            // TODO: Only log a limited amount of blocks at a time and override?
-            // Activationstate check
-            if (!ConfigEditor.isActive("PassiveSkills.All")) {
-                MessageMaster.sendExitMessage("BlockPlaceListenerPS", "onBlockPlacePS(" + event + ")", "the PassiveSkills segment is not active.");
-                return;
-            }
-
-            Block block = event.getBlockPlaced();
-            String entryName = block.getWorld().getName() + "," + block.getX() + "," + block.getY() + "," + block.getZ();
-            // Logs the block as placed
-            ConfigEditor.set("PlacedBlocks." + entryName, block.getLocation());
-
-            MessageMaster.sendExitMessage("BlockPlaceListenerPS", "onBlockPlacePS(" + event + ")", "success");
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("BlockPlaceListenerPS", "onBlockPlacePS(" + event + ")", e);
+        // TODO: Only log a limited amount of blocks at a time and override?
+        // Activationstate check
+        if (!ConfigEditor.isActive("PassiveSkills.All")) {
+            return;
         }
+
+        Block block = event.getBlockPlaced();
+        String entryName = block.getWorld().getName() + "," + block.getX() + "," + block.getY() + "," + block.getZ();
+        // Logs the block as placed
+        ConfigEditor.set("PlacedBlocks." + entryName, block.getLocation());
+
     }
 
 }

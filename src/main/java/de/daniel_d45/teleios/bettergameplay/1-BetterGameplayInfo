@@ -1,11 +1,15 @@
 - Features:
 
+Done:
 1 Enderchest command
 1 Teleporters:
     1 distance calculation with Pythagoras
     1 left-clicking on teleporters opens the interactive inventory
     1 case insensitive warping
     1 the teleporter orientation is the player's orientation when placing it
+
+WIP:
+1 Teleporters:
     0 tablist for /warp [TeleporterName]|[WarppointName]
     0 teleporters with restricted access
     0 bug fix: yaw reset on interacton with teleporter
@@ -19,38 +23,31 @@
     0 does teleporting to the End island start platform destroy teleporters placed there?
     0 bug hunter script:
         0 search teleporter positions, if (cave) air: drop teleporter and delete from config
+
+Planned:
 0 move config to world folder
 0 Villagers are easy to reroll when not traded with yet
-0 enchantments on items upgrade over time (e.g. Sharpness I->II) (xp collected?)
-0 save more stats (used durability)
-0 Printstat command: prints the player's stats to the chat
-0 block which can salvage items/blocks (like wooden stairs)
+0 vanity config cmd (tablist):
+/vanity
+    self:
+        arrows:
+            clear: 0 clear arrow effects
+            particle: 0 make all particles available
+        potions:
+            dimParticles?: 0 true/false
+    others: 0 swith other player's particles on/off
 0 right click on shulker boxes in inventory to open them
-0 a bow which shoots straight (very fast)
-0 chickens rarely drop special loot instead of eggs?
-0 swords can be upgraded in material, keeping the enchantments (crafting recipe?)
+0 deconstructor block? which can salvage items/blocks (like wooden stairs)
 0 quarz blocks can be crafted into 9 quarz (+others?)
 0 possibility to get player heads and mini blocks for decorations (crafting recipe)
-0 machines which can harvest crops
-0 an item with charge building over time which is used to accelerate the player
-0 special noob mode?
-    0 certain players can be specified
-    0 less damage through monsters?
-    0 more durability?
-    0 less hunger?
-    0 faster health regen?
-0 monsters get stronger the more you kill
-0 riding animals (horses, donkeys, pigs) level health, speed and jump height through being ridden
-0 tombstones which save your items on death
-0 elytra with 8 armor value
-0 active power-up/ability which debuffs monsters for a limited time
+0 rideable animals (horses, donkeys, pigs) level health?, speed and jump height through being ridden
+0 death:
+    0 tombstones which save your items on death
+    0 get a compass leading to point of death
+    0 corpse beacon
 0 Mending has multiple levels, higher levels repair more for the same amount of xp
-0 duplication enchantment for bows with a chance to fire two arrows at once
 0 knockback doesn't knock back skeletons
-0 enchantments with higher levels than vanilla (unlockable?)
 0 throwable item to build temporary floating blocks
-0 compass that shows the way to the (players') nearest shulker box
-0 jungle saplings drop more often
 0 heal iron golems with iron
 0 craft dirt from bone meal and wood
 0 craft dirt from bone meal and wood
@@ -63,12 +60,25 @@
 0 eliminate trading limits
 0 elytra's armor can be upgraded with nether stars
 0 loot chests with player-specific inventories
-0 stats about:
+0 more stats:
+    0 /printstats command: prints the player's stats to the chat
     0 durability used
+    0 list broken tools
     0 strongest hit
     0 % of crit hits
     0 resources used for crafting
-    0 items burned/destoryed
+    0 list items burned/destroyed (cactus, void) (global?)
+0 enchantments:
+    0 higher levels than vanilla (unlockable?)
+    0 enchantments on items upgrade over time (e.g. Sharpness I->II) (xp collected?)
+    0 duplication (bows): chance to fire two arrows at once
+    0 (over)penetration (bows): arrows fly through x amount of blocks (material makes a difference?)
+    0 destruction (bows): arrows break blocks (material dependent)
+    0 homing (bows): homing arrows
+    0 speed (bows): arrows have more speed
+0 compass that shows the way to the (players') nearest shulker box
+0 set a compass to anything (block/entity)
+0 paintable maps
 
 0 Flow: prevents unwanted gameplay
     0 inventory for player-specific settings
@@ -78,12 +88,21 @@
         0 prevent falling with the elytra in inventory?
     0 when falling into the void with or dropping the dragon egg -> replaces the dragon egg
 
+0 Special Monsters:
+    0 Tanky Creeper (less knockback)
+    0 Magic Zombie (boosts nearby monsters)
+    0 Invisible Spider
+    0 Wizard Skeleton (every Skeleton uses special effect arrows)
+
+
+Decide:
 0 Upgrade Coins:
     0 ? item
     0 obtainable through:
         0 killing
         0 mining
         0 loot chests
+        0 generated in the world (~ fairy souls)
     0 /upgrade to open an upgrade inventory
     0 can be used in upgrade inv to upgrade:
         0 worse targeting by certain monsters
@@ -92,7 +111,6 @@
         0 food consumption?
         0 potion resistance?
         0 potion affinity?
-
 0 [levelling system]:
     0 every different material players collect gives them a reward?
     0 collection system that unlocks crafting recipes?
@@ -107,8 +125,7 @@
         0 dodging
         0 XP collected
         0 higher chance for good enchantments?
-
-0 Emerald Weapons:
+0 Emerald Weapons (option 1):
     0 emerald ore sometimes drops "energised emerald" (enchanted emerald) used to craft equipment on diamond basis
     0 emerald sword:
         0 levels through killing slime with it
@@ -127,15 +144,10 @@
         0 3x damage?
         0 50% armor ignore?
         0 emerald block in helmet slot (0 doesn't drop)
-0 Emerald Weapons alt version:
+0 Emerald Weapons (option 2):
     0 tools are charged by "energised emerald" and use charge when using their abilities
     0 emerald monsters drop "energised emerald blocks"
     0 tools' charge meter and charge rate can be upgraded by combining the tool with an "energised emerald block" in an anvil
-0 Special Monsters:
-    0 Tanky Creeper (less knockback)
-    0 Magic Zombie (boosts nearby monsters)
-    0 Invisible Spider
-    0 Wizard Skeleton (every Skeleton uses special effect arrows)
 0 PassiveSkills:
     1 save data to config
     1 list all players with their skills
@@ -146,11 +158,32 @@
     1 search and use config on plugin start
     0 command to show skill leaderboards
     0 command to remove players
+0 custom dungeons
+0 chickens rarely drop special loot instead of eggs?
+0 swords can be upgraded in material, keeping the enchantments (crafting recipe? high xp cost?)
+0 [automation]:
+    0 machines which can harvest crops
+    0 manufacturing/assembling blocks (arrangement of "atoms" is important)
+0 an item with charge building over time which is used to accelerate the player
+0 special noob mode?
+    0 certain players can be specified
+    0 less damage through monsters?
+    0 more durability?
+    0 less hunger?
+    0 faster health regen?
+    0 less monster target range?
+0 elytra with 8 armor value?
+0 special abilities/combos:
+    0 active power-up/ability which debuffs monsters for a limited time
+    0 tool abilities
+    0 passive abilities (speed)?
+
 
 - Valid and standard argument values:
 
 ArgumentName (StandardValue): Range
 BlocksPerPearl (100): bpp > 0; bpp <= Integer.MAX_VALUE;
+
 
 - Config file structure example:
 

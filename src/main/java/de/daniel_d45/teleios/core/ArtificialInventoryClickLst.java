@@ -1,6 +1,7 @@
 /*
- Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
- Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
+ 2020-2023
+ Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
+ Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
 
 package de.daniel_d45.teleios.core;
@@ -21,26 +22,18 @@ public class ArtificialInventoryClickLst implements Listener {
      */
     @EventHandler(priority = EventPriority.LOW)
     public void onArtificialInventoryClick(InventoryClickEvent event) {
-        try {
 
-            Inventory inventory = event.getClickedInventory();
+        Inventory inventory = event.getClickedInventory();
 
-            // TODO: Necessary?
-            // No inventory check
-            if (inventory == null) {
-                MessageMaster.sendExitMessage("ArtificialInventoryClickListener", "onArtificialInventoryClick(" + event + ")", "no inventory clicked.");
-                return;
-            }
-
-            if (inventory.getHolder() instanceof ArtificialInventory) {
-                // Cancels interaction with artificial inventories
-                event.setCancelled(true);
-                MessageMaster.sendExitMessage("ArtificialInventoryClickListener", "onArtificialInventoryClick(" + event + ")", "success");
-            }
-
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ArtificialInventoryClickListener", "onArtificialInventoryClick(" + event + ")", e);
+        // No inventory check
+        if (inventory == null) {
+            return;
         }
+
+        if (inventory.getHolder() instanceof NoInteractionInventories) {
+            event.setCancelled(true);
+        }
+
     }
 
 }

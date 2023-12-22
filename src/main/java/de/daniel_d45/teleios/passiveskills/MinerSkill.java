@@ -1,6 +1,7 @@
 /*
- Copyright (c) 2020-2022 Daniel_D45 <https://github.com/DanielD45>
- Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
+ 2020-2023
+ Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
+ Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
 
 // TODO: Copy and adapt the LumberjackSkill class.
@@ -10,8 +11,6 @@ package de.daniel_d45.teleios.passiveskills;
 /*
 public class MinerSkill extends Skill {
 
-
-    /*
     @Override
     public String getSkillName() {
         return null;

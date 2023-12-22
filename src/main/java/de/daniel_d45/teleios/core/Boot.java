@@ -1,6 +1,7 @@
 /*
- Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
- Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
+ 2020-2023
+ Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
+ Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
 
 package de.daniel_d45.teleios.core;
@@ -14,15 +15,10 @@ package de.daniel_d45.teleios.core;
 public class Boot {
 
     public static void main(String[] args) {
-        try {
 
-            // Program test room
+        // Program test room
 
-            // End of program test room
-            MessageMaster.sendExitMessage("Boot", "main()", "success");
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("Boot", "main()", e);
-        }
+        // End of program test room
 
     }
 

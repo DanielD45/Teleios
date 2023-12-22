@@ -1,6 +1,7 @@
 /*
- Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
- Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
+ 2020-2023
+ Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
+ Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
 
 package de.daniel_d45.teleios.core;
@@ -17,7 +18,6 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Objects;
 import java.util.Set;
 
 
@@ -30,150 +30,75 @@ public class ConfigEditor {
 
     private static final FileConfiguration config = Teleios.getConfigObject();
 
-    public static int getDebugLevel() {
-        int debugLevel;
-        try {
-            debugLevel = Integer.parseInt(Objects.requireNonNull(get("DebugLevel")).toString());
-        } catch (Exception e) {
-            Teleios.getServerObject().getConsoleSender().sendMessage(MessageMaster.getPluginPrefix() + "§4ConfigEditor§c class: Warning in method §4getDebugLevel()§c: the DebugLevel is invalid!");
-            debugLevel = Teleios.getStandardDebugLevel();
-        }
-        return debugLevel;
-    }
-
     public static void setupConfig() {
-        try {
 
-            initiateDebugLevel();
-            initiateJoinMessage();
-            initiateActivationstates();
-            initiateWarppoints();
-            initiateTeleporters();
-            initiateBlocksPerPearl();
+        initiateJoinMessage();
+        initiateActivationstates();
+        initiateWarppoints();
+        initiateTeleporters();
+        initiateBlocksPerPearl();
 
-            for (Player currentPlayer : Bukkit.getOnlinePlayers()) {
-                BetterGameplay.initiateWarppouch(currentPlayer.getName());
-                PassiveSkills.initiatePlayerRecords(currentPlayer.getName());
-            }
-
-            initiatePersonalLootChests();
-
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ConfigEditor", "setupConfig()", e);
+        for (Player currentPlayer : Bukkit.getOnlinePlayers()) {
+            BetterGameplay.initiateWarppouch(currentPlayer.getName());
+            PassiveSkills.initiatePlayerRecords(currentPlayer.getName());
         }
-    }
 
-    private static void initiateDebugLevel() {
-        try {
-
-            // Tries to get the debug level
-            int debugLevel = Integer.parseInt(config.get("DebugLevel").toString());
-
-            if (debugLevel > 10 || debugLevel < 0) {
-                // Debug level is out of bounds
-                // Sets the debug level to the standard value
-                ConfigEditor.set("DebugLevel", Teleios.getStandardDebugLevel());
-            }
-        } catch (NullPointerException e) {
-            // Sets the debug level to the standard value of 1
-            ConfigEditor.set("DebugLevel", 1);
-            MessageMaster.sendExitMessage("ConfigEditor", "initiateDebugLevel()", "the DebugLevel path doesn't exist.");
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ConfigEditor", "initiateDebugLevel()", e);
-        }
+        initiatePersonalLootChests();
     }
 
     private static void initiateJoinMessage() {
-        try {
-
-            if (ConfigEditor.get("JoinMessage") == null || !ConfigEditor.get("JoinMessage").equals(true)) {
-
-                ConfigEditor.set("JoinMessage", false);
-            }
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ConfigEditor", "initiateJoinMessage()", e);
+        // Initiates JoinMessage
+        if (!ConfigEditor.containsPath("JoinMessage")) {
+            ConfigEditor.set("JoinMessage", false);
+            return;
+        }
+        // Verifies JoinMessage value
+        if (!ConfigEditor.get("JoinMessage").equals(true)) {
+            ConfigEditor.set("JoinMessage", false);
         }
     }
 
     private static void initiateActivationstates() {
-        try {
+        ArrayList<String> paths = new ArrayList<>();
 
-            ArrayList<String> paths = new ArrayList<>();
+        Collections.addAll(paths, AdminFeatures.getActivationstatePaths());
+        Collections.addAll(paths, BetterGameplay.getActivationstatePaths());
+        Collections.addAll(paths, PassiveSkills.getActivationstatePaths());
+        Collections.addAll(paths, WorldMaster.getActivationstatePaths());
 
-            // TODO: Keep up-to-date
-            Collections.addAll(paths, AdminFeatures.getActivationstatePaths());
-
-            Collections.addAll(paths, BetterGameplay.getActivationstatePaths());
-
-            Collections.addAll(paths, PassiveSkills.getActivationstatePaths());
-
-            Collections.addAll(paths, WorldMaster.getActivationstatePaths());
-
-            // Initiates the Activationstates for all the segments and functions
-            for (String current : paths) {
-                if (!isActive(current)) {
-                    set("Activationstates." + current, "OFF");
-                }
+        // Initiates the Activationstates for all the segments and functions
+        for (String current : paths) {
+            if (!isActive(current)) {
+                set("Activationstates." + current, "OFF");
             }
-
-            RecipeManager.enableTeleporterRecipe(isActive("BetterGameplay.Teleporters"));
-
-            MessageMaster.sendExitMessage("ConfigEditor", "initiateActivationstates()", "success");
-        } catch (IllegalStateException e) {
-            MessageMaster.sendWarningMessage("ConfigEditor", "initiateActivationstates()", "IllegalStateException");
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ConfigEditor", "initiateActivationstates()", e);
         }
+        RecipeManager.enableTeleporterRecipe(isActive("BetterGameplay.Teleporters"));
     }
 
     private static void initiateWarppoints() {
-        try {
-
-            if (!ConfigEditor.containsPath("Warppoints")) {
-                ConfigEditor.set("Warppoints.Setup", "setup");
-                ConfigEditor.set("Warppoints.Setup", null);
-            }
-
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ConfigEditor", "initiateWarppoints()", e);
+        if (!ConfigEditor.containsPath("Warppoints")) {
+            ConfigEditor.set("Warppoints.Setup", "setup");
+            ConfigEditor.set("Warppoints.Setup", null);
         }
     }
 
     private static void initiateTeleporters() {
-        try {
-
-            if (!ConfigEditor.containsPath("Teleporters")) {
-                ConfigEditor.set("Teleporters.Setup", "setup");
-                ConfigEditor.set("Teleporters.Setup", null);
-            }
-
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ConfigEditor", "initiateTeleporters()", e);
+        if (!ConfigEditor.containsPath("Teleporters")) {
+            ConfigEditor.set("Teleporters.Setup", "setup");
+            ConfigEditor.set("Teleporters.Setup", null);
         }
     }
 
     private static void initiateBlocksPerPearl() {
-        try {
-
-            if (!ConfigEditor.containsPath("BlocksPerPearl")) {
-                ConfigEditor.set("BlocksPerPearl", 100);
-            }
-
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ConfigEditor", "initiateBlocksPerPearl()", e);
+        if (!ConfigEditor.containsPath("BlocksPerPearl")) {
+            ConfigEditor.set("BlocksPerPearl", 300);
         }
     }
 
     private static void initiatePersonalLootChests() {
-        try {
-
-            if (!ConfigEditor.containsPath("PersonalLootChests")) {
-                ConfigEditor.set("PersonalLootChests.Setup", "setup");
-                ConfigEditor.set("PersonalLootChests.Setup", null);
-            }
-
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ConfigEditor", "initiatePersonalLootChests()", e);
+        if (!ConfigEditor.containsPath("PersonalLootChests")) {
+            ConfigEditor.set("PersonalLootChests.Setup", "setup");
+            ConfigEditor.set("PersonalLootChests.Setup", null);
         }
     }
 
@@ -185,57 +110,18 @@ public class ConfigEditor {
      * failed.
      */
     public static boolean isActive(String subPath) {
-        try {
-
-            // TODO: Is null check working?
-            if (get("Activationstates." + subPath) != null && get("Activationstates." + subPath).equals("ON")) {
-
-                MessageMaster.sendExitMessage("ConfigEditor", "isActive(" + subPath + "), segment is active", "success");
-                return true;
-            }
-            else {
-                MessageMaster.sendExitMessage("ConfigEditor", "isActive(" + subPath + "), segment is not active", "success");
-                return false;
-            }
-
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ConfigEditor", "isActive(" + subPath + ")", e);
+        if (get("Activationstates." + subPath) == null) {
             return false;
         }
+        return get("Activationstates." + subPath).equals("ON");
     }
-
-    /*
-    public static void setDebugLevel(int level) {
-        try {
-
-            if (level >= 0) {
-                ConfigEditor.set("DebugLevel", level);
-            }
-            else {
-                MessageMaster.sendSkipMessage("ConfigEditor", "setDebugLevel(" + level + "), the specified level is invalid.");
-                return;
-            }
-
-            MessageMaster.sendExitMessage("ConfigEditor", "setDebugLevel(" + level + ")");
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ConfigEditor", "setDebugLevel(" + level + ")", e);
-            ConfigEditor.set("DebugLevel", Teleios.getStandardDebugLevel());
-        }
-    }
-*/
 
     public static void switchActivationstate(String subPath) {
-        try {
-
-            if (isActive(subPath)) {
-                set("Activationstates." + subPath, "OFF");
-            }
-            else {
-                set("Activationstates." + subPath, "ON");
-            }
-
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ConfigEditor", "switchActivationstate(" + subPath + ")", e);
+        if (isActive(subPath)) {
+            set("Activationstates." + subPath, "OFF");
+        }
+        else {
+            set("Activationstates." + subPath, "ON");
         }
     }
 
@@ -246,15 +132,8 @@ public class ConfigEditor {
      * @param value [Object] value
      */
     public static void set(String path, Object value) {
-        try {
-
-            config.set(path, value);
-            saveConfig();
-
-            MessageMaster.sendExitMessage("ConfigEditor", "set(" + path + ", " + value + ")", "success");
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ConfigEditor", "set(" + path + ", " + value + ")", e);
-        }
+        config.set(path, value);
+        saveConfig();
     }
 
     /**
@@ -263,16 +142,7 @@ public class ConfigEditor {
      * @param path [String] The path to get the value from.
      */
     public static Object get(String path) {
-        try {
-
-            Object value = config.get(path);
-
-            //MessageMaster.sendExitMessage("ConfigEditor", "get(" + path + ")");
-            return value;
-        } catch (Exception e) {
-            // MessageMaster.sendFailMessage("ConfigEditor", "get(" + path + ")", e);
-            return null;
-        }
+        return config.get(path);
     }
 
     /**
@@ -282,29 +152,10 @@ public class ConfigEditor {
      * @return [Set<String>] The specified section's first level keys.
      */
     public static Set<String> getSectionKeys(String path) {
-        try {
-
-            ConfigurationSection configSection = config.getConfigurationSection(path);
-            // Represents only the direct keys
-            Set<String> keys = configSection.getKeys(false);
-
-            if (keys.toArray().length > 0) {
-                // Found keys
-                MessageMaster.sendExitMessage("ConfigEditor", "getSectionKeys(" + path + ")", "success");
-            }
-            else {
-                // No keys found
-                MessageMaster.sendExitMessage("ConfigEditor", "getSectionKeys(" + path + ")", "no keys found");
-            }
-
-            return keys;
-        } catch (NullPointerException e) {
-            MessageMaster.sendExitMessage("ConfigEditor", "getSectionKeys(" + path + ")", "the path doesn't exist.");
-            return null;
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ConfigEditor", "getSectionKeys(" + path + ")", e);
-            return null;
-        }
+        ConfigurationSection configSection = config.getConfigurationSection(path);
+        if (configSection == null) return null;
+        // Represents only the direct keys
+        return configSection.getKeys(false);
     }
 
     /**
@@ -314,19 +165,7 @@ public class ConfigEditor {
      * @return isThere [boolean] Whether the path is contained.
      */
     public static boolean containsPath(String path) {
-        try {
-
-            boolean isThere = config.contains(path, false);
-
-            MessageMaster.sendExitMessage("ConfigEditor", "containsPath(" + path + ")", "success");
-            return isThere;
-        } catch (NullPointerException e) {
-            MessageMaster.sendExitMessage("ConfigEditor", "containsPath(" + path + ")", "the path doesn't exist.");
-            return false;
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ConfigEditor", "containsPath(" + path + ")", e);
-            return false;
-        }
+        return config.contains(path, false);
     }
 
     /**
@@ -337,20 +176,8 @@ public class ConfigEditor {
      * @return hasValue [boolean] Whether the path is contained.
      */
     public static boolean hasValue(String path, Object value) {
-        try {
-
-            Object foundValue = get(path);
-            boolean hasValue = BetterMethods.betterEquals(foundValue, value);
-
-            MessageMaster.sendExitMessage("ConfigEditor", "hasValue(" + path + ")", "success");
-            return hasValue;
-        } catch (NullPointerException e) {
-            MessageMaster.sendExitMessage("ConfigEditor", "hasValue(" + path + ")", "the path doesn't exist.");
-            return false;
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ConfigEditor", "hasValue(" + path + ")", e);
-            return false;
-        }
+        Object foundValue = get(path);
+        return GlobalMethods.betterEquals(foundValue, value);
     }
 
     /**
@@ -358,29 +185,15 @@ public class ConfigEditor {
      * (keys).
      */
     public static void clearPath(String path) {
-        try {
-
-            config.set(path, null);
-            saveConfig();
-
-            MessageMaster.sendExitMessage("ConfigEditor", "clearPath(" + path + ")", "success");
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ConfigEditor", "clearPath(" + path + ")", e);
-        }
+        config.set(path, null);
+        saveConfig();
     }
 
     /**
      * Saves the config file.
      */
     private static void saveConfig() {
-        try {
-
-            Teleios.getPlugin().saveConfig();
-
-            MessageMaster.sendExitMessage("ConfigEditor", "saveConfig()", "success");
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ConfigEditor", "saveConfig()", e);
-        }
+        Teleios.getPlugin().saveConfig();
     }
 
 }

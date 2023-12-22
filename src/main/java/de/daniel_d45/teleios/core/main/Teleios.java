@@ -1,13 +1,17 @@
 /*
- Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
- Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
+ 2020-2023
+ Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
+ Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
 
 package de.daniel_d45.teleios.core.main;
 
 import de.daniel_d45.teleios.adminfeatures.*;
 import de.daniel_d45.teleios.bettergameplay.*;
-import de.daniel_d45.teleios.core.*;
+import de.daniel_d45.teleios.core.ArtificialInventoryClickLst;
+import de.daniel_d45.teleios.core.ConfigEditor;
+import de.daniel_d45.teleios.core.JoinLst;
+import de.daniel_d45.teleios.core.ManageteleiosCmdLst;
 import de.daniel_d45.teleios.passiveskills.SkillsCmd;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
@@ -28,7 +32,7 @@ public class Teleios extends JavaPlugin {
 
     private static Teleios plugin;
     private static Server server;
-    private static int standardDebugLevel;
+    static String pluginPrefix;
     private static FileConfiguration config;
 
     @NonNull
@@ -40,8 +44,8 @@ public class Teleios extends JavaPlugin {
         return server;
     }
 
-    public static int getStandardDebugLevel() {
-        return standardDebugLevel;
+    public static String getPluginPrefix() {
+        return pluginPrefix;
     }
 
     public static FileConfiguration getConfigObject() {
@@ -57,106 +61,100 @@ public class Teleios extends JavaPlugin {
      */
     @Override
     public void onEnable() {
-        try {
 
-            // Instantiates the variables of this class
-            plugin = this;
-            server = plugin.getServer();
-            standardDebugLevel = 3;
-            config = plugin.getConfig();
-            PluginManager pluginManager = Bukkit.getPluginManager();
-            // Variables for multi-use
-            MuteCmdLst muteCmdLst = new MuteCmdLst();
-            JoinmessageCmdLst joinmessageCmdLst = new JoinmessageCmdLst();
-            ManageteleiosCmdLst manageteleiosCmdLst = new ManageteleiosCmdLst();
-            MakePersonalLootChestCmdLst makePersonalLootChestCmdLst = new MakePersonalLootChestCmdLst();
+        // Instantiates the variables of this class
+        plugin = this;
+        server = plugin.getServer();
+        pluginPrefix = "§5[Teleios Plugin]§r ";
+        config = plugin.getConfig();
+        PluginManager pluginManager = Bukkit.getPluginManager();
+        // Variables for multi-use
+        MuteCmdLst muteCmdLst = new MuteCmdLst();
+        JoinmessageCmdLst joinmessageCmdLst = new JoinmessageCmdLst();
+        ManageteleiosCmdLst manageteleiosCmdLst = new ManageteleiosCmdLst();
+        MakePersonalLootChestCmdLst makePersonalLootChestCmdLst = new MakePersonalLootChestCmdLst();
 
-            // Config setup
-            ConfigEditor.setupConfig();
+        // Config setup
+        ConfigEditor.setupConfig();
 
-            // Command instantiation
-            try {
-                // Objects.requireNonNull() is only there to suppress IDE warnings
+        // Command instantiation
 
-                // AdminFeatures commands
-                Objects.requireNonNull(getCommand("chatclear")).setExecutor(new ChatclearCmd());
-                //getCommand("chatclear").unregister();
-                //getCommand("countdown").setExecutor(new ChatclearCommand());
-                Objects.requireNonNull(getCommand("damage")).setExecutor(new DamageCmd());
-                Objects.requireNonNull(getCommand("gma")).setExecutor(new GmaCmd());
-                Objects.requireNonNull(getCommand("gmc")).setExecutor(new GmcCmd());
-                Objects.requireNonNull(getCommand("gms")).setExecutor(new GmsCmd());
-                Objects.requireNonNull(getCommand("gmsp")).setExecutor(new GmspCmd());
-                Objects.requireNonNull(getCommand("heal")).setExecutor(new HealCmd());
-                Objects.requireNonNull(getCommand("inventories")).setExecutor(new InventoriesCmd());
-                Objects.requireNonNull(getCommand("joinmessage")).setExecutor(joinmessageCmdLst);
-                Objects.requireNonNull(getCommand("makepersonallootchest")).setExecutor(makePersonalLootChestCmdLst);
-                Objects.requireNonNull(getCommand("mute")).setExecutor(muteCmdLst);
-                Objects.requireNonNull(getCommand("openinventory")).setExecutor(new OpeninventoryCmd());
-                Objects.requireNonNull(getCommand("oplist")).setExecutor(new OpListCmd());
-                Objects.requireNonNull(getCommand("tphere")).setExecutor(new TphereCmd());
-                Objects.requireNonNull(getCommand("unmute")).setExecutor(new UnmuteCmd());
+        // Objects.requireNonNull() is only there to suppress IDE warnings
 
-                // BetterGameplay commands
-                Objects.requireNonNull(getCommand("configureteleporter")).setExecutor(new ConfigureteleporterCmd());
-                Objects.requireNonNull(getCommand("enderchest")).setExecutor(new EnderchestCmd());
-                Objects.requireNonNull(getCommand("setblocksperpearl")).setExecutor(new SetblocksperpearlCmd());
-                Objects.requireNonNull(getCommand("warp")).setExecutor(new WarpCmd());
-                Objects.requireNonNull(getCommand("warppoint")).setExecutor(new WarppointCmd());
-                Objects.requireNonNull(getCommand("warppouch")).setExecutor(new WarppouchCmd());
+        // AdminFeatures commands
+        Objects.requireNonNull(getCommand("chatclear")).setExecutor(new ChatclearCmd());
+        //getCommand("chatclear").unregister();
+        //getCommand("countdown").setExecutor(new ChatclearCommand());
+        Objects.requireNonNull(getCommand("damage")).setExecutor(new DamageCmd());
+        Objects.requireNonNull(getCommand("gma")).setExecutor(new GmaCmd());
+        Objects.requireNonNull(getCommand("gmc")).setExecutor(new GmcCmd());
+        Objects.requireNonNull(getCommand("gms")).setExecutor(new GmsCmd());
+        Objects.requireNonNull(getCommand("gmsp")).setExecutor(new GmspCmd());
+        Objects.requireNonNull(getCommand("heal")).setExecutor(new HealCmd());
+        Objects.requireNonNull(getCommand("inventories")).setExecutor(new InventoriesCmd());
+        Objects.requireNonNull(getCommand("joinmessage")).setExecutor(joinmessageCmdLst);
+        Objects.requireNonNull(getCommand("makepersonallootchest")).setExecutor(makePersonalLootChestCmdLst);
+        Objects.requireNonNull(getCommand("mute")).setExecutor(muteCmdLst);
+        Objects.requireNonNull(getCommand("openinventory")).setExecutor(new OpeninventoryCmd());
+        Objects.requireNonNull(getCommand("oplist")).setExecutor(new OpListCmd());
+        Objects.requireNonNull(getCommand("tphere")).setExecutor(new TphereCmd());
+        Objects.requireNonNull(getCommand("unmute")).setExecutor(new UnmuteCmd());
 
-                // Core commands
-                Objects.requireNonNull(getCommand("manageteleios")).setExecutor(manageteleiosCmdLst);
-                Objects.requireNonNull(getCommand("setdebuglevel")).setExecutor(new SetDebugLevelCmd());
+        // BetterGameplay commands
+        Objects.requireNonNull(getCommand("configureteleporter")).setExecutor(new ConfigureteleporterCmd());
+        Objects.requireNonNull(getCommand("enderchest")).setExecutor(new EnderchestCmd());
+        Objects.requireNonNull(getCommand("setblocksperpearl")).setExecutor(new SetblocksperpearlCmd());
+        Objects.requireNonNull(getCommand("warp")).setExecutor(new WarpCmd());
+        //Objects.requireNonNull(getCommand("warp")).setTabCompleter();
+        Objects.requireNonNull(getCommand("warppoint")).setExecutor(new WarppointCmd());
+        Objects.requireNonNull(getCommand("warppouch")).setExecutor(new WarppouchCmd());
 
-                // PassiveSkills commands
-                Objects.requireNonNull(getCommand("skills")).setExecutor(new SkillsCmd());
+        // Core commands
+        Objects.requireNonNull(getCommand("manageteleios")).setExecutor(manageteleiosCmdLst);
 
-            } catch (Exception e) {
-                MessageMaster.sendFailMessage("Teleios", "onEnable(): Command instantiation", e);
-            }
 
-            // Event Listener instantiation
-            try {
+        // PassiveSkills commands
+        Objects.requireNonNull(getCommand("skills")).setExecutor(new SkillsCmd());
 
-                // TODO: reorganise
-                // Core Listeners
-                pluginManager.registerEvents(new ArtificialInventoryClickLst(), plugin);
-                pluginManager.registerEvents(manageteleiosCmdLst, plugin);
-                pluginManager.registerEvents(new JoinListener(), plugin);
 
-                // AdminFeatures Listeners
-                pluginManager.registerEvents(joinmessageCmdLst, plugin);
-                pluginManager.registerEvents(makePersonalLootChestCmdLst, plugin);
+        // Event Listener instantiation
 
-                // BetterGameplay Listeners
-                pluginManager.registerEvents(muteCmdLst, plugin);
-                pluginManager.registerEvents(new PlayerInteractWithTeleporterLst(), plugin);
-                pluginManager.registerEvents(new TeleporterPlaceLst(), plugin);
+        // TODO: reorganise
+        // Core Listeners
+        pluginManager.registerEvents(new ArtificialInventoryClickLst(), plugin);
+        pluginManager.registerEvents(manageteleiosCmdLst, plugin);
+        pluginManager.registerEvents(new JoinLst(), plugin);
 
-                // PassiveSkills Listeners
-                //pM.registerEvents(new BlockBreakListenerPS(), this);
-                //pM.registerEvents(new BlockPlaceListenerPS(), this);
+        // AdminFeatures Listeners
+        pluginManager.registerEvents(joinmessageCmdLst, plugin);
+        pluginManager.registerEvents(makePersonalLootChestCmdLst, plugin);
 
-            } catch (Exception e) {
-                MessageMaster.sendFailMessage("Teleios", "onEnable(): Event listeners instantiation", e);
-            }
+        // BetterGameplay Listeners
+        pluginManager.registerEvents(muteCmdLst, plugin);
+        pluginManager.registerEvents(new PlayerInteractWithTeleporterLst(), plugin);
+        pluginManager.registerEvents(new TeleporterPlaceLst(), plugin);
 
-            MessageMaster.sendEnableMessage();
+        // PassiveSkills Listeners
+        //pM.registerEvents(new BlockBreakListenerPS(), this);
+        //pM.registerEvents(new BlockPlaceListenerPS(), this);
 
-            // Program test room
-            //FileConfiguration testConfig = plugin.getConfig();
-            //testConfig.load("teleios");
-            // End of program test room
-        } catch (Exception e) {
-            System.out.println("§cAn error occured while starting the plugin!");
-            MessageMaster.sendFailMessage("Teleios", "onEnable()", e);
-        }
+
+        String outputMessage = pluginPrefix + "§bPlugin enabled§r";
+
+        // Prints the message to the console
+        Teleios.getServerObject().getConsoleSender().sendMessage(outputMessage);
+
+        // PROGRAM TEST ROOM
+        //FileConfiguration testConfig = plugin.getConfig();
+        //testConfig.load("teleios");
+        // END OF PROGRAM TEST ROOM
     }
 
     @Override
     public void onDisable() {
-        MessageMaster.sendDisableMessage();
+        String outputMessage = pluginPrefix + "§3Plugin disabled§r";
+        // Prints the message to the console
+        Teleios.getServerObject().getConsoleSender().sendMessage(outputMessage);
     }
 
 }

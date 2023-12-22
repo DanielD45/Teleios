@@ -1,5 +1,6 @@
 - Features:
 
+Done:
 1 warp command
 1 warppoint command
 1 heal command
@@ -16,6 +17,8 @@
 1 gms command
 1 gma command
 
+WIP:
+0 /opl list
 0 countdown command
 0 tpa command
 0 tpahere command
@@ -24,8 +27,13 @@
     1 list inventories
     1 remove inventories
     1 open inventories
-0 spawnmanager command
 0 destructionmanager inventory to manage which entities (Creepers, Villagers, TNT...) can destroy what
+0 [world manager] (inv):
+    monsters:
+        0 change NBT data per monster type
+        0 monsters get stronger the more are killed (*)
+    blocks:
+        drops: 0 make drops adaptable (multipliers)
 0 /freezemobs: (toggle) sets all entities' NoAI argument to true and disables mob spawns
 0 /repair: repairs the targeted player's items
 0 make unnecessary arguments irrelevant (i.e. /warp list drgsrilz = /warp list)
@@ -44,3 +52,12 @@
     0 easy Villager dialogue
     0 make sure player doesn't get items from creative
     0 teleporters are free
+0 use arrows/snowballs... for marking (for commands?)
+0 AdminBook (limit to admins)
+0 admin profiles?
+    0 hotkeys for commands/functionality?
+    0 /profile command for profile setup (new server) and adaptation
+
+
+Planned:
+

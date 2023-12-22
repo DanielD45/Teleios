@@ -1,11 +1,11 @@
 /*
- Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
- Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
+ 2020-2023
+ Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
+ Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
 
 package de.daniel_d45.teleios.passiveskills;
 
-import de.daniel_d45.teleios.core.MessageMaster;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -76,19 +76,16 @@ public abstract class Skill {
                 // Adds the current entry to the new list
                 newDrops.add(itemStack);
             }
-
-            MessageMaster.sendExitMessage("Skill", "modifyBlockDrops(" + block + ", " + tool + ", " + player + ")", "success");
             return newDrops;
         } catch (Exception e) {
-            MessageMaster.sendFailMessage("Skill", "modifyBlockDrops(" + block + ", " + tool + ", " + player + ")", e);
             return null;
         }
 
     }
 
     /**
-     * @param playerName
-     * @return
+     * @param playerName [String]
+     * @return [String]
      */
     public String getListSkillsMessage(String playerName) {
         try {
@@ -112,11 +109,8 @@ public abstract class Skill {
                 message = "§eYour §3" + getMessageName() + " §eis on level §3" + PassiveSkills.getLevel(playerName, getSkillName()) + "§e! Your bonus items multiplier is at §3" + bonusMultiplier + " §e meaning you'll get §3" + (int) Math.floor(bonusMultiplier) + "x §ethe block drops of any kind of " + getBlocksType() + " and a chance of §3" + (bonusMultiplier - Math.floor(bonusMultiplier)) * 100 + "% §eto get §3" + (int) Math.floor(bonusMultiplier) + 1 + "x §ethe block drops!";
             }
 
-            MessageMaster.sendExitMessage("Skill", "getMessage()", "success");
-
             return message;
         } catch (Exception e) {
-            MessageMaster.sendFailMessage("Skill", "getMessage()", e);
             return null;
         }
     }
@@ -127,39 +121,33 @@ public abstract class Skill {
      * @param player [Player] The player receiving the level-up.
      */
     public void levelUp(Player player) {
-        try {
 
-            int bonusXp = 100;
-            // Gives the xp specified by bonusXp to the player
-            player.giveExp(bonusXp);
-            // Represents the bonusMultiplier of the player and the skill
-            double bonusMultiplier = PassiveSkills.getBonusMultiplier(player.getName(), getSkillName());
-            // Represents the messages to send the player with a level-up
-            String[] messages = new String[2];
-            messages[0] = "§eYour §3" + getMessageName() + " §eis now on level §3" + PassiveSkills.getLevel(player.getName(), getSkillName() + "§e!");
+        int bonusXp = 100;
+        // Gives the xp specified by bonusXp to the player
+        player.giveExp(bonusXp);
+        // Represents the bonusMultiplier of the player and the skill
+        double bonusMultiplier = PassiveSkills.getBonusMultiplier(player.getName(), getSkillName());
+        // Represents the messages to send the player with a level-up
+        String[] messages = new String[2];
+        messages[0] = "§eYour §3" + getMessageName() + " §eis now on level §3" + PassiveSkills.getLevel(player.getName(), getSkillName() + "§e!");
 
-            // Checks whether the BonusMultiplier is an integer
-            if (bonusMultiplier == Math.floor(bonusMultiplier)) {
-                // Bonus Multiplier is an integer
+        // Checks whether the BonusMultiplier is an integer
+        if (bonusMultiplier == Math.floor(bonusMultiplier)) {
+            // Bonus Multiplier is an integer
 
-                // Casts the BonusMultiplier to int
-                bonusMultiplier = (int) bonusMultiplier;
+            // Casts the BonusMultiplier to int
+            bonusMultiplier = (int) bonusMultiplier;
 
-                messages[1] = "Your bonus items multiplier is now at §3" + bonusMultiplier + " §e meaning you'll now get §3" + bonusMultiplier + "x §3the block drops of any kind of " + getBlocksType() + "!";
-            }
-            else {
-                // Bonus Multiplier is not an integer
-
-                messages[1] = "Your bonus items multiplier is now at §3" + bonusMultiplier + " §e meaning you'll now get §3" + (int) Math.floor(bonusMultiplier) + "x §ethe block drops of any kind of " + getBlocksType() + " and a chance of §3" + (bonusMultiplier - Math.floor(bonusMultiplier)) * 100 + "% §eto get §3" + (int) Math.floor(bonusMultiplier) + 1 + "x §ethe block drops!";
-            }
-
-            // Sends the player the messages
-            player.sendMessage(messages);
-
-            MessageMaster.sendExitMessage("Skill", "levelUp(" + player + ")", "success");
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("Skill", "levelUp(" + player + ")", e);
+            messages[1] = "Your bonus items multiplier is now at §3" + bonusMultiplier + " §e meaning you'll now get §3" + bonusMultiplier + "x §3the block drops of any kind of " + getBlocksType() + "!";
         }
+        else {
+            // Bonus Multiplier is not an integer
+
+            messages[1] = "Your bonus items multiplier is now at §3" + bonusMultiplier + " §e meaning you'll now get §3" + (int) Math.floor(bonusMultiplier) + "x §ethe block drops of any kind of " + getBlocksType() + " and a chance of §3" + (bonusMultiplier - Math.floor(bonusMultiplier)) * 100 + "% §eto get §3" + (int) Math.floor(bonusMultiplier) + 1 + "x §ethe block drops!";
+        }
+
+        // Sends the player the messages
+        player.sendMessage(messages);
     }
 
     /**
@@ -205,7 +193,6 @@ public abstract class Skill {
 
             return item;
         } catch (Exception e) {
-            MessageMaster.sendFailMessage("LumberjackSkill", "getSkillInfo()", e);
             return null;
         }
     }

@@ -1,13 +1,13 @@
 /*
- Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
- Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
+ 2020-2023
+ Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
+ Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
 
 package de.daniel_d45.teleios.passiveskills;
 
 import de.daniel_d45.teleios.core.ConfigEditor;
 import de.daniel_d45.teleios.core.ItemBuilder;
-import de.daniel_d45.teleios.core.MessageMaster;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -42,54 +42,37 @@ public class PassiveSkills {
     }
 
     public static void switchActivationstatePS() {
-        try {
+        if (ConfigEditor.isActive(getSegmentName() + ".All")) {
 
-            if (ConfigEditor.isActive(getSegmentName() + ".All")) {
-
-                for (String current : activationstatePaths) {
-                    ConfigEditor.set("Activationstates." + current, "OFF");
-                }
-
-                MessageMaster.sendExitMessage("SegmentManagerAC", "switchActivationstateAC()", "success");
+            for (String current : activationstatePaths) {
+                ConfigEditor.set("Activationstates." + current, "OFF");
             }
-            else {
 
-                for (String current : activationstatePaths) {
-                    ConfigEditor.set("Activationstates." + current, "ON");
-                }
-
-                MessageMaster.sendExitMessage("SegmentManagerPS", "switchActivationstatePS()", "success");
+        }
+        else {
+            for (String current : activationstatePaths) {
+                ConfigEditor.set("Activationstates." + current, "ON");
             }
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("SegmentManagerPS", "switchActivationstatePS()", e);
         }
     }
 
     public static ItemStack getSegmentItem() {
-        try {
 
-            ItemStack item;
+        ItemStack item;
 
-            if (ConfigEditor.isActive(getSegmentName() + ".All")) {
-                // The segment is activated
+        if (ConfigEditor.isActive(getSegmentName() + ".All")) {
+            // The segment is activated
 
-                item = new ItemBuilder(Material.SPRUCE_LOG, 1).setName("§o§5PassiveSkills").setLore("§fThe PassiveSkills segment adds skills", "§fyou can level up by breaking blocks.", "§fYou can use this segment for", "§fa better survival experience.", "§eActivationstate: §aON", "§7Left click to deactivate the segment.", "§7Right click for more options.").addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1).addItemFlags(ItemFlag.HIDE_ENCHANTS).build();
+            item = new ItemBuilder(Material.SPRUCE_LOG, 1).setName("§o§5PassiveSkills").setLore("§eActivationstate: §aON", "§fThe PassiveSkills segment adds skills", "§fyou can level up by breaking blocks.", "§fYou can use this segment for", "§fa better survival experience.", "§7Left click to deactivate the segment.", "§7Right click for more options.").addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1).addItemFlags(ItemFlag.HIDE_ENCHANTS).build();
 
-            }
-            else {
-                // The segment is deactivated
-
-                item = new ItemBuilder(Material.SPRUCE_LOG, 1).setName("§o§5PassiveSkills").setLore("§fThe PassiveSkills segment adds skills", "§fyou can level up by breaking blocks.", "§fYou can use this segment for", "§fa better survival experience.", "§eActivationstate: §cOFF", "§7Left click to activate the segment.", "§7Right click for more options.").build();
-
-            }
-
-            MessageMaster.sendExitMessage("SegmentManagerPS", "getSegmentItem()", "success");
-            return item;
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("SegmentManagerPS", "getSegmentItem()", e);
-            return new ItemBuilder(Material.BARRIER, 1).setName("§o§cERROR").build();
         }
+        else {
+            // The segment is deactivated
 
+            item = new ItemBuilder(Material.SPRUCE_LOG, 1).setName("§o§5PassiveSkills").setLore("§eActivationstate: §cOFF", "§fThe PassiveSkills segment adds skills", "§fyou can level up by breaking blocks.", "§fYou can use this segment for", "§fa better survival experience.", "§7Left click to activate the segment.", "§7Right click for more options.").build();
+
+        }
+        return item;
     }
 
     /**
@@ -98,27 +81,20 @@ public class PassiveSkills {
      * @param skill [String] The name of the skill to use.
      */
     public static void addUsedSkill(Skill skill) {
-        try {
 
-            // Iterates through the already listed used skills
-            for (Skill currentSkill : usedSkills) {
+        // Iterates through the already listed used skills
+        for (Skill currentSkill : usedSkills) {
 
-                // Checks whether the specified skill is already listed
-                if (currentSkill.equals(skill)) {
-                    MessageMaster.sendExitMessage("SegmentManagerPS", "addUsedSkill(" + skill + ")", "the specified skill is already listed.");
-                    return;
-                }
-
+            // Checks whether the specified skill is already listed
+            if (currentSkill.equals(skill)) {
+                return;
             }
 
-            usedSkills.add(skill);
-            // Calls the setup method in the subclass of the Skill class
-            skill.setup();
-
-            MessageMaster.sendExitMessage("SegmentManagerPS", "addUsedSkill(" + skill + ")", "success");
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("SegmentManagerPS", "addUsedSkill(" + skill + ")", e);
         }
+
+        usedSkills.add(skill);
+        // Calls the setup method in the subclass of the Skill class
+        skill.setup();
     }
 
     /**
@@ -127,14 +103,7 @@ public class PassiveSkills {
      * @param skill [Skill]
      */
     public static void removeUsedSkill(Skill skill) {
-        try {
-
-            usedSkills.remove(skill);
-
-            MessageMaster.sendExitMessage("SegmentManagerPS", "removeUsedSkill(" + skill + ")", "success");
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("SegmentManagerPS", "removeUsedSkill(" + skill + ")", e);
-        }
+        usedSkills.remove(skill);
     }
 
     /**
@@ -144,35 +113,27 @@ public class PassiveSkills {
      * @param playerName [String] The player's name
      */
     public static void initiatePlayerRecords(String playerName) {
-        try {
 
-            // Iterates through the used skills
-            for (Skill currentSkill : usedSkills) {
+        // Iterates through the used skills
+        for (Skill currentSkill : usedSkills) {
 
-                // Changes the value to the current skillName
-                String skillName = currentSkill.getSkillName();
+            // Changes the value to the current skillName
+            String skillName = currentSkill.getSkillName();
 
-                // CHECKS WHETHER THE DATA STRUCTURE FOR THE SPECIFIED PLAYER EXISTS
-                if (!(ConfigEditor.containsPath("Players." + playerName + "." + skillName + ".BlockValue") && ConfigEditor.containsPath("Players." + playerName + "." + skillName + ".BonusMultiplier"))) {
-                    // One or both paths don't exist
+            // CHECKS WHETHER THE DATA STRUCTURE FOR THE SPECIFIED PLAYER EXISTS
+            if (!(ConfigEditor.containsPath("Players." + playerName + "." + skillName + ".BlockValue") && ConfigEditor.containsPath("Players." + playerName + "." + skillName + ".BonusMultiplier"))) {
+                // One or both paths don't exist
 
-                    // Creates the paths
-                    ConfigEditor.set("Players." + playerName + "." + skillName + ".BlockValue", 0.0);
-                    ConfigEditor.set("Players." + playerName + "." + skillName + ".BonusMultiplier", 1.0);
+                // Creates the paths
+                ConfigEditor.set("Players." + playerName + "." + skillName + ".BlockValue", 0.0);
+                ConfigEditor.set("Players." + playerName + "." + skillName + ".BonusMultiplier", 1.0);
 
-                    MessageMaster.sendExitMessage("SegmentManagerPS", "initiatePlayerRecords(" + playerName + ")", "success");
-                }
-                else {
-                    // Both paths exist
-                    MessageMaster.sendExitMessage("SegmentManagerPS", "initiatePlayerRecords(" + playerName + ")", "both paths already exist.");
-                }
-                // After checking for data structure
             }
-            // Atfer iterating through the used skills
-
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("SegmentManagerPS", "initiatePlayerRecords(" + playerName + ")", e);
+            // else {// Both paths exist}
+            // After checking for data structure
         }
+        // Atfer iterating through the used skills
+
     }
 
     /**
@@ -181,14 +142,7 @@ public class PassiveSkills {
      * @param playerName [String] The player's name
      */
     public static void removePlayer(String playerName) {
-        try {
-
-            ConfigEditor.clearPath("Players." + playerName);
-
-            MessageMaster.sendExitMessage("SegmentManagerPS", "removePlayer(" + playerName + ")", "success");
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("SegmentManagerPS", "removePlayer(" + playerName + ")", e);
-        }
+        ConfigEditor.clearPath("Players." + playerName);
     }
 
     /**
@@ -203,13 +157,8 @@ public class PassiveSkills {
     public static double getBlockValue(String playerName, String skillName) {
         try {
 
-            double blockValue = (double) ConfigEditor.get("Players." + playerName + "." + skillName + ".BlockValue");
-
-            MessageMaster.sendExitMessage("SegmentManagerPS", "getBlockValue(" + playerName + ", " + skillName + ")", "success");
-
-            return blockValue;
+            return (double) ConfigEditor.get("Players." + playerName + "." + skillName + ".BlockValue");
         } catch (Exception e) {
-            MessageMaster.sendFailMessage("SegmentManagerPS", "getBlockValue(" + playerName + ", " + skillName + ")", e);
             return -1;
         }
     }
@@ -222,15 +171,7 @@ public class PassiveSkills {
      * @param skillName  [String] The skill's name.
      */
     public static void increaseBlockValue(String playerName, String skillName, double value) {
-        try {
-
-            // Increases the BlockValue by the specified value
-            ConfigEditor.set("Players." + playerName + "." + skillName + ".BlockValue", getBlockValue(playerName, skillName) + value);
-
-            MessageMaster.sendExitMessage("SegmentManagerPS", "increaseBlockValue(" + playerName + ", " + skillName + ", " + value + ")", "success");
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("SegmentManagerPS", "increaseBlockValue(" + playerName + ", " + skillName + ", " + value + ")", e);
-        }
+        ConfigEditor.set("Players." + playerName + "." + skillName + ".BlockValue", getBlockValue(playerName, skillName) + value);
     }
 
     /**
@@ -244,19 +185,12 @@ public class PassiveSkills {
      */
     public static double getBonusMultiplier(String playerName, String skillName) {
         try {
-
-            double bonusMultiplier = (double) ConfigEditor.get("Players." + playerName + "." + skillName + ".BonusMultiplier");
-
-            MessageMaster.sendExitMessage("SegmentManagerPS", "getBonusMultiplier(" + playerName + ", " + skillName + ")", "success");
-
-            return bonusMultiplier;
+            return (double) ConfigEditor.get("Players." + playerName + "." + skillName + ".BonusMultiplier");
         } catch (Exception e) {
-            MessageMaster.sendFailMessage("SegmentManagerPS", "getBonusMultiplier(" + playerName + ", " + skillName + ")", e);
             return -1;
         }
     }
 
-    // TODO: Maybe improve Exception Handling
 
     /**
      * Computes the amount of bonus items the player gets. Returns -1 if the process failed.
@@ -288,18 +222,11 @@ public class PassiveSkills {
                     itemMultiplier++;
                 }
 
-                MessageMaster.sendExitMessage("SegmentManagerPS", "computeBonusItemMultiplier(" + playerName + ", " + skillName + ")", "success");
-
             }
-            else {
-                // Method getBonusMultiplier() failed
-
-                MessageMaster.sendWarningMessage("SegmentManagerPS", "computeBonusItemAmount(" + playerName + ", " + skillName + ")", "method getBonusMultiplier(" + playerName + ", " + skillName + ") failed.");
-            }
+            //else {// Method getBonusMultiplier() failed}
 
             return itemMultiplier;
         } catch (Exception e) {
-            MessageMaster.sendFailMessage("SegmentManagerPS", "computeBonusItemMultiplier(" + playerName + ", " + skillName + ")", e);
             return -1;
         }
     }
@@ -323,20 +250,13 @@ public class PassiveSkills {
 
                 // The level limit is every 64 BlockValue
                 level = (int) Math.floor(getBlockValue(playerName, skillName) / 64) + 1;
-
-                MessageMaster.sendExitMessage("SegmentManagerPS", "getLevel(" + playerName + ", " + skillName + ")", "success");
             }
             else {
                 // The getBlockValue() method failed
-
                 level = -1;
-
-                MessageMaster.sendWarningMessage("SegmentManagerPS", "getLevel(" + playerName + ", " + skillName + ")", "method getBlockValue(" + playerName + ", " + skillName + ") failed.");
             }
-
             return level;
         } catch (Exception e) {
-            MessageMaster.sendFailMessage("SegmentManagerPS", "getLevel(" + playerName + ", " + skillName + ")", e);
             return -1;
         }
     }

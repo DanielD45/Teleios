@@ -1,12 +1,12 @@
 /*
- Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
- Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
+ 2020-2023
+ Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
+ Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
 
 package de.daniel_d45.teleios.passiveskills;
 
 import de.daniel_d45.teleios.core.ConfigEditor;
-import de.daniel_d45.teleios.core.MessageMaster;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -30,43 +30,34 @@ public class BlockBreakLstPS implements Listener {
      */
     @EventHandler(priority = EventPriority.NORMAL)
     public void onBlockBreakPS(BlockBreakEvent event) {
-        try {
 
-            // Activationstate check
-            if (!ConfigEditor.isActive("PassiveSkills.All")) {
-                MessageMaster.sendExitMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + ")", "the PassiveSkills segment is not active.");
-                return;
-            }
+        // Activationstate check
+        if (!ConfigEditor.isActive("PassiveSkills.All")) {
+            return;
+        }
 
-            int preLevel;
-            int postLevel;
-            Player player = event.getPlayer();
-            Block block = event.getBlock();
-            boolean playerPlaced = false;
+        int preLevel;
+        int postLevel;
+        Player player = event.getPlayer();
+        Block block = event.getBlock();
+        boolean playerPlaced = false;
 
-            // TODO: Remove Try-catch
-            // CHECKS WHETHER THE BLOCK HAS BEEN PLACED BY A PLAYER
-            try {
+        // TODO: Remove Try-catch
+        // CHECKS WHETHER THE BLOCK HAS BEEN PLACED BY A PLAYER
 
-                String[] placedBlocks = ConfigEditor.getSectionKeys("PlacedBlocks").toArray(new String[0]);
+        String[] placedBlocks = ConfigEditor.getSectionKeys("PlacedBlocks").toArray(new String[0]);
 
-                if (placedBlocks != null) {
+        if (placedBlocks != null) {
 
-                    // Iterates through the placed blocks
-                    for (String currentKey : placedBlocks) {
+            // Iterates through the placed blocks
+            for (String currentKey : placedBlocks) {
 
-                        // TODO: Valid check? (Block == Location check)
-                        if (ConfigEditor.get("PlacedBlocks." + currentKey) == block.getLocation()) {
+                // TODO: Valid check? (Block == Location check)
+                if (ConfigEditor.get("PlacedBlocks." + currentKey) == block.getLocation()) {
 
-                            playerPlaced = true;
-                            break;
-                        }
-                    }
-
+                    playerPlaced = true;
+                    break;
                 }
-
-            } catch (Exception e) {
-                MessageMaster.sendFailMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + "): Placed by player check", e);
             }
 
             if (playerPlaced) {
@@ -75,98 +66,65 @@ public class BlockBreakLstPS implements Listener {
                 // TODO: Check functionality
                 String entryName = block.getWorld().getName() + "," + block.getX() + "," + block.getY() + "," + block.getZ();
                 ConfigEditor.clearPath("PlacedBlocks." + entryName);
-
-                MessageMaster.sendExitMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + "), the block has been removed from the PlacedBlocks path.", "success");
             }
             else {
 
                 // Player survival mode check
                 if (player.getGameMode() != GameMode.SURVIVAL) {
-                    MessageMaster.sendExitMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + ")", "the player is not in survival mode.");
                     return;
                 }
 
-                // TODO: Remove Try-catch
                 // CHECKS FOR A MATERIAL MATCH
-                try {
 
-                    // Iterates through the usedSkills ArrayList
-                    for (Skill currentSkill : PassiveSkills.usedSkills) {
+                // Iterates through the usedSkills ArrayList
+                for (Skill currentSkill : PassiveSkills.usedSkills) {
 
-                        // Iterates through every used skill's listed materials
-                        for (Material currentMaterial : currentSkill.getListedMaterials().keySet()) {
+                    // Iterates through every used skill's listed materials
+                    for (Material currentMaterial : currentSkill.getListedMaterials().keySet()) {
 
-                            // Checks for a material match with the current material
-                            if (block.getType() == currentMaterial) {
+                        // Checks for a material match with the current material
+                        if (block.getType() == currentMaterial) {
 
-                                // Represents the level before increasing the BlockValue
-                                preLevel = PassiveSkills.getLevel(player.getName(), currentSkill.getSkillName());
+                            // Represents the level before increasing the BlockValue
+                            preLevel = PassiveSkills.getLevel(player.getName(), currentSkill.getSkillName());
 
-                                // TODO: Remove Try-catch
-                                // CANCELS THE BLOCK DROPS AND REPLACES THEM WITH THE NEW DROPS
-                                try {
+                            // CANCELS THE BLOCK DROPS AND REPLACES THEM WITH THE NEW DROPS
 
-                                    // TODO: Modify the outcome instead?
-                                    // Cancels the normal block drops
-                                    event.setDropItems(false);
+                            // TODO: Modify the outcome instead?
+                            // Cancels the normal block drops
+                            event.setDropItems(false);
 
-                                    // Drops the modified block drops one by one
-                                    for (ItemStack currentItem : currentSkill.modifyBlockDrops(block, player.getItemInHand(), player)) {
+                            // Drops the modified block drops one by one
+                            for (ItemStack currentItem : currentSkill.modifyBlockDrops(block, player.getItemInHand(), player)) {
 
-                                        block.getWorld().dropItemNaturally(block.getLocation(), currentItem);
-                                    }
-
-                                } catch (Exception e) {
-                                    MessageMaster.sendFailMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + "): Modifying the block drops.", e);
-                                    return;
-                                }
-
-                                // TODO: Remove Try-catch
-                                // INCREASES THE BLOCKVALUE
-                                try {
-
-                                    // Increases the BlockValue by the material's value specified by the skill type
-                                    PassiveSkills.increaseBlockValue(player.getName(), currentSkill.getSkillName(), currentSkill.getListedMaterials().get(currentMaterial));
-                                } catch (Exception e) {
-                                    MessageMaster.sendFailMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + "): Increasing the BlockValue.", e);
-                                    return;
-                                }
-
-                                // Represents the level after increasing the BlockValue
-                                postLevel = PassiveSkills.getLevel(player.getName(), currentSkill.getSkillName());
-
-                                // TODO: Remove Try-catch
-                                // CHECKS FOR A LEVEL-UP
-                                try {
-
-                                    if (preLevel < postLevel) {
-                                        currentSkill.levelUp(player);
-                                    }
-                                } catch (Exception e) {
-                                    MessageMaster.sendFailMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + "): Level-up check.", e);
-                                    return;
-                                }
-
-                                MessageMaster.sendExitMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + ")", "success");
-                                return;
+                                block.getWorld().dropItemNaturally(block.getLocation(), currentItem);
                             }
-                            // Else: the block's material doesn't match the current material
+
+                            // INCREASES THE BLOCKVALUE
+
+                            // Increases the BlockValue by the material's value specified by the skill type
+                            PassiveSkills.increaseBlockValue(player.getName(), currentSkill.getSkillName(), currentSkill.getListedMaterials().get(currentMaterial));
+
+                            // Represents the level after increasing the BlockValue
+                            postLevel = PassiveSkills.getLevel(player.getName(), currentSkill.getSkillName());
+
+                            // CHECKS FOR A LEVEL-UP
+
+                            if (preLevel < postLevel) {
+                                currentSkill.levelUp(player);
+                            }
+
+                            return;
                         }
-                        // Else: no Material match in this used skill's listedMaterials list
+                        // Else: the block's material doesn't match the current material
                     }
-                    // No material match in any used skill's listedMaterials list
-
-                } catch (Exception e) {
-                    MessageMaster.sendFailMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + "): Material match check.", e);
-                    return;
+                    // Else: no Material match in this used skill's listedMaterials list
                 }
+                // No material match in any used skill's listedMaterials list
 
-                MessageMaster.sendExitMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + ")", "no material match.");
             }
-
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("BlockBreakListenerPS", "onBlockBreakPS(" + event + ")", e);
         }
+
     }
 
 }

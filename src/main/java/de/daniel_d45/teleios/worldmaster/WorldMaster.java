@@ -1,13 +1,13 @@
 /*
- Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
- Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
+ 2020-2023
+ Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
+ Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
 
 package de.daniel_d45.teleios.worldmaster;
 
 import de.daniel_d45.teleios.core.ConfigEditor;
 import de.daniel_d45.teleios.core.ItemBuilder;
-import de.daniel_d45.teleios.core.MessageMaster;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -27,54 +27,32 @@ public class WorldMaster {
     }
 
     public static void switchActivationstateWM() {
-        try {
 
-            if (ConfigEditor.isActive(getSegmentName() + ".All")) {
-
-                for (String current : activationstatePaths) {
-                    ConfigEditor.set("Activationstates." + current, "OFF");
-                }
-
-                MessageMaster.sendExitMessage("SegmentManagerWM", "switchActivationstateWM()", "success");
+        if (ConfigEditor.isActive(getSegmentName() + ".All")) {
+            for (String current : activationstatePaths) {
+                ConfigEditor.set("Activationstates." + current, "OFF");
             }
-            else {
-
-                for (String current : activationstatePaths) {
-                    ConfigEditor.set("Activationstates." + current, "ON");
-                }
-
-                MessageMaster.sendExitMessage("SegmentManagerWM", "switchActivationstateWM()", "success");
+        }
+        else {
+            for (String current : activationstatePaths) {
+                ConfigEditor.set("Activationstates." + current, "ON");
             }
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("SegmentManagerWM", "switchActivationstateWM()", e);
         }
     }
 
     public static ItemStack getSegmentItem() {
-        try {
 
-            ItemStack item;
+        ItemStack item;
 
-            if (ConfigEditor.isActive(getSegmentName() + ".All")) {
-                // The segment is activated
-
-                item = new ItemBuilder(Material.GRASS_BLOCK, 1).setName("§o§5WorldMaster").setLore("§4Not implemented", "§fThe WorldMaster segment adds commands", "§fto manage different worlds on the server.", "§eActivationstate: §aON", "§7Left click to deactivate the segment.", "§7Right click for more options.").addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1).addItemFlags(ItemFlag.HIDE_ENCHANTS).build();
-
-            }
-            else {
-                // The segment is deactivated
-
-                item = new ItemBuilder(Material.GRASS_BLOCK, 1).setName("§o§5WorldMaster").setLore("§4Not implemented", "§fThe WorldMaster segment adds commands", "§fto manage different worlds on the server.", "§eActivationstate: §cOFF", "§7Left click to activate the segment.", "§7Right click for more options.").build();
-
-            }
-
-            MessageMaster.sendExitMessage("SegmentManagerPS", "getSegmentItem()", "success");
-            return item;
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("SegmentManagerPS", "getSegmentItem()", e);
-            return new ItemBuilder(Material.BARRIER, 1).setName("§o§cERROR").build();
+        if (ConfigEditor.isActive(getSegmentName() + ".All")) {
+            // The segment is activated
+            item = new ItemBuilder(Material.GRASS_BLOCK, 1).setName("§o§5WorldMaster").setLore("§eActivationstate: §aON", "§4Not implemented", "§fThe WorldMaster segment adds commands", "§fto manage different worlds on the server.", "§7Left click to deactivate the segment.", "§7Right click for more options.").addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1).addItemFlags(ItemFlag.HIDE_ENCHANTS).build();
         }
-
+        else {
+            // The segment is deactivated
+            item = new ItemBuilder(Material.GRASS_BLOCK, 1).setName("§o§5WorldMaster").setLore("§eActivationstate: §cOFF", "§4Not implemented", "§fThe WorldMaster segment adds commands", "§fto manage different worlds on the server.", "§7Left click to activate the segment.", "§7Right click for more options.").build();
+        }
+        return item;
     }
 
 }

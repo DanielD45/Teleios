@@ -1,6 +1,7 @@
 /*
- Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
- Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
+ 2020-2023
+ Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
+ Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
 
 package de.daniel_d45.teleios.core;
@@ -11,7 +12,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.checkerframework.common.reflection.qual.UnknownClass;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 
@@ -42,7 +42,6 @@ final class SampleCode {
             }
         } catch (NullPointerException | ClassCastException | IllegalArgumentException e) {
             player.sendMessage("§cYour warp pouch is invalid!");
-            MessageMaster.sendExitMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the player's warp pouch is invalid.");
             return;
         }
         // End of sample
@@ -60,7 +59,6 @@ final class SampleCode {
             specifiedAmount = Integer.parseInt(args[1]);
             if (specifiedAmount <= 0) {
                 player.sendMessage("§cInvalid amount of ender pearls!");
-                MessageMaster.sendExitMessage("WarppouchCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "invalid amount of ender pearls.");
                 return;
             }
         } catch (IllegalArgumentException e) {

@@ -1,12 +1,12 @@
 /*
- Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
- Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
+ 2020-2023
+ Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
+ Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
 
 package de.daniel_d45.teleios.adminfeatures;
 
 import de.daniel_d45.teleios.core.ConfigEditor;
-import de.daniel_d45.teleios.core.MessageMaster;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,45 +18,35 @@ public class CountdownCmd implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        try {
 
-            // Activation state check
-            if (!ConfigEditor.isActive("AdminFeatures.All")) {
-                sender.sendMessage("§cThis command is not active.");
-                MessageMaster.sendExitMessage("CountdownCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + args + ")", "the command is deactivated.");
-                return true;
-            }
+        // Activation state check
+        if (!ConfigEditor.isActive("AdminFeatures.All")) {
+            sender.sendMessage("§cThis command is not active.");
+            return true;
+        }
 
-            // Permission check
-            if (!sender.hasPermission("teleios.adminfeatures.countdown")) {
-                sender.sendMessage("§cMissing Permissions!");
-                MessageMaster.sendExitMessage("CountdownCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + args + ")", "the sender doesn't have the needed permissions.");
-                return true;
-            }
+        // Permission check
+        if (!sender.hasPermission("teleios.adminfeatures.countdown")) {
+            sender.sendMessage("§cMissing Permissions!");
+            return true;
+        }
 
-            switch (args.length) {
-                case 2:
-                    // Specifies /countdown [Duration] [EndMessage]
-                    try {
-                        //TODO
+        switch (args.length) {
+            case 2:
+                // Specifies /countdown [Duration] [EndMessage]
+                try {
+                    //TODO
 
-                        return true;
-                    } catch (Exception e) {
-                        sender.sendMessage("§cWrong arguments!");
-                        MessageMaster.sendExitMessage("CountdownCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + args + ")", "wrong arguments.");
-                        return false;
-                    }
-
-                default:
-                    // Wrong amount of arguments
-                    sender.sendMessage("§cWrong amount of arguments!");
-                    MessageMaster.sendExitMessage("CountdownCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + args + ")", "wrong amount of arguments.");
+                    return true;
+                } catch (Exception e) {
+                    sender.sendMessage("§cWrong arguments!");
                     return false;
-            }
+                }
 
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("CountdownCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + args + ")", e);
-            return false;
+            default:
+                // Wrong amount of arguments
+                sender.sendMessage("§cWrong amount of arguments!");
+                return false;
         }
 
     }

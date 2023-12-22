@@ -1,11 +1,10 @@
 - Plugin name:
-
 greek: Téleios (Τέλειος) = english: complete
 pronunciation: pronounced like TELL-e-os
 
-
 - Features:
 
+Done:
 1 setdebuglevel command
 1 manageteleios command
 1 activationstate enum
@@ -13,24 +12,37 @@ pronunciation: pronounced like TELL-e-os
 1 new DebugLevel system:
     1 add info messages
     1 odd = terminal output, even = terminal and chat output
-------------------------------------------------------------------------------------------------------------------------------------------------------
+
 WIP:
-0 upgrade to 1.20 -> wait for the spigot 1.20 stable version
-0 fix: assigning mode exit message coupled with function not active message
+0 fix MTL inv
+0 test: multiple people open the MTL inv
+0 test invalid values for JoinMessage path
+0 add tablist to /w
+0 reduce exception handling to minimum
+0 add and remove teleporter recipe to recipe book
 0 PLCs
     0 personal invs: Bug: ConfigEditor.set();
     0 barrels... too
-    0 restock PLCs
+    0 restock PLCs after timer
 0 listener event priorities
 0 ConfigEditor: change initiate wpp...
-0 ConfigEditor:
+0 Organise ConfigEditor workflow:
     0 optional: get & save previous value
     0 test new value
-    0 set new value
-    0 test value from config
-    0 if value invalid: store previous value to config & notify console
+    if valid:
+        0 set new value
+    else:
+        0 test previous value
+        if valid:
+            0 store to config & notify console
+        else:
+            0 store default value
+0 make only one instance of menu invs
 0 fill SampleCode class
-------------------------------------------------------------------------------------------------------------------------------------------------------
+0 merge PassiveSkills segment into BetterGameplay?
+
+Planned:
+0 integrated tutorials
 0 make more specialised listeners?
 0 MTL inventory: activated segments have enchanted icons
 0 MTL inventory: icons do not show enchantments or damage specs
@@ -51,41 +63,20 @@ Cmd = Command
 Lst = Listener
 
 
-- Debug message colours:
-
-red (§c)    / dark red (§4):	method failed
-green (§a)  / dark green (§2):	method ran successfully
-yellow (§e) / gold (§6):	    method ran without real impact / method skipped
-
-
 - Chat message / command feedback colors:
-
 green (§a) 	/ gold (§6): success message
 yellow (§e) / gold (§6): info message
 red (§c) 	/ gold (§6): fail message
 
 
-- Valid and standard argument values:
-
-ArgumentName (StandardValue): Range
-DebugLevel (1): x >= 0; x <= 8;
-                0  = no messages
-                1  = plugin start/end messages will be written to the terminal
-                2  = plugin start/end messages will be written to the terminal & in-game chat
-                3  = plugin start/end + fail messages will be written to the terminal
-                4  = plugin start/end + fail messages will be written to the terminal & in-game chat
-                5  = plugin start/end + fail + warning messages will be written to the terminal
-                6  = plugin start/end + fail + warning messages will be written to the terminal & in-game chat
-                7  = plugin start/end + fail + warning + exit messages will be written to the terminal
-                8  = plugin start/end + fail + warning + exit messages will be written to the terminal & in-game chat
-
-Fail messages print a short message and the exception stack trace on encountered exception.
-Warning messages inform the console that something unexpected happened or action is necessary.
-Exit messages inform the console that and how a method finished.
+- Exception handling:
+Commands:
+    1 try catch block
+        error feedback
+        return false
 
 
 - Data structure for the plugin.yml:
-
 commands:
    [command1]:
       aliases:

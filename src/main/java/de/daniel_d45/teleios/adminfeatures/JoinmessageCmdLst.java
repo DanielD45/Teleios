@@ -1,12 +1,12 @@
 /*
- Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
- Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
+ 2020-2023
+ Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
+ Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
 
 package de.daniel_d45.teleios.adminfeatures;
 
 import de.daniel_d45.teleios.core.ConfigEditor;
-import de.daniel_d45.teleios.core.MessageMaster;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,7 +16,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 
@@ -35,75 +34,58 @@ public class JoinmessageCmdLst implements CommandExecutor, Listener {
                 event.setJoinMessage("§6" + player.getName() + " §9joined the server.");
             }
         } catch (NullPointerException e) {
-            MessageMaster.sendWarningMessage("JoinmessageCommandListener", "onPlayerJoin(" + event + ")", "the JoinMessage path in the config file doesn't exist.");
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("JoinmessageCommandListener", "onPlayerJoin(" + event + ")", e);
+            // The JoinMessage path in the config file doesn't exist
+            // TODO: Create JoinMessage path?
         }
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        try {
 
-            // Activation state check
-            if (!ConfigEditor.isActive("AdminFeatures.All")) {
-                sender.sendMessage("§cThis command is not active.");
-                MessageMaster.sendExitMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the command is deactivated.");
-                return true;
-            }
-
-            // Specifies /joinmessage
-            if (args.length == 0) {
-                boolean joinMessageEnabled;
-                try {
-                    joinMessageEnabled = (boolean) Objects.requireNonNull(ConfigEditor.get("JoinMessage"));
-                } catch (Exception e) {
-                    sender.sendMessage("§cThe JoinMessage argument is invalid! Set it using §6/joinmessage true|false§c.");
-                    return true;
-                }
-
-                if (joinMessageEnabled) {
-                    sender.sendMessage("§aThe custom join message is §6enabled§a.");
-                }
-                else {
-                    sender.sendMessage("§aThe custom join message is §6disabled§a.");
-                }
-
-                MessageMaster.sendExitMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
-                return true;
-            }
-
-            // Sender permission check
-            if (!sender.hasPermission("teleios.adminfeatures.joinmessage")) {
-                sender.sendMessage("§cMissing Permissions!");
-                MessageMaster.sendExitMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender doesn't have the needed permissions.");
-                return true;
-            }
-
-            // Specifies /joinmessage enable|true
-            if (args[0].equalsIgnoreCase("enable") || args[0].equalsIgnoreCase("true")) {
-                ConfigEditor.set("JoinMessage", true);
-                sender.sendMessage("§aThe custom join message is now §6enabled§a!");
-                MessageMaster.sendExitMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
-                return true;
-            }
-
-            // Specifies /joinmessage disable|false
-            else if (args[0].equalsIgnoreCase("disable") || args[0].equalsIgnoreCase("false")) {
-                ConfigEditor.set("JoinMessage", false);
-                sender.sendMessage("§aThe custom join message is now §6disabled§a!");
-                MessageMaster.sendExitMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
-                return true;
-            }
-
-            // Wrong arguments
-            sender.sendMessage("§cWrong arguments!");
-            MessageMaster.sendExitMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "wrong arguments.");
-            return false;
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("JoinmessageCommandListener", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", e);
-            return false;
+        // Activation state check
+        if (!ConfigEditor.isActive("AdminFeatures.All")) {
+            sender.sendMessage("§cThis command is not active.");
+            return true;
         }
+
+        // Specifies /joinmessage
+        if (args.length == 0) {
+            // TODO: fix config path if invalid
+            boolean joinMessageEnabled = (boolean) Objects.requireNonNull(ConfigEditor.get("JoinMessage"));
+
+            if (joinMessageEnabled) {
+                sender.sendMessage("§aThe custom join message is §6enabled§a.");
+            }
+            else {
+                sender.sendMessage("§aThe custom join message is §6disabled§a.");
+            }
+
+            return true;
+        }
+
+        // Sender permission check
+        if (!sender.hasPermission("teleios.adminfeatures.joinmessage")) {
+            sender.sendMessage("§cMissing Permissions!");
+            return true;
+        }
+
+        // Specifies /joinmessage enable|true
+        if (args[0].equalsIgnoreCase("enable") || args[0].equalsIgnoreCase("true")) {
+            ConfigEditor.set("JoinMessage", true);
+            sender.sendMessage("§aThe custom join message is now §6enabled§a!");
+            return true;
+        }
+
+        // Specifies /joinmessage disable|false
+        else if (args[0].equalsIgnoreCase("disable") || args[0].equalsIgnoreCase("false")) {
+            ConfigEditor.set("JoinMessage", false);
+            sender.sendMessage("§aThe custom join message is now §6disabled§a!");
+            return true;
+        }
+
+        // Wrong arguments
+        sender.sendMessage("§cWrong arguments!");
+        return false;
     }
 
 }

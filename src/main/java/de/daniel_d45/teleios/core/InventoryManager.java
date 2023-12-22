@@ -1,184 +1,89 @@
 /*
- Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
- Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
+ 2020-2023
+ Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
+ Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
 
 package de.daniel_d45.teleios.core;
 
 import de.daniel_d45.teleios.adminfeatures.AdminFeatures;
 import de.daniel_d45.teleios.bettergameplay.BetterGameplay;
-import de.daniel_d45.teleios.passiveskills.PassiveSkills;
-import de.daniel_d45.teleios.worldmaster.WorldMaster;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 
 public class InventoryManager {
 
     public static ItemStack getErrorItem() {
-        return new ItemBuilder(Material.BARRIER, 1).setName("§oERROR").build();
+        return new ItemBuilder(Material.POISONOUS_POTATO, 1).setName("§oERROR").build();
     }
 
     public static Inventory getErrorInventory() {
-        Inventory inv = Bukkit.createInventory(null, 9, "§cInventory creation failed!");
+        Inventory inv = InventoryManager.createNoInteractionInventory(1, "§cInventory creation failed!", null);
         InventoryManager.fillInventory(inv, getErrorItem(), getErrorItem(), getErrorItem(), getErrorItem(), getErrorItem(), getErrorItem(), getErrorItem(), getErrorItem(), getErrorItem());
         return inv;
     }
 
     public static String getCleanString(String string) {
-        try {
-
-            // TODO: Handle spaces at string start?
-            if (string.startsWith("§")) {
-                return string.substring(2);
-            }
-
-            MessageMaster.sendExitMessage("InventoryManager", "getCleanString(" + string + ")", "success");
-            return string;
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("InventoryManager", "getCleanString(" + string + ")", e);
-            return null;
+        // TODO: Handle spaces at string start?
+        if (string.startsWith("§")) {
+            return string.substring(2);
         }
+        return string;
     }
 
     public static ItemStack getYesItem() {
-        try {
-
-            ItemStack item = new ItemBuilder(Material.GREEN_CONCRETE, 1).setName("§aYes").build();
-
-            MessageMaster.sendExitMessage("InventoryManager", "getYesItem()", "success");
-            return item;
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("InventoryManager", "getYesItem()", e);
-            return getErrorItem();
-        }
+        return new ItemBuilder(Material.GREEN_CONCRETE, 1).setName("§aYes").build();
     }
 
     public static ItemStack getNoItem() {
-        try {
-
-            ItemStack item = new ItemBuilder(Material.RED_CONCRETE, 1).setName("§cNo").build();
-
-            MessageMaster.sendExitMessage("InventoryManager", "getNoItem()", "success");
-            return item;
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("InventoryManager", "getNoItem()", e);
-            return getErrorItem();
-        }
+        return new ItemBuilder(Material.RED_CONCRETE, 1).setName("§cNo").build();
     }
 
     public static ItemStack getBackItem() {
-        try {
-
-            ItemStack item = new ItemBuilder(Material.HOPPER, 1).setName("§7<- Previous page").build();
-
-            MessageMaster.sendExitMessage("InventoryManager", "getBackItem()", "success");
-            return item;
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("InventoryManager", "getBackItem()", e);
-            return getErrorItem();
-        }
+        return new ItemBuilder(Material.HOPPER, 1).setName("§7<- Previous page").build();
     }
 
-    // TODO: Keep up-to-date
     public static Inventory getManageTeleiosInventory() {
-        try {
+        Inventory inv = InventoryManager.createNoInteractionInventory(3, "§0Manage Teleios functionality", null);
 
-            Inventory inv = InventoryManager.createArtificialInventory(3, "§0Manage Teleios functionality");
+        // TODO: make list and dynamically arrange icons in inventory
+        // AdminFeatures segment.
+        inv.setItem(11, AdminFeatures.getSegmentItem());
+        // BetterGameplay segment.
+        inv.setItem(12, BetterGameplay.getSegmentItem());
+        // PassiveSkills segment.
+        //inv.setItem(14, PassiveSkills.getSegmentItem());
+        // WorldMaster segment.
+        //inv.setItem(15, WorldMaster.getSegmentItem());
 
-            // TODO: make list and dynamically arrange icons in inventory
-            // AdminFeatures segment.
-            inv.setItem(11, AdminFeatures.getSegmentItem());
-            // BetterGameplay segment.
-            inv.setItem(12, BetterGameplay.getSegmentItem());
-            // PassiveSkills segment.
-            inv.setItem(14, PassiveSkills.getSegmentItem());
-            // WorldMaster segment.
-            inv.setItem(15, WorldMaster.getSegmentItem());
-
-            InventoryManager.fillEmptySlots(inv);
-
-            return inv;
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ManageteleiosCommand", "getInventory()", e);
-            return InventoryManager.getErrorInventory();
-        }
+        InventoryManager.fillEmptySlots(inv);
+        return inv;
     }
 
     public static Inventory getManageAFInventory() {
-        try {
-
-            // TODO: Add Items
-            Inventory inv = createSegmentInventory("AdminFeatures");
-
-            MessageMaster.sendExitMessage("ManageteleiosCommand", "getManageAFInventory()", "success");
-            return inv;
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ManageteleiosCommand", "getManageAFInventory()", e);
-            return InventoryManager.getErrorInventory();
-        }
+        // TODO: Add Items
+        return createSegmentInventory("AdminFeatures");
     }
 
     public static Inventory getManageBGInventory() {
-        try {
-
-            // TODO: Add Items
-            Inventory inv = createSegmentInventory("BetterGameplay", BetterGameplay.getEnderchestCommandItem(), BetterGameplay.getTeleportersItem());
-
-            MessageMaster.sendExitMessage("ManageteleiosCommand", "getManageAFInventory()", "success");
-            return inv;
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ManageteleiosCommand", "getManageAFInventory()", e);
-            return InventoryManager.getErrorInventory();
-        }
-    }
-
-    public static Inventory getManageCEInventory() {
-        try {
-
-            // TODO: Add Items
-            Inventory inv = createSegmentInventory("CreatureEvolution");
-
-            MessageMaster.sendExitMessage("ManageteleiosCommand", "getManageCEInventory()", "success");
-            return inv;
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ManageteleiosCommand", "getManageCEInventory()", e);
-            return InventoryManager.getErrorInventory();
-        }
+        // TODO: Add Items
+        return createSegmentInventory("BetterGameplay", BetterGameplay.getEnderchestCmdItem(), BetterGameplay.getTeleportersItem());
     }
 
     public static Inventory getManagePSInventory() {
-        try {
-
-            // TODO: Add Items
-            Inventory inv = createSegmentInventory("PassiveSkills");
-
-            MessageMaster.sendExitMessage("ManageteleiosCommand", "getManagePSInventory()", "success");
-            return inv;
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ManageteleiosCommand", "getManagePSInventory()", e);
-            return InventoryManager.getErrorInventory();
-        }
+        // TODO: Add Items
+        return createSegmentInventory("PassiveSkills");
     }
 
     public static Inventory getManageWMInventory() {
-        try {
-
-            // TODO: Add Items
-            Inventory inv = createSegmentInventory("WorldMaster");
-
-            MessageMaster.sendExitMessage("ManageteleiosCommand", "getManageWMInventory()", "success");
-            return inv;
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("ManageteleiosCommand", "getManageWMInventory()", e);
-            return InventoryManager.getErrorInventory();
-        }
+        // TODO: Add Items
+        return createSegmentInventory("WorldMaster");
     }
 
     /**
@@ -187,59 +92,39 @@ public class InventoryManager {
      * @param inventory [Inventory] The modified inventory
      */
     public static void fillEmptySlots(Inventory inventory) {
-        try {
-
-            for (int slot = 0; slot < inventory.getSize(); slot++) {
-                // Adds a black stained glass pane in every empty slot
-                if (inventory.getItem(slot) == null) {
-                    // TODO: Possible to reference the same variable?
-                    inventory.setItem(slot, new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE, 1).setName(" ").build());
-                }
+        for (int slot = 0; slot < inventory.getSize(); ++slot) {
+            // Adds a black stained glass pane in every empty slot
+            if (inventory.getItem(slot) == null) {
+                // TODO: Possible to reference the same variable?
+                inventory.setItem(slot, new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE, 1).setName(" ").build());
             }
-
-            MessageMaster.sendExitMessage("InventoryManager", "fillEmptySlots(" + inventory + ")", "success");
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("InventoryManager", "fillEmptySlots(" + inventory + ")", e);
         }
     }
 
-    // TODO: Care for ArrayIndexOutOfBoundsException
-
     public static void fillInventory(Inventory inventory, ItemStack... itemStacks) {
-        try {
-            ArrayList<Integer> emptySlots = new ArrayList<>();
+        ArrayList<Integer> emptySlots = new ArrayList<>();
 
-            // Saves the empty slots in the ArrayList
-            for (int slot = 0; slot < inventory.getSize(); ++slot) {
-                if (inventory.getItem(slot) == null) {
-                    emptySlots.add(slot);
+        // Saves the empty slots in the ArrayList
+        for (int slot = 0; slot < inventory.getSize(); ++slot) {
+            if (inventory.getItem(slot) == null) {
+                emptySlots.add(slot);
+            }
+        }
+
+        if (emptySlots.size() >= itemStacks.length) {
+            int i = 0;
+
+            for (int currentSlot : emptySlots) {
+                if (i == itemStacks.length) {
+                    break;
                 }
+                inventory.setItem(currentSlot, itemStacks[i]);
+                ++i;
             }
-
-            if (emptySlots.size() >= itemStacks.length) {
-
-                int i = 0;
-
-                for (int currentSlot : emptySlots) {
-                    inventory.setItem(currentSlot, itemStacks[i]);
-                    ++i;
-                }
-
-                MessageMaster.sendExitMessage("InventoryManager", "fillInventory(" + inventory + ", " + Arrays.toString(itemStacks) + ")", "success");
-            }
-            else {
-                MessageMaster.sendExitMessage("InventoryManager", "fillInventory(" + inventory + ", " + Arrays.toString(itemStacks) + ")", "too many items to add.");
-            }
-
-        } catch (ArrayIndexOutOfBoundsException e) {
-            MessageMaster.sendFailMessage("InventoryManager", "fillInventory(" + inventory + ")", e);
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("InventoryManager", "fillInventory(" + inventory + ")", e);
         }
     }
 
     // TODO: Exception handling
-
 
     /**
      * @param inv       [Inventory] The inventory to remove the items from.
@@ -249,7 +134,6 @@ public class InventoryManager {
      */
     public static int removeItemsPlayerSoft(Inventory inv, ItemStack itemStack, int amount) {
         if (amount <= 0) {
-            MessageMaster.sendExitMessage("InventoryManager", "removeItemsPlayerSoft(" + inv + ", " + itemStack + ", " + amount + ")", "the specified amount is 0 or less.");
             return 0;
         }
 
@@ -279,7 +163,6 @@ public class InventoryManager {
         try {
 
             if (possibleAmount <= 0) {
-                MessageMaster.sendExitMessage("InventoryManager", "removeItemsPlayerSoft(" + inv + ", " + itemStack + ", " + amount + ")", "the specified inventory doesn't contain this ItemStack.");
                 return 0;
             }
 
@@ -303,12 +186,10 @@ public class InventoryManager {
                 }
                 else {
                     currentItem.setAmount(currentItem.getAmount() - restAmount);
-                    MessageMaster.sendExitMessage("InventoryManager", "removeItemsPlayerSoft(" + inv + ", " + itemStack + ", " + amount + ")", "success");
                     return amount;
                 }
 
                 if (restAmount == 0) {
-                    MessageMaster.sendExitMessage("InventoryManager", "removeItemsPlayerSoft(" + inv + ", " + itemStack + ", " + amount + ")", "success");
                     return amount;
                 }
 
@@ -320,7 +201,6 @@ public class InventoryManager {
             for (int currentSlot : matchingItems.keySet()) {
                 inv.setItem(currentSlot, matchingItems.get(currentSlot));
             }
-            MessageMaster.sendFailMessage("InventoryManager", "removeItemsPlayerSoft(" + inv + ", " + itemStack + ", " + amount + ")", e);
             return 0;
         }
     }
@@ -337,64 +217,43 @@ public class InventoryManager {
     public static boolean isSameItemType(ItemStack itemStack1, ItemStack itemStack2) {
         try {
 
-            if (BetterMethods.betterEquals(itemStack1.getType(), itemStack2.getType()) && BetterMethods.betterEquals(itemStack1.getEnchantments(), itemStack2.getEnchantments()) && BetterMethods.betterEquals(itemStack1.getItemMeta().getAttributeModifiers(), itemStack2.getItemMeta().getAttributeModifiers()) && BetterMethods.betterEquals(itemStack1.getItemMeta().getDisplayName(), itemStack2.getItemMeta().getDisplayName()) && BetterMethods.betterEquals(itemStack1.getItemMeta().getEnchants(), itemStack2.getItemMeta().getEnchants()) && BetterMethods.betterEquals(itemStack1.getItemMeta().getItemFlags(), itemStack2.getItemMeta().getItemFlags()) && BetterMethods.betterEquals(itemStack1.getItemMeta().getLore(), itemStack2.getItemMeta().getLore())) {
-                MessageMaster.sendExitMessage("InventoryManager", "isSameItemType(" + itemStack1 + ", " + itemStack2 + ")", "success");
-                return true;
-            }
-
-            MessageMaster.sendExitMessage("InventoryManager", "isSameItemType(" + itemStack1 + ", " + itemStack2 + ")", "the items are not of the same type.");
-            return false;
+            return GlobalMethods.betterEquals(itemStack1.getType(), itemStack2.getType()) && GlobalMethods.betterEquals(itemStack1.getEnchantments(), itemStack2.getEnchantments()) && GlobalMethods.betterEquals(itemStack1.getItemMeta().getAttributeModifiers(), itemStack2.getItemMeta().getAttributeModifiers()) && GlobalMethods.betterEquals(itemStack1.getItemMeta().getDisplayName(), itemStack2.getItemMeta().getDisplayName()) && GlobalMethods.betterEquals(itemStack1.getItemMeta().getEnchants(), itemStack2.getItemMeta().getEnchants()) && GlobalMethods.betterEquals(itemStack1.getItemMeta().getItemFlags(), itemStack2.getItemMeta().getItemFlags()) && GlobalMethods.betterEquals(itemStack1.getItemMeta().getLore(), itemStack2.getItemMeta().getLore());
         } catch (NullPointerException e) {
-            MessageMaster.sendExitMessage("InventoryManager", "isSameItemType(" + itemStack1 + ", " + itemStack2 + ")", "the items are not of the same type.");
-            return false;
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("InventoryManager", "isSameItemType(" + itemStack1 + ", " + itemStack2 + ")", e);
             return false;
         }
     }
 
     public static Inventory createNormalInventory(int rows, String name) {
-        try {
-
-            Inventory inv = Bukkit.createInventory(null, 9 * rows, name);
-
-            MessageMaster.sendExitMessage("InventoryManager", "createArtificialInventory(" + rows + ", " + name + ")", "success");
-            return inv;
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("InventoryManager", "createArtificialInventory(" + rows + ", " + name + ")", e);
-            return getErrorInventory();
-        }
+        return Bukkit.createInventory(null, 9 * rows, name);
     }
 
-    public static Inventory createArtificialInventory(int rows, String name) {
-        try {
 
-            Inventory inv = Bukkit.createInventory(new ArtificialInventory(), rows * 9, name);
-
-            MessageMaster.sendExitMessage("InventoryManager", "createArtificialInventory(" + rows + ", " + name + ")", "success");
-            return inv;
-        } catch (Exception e) {
-            MessageMaster.sendFailMessage("InventoryManager", "createArtificialInventory(" + rows + ", " + name + ")", e);
-            return getErrorInventory();
-        }
+    /**
+     * @param rows                 Corrected to fit interval [1;6]
+     * @param name                 -
+     * @param predecessorInventory -
+     * @return -
+     */
+    public static Inventory createNoInteractionInventory(int rows, String name, Inventory predecessorInventory) {
+        rows = GlobalMethods.validateInt(rows, 1, 6);
+        return Bukkit.createInventory(new NoInteractionInventories(predecessorInventory), rows * 9, name);
     }
 
-    public static Inventory createSegmentInventory(String name, ItemStack... itemStacks) {
+    public static Inventory createSegmentInventory(String segmentName, ItemStack... itemStacks) {
         try {
 
-            Inventory inv = InventoryManager.createArtificialInventory(3, "§0Manage " + name);
-
-            inv.setItem(22, InventoryManager.getBackItem());
+            // TODO: dynamically adjust number of rows to fit amount of itemStacks
+            int rows = 3;
+            Inventory inv = InventoryManager.createNoInteractionInventory(rows, "§0Manage " + segmentName, null/*getManageTeleiosInventory()*/);
+            inv.setItem((rows * 9) - 5, InventoryManager.getBackItem());
 
             if (itemStacks != null) {
                 InventoryManager.fillInventory(inv, itemStacks);
             }
 
             InventoryManager.fillEmptySlots(inv);
-
             return inv;
         } catch (Exception e) {
-            MessageMaster.sendFailMessage("ManageteleiosCommand", "getManageAFInventory()", e);
             return InventoryManager.getErrorInventory();
         }
     }

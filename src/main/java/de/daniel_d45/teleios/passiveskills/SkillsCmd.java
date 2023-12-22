@@ -1,23 +1,19 @@
 /*
- Copyright (c) 2020-2023 Daniel_D45 <https://github.com/DanielD45>
- Teleios by Daniel_D45 is licensed under the Attribution-NonCommercial 4.0 International license <https://creativecommons.org/licenses/by-nc/4.0/>
+ 2020-2023
+ Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
+ Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
 
 package de.daniel_d45.teleios.passiveskills;
 
-import de.daniel_d45.teleios.core.ArtificialInventory;
 import de.daniel_d45.teleios.core.ConfigEditor;
 import de.daniel_d45.teleios.core.InventoryManager;
-import de.daniel_d45.teleios.core.MessageMaster;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.Arrays;
 
 
 // TODO: WIP
@@ -30,31 +26,25 @@ public class SkillsCmd implements CommandExecutor {
             // Activationstate check
             if (!ConfigEditor.isActive("PassiveSkills.All")) {
                 sender.sendMessage("§cThis command is not active!");
-                MessageMaster.sendExitMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "this command is not active");
                 return true;
             }
 
             // Sender player check
             if (!(sender instanceof Player player)) {
                 sender.sendMessage("§cYou are no player!");
-                MessageMaster.sendExitMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "the sender is not a player.");
                 return true;
             }
 
             // Only runs when a skill is activated
             if (PassiveSkills.usedSkills.size() > 0) {
-
                 player.openInventory(getSkillsInventory(player));
-                MessageMaster.sendExitMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "success");
             }
             else {
                 player.sendMessage("§eNo skill is beeing used!");
-                MessageMaster.sendExitMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", "no skills are beeing used.");
             }
 
             return true;
         } catch (Exception e) {
-            MessageMaster.sendFailMessage("SkillsCommand", "onCommand(" + sender + ", " + command + ", " + label + ", " + Arrays.toString(args) + ")", e);
             return false;
         }
     }
@@ -67,7 +57,7 @@ public class SkillsCmd implements CommandExecutor {
             // Sets the start slot. Only works fine up to 9 skills
             int slot = (int) (13 - Math.floor(PassiveSkills.usedSkills.size() / 2.0));
             // TODO: Dynamically adjust the inventory's rows.
-            Inventory inventory = Bukkit.createInventory(new ArtificialInventory(), 3 * 9, "Your Skills");
+            Inventory inventory = InventoryManager.createNoInteractionInventory(3, "Your Skills", null);
 
             // Iterates through the used skills
             for (Skill currentSkill : PassiveSkills.usedSkills) {
@@ -89,14 +79,10 @@ public class SkillsCmd implements CommandExecutor {
             }
 
             InventoryManager.fillEmptySlots(inventory);
-
-            MessageMaster.sendExitMessage("SkillsCommand", "getInventory(" + player + ")", "success");
             return inventory;
         } catch (Exception e) {
-            MessageMaster.sendFailMessage("SkillsCommand", "getInventory(" + player + ")", e);
             return InventoryManager.getErrorInventory();
         }
-
     }
 
 }
