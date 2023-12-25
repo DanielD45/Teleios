@@ -32,8 +32,7 @@ public class WorldMaster {
             for (String current : activationstatePaths) {
                 ConfigEditor.set("Activationstates." + current, "OFF");
             }
-        }
-        else {
+        } else {
             for (String current : activationstatePaths) {
                 ConfigEditor.set("Activationstates." + current, "ON");
             }
@@ -46,11 +45,17 @@ public class WorldMaster {
 
         if (ConfigEditor.isActive(getSegmentName() + ".All")) {
             // The segment is activated
-            item = new ItemBuilder(Material.GRASS_BLOCK, 1).setName("§o§5WorldMaster").setLore("§eActivationstate: §aON", "§4Not implemented", "§fThe WorldMaster segment adds commands", "§fto manage different worlds on the server.", "§7Left click to deactivate the segment.", "§7Right click for more options.").addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1).addItemFlags(ItemFlag.HIDE_ENCHANTS).build();
-        }
-        else {
+            item = new ItemBuilder(Material.GRASS_BLOCK, 1).setName("§o§5WorldMaster").setLore(
+                            "§eActivationstate: §aON", "§4Not implemented", "§fThe WorldMaster segment adds commands",
+                            "§fto manage different worlds on the server.", "§7Left click to deactivate the segment.",
+                            "§7Right click for more options.").addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 1)
+                    .addItemFlags(ItemFlag.HIDE_ENCHANTS).build();
+        } else {
             // The segment is deactivated
-            item = new ItemBuilder(Material.GRASS_BLOCK, 1).setName("§o§5WorldMaster").setLore("§eActivationstate: §cOFF", "§4Not implemented", "§fThe WorldMaster segment adds commands", "§fto manage different worlds on the server.", "§7Left click to activate the segment.", "§7Right click for more options.").build();
+            item = new ItemBuilder(Material.GRASS_BLOCK, 1).setName("§o§5WorldMaster").setLore(
+                    "§eActivationstate: §cOFF", "§4Not implemented", "§fThe WorldMaster segment adds commands",
+                    "§fto manage different worlds on the server.", "§7Left click to activate the segment.",
+                    "§7Right click for more options.").build();
         }
         return item;
     }
