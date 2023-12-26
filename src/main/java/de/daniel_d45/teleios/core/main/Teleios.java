@@ -105,7 +105,6 @@ public class Teleios extends JavaPlugin {
         Objects.requireNonNull(getCommand("enderchest")).setExecutor(new EnderchestCmd());
         Objects.requireNonNull(getCommand("setblocksperpearl")).setExecutor(new SetblocksperpearlCmd());
         Objects.requireNonNull(getCommand("warp")).setExecutor(new WarpCmd());
-        //Objects.requireNonNull(getCommand("warp")).setTabCompleter();
         Objects.requireNonNull(getCommand("warppoint")).setExecutor(new WarppointCmd());
         Objects.requireNonNull(getCommand("warppouch")).setExecutor(new WarppouchCmd());
 

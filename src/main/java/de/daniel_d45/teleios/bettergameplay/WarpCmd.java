@@ -15,6 +15,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +26,13 @@ import java.util.Set;
 public class WarpCmd implements CommandExecutor, TabCompleter {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NonNull CommandSender sender, @NonNull Command command, @NonNull String label,
+                             @NonNull String[] args) {
         try {
 
             // Activation state check
-            if (!ConfigEditor.isActive("BetterGameplay.All")) {
+            if (!ConfigEditor.isActive("BetterGameplay.All") ||
+                    !ConfigEditor.isActive("BetterGameplay.Teleporters")) {
                 sender.sendMessage("§cThis command is not active.");
                 return true;
             }
@@ -101,8 +104,7 @@ public class WarpCmd implements CommandExecutor, TabCompleter {
                         if (((FeetMat == Material.AIR || FeetMat == Material.CAVE_AIR) && (HeadMat == Material.AIR || HeadMat == Material.CAVE_AIR)) && currentTPLoc.getWorld() == playerLoc.getWorld()) {
                             // Lists the teleporter in gold
                             listMessage.append("§6").append(teleporters[i]);
-                        }
-                        else {
+                        } else {
                             // Lists the teleporter in grey
                             listMessage.append("§7").append(teleporters[i]);
                         }
@@ -279,23 +281,27 @@ public class WarpCmd implements CommandExecutor, TabCompleter {
     }
 
     @Override
-    public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
+    public List<String> onTabComplete(@NonNull CommandSender sender, @NonNull Command c, @NonNull String s,
+                                      @NonNull String[] args) {
 
-        ArrayList<String> list = new ArrayList<String>();
-        Set<String> wps = ConfigEditor.getSectionKeys("Warppoints");
-        Set<String> tps = ConfigEditor.getSectionKeys("Teleporters");
+        List<String> options = new ArrayList<>();
 
-        // Warppoints exist check
-        if (wps != null && wps.size() > 0) {
-            list.addAll(wps);
+        if ((ConfigEditor.isActive("BetterGameplay.Teleporters")) && args.length == 1) {
+            Set<String> wps = ConfigEditor.getSectionKeys("Warppoints");
+            Set<String> tps = ConfigEditor.getSectionKeys("Teleporters");
+
+            // Warppoints exist check
+            if (wps != null && !wps.isEmpty()) {
+                options.addAll(wps);
+            }
+
+            // Teleporters exist check
+            if (tps != null && !tps.isEmpty()) {
+                options.addAll(tps);
+            }
+            options = GlobalMethods.getFittingOptions(args[0], options);
         }
-
-        // Teleporters exist check
-        if (tps != null && tps.size() > 0) {
-            list.addAll(tps);
-        }
-
-        return list;
+        return options;
     }
 
 }

@@ -6,9 +6,10 @@
 
 package de.daniel_d45.teleios.core;
 
-
 import org.bukkit.command.CommandSender;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class GlobalMethods {
 
@@ -39,6 +40,26 @@ public class GlobalMethods {
         if (i < minValue) i = minValue;
         else if (i > maxValue) i = maxValue;
         return i;
+    }
+
+    /**
+     * Reduces a List of options down to the List of options starting with the same letter.
+     *
+     * @param argument -
+     * @param options  -
+     * @return -
+     */
+    public static List<String> getFittingOptions(String argument, List<String> options) {
+
+        if (options == null) return null;
+
+        List<String> fittingOptions = new ArrayList<>();
+        for (String option : options) {
+            if (option.toLowerCase().startsWith(argument.toLowerCase())) {
+                fittingOptions.add(option);
+            }
+        }
+        return fittingOptions;
     }
 
 }

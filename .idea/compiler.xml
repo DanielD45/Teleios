@@ -9,8 +9,5 @@
         <module name="Teleios" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Teleios" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>

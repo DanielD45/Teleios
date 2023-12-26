@@ -6,7 +6,7 @@ description: Adds features to your server which can be turned on and off using t
 api-version: 1.19
 author: Daniel_D45
 website: https://github.com/DanielD45/Teleios/
-# TEST
+
 commands:
 
   chatclear:

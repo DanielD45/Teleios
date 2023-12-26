@@ -16,7 +16,6 @@ Done:
 WIP:
 0 fix MTL inv
 0 test: multiple people open the MTL inv
-0 test invalid values for JoinMessage path
 0 add tablist to /w
 0 reduce exception handling to minimum
 0 add and remove teleporter recipe to recipe book
@@ -37,6 +36,7 @@ WIP:
             0 store to config & notify console
         else:
             0 store default value
+0 test invalid values for JoinMessage path
 0 make only one instance of menu invs
 0 fill SampleCode class
 0 merge PassiveSkills segment into BetterGameplay?

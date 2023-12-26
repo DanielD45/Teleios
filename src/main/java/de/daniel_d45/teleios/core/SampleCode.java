@@ -67,4 +67,17 @@ final class SampleCode {
         // End of sample
     }
 
+    // Mark entities, deleted on server restart
+    //Entity?.setMetadata("Key",new FixedMetadataValue(Plugin.getInstance(), Value(Object)));
+
+    // Mark entities
+    //Entity?.getPersistentDataContainer();
+
+    @DoNotCall
+    static void TabCompleter() {
+        // Class must extend TabCompleter
+        // in method List<String> onTabComplete(...):
+        // return null => TabCompleter for player names
+    }
+
 }
