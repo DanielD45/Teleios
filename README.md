@@ -92,12 +92,14 @@ This is a history of the past changes coming with the respective versions. "WIP"
 
 ### v1.3WIP
 **Server owners can remove the DebugLevel path from the config.**
-- this version is native to Minecraft 1.19 but also works with 1.20
+- this version is native to Minecraft 1.20.1
 - the DebugLevel has been removed. The plugin will now only output the exception stacktrace and, <br/>
   when an error occurres while running a command, the sender will be notified of the error
 - added /oplist (/opl): lets you store ops on a list. These people can op themselves anytime as long as the AdminFeatures segment is active.
-- Teleios is now public domain and runs under the CC0 license, meaning I withdraw my copyright of this project.
+- Teleios is now public domain and runs under the CC0 license, meaning I withdraw my copyright of this project
 - /w now has a tabcompleter
+- removed unimplemented functionality from the manage Teleios inventory (see /mtl)
+- teleporter recipes are now being added and removed from the recipe book, according to whether the function is active
 - general optimisation
 
 ### v1.2
