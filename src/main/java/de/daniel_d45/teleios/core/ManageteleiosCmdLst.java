@@ -9,7 +9,6 @@ package de.daniel_d45.teleios.core;
 import de.daniel_d45.teleios.adminfeatures.AdminFeatures;
 import de.daniel_d45.teleios.bettergameplay.BetterGameplay;
 import de.daniel_d45.teleios.passiveskills.PassiveSkills;
-import de.daniel_d45.teleios.worldmaster.WorldMaster;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -20,11 +19,14 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
+import javax.annotation.Nonnull;
+
 
 public class ManageteleiosCmdLst implements CommandExecutor, Listener {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
+                             @Nonnull String[] args) {
         try {
 
             // Sender player check
@@ -33,19 +35,17 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
                 return true;
             }
 
-            // Specifies /manageteleios
+            // Specifies /mtl
             player.openInventory(InventoryManager.getManageTeleiosInventory());
             return true;
         } catch (Exception e) {
-            GlobalMethods.sendErrorFeedback(sender);
+            GlobalMethods.sendErrorFeedbackCmd(sender);
             return false;
         }
     }
 
     /**
-     * This listener method implements the functionality when clicking an item in the ManageTeleios inventory.
-     *
-     * @param event [InventoryClickEvent] The event triggering this method
+     * Implements the functionality when clicking on an item in the ManageTeleios inventory.
      */
     @EventHandler
     public void onManageTeleiosInventoryClick(InventoryClickEvent event) {
@@ -58,7 +58,6 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
         ItemStack item_AF = AdminFeatures.getSegmentItem();
         ItemStack item_BG = BetterGameplay.getSegmentItem();
         ItemStack item_PS = PassiveSkills.getSegmentItem();
-        ItemStack item_WM = WorldMaster.getSegmentItem();
 
         // Item null check
         if (item == null) {
@@ -76,8 +75,7 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
                         AdminFeatures.switchActivationstateAF();
                         player.openInventory(InventoryManager.getManageTeleiosInventory());
                         return;
-                    }
-                    else if (clickType == ClickType.RIGHT || clickType == ClickType.SHIFT_RIGHT) {
+                    } else if (clickType == ClickType.RIGHT || clickType == ClickType.SHIFT_RIGHT) {
                         //player.openInventory(InventoryManager.getManageAFInventory());
                         return;
                     }
@@ -91,8 +89,7 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
                         BetterGameplay.switchActivationstateBG();
                         player.openInventory(InventoryManager.getManageTeleiosInventory());
                         return;
-                    }
-                    else if (clickType == ClickType.RIGHT || clickType == ClickType.SHIFT_RIGHT) {
+                    } else if (clickType == ClickType.RIGHT || clickType == ClickType.SHIFT_RIGHT) {
                         player.openInventory(InventoryManager.getManageBGInventory());
                         return;
                     }
@@ -100,9 +97,9 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
                 }
 
                 // PASSIVESKILLS ITEM
-                else if (item.equals(item_PS)) {
-                    return;
 /*
+                else if (item.equals(item_PS)) {
+
                     if (clickType == ClickType.LEFT) {
                         PassiveSkills.switchActivationstatePS();
                         player.openInventory(InventoryManager.getManageTeleiosInventory());
@@ -113,31 +110,13 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
                         player.openInventory(InventoryManager.getManagePSInventory());
                         return;
                     }
+                }
 */
+                else {
+                    return;
                 }
 
                 // WORLDMASTER ITEM
-                else if (item.equals(item_WM)) {
-                    return;
-                /*
-
-                    if (clickType == ClickType.LEFT) {
-                        // TODO
-                        // SegmentManagerWM.switchActivationstateWM();
-                        // player.openInventory(InventoryManager.getManageTeleiosInventory());
-                        return;
-
-                    }
-                    else if (clickType == ClickType.RIGHT) {
-                        player.openInventory(InventoryManager.getManageWMInventory());
-                        return;
-                    }
-
-                }
-                else {
-                    return;
-                */
-                }
 
                 break;
 
@@ -148,8 +127,7 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
                 if (item.equals(InventoryManager.getBackItem())) {
                     player.openInventory(InventoryManager.getManageTeleiosInventory());
                     return;
-                }
-                else {
+                } else {
                     return;
                 }
 
@@ -162,22 +140,19 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
                     ConfigEditor.switchActivationstate("BetterGameplay.EnderchestCommand");
                     player.openInventory(InventoryManager.getManageBGInventory());
                     return;
-
                 }
                 // TELEPORTERS ITEM
                 else if (item.equals(BetterGameplay.getTeleportersItem())) {
                     BetterGameplay.switchActivationstateTeleporters();
                     player.openInventory(InventoryManager.getManageBGInventory());
                     return;
-
                 }
                 // BACK ITEM
                 else if (item.equals(InventoryManager.getBackItem())) {
                     player.openInventory(InventoryManager.getManageTeleiosInventory());
                     return;
 
-                }
-                else {
+                } else {
                     return;
                 }
 
@@ -193,11 +168,11 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
 
                 }
                 else {
-                    return;
-                }
-
 */
-                // 1.4 WORLDMASTER INVENTORY
+                return;
+            //} break;
+
+            // 1.4 WORLDMASTER INVENTORY
             case "§0Manage WorldMaster":
 /*
                 // TODO
@@ -209,12 +184,12 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
 
                 }
                 else {
-                    return;
-                }
-
 */
-            default:
                 return;
+            //} break
+
+            default:
+                // Clicked inv is not one of the cases
         }
     }
 

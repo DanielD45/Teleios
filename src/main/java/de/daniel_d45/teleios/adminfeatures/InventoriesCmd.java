@@ -14,12 +14,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
+import javax.annotation.Nonnull;
+
 
 public class InventoriesCmd implements CommandExecutor {
 
     // TODO: Fix inventory is not recognised when reloading
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
+                             @Nonnull String[] args) {
 
         // Activation state check
         if (!ConfigEditor.isActive("AdminFeatures.All")) {
@@ -68,8 +71,7 @@ public class InventoriesCmd implements CommandExecutor {
                         sender.sendMessage("§eThere are no inventories yet! Add one by using §6/inventories create [name] [rows]§e!");
                         return true;
                     }
-                }
-                else if (args[0].equalsIgnoreCase("clear")) {
+                } else if (args[0].equalsIgnoreCase("clear")) {
                     try {
 
                         // Inventories existance check
@@ -89,8 +91,7 @@ public class InventoriesCmd implements CommandExecutor {
                         sender.sendMessage("§cCould not clear all inventories!");
                         return false;
                     }
-                }
-                else {
+                } else {
                     sender.sendMessage("§cWrong arguments!");
                     return false;
                 }
@@ -135,8 +136,7 @@ public class InventoriesCmd implements CommandExecutor {
 
                     sender.sendMessage("§cCould not find the inventory §6" + name + "§c!");
                     return true;
-                }
-                else {
+                } else {
                     sender.sendMessage("§cWrong arguments!");
                     return false;
                 }
@@ -161,8 +161,7 @@ public class InventoriesCmd implements CommandExecutor {
                     sender.sendMessage("§aCreated inventory §6" + name + "§a!");
                     return true;
 
-                }
-                else {
+                } else {
                     sender.sendMessage("§cWrong arguments!");
                     return false;
                 }
@@ -174,12 +173,10 @@ public class InventoriesCmd implements CommandExecutor {
                     if (args[0].equalsIgnoreCase("access")) {
                         // TODO: Implement
 
-                    }
-                    else {
+                    } else {
 
                     }
-                }
-                else {
+                } else {
                     sender.sendMessage("§cWrong arguments!");
                     return false;
                 }

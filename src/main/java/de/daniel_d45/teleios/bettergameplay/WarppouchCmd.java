@@ -16,13 +16,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import javax.annotation.Nonnull;
 import java.util.Objects;
 
 
 public class WarppouchCmd implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
+                             @Nonnull String[] args) {
         try {
 
             // Activationstate check
@@ -52,8 +54,7 @@ public class WarppouchCmd implements CommandExecutor {
             if (args.length == 0 || args[0].equalsIgnoreCase("view") || args[0].equalsIgnoreCase("show")) {
                 if (storedEPs == 1) {
                     player.sendMessage("§aThere is §6" + storedEPs + " §aender pearl in your warp pouch.");
-                }
-                else {
+                } else {
                     player.sendMessage("§aThere are §6" + storedEPs + " §aender pearls in your warp pouch.");
                 }
                 return true;
@@ -103,8 +104,7 @@ public class WarppouchCmd implements CommandExecutor {
 
                 if (specifiedAmount == 1) {
                     player.sendMessage("§aDeposited §6" + actualAmount + " §aender pearl.");
-                }
-                else {
+                } else {
                     player.sendMessage("§aDeposited §6" + actualAmount + " §aender pearls.");
                 }
 
@@ -115,7 +115,7 @@ public class WarppouchCmd implements CommandExecutor {
             player.sendMessage("§cWrong arguments!");
             return false;
         } catch (Exception e) {
-            GlobalMethods.sendErrorFeedback(sender);
+            GlobalMethods.sendErrorFeedbackCmd(sender);
             return false;
         }
     }

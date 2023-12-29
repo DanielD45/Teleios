@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <!--
   2020-2023
   Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
@@ -14,6 +13,7 @@
 
     <groupId>io.github.Daniel_D45</groupId>
     <artifactId>Teleios</artifactId>
+    <!-- Update version -->
     <version>v1.3WIP</version>
 
     <properties>
@@ -32,7 +32,8 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.19.4-R0.1-SNAPSHOT</version>
+            <!-- Spigot version -->
+            <version>1.20.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -44,7 +45,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.2.0</version>
                 <configuration>
-                    <!--> Data security warning: this path is visible when uploaded! <!-->
+                    <!-- This path is visible when uploaded! -->
                     <outputDirectory>C:\Users\danie\OneDrive\Daniel\Gaming\Minecraft\Servers\Spigot_1.20.1\plugins
                     </outputDirectory>
                 </configuration>

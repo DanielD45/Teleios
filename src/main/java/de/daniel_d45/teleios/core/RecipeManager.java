@@ -6,46 +6,107 @@
 
 package de.daniel_d45.teleios.core;
 
+import com.google.errorprone.annotations.DoNotCall;
+import de.daniel_d45.teleios.adminfeatures.AdminFeatures;
 import de.daniel_d45.teleios.core.main.Teleios;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.*;
+import org.bukkit.inventory.recipe.CraftingBookCategory;
+
+import javax.annotation.Nonnull;
 
 
-public class RecipeManager {
+public final class RecipeManager implements Listener {
 
+    @Nonnull
     public static ShapedRecipe getTeleporterRecipe() {
 
-        ItemStack teleporter = new ItemBuilder(Material.END_PORTAL_FRAME, 1).setLore("§fChange this teleporter's name", "§fby using the §6/configureteleporter §fcommand§r").build();
+        ItemStack teleporter = new ItemBuilder(Material.END_PORTAL_FRAME).setName("§5Teleporter").setLore
+                ("§fChange this teleporter's name", "§fby using the §6/configureteleporter§f command§r").build();
 
-        ItemMeta teleporterMeta = teleporter.getItemMeta();
-
-        teleporterMeta.setDisplayName("§5Teleporter");
-
-        teleporter.setItemMeta(teleporterMeta);
-
-        NamespacedKey key = new NamespacedKey(Teleios.getPlugin(), "teleporter");
-
-        ShapedRecipe teleporterRecipe = new ShapedRecipe(key, teleporter);
+        ShapedRecipe teleporterRecipe = new ShapedRecipe
+                (new NamespacedKey(Teleios.getPlugin(), "Teleporter"), teleporter);
         teleporterRecipe.shape("ESE", "SBS", "ESE");
         teleporterRecipe.setIngredient('E', Material.ENDER_PEARL);
         teleporterRecipe.setIngredient('S', Material.SANDSTONE);
         teleporterRecipe.setIngredient('B', Material.BLAZE_POWDER);
+        teleporterRecipe.setCategory(CraftingBookCategory.MISC);
 
         return teleporterRecipe;
     }
 
     // TODO: Check functionality
-    public static void enableTeleporterRecipe(boolean b) {
-        if (b) {
+    public static void enableTeleporterRecipe(boolean enable) {
+        if (enable) {
             Bukkit.addRecipe(getTeleporterRecipe());
-        }
-        else {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                if (!player.hasDiscoveredRecipe(getTeleporterRecipe().getKey())) {
+                    player.discoverRecipe(getTeleporterRecipe().getKey());
+                }
+            }
+        } else {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                if (player.hasDiscoveredRecipe(getTeleporterRecipe().getKey())) {
+                    player.undiscoverRecipe(getTeleporterRecipe().getKey());
+                }
+            }
             Bukkit.removeRecipe(getTeleporterRecipe().getKey());
         }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+
+        if (ConfigEditor.isActive(AdminFeatures.getActivationstatePaths()[0])) {
+            if (!player.hasDiscoveredRecipe(getTeleporterRecipe().getKey())) {
+                player.discoverRecipe(getTeleporterRecipe().getKey());
+            }
+        } else {
+            if (player.hasDiscoveredRecipe(getTeleporterRecipe().getKey())) {
+                player.undiscoverRecipe(getTeleporterRecipe().getKey());
+            }
+        }
+    }
+
+    @DoNotCall
+    public static void registerTestRecipes() {
+
+        ItemStack superPaper = new ItemBuilder(Material.PAPER, 1).setName(ChatColor.GOLD + "Super Paper")
+                .addEnchant(Enchantment.DAMAGE_ALL, 1).addItemFlags(ItemFlag.HIDE_ENCHANTS).build();
+
+        ShapelessRecipe recipe0 = new ShapelessRecipe(new NamespacedKey(Teleios.getPlugin(), "SuperPaperRecipe"),
+                superPaper);
+        recipe0.addIngredient(3, Material.BOOK);
+        Bukkit.addRecipe(recipe0);
+
+
+        ItemStack weirdSword = new ItemBuilder(Material.WOODEN_SWORD).setName
+                (ChatColor.GRAY + "Weird Sword").setLore("Test").build();
+
+        FurnaceRecipe recipe1 = new FurnaceRecipe(new NamespacedKey(Teleios.getPlugin(), "WeirdSword"), weirdSword,
+                new RecipeChoice.ExactChoice(superPaper), 2, 20);
+        Bukkit.addRecipe(recipe1);
+
+
+        ItemStack laserpointer = new ItemBuilder(Material.END_ROD).setName(ChatColor.DARK_RED + "Laser Pointer").
+                build();
+
+        ShapedRecipe recipe2 = new ShapedRecipe(new NamespacedKey(Teleios.getPlugin(), "LaserPointerRecipe"),
+                laserpointer);
+        recipe2.shape(" S ", "SBS", " S ");
+        recipe2.setIngredient('S', new RecipeChoice.ExactChoice(weirdSword));
+        recipe2.setIngredient('B', Material.BOOK);
+        Bukkit.addRecipe(recipe2);
     }
 
 }

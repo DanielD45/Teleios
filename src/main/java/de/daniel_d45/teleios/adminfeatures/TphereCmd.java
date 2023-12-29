@@ -13,11 +13,14 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import javax.annotation.Nonnull;
+
 
 public class TphereCmd implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
+                             @Nonnull String[] args) {
 
         // Activation state check
         if (!ConfigEditor.isActive("AdminFeatures.All")) {
@@ -34,6 +37,7 @@ public class TphereCmd implements CommandExecutor {
         // Specifies /tphere [Player]
         try {
 
+            // TODO: input
             Player target = Bukkit.getPlayer(args[0]);
 
             // Target online check
@@ -49,7 +53,7 @@ public class TphereCmd implements CommandExecutor {
             }
 
             target.teleport(player.getLocation());
-            target.sendMessage("§aTeleported §6" + target.getName() + " §ato you!");
+            player.sendMessage("§aTeleported §6" + target.getName() + "§a to you!");
             return true;
         } catch (Exception e) {
             return false;

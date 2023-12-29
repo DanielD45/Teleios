@@ -32,14 +32,25 @@ public class GlobalMethods {
         return obj1.equals(obj2);
     }
 
-    public static void sendErrorFeedback(CommandSender recipient) {
+    public static void sendErrorFeedbackCmd(CommandSender recipient) {
         recipient.sendMessage("§cError occurred while running command!");
     }
 
-    public static int validateInt(int i, int minValue, int maxValue) {
+    public static boolean intUsable(int i, int minValue, int maxValue) {
+        if (i < minValue) return false;
+        else return i <= maxValue;
+    }
+
+    public static int trimInt(int i, int minValue, int maxValue) {
         if (i < minValue) i = minValue;
         else if (i > maxValue) i = maxValue;
         return i;
+    }
+
+    public static boolean stringUsable(String string, int lengthMin, int lengthMax) {
+        if (string == null) return false;
+        if (string.length() < lengthMin) return false;
+        return string.length() <= lengthMax;
     }
 
     /**
@@ -61,5 +72,4 @@ public class GlobalMethods {
         }
         return fittingOptions;
     }
-
 }

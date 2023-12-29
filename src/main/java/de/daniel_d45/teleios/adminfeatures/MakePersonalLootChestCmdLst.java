@@ -26,6 +26,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
@@ -37,7 +38,8 @@ public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
     ArrayList<UUID> playersInAssignMode = new ArrayList<>();
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
+                             @Nonnull String[] args) {
 
         // Activation state check
         if (!ConfigEditor.isActive("AdminFeatures.All")) {
@@ -55,10 +57,10 @@ public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
         if (playersInAssignMode.contains(player.getUniqueId())) {
             playersInAssignMode.remove(player.getUniqueId());
             player.sendMessage("§aAssigning mode has been §6deactivated§a.");
-        }
-        else {
+        } else {
             playersInAssignMode.add(player.getUniqueId());
-            player.sendMessage("§aThe next chest you click will turn into a personal loot chest. You can also cancel this assigning mode by using the command again.");
+            player.sendMessage("§aThe next chest you click will turn into a personal loot chest. " +
+                    "You can also cancel this assigning mode by using the command again.");
         }
         return true;
     }
@@ -125,8 +127,7 @@ public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
             // Ends the assigning mode
             playersInAssignMode.remove(player.getUniqueId());
             player.sendMessage("§aAssigning mode has been §6deactivated§a.");
-        }
-        else {
+        } else {
             // Player is not in assigning mode
             Action action = event.getAction();
 
@@ -222,8 +223,7 @@ public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
                     }
                 }
 
-            }
-            else if (item.equals(InventoryManager.getNoItem())) {
+            } else if (item.equals(InventoryManager.getNoItem())) {
                 // NO ITEM
                 player.closeInventory();
                 return;
@@ -234,7 +234,8 @@ public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
         if (event.getView().getTitle().startsWith(player.getName() + " §0personal loot chest: ")) {
             // works?
             String key = event.getView().getTitle().split(": ")[1];
-            // TODO: rem + BUG IS HERE! Saving inv overwrites all paths of "PersonalLootChests.[key]". TEST SINGLE ITEMSTACK RELOAD CONSISTENCY. PROBLEM WITH RELOADS. TEST WITH MULTIPLE PLCS.
+            // TODO: rem + BUG IS HERE! Saving inv overwrites all paths of "PersonalLootChests.[key]".
+            //  TEST SINGLE ITEMSTACK RELOAD CONSISTENCY. PROBLEM WITH RELOADS. TEST WITH MULTIPLE PLCS.
             // Saves the inventory contents
             //ConfigEditor.set("PersonalLootChests." + key + "." + player.getName() + ".Contents", event.getInventory().getContents());
             //player.getName();

@@ -12,13 +12,15 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import javax.annotation.Nonnull;
 import java.util.Set;
 
 
 public class WarppointCmd implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
+                             @Nonnull String[] args) {
         try {
 
             // Activationstate check
@@ -36,7 +38,7 @@ public class WarppointCmd implements CommandExecutor {
                             String[] warppoints = ConfigEditor.getSectionKeys("Warppoints").toArray(new String[0]);
 
                             // Warppoints existance check
-                            if (warppoints.length <= 0) {
+                            if (warppoints.length == 0) {
                                 sender.sendMessage("§eThere are no warppoints yet! Add one by using §6/warppoint add [name]§e!");
                                 return true;
                             }
@@ -70,8 +72,7 @@ public class WarppointCmd implements CommandExecutor {
                             return false;
                         }
 
-                    }
-                    else if (args[0].equalsIgnoreCase("clear")) {
+                    } else if (args[0].equalsIgnoreCase("clear")) {
                         try {
 
                             // Warppoints existance check
@@ -91,8 +92,7 @@ public class WarppointCmd implements CommandExecutor {
                             sender.sendMessage("§cCould not clear all warppoints!");
                             return false;
                         }
-                    }
-                    else {
+                    } else {
                         // Wrong arguments
                         sender.sendMessage("§cWrong arguments!");
                         return false;
@@ -148,8 +148,7 @@ public class WarppointCmd implements CommandExecutor {
                             sender.sendMessage("§cCould not add the warppoint!");
                             return false;
                         }
-                    }
-                    else if (args[0].equalsIgnoreCase("remove")) {
+                    } else if (args[0].equalsIgnoreCase("remove")) {
                         // Specifies /warppoint remove [Name]
                         try {
 
@@ -168,8 +167,7 @@ public class WarppointCmd implements CommandExecutor {
                             sender.sendMessage("§cCould not remove the warppoint §e" + args[1] + "§c!");
                             return false;
                         }
-                    }
-                    else if (args[0].equalsIgnoreCase("override")) {
+                    } else if (args[0].equalsIgnoreCase("override")) {
                         // Specifies /warppoint override [Name]
                         try {
 
@@ -196,8 +194,7 @@ public class WarppointCmd implements CommandExecutor {
                             sender.sendMessage("§cCould not override the warppoint §e" + args[1] + "§c!");
                             return false;
                         }
-                    }
-                    else {
+                    } else {
                         sender.sendMessage("§cWrong arguments!");
                         return false;
                     }

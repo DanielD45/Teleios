@@ -37,13 +37,22 @@ Planned:
             dimParticles?: 0 true/false
     others: 0 swith other player's particles on/off
 0 right click on shulker boxes in inventory to open them
+0 collection of items the player obtained
+0 more stats:
+    0 /printstats command: prints the player's stats to the chat
+    0 durability used
+    0 list broken tools
+    0 strongest hit
+    0 % of crit hits
+    0 resources used for crafting
+    0 list items burned/destroyed (cactus, void) (global?)
 0 deconstructor block? which can salvage items/blocks (like wooden stairs)
 0 quarz blocks can be crafted into 9 quarz (+others?)
 0 possibility to get player heads and mini blocks for decorations (crafting recipe)
 0 rideable animals (horses, donkeys, pigs) level health?, speed and jump height through being ridden
 0 death:
     0 tombstones which save your items on death
-    0 get a compass leading to point of death
+    0 get a compass leading to point of death (see recovery compass)
     0 corpse beacon
 0 Mending has multiple levels, higher levels repair more for the same amount of xp
 0 knockback doesn't knock back skeletons
@@ -60,14 +69,6 @@ Planned:
 0 eliminate trading limits
 0 elytra's armor can be upgraded with nether stars
 0 loot chests with player-specific inventories
-0 more stats:
-    0 /printstats command: prints the player's stats to the chat
-    0 durability used
-    0 list broken tools
-    0 strongest hit
-    0 % of crit hits
-    0 resources used for crafting
-    0 list items burned/destroyed (cactus, void) (global?)
 0 enchantments:
     0 higher levels than vanilla (unlockable?)
     0 enchantments on items upgrade over time (e.g. Sharpness I->II) (xp collected?)
@@ -76,7 +77,7 @@ Planned:
     0 destruction (bows): arrows break blocks (material dependent)
     0 homing (bows): homing arrows
     0 speed (bows): arrows have more speed
-0 compass that shows the way to the (players') nearest shulker box
+0 implement Illusioners
 0 set a compass to anything (block/entity)
 0 paintable maps
 
@@ -111,6 +112,7 @@ Decide:
         0 food consumption?
         0 potion resistance?
         0 potion affinity?
+        0 throwing power (ender pearls, snowballs... fly further)?
 0 [levelling system]:
     0 every different material players collect gives them a reward?
     0 collection system that unlocks crafting recipes?
@@ -177,6 +179,8 @@ Decide:
     0 active power-up/ability which debuffs monsters for a limited time
     0 tool abilities
     0 passive abilities (speed)?
+0 faster arrows -> more damage
+0 Sniffers can lead to near structures
 
 
 - Valid and standard argument values:

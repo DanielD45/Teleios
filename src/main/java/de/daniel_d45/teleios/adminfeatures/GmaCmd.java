@@ -14,11 +14,14 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import javax.annotation.Nonnull;
+
 
 public class GmaCmd implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
+                             @Nonnull String[] args) {
 
         // Activation state check
         if (!ConfigEditor.isActive("AdminFeatures.All")) {
@@ -70,8 +73,7 @@ public class GmaCmd implements CommandExecutor {
                     target.setGameMode(GameMode.ADVENTURE);
                     target.sendMessage("§aYour gamemode has been set to §6adventure§a!");
                     sender.sendMessage("§6" + target.getName() + "§a's gamemode has been set to §6adventure§a!");
-                }
-                else {
+                } else {
                     // The sender targets himself
                     Player player = (Player) sender;
 

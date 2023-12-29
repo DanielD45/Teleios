@@ -16,6 +16,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import javax.annotation.Nonnull;
+
 
 public class MuteCmdLst implements CommandExecutor, Listener {
 
@@ -32,7 +34,8 @@ public class MuteCmdLst implements CommandExecutor, Listener {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
+                             @Nonnull String[] args) {
 
         // Activation state check
         if (!ConfigEditor.isActive("AdminFeatures.All")) {

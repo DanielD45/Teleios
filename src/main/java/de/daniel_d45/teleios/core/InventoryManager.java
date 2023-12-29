@@ -183,8 +183,7 @@ public class InventoryManager {
                     restAmount -= currentItem.getAmount();
                     // Removes the ItemStack
                     inv.setItem(currentSlot, null);
-                }
-                else {
+                } else {
                     currentItem.setAmount(currentItem.getAmount() - restAmount);
                     return amount;
                 }
@@ -235,7 +234,7 @@ public class InventoryManager {
      * @return -
      */
     public static Inventory createNoInteractionInventory(int rows, String name, Inventory predecessorInventory) {
-        rows = GlobalMethods.validateInt(rows, 1, 6);
+        rows = GlobalMethods.trimInt(rows, 1, 6);
         return Bukkit.createInventory(new NoInteractionInventories(predecessorInventory), rows * 9, name);
     }
 

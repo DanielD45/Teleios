@@ -14,11 +14,14 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import javax.annotation.Nonnull;
+
 
 public class DamageCmd implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
+                             @Nonnull String[] args) {
 
         // Activation state check
         if (!ConfigEditor.isActive("AdminFeatures.All")) {
@@ -50,8 +53,7 @@ public class DamageCmd implements CommandExecutor {
                     if (player.getHealth() - amount <= 0) {
                         player.damage(player.getMaxHealth());
                         player.sendMessage("§4You killed yourself!");
-                    }
-                    else {
+                    } else {
                         player.damage(amount);
                         player.sendMessage("§4You damaged yourself by §6" + amount + " §4hp!");
                     }
@@ -88,15 +90,13 @@ public class DamageCmd implements CommandExecutor {
                             target.damage(target.getMaxHealth());
                             target.sendMessage("§4You've been killed!");
                             sender.sendMessage("§4You killed player §6" + target.getName() + "§4!");
-                        }
-                        else {
+                        } else {
                             target.damage(amount);
                             target.sendMessage("§4You've been damaged by §6" + amount + " §4hp!");
                             sender.sendMessage("§4You damaged player §6" + target.getName() + " by §6" + amount + " §4hp!");
                         }
 
-                    }
-                    else {
+                    } else {
                         // The sender is the target
 
                         Player player = (Player) sender;
@@ -111,8 +111,7 @@ public class DamageCmd implements CommandExecutor {
                         if (player.getHealth() - amount <= 0) {
                             player.damage(player.getMaxHealth());
                             player.sendMessage("§4You've been killed!");
-                        }
-                        else {
+                        } else {
                             player.damage(amount);
                             player.sendMessage("§4You damaged yourself by §6" + amount + " §4hp!");
                         }

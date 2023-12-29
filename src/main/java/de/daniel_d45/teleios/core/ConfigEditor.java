@@ -10,7 +10,6 @@ import de.daniel_d45.teleios.adminfeatures.AdminFeatures;
 import de.daniel_d45.teleios.bettergameplay.BetterGameplay;
 import de.daniel_d45.teleios.core.main.Teleios;
 import de.daniel_d45.teleios.passiveskills.PassiveSkills;
-import de.daniel_d45.teleios.worldmaster.WorldMaster;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -64,7 +63,6 @@ public class ConfigEditor {
         Collections.addAll(paths, AdminFeatures.getActivationstatePaths());
         Collections.addAll(paths, BetterGameplay.getActivationstatePaths());
         Collections.addAll(paths, PassiveSkills.getActivationstatePaths());
-        Collections.addAll(paths, WorldMaster.getActivationstatePaths());
 
         // Initiates the Activationstates for all the segments and functions
         for (String current : paths) {
@@ -119,8 +117,7 @@ public class ConfigEditor {
     public static void switchActivationstate(String subPath) {
         if (isActive(subPath)) {
             set("Activationstates." + subPath, "OFF");
-        }
-        else {
+        } else {
             set("Activationstates." + subPath, "ON");
         }
     }

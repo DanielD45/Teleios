@@ -12,13 +12,15 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import javax.annotation.Nonnull;
 import java.util.Set;
 
 
 public class OpListCmd implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
+                             @Nonnull String[] args) {
 
         // Activation state check
         if (!ConfigEditor.isActive("AdminFeatures.All")) {
@@ -92,6 +94,7 @@ public class OpListCmd implements CommandExecutor {
                 return true;
             }
 
+            // TODO: input, exception handling
             // Target on OP list check
             if (ConfigEditor.get("OPList." + args[1]) == null) {
                 sender.sendMessage("§cThis player is not on the OP list!");
@@ -108,8 +111,6 @@ public class OpListCmd implements CommandExecutor {
             return true;
         }
 
-        // Wrong arguments
-        sender.sendMessage("§cWrong arguments!");
         return false;
     }
 

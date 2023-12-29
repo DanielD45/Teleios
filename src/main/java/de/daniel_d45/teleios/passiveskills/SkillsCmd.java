@@ -15,12 +15,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import javax.annotation.Nonnull;
+
 
 // TODO: WIP
 public class SkillsCmd implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
+                             @Nonnull String[] args) {
         try {
 
             // Activationstate check
@@ -36,10 +39,9 @@ public class SkillsCmd implements CommandExecutor {
             }
 
             // Only runs when a skill is activated
-            if (PassiveSkills.usedSkills.size() > 0) {
+            if (!PassiveSkills.usedSkills.isEmpty()) {
                 player.openInventory(getSkillsInventory(player));
-            }
-            else {
+            } else {
                 player.sendMessage("§eNo skill is beeing used!");
             }
 
@@ -71,8 +73,7 @@ public class SkillsCmd implements CommandExecutor {
                 if (PassiveSkills.usedSkills.size() % 2 == 0 && slot == 12) {
                     // Skips the middle (13.) slot when the amount of used skills is even
                     slot += 2;
-                }
-                else {
+                } else {
                     ++slot;
                 }
 

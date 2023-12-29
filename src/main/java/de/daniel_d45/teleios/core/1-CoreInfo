@@ -14,11 +14,11 @@ Done:
     1 odd = terminal output, even = terminal and chat output
 
 WIP:
-0 fix MTL inv
-0 test: multiple people open the MTL inv
-0 add tablist to /w
+0 make common parts methods (segment items...)
+0 move sbpp in MTL-inv
+0 set max teleporter name length using MTL-inv
 0 reduce exception handling to minimum
-0 add and remove teleporter recipe to recipe book
+0 command (or MTL inv) to de-implement commands to make space for other plugins' command names
 0 PLCs
     0 personal invs: Bug: ConfigEditor.set();
     0 barrels... too
@@ -38,24 +38,27 @@ WIP:
             0 store default value
 0 test invalid values for JoinMessage path
 0 make only one instance of menu invs
-0 fill SampleCode class
-0 merge PassiveSkills segment into BetterGameplay?
+0 merge PassiveSkills segment into BetterGameplay
 
 Planned:
 0 integrated tutorials
+    0 players start with instruction book (you can get anytime using /howto?)?
+    0 clicking on teleporters starts chat prompt wth info?
+    0 /help Teleporter|Teleporters?
+    0 /help Teleios?
 0 make more specialised listeners?
-0 MTL inventory: activated segments have enchanted icons
-0 MTL inventory: icons do not show enchantments or damage specs
-0 command (or MTL inv) to de-implement commands to make space for other plugins' command names
-0 fix: teleporter recipe being created multiple times
-0 fix: remove loading time when listing a lot of teleporters -> send message as one, reduce loading time
-0 fix: broadcasting doesn't work in onEnable()
-0 command tablists
+0 fix: remove loading time when listing a lot of teleporters? -> send message as one, reduce loading time
+0 command tab-completion
 
 
 - Interesting classes and methods:
 LivingEntity
- addPotionEffect(PotionEffect effect)
+    addPotionEffect(PotionEffect effect)
+Player
+    setInvisible(boolean b)
+ItemStack
+    serialize()
+ItemMeta
 
 
 - File Naming Notes:

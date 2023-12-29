@@ -7,6 +7,8 @@
 package de.daniel_d45.teleios.core;
 
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -17,25 +19,20 @@ import java.util.Arrays;
 
 public class ItemBuilder {
 
-    private ItemStack item;
-    private ItemMeta itemMeta;
+    private final ItemStack item;
+    private final ItemMeta itemMeta;
 
-    /**
-     * Material and amount constructor
-     *
-     * @param material [Material]
-     * @param amount   [Integer]
-     */
+
+    public ItemBuilder(Material material) {
+        item = new ItemStack(material, 1);
+        itemMeta = item.getItemMeta();
+    }
+
     public ItemBuilder(Material material, int amount) {
         item = new ItemStack(material, amount);
         itemMeta = item.getItemMeta();
     }
 
-    /**
-     * ItemStack constructor
-     *
-     * @param itemStack [ItemStack]
-     */
     public ItemBuilder(ItemStack itemStack) {
         item = itemStack;
         itemMeta = itemStack.getItemMeta();
@@ -46,7 +43,7 @@ public class ItemBuilder {
         return item;
     }
 
-    // TODO: Check usage
+    // used?
     public ItemBuilder setAmount(int amount) {
         item.setAmount(amount);
         return this;
@@ -62,25 +59,34 @@ public class ItemBuilder {
         return this;
     }
 
-    // TODO: Fix
-    public ItemBuilder addEnchantment(Enchantment enchant, int level) {
-        item.addEnchantment(enchant, level);
-        return this;
-    }
-
-    // TODO: Fix
-    public ItemBuilder addUnsafeEnchantment(Enchantment enchant, int level) {
-        item.addUnsafeEnchantment(enchant, level);
-        return this;
-    }
-
     public ItemBuilder addItemFlags(ItemFlag... itemFlags) {
         itemMeta.addItemFlags(itemFlags);
         return this;
     }
 
+    public ItemBuilder addEnchant(Enchantment enchant, int level) {
+        itemMeta.addEnchant(enchant, level, true);
+        return this;
+    }
+
+    public ItemBuilder addEnchantmentCapped(Enchantment enchant, int level) {
+        itemMeta.addEnchant(enchant, level, false);
+        return this;
+    }
+
     public ItemBuilder setUnbreakable(boolean unbreakable) {
         itemMeta.setUnbreakable(unbreakable);
+        return this;
+    }
+
+    public ItemBuilder addAttributeModifier(Attribute attribute, AttributeModifier attributeModifier) {
+        itemMeta.addAttributeModifier(attribute, attributeModifier);
+        return this;
+    }
+
+    @Deprecated
+    public ItemBuilder setDurability(short durability) {
+        item.setDurability(durability);
         return this;
     }
 

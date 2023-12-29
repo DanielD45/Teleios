@@ -12,11 +12,14 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import javax.annotation.Nonnull;
+
 
 public class ChatclearCmd implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
+                             @Nonnull String[] args) {
 
         // Activation state check
         if (!ConfigEditor.isActive("AdminFeatures.All")) {
@@ -28,6 +31,10 @@ public class ChatclearCmd implements CommandExecutor {
         for (int i = 0; i <= 60; ++i) {
             Bukkit.broadcastMessage("");
         }
+
+        // Test room
+
+        // End of test room
 
         Bukkit.broadcastMessage("§aThe chat has been cleared!");
         return true;

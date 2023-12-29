@@ -66,8 +66,7 @@ public class BlockBreakLstPS implements Listener {
                 // TODO: Check functionality
                 String entryName = block.getWorld().getName() + "," + block.getX() + "," + block.getY() + "," + block.getZ();
                 ConfigEditor.clearPath("PlacedBlocks." + entryName);
-            }
-            else {
+            } else {
 
                 // Player survival mode check
                 if (player.getGameMode() != GameMode.SURVIVAL) {
@@ -95,7 +94,7 @@ public class BlockBreakLstPS implements Listener {
                             event.setDropItems(false);
 
                             // Drops the modified block drops one by one
-                            for (ItemStack currentItem : currentSkill.modifyBlockDrops(block, player.getItemInHand(), player)) {
+                            for (ItemStack currentItem : currentSkill.modifyBlockDrops(block, player.getInventory().getItemInMainHand(), player)) {
 
                                 block.getWorld().dropItemNaturally(block.getLocation(), currentItem);
                             }

@@ -16,6 +16,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import javax.annotation.Nonnull;
 import java.util.Objects;
 
 
@@ -27,7 +28,8 @@ public class JoinmessageCmdLst implements CommandExecutor, Listener {
 
             // TODO: Make individual ActivationState for command
             // Tests if the joinmessage is enabled and the command is active
-            if (ConfigEditor.hasValue("JoinMessage", true) && ConfigEditor.isActive("AdminFeatures.All")) {
+            if (ConfigEditor.hasValue("JoinMessage", true) &&
+                    ConfigEditor.isActive("AdminFeatures.All")) {
 
                 // Sends join message
                 Player player = event.getPlayer();
@@ -40,7 +42,8 @@ public class JoinmessageCmdLst implements CommandExecutor, Listener {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
+                             @Nonnull String[] args) {
 
         // Activation state check
         if (!ConfigEditor.isActive("AdminFeatures.All")) {
@@ -55,8 +58,7 @@ public class JoinmessageCmdLst implements CommandExecutor, Listener {
 
             if (joinMessageEnabled) {
                 sender.sendMessage("§aThe custom join message is §6enabled§a.");
-            }
-            else {
+            } else {
                 sender.sendMessage("§aThe custom join message is §6disabled§a.");
             }
 

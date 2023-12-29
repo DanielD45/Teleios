@@ -14,13 +14,15 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import javax.annotation.Nonnull;
+
 
 public class HealCmd implements CommandExecutor {
 
     // TODO: Make doubles possible as input
-    @SuppressWarnings("deprecation")
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
+                             @Nonnull String[] args) {
 
         // Activation state check
         if (!ConfigEditor.isActive("AdminFeatures.All")) {
@@ -73,8 +75,7 @@ public class HealCmd implements CommandExecutor {
                     if (player.getHealth() + amount > player.getMaxHealth()) {
                         player.setHealth(player.getMaxHealth());
                         player.sendMessage("§aYou fully healed yourself!");
-                    }
-                    else {
+                    } else {
                         player.setHealth(player.getHealth() + amount);
                         player.sendMessage("§aYou healed yourself by §6" + amount + " §ahp!");
                     }
@@ -103,8 +104,7 @@ public class HealCmd implements CommandExecutor {
                         target.setHealth(target.getMaxHealth());
                         target.sendMessage("§aYou've been fully healed!");
                         sender.sendMessage("§aYou fully healed §6" + target.getName() + "§a!");
-                    }
-                    else {
+                    } else {
                         // The sender himself is the target.
 
                         Player player = (Player) sender;
@@ -147,15 +147,13 @@ public class HealCmd implements CommandExecutor {
                         target.setHealth(target.getMaxHealth());
                         target.sendMessage("§aYou've been fully healed!");
                         sender.sendMessage("§aYou fully healed §6" + target.getName() + "§a!");
-                    }
-                    else {
+                    } else {
                         target.setHealth(target.getHealth() + amount);
                         target.sendMessage("§aYou've been healed by §6" + amount + " §ahp!");
                         sender.sendMessage("§aYou healed " + target.getName() + " by §6" + amount + " §ahp!");
                     }
 
-                }
-                else {
+                } else {
                     // The sender is the target
 
                     Player player = (Player) sender;
@@ -168,8 +166,7 @@ public class HealCmd implements CommandExecutor {
                     if (player.getHealth() + amount > player.getMaxHealth()) {
                         player.setHealth(player.getMaxHealth());
                         player.sendMessage("§aYou fully healed yourself!");
-                    }
-                    else {
+                    } else {
                         player.setHealth(player.getHealth() + amount);
                         player.sendMessage("§aYou healed yourself by §6" + amount + " §ahp!");
                     }

@@ -12,9 +12,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 
 /**
- * This class is used to identify the inventories you can't exchange items with.
- *
- * @author Daniel_D45
+ * Is used to identify the inventories you can't exchange items with.
  */
 public class NoInteractionInventories implements InventoryHolder {
 

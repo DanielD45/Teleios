@@ -8,11 +8,10 @@ package de.daniel_d45.teleios.core.main;
 
 import de.daniel_d45.teleios.adminfeatures.*;
 import de.daniel_d45.teleios.bettergameplay.*;
-import de.daniel_d45.teleios.core.ArtificialInventoryClickLst;
 import de.daniel_d45.teleios.core.ConfigEditor;
 import de.daniel_d45.teleios.core.JoinLst;
 import de.daniel_d45.teleios.core.ManageteleiosCmdLst;
-import de.daniel_d45.teleios.passiveskills.SkillsCmd;
+import de.daniel_d45.teleios.core.NoInteractionInventoryClickLst;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -24,7 +23,7 @@ import java.util.Objects;
 
 
 /**
- * The plugins main class as Singleton. Extends org.bukkit.plugin.java.JavaPlugin.
+ * The plugin's main class as Singleton.
  *
  * @author Daniel_D45
  */
@@ -44,25 +43,20 @@ public class Teleios extends JavaPlugin {
         return server;
     }
 
-    public static String getPluginPrefix() {
-        return pluginPrefix;
-    }
-
     public static FileConfiguration getConfigObject() {
         return config;
     }
 
     /**
-     * This method fires when the plugin is started. It is used as a setup method. Plugin-added commands and EventListeners have to be activated here.
-     * <p>
-     * - To register a command use: getCommand("[CommandName]").setExecutor([CommandClassObject]());
-     * <p>
+     * Fires when the plugin is started. Is used as a setup method.
+     * Plugin-added commands and EventListeners have to be activated here. <p>
+     * - To register a command use: getCommand("[CommandName]").setExecutor([CommandClassObject]()); <p>
      * - To register an EventListener use: [PluginManagerObject].registerEvents(new [ListenerClassName](), this);
      */
     @Override
     public void onEnable() {
 
-        // Instantiates the variables of this class
+        // Variable instantiation
         plugin = this;
         server = plugin.getServer();
         pluginPrefix = "§5[Teleios Plugin]§r ";
@@ -79,12 +73,8 @@ public class Teleios extends JavaPlugin {
 
         // Command instantiation
 
-        // Objects.requireNonNull() is only there to suppress IDE warnings
-
         // AdminFeatures commands
         Objects.requireNonNull(getCommand("chatclear")).setExecutor(new ChatclearCmd());
-        //getCommand("chatclear").unregister();
-        //getCommand("countdown").setExecutor(new ChatclearCommand());
         Objects.requireNonNull(getCommand("damage")).setExecutor(new DamageCmd());
         Objects.requireNonNull(getCommand("gma")).setExecutor(new GmaCmd());
         Objects.requireNonNull(getCommand("gmc")).setExecutor(new GmcCmd());
@@ -99,61 +89,52 @@ public class Teleios extends JavaPlugin {
         Objects.requireNonNull(getCommand("oplist")).setExecutor(new OpListCmd());
         Objects.requireNonNull(getCommand("tphere")).setExecutor(new TphereCmd());
         Objects.requireNonNull(getCommand("unmute")).setExecutor(new UnmuteCmd());
-
+        Objects.requireNonNull(getCommand("warppoint")).setExecutor(new WarppointCmd());
         // BetterGameplay commands
         Objects.requireNonNull(getCommand("configureteleporter")).setExecutor(new ConfigureteleporterCmd());
-        Objects.requireNonNull(getCommand("enderchest")).setExecutor(new EnderchestCmd());
+        // TODO: Objects.requireNonNull(getCommand("enderchest")).setExecutor(new EnderchestCmd());
         Objects.requireNonNull(getCommand("setblocksperpearl")).setExecutor(new SetblocksperpearlCmd());
         Objects.requireNonNull(getCommand("warp")).setExecutor(new WarpCmd());
-        Objects.requireNonNull(getCommand("warppoint")).setExecutor(new WarppointCmd());
         Objects.requireNonNull(getCommand("warppouch")).setExecutor(new WarppouchCmd());
-
         // Core commands
         Objects.requireNonNull(getCommand("manageteleios")).setExecutor(manageteleiosCmdLst);
-
-
         // PassiveSkills commands
-        Objects.requireNonNull(getCommand("skills")).setExecutor(new SkillsCmd());
+        //Objects.requireNonNull(getCommand("skills")).setExecutor(new SkillsCmd());
 
 
         // Event Listener instantiation
 
-        // TODO: reorganise
-        // Core Listeners
-        pluginManager.registerEvents(new ArtificialInventoryClickLst(), plugin);
-        pluginManager.registerEvents(manageteleiosCmdLst, plugin);
-        pluginManager.registerEvents(new JoinLst(), plugin);
-
         // AdminFeatures Listeners
         pluginManager.registerEvents(joinmessageCmdLst, plugin);
         pluginManager.registerEvents(makePersonalLootChestCmdLst, plugin);
-
-        // BetterGameplay Listeners
         pluginManager.registerEvents(muteCmdLst, plugin);
+        // BetterGameplay Listeners
         pluginManager.registerEvents(new PlayerInteractWithTeleporterLst(), plugin);
         pluginManager.registerEvents(new TeleporterPlaceLst(), plugin);
-
+        // Core Listeners
+        pluginManager.registerEvents(new JoinLst(), plugin);
+        pluginManager.registerEvents(manageteleiosCmdLst, plugin);
+        pluginManager.registerEvents(new NoInteractionInventoryClickLst(), plugin);
         // PassiveSkills Listeners
-        //pM.registerEvents(new BlockBreakListenerPS(), this);
-        //pM.registerEvents(new BlockPlaceListenerPS(), this);
+        //pluginManager.registerEvents(new BlockBreakListenerPS(), this);
+        //pluginManager.registerEvents(new BlockPlaceListenerPS(), this);
 
-
-        String outputMessage = pluginPrefix + "§bPlugin enabled§r";
 
         // Prints the message to the console
-        Teleios.getServerObject().getConsoleSender().sendMessage(outputMessage);
+        Teleios.getServerObject().getConsoleSender().sendMessage(pluginPrefix + "§bPlugin enabled§r");
 
         // PROGRAM TEST ROOM
         //FileConfiguration testConfig = plugin.getConfig();
         //testConfig.load("teleios");
+        
+        //RecipeManager.registerTestRecipes();
         // END OF PROGRAM TEST ROOM
     }
 
     @Override
     public void onDisable() {
-        String outputMessage = pluginPrefix + "§3Plugin disabled§r";
         // Prints the message to the console
-        Teleios.getServerObject().getConsoleSender().sendMessage(outputMessage);
+        Teleios.getServerObject().getConsoleSender().sendMessage(pluginPrefix + "§3Plugin disabled§r");
     }
 
 }
