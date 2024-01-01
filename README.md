@@ -90,14 +90,18 @@ The WorldMaster segment is not implemented yet.
 ## Version updates
 This is a history of the past changes coming with the respective versions. "WIP" (Work In Progress) versions are not available yet.
 
-### v1.3WIP
-**Server owners can remove the DebugLevel path from the config.**
-- this version is native to Minecraft 1.19 but also works with 1.20
+### v1.3WIP: simpler, robust and more user-friendly
+**Server owners can remove the "DebugLevel", "Activationstates.PassiveSkills" and "Activationstates.WorldMaster" paths from the config.**
+- this version is native to Minecraft 1.20.1
 - the DebugLevel has been removed. The plugin will now only output the exception stacktrace and, <br/>
   when an error occurres while running a command, the sender will be notified of the error
 - added /oplist (/opl): lets you store ops on a list. These people can op themselves anytime as long as the AdminFeatures segment is active.
-- Teleios is now public domain and runs under the CC0 license, meaning I withdraw my copyright of this project.
+- Teleios is now public domain and runs under the CC0 license, meaning I withdraw my copyright of this project
 - /w now has a tabcompleter
+- unimplemented functionality has been removed from the manage Teleios inventory (see /mtl)
+- the Activationstates of the unimplemented segments "PassiveSkills" and "WorldMaster" have been removed from the config
+- teleporter recipes are now being added and removed from the recipe book, according to whether the function is active. Relogging is sometimes needed.
+- commands are now very robust and account for any amount and type of arguments. Out-of-bounds inputs will be cut to size.
 - general optimisation
 
 ### v1.2
