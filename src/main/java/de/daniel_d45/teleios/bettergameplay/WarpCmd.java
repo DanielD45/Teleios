@@ -53,7 +53,7 @@ public class WarpCmd implements CommandExecutor, TabCompleter {
                 return true;
             }
 
-            // Specifies /warp (list)
+            // /warp (list)
             if (args.length == 0 || args[0].equalsIgnoreCase("list")) {
 
                 StringBuilder listMessage = new StringBuilder();
@@ -128,7 +128,7 @@ public class WarpCmd implements CommandExecutor, TabCompleter {
 
             }
 
-            // Specifies /warp [WarppointName]
+            // /warp [WarppointName]
             if (wps != null) {
                 String[] warppoints = wps.toArray(new String[0]);
 
@@ -156,7 +156,7 @@ public class WarpCmd implements CommandExecutor, TabCompleter {
                 // No warppoint match, code continues
             }
 
-            // Specifies /warp [TeleporterName]
+            // /warp [TeleporterName]
             if (tps != null) {
                 String[] teleporters = tps.toArray(new String[0]);
 

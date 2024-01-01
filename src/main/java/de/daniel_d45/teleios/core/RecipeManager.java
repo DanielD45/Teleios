@@ -44,7 +44,6 @@ public final class RecipeManager implements Listener {
         return teleporterRecipe;
     }
 
-    // TODO: Check functionality
     public static void enableTeleporterRecipe(boolean enable) {
         if (enable) {
             Bukkit.addRecipe(getTeleporterRecipe());

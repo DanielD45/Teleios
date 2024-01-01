@@ -8,7 +8,6 @@ package de.daniel_d45.teleios.adminfeatures;
 
 import de.daniel_d45.teleios.core.ConfigEditor;
 import de.daniel_d45.teleios.core.ItemBuilder;
-import de.daniel_d45.teleios.core.RecipeManager;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -55,13 +54,11 @@ public class AdminFeatures {
             for (String current : activationstatePaths) {
                 ConfigEditor.set("Activationstates." + current, "OFF");
             }
-            RecipeManager.enableTeleporterRecipe(false);
         } else {
 
             for (String current : activationstatePaths) {
                 ConfigEditor.set("Activationstates." + current, "ON");
             }
-            RecipeManager.enableTeleporterRecipe(true);
         }
     }
 

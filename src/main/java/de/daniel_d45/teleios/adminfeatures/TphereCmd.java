@@ -34,7 +34,7 @@ public class TphereCmd implements CommandExecutor {
             return true;
         }
 
-        // Specifies /tphere [Player]
+        // /tphere [Player]
         try {
 
             // TODO: input

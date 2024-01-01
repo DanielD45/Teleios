@@ -51,7 +51,7 @@ public class JoinmessageCmdLst implements CommandExecutor, Listener {
             return true;
         }
 
-        // Specifies /joinmessage
+        // /joinmessage
         if (args.length == 0) {
             // TODO: fix config path if invalid
             boolean joinMessageEnabled = (boolean) Objects.requireNonNull(ConfigEditor.get("JoinMessage"));
@@ -71,14 +71,14 @@ public class JoinmessageCmdLst implements CommandExecutor, Listener {
             return true;
         }
 
-        // Specifies /joinmessage enable|true
+        // /joinmessage enable|true
         if (args[0].equalsIgnoreCase("enable") || args[0].equalsIgnoreCase("true")) {
             ConfigEditor.set("JoinMessage", true);
             sender.sendMessage("§aThe custom join message is now §6enabled§a!");
             return true;
         }
 
-        // Specifies /joinmessage disable|false
+        // /joinmessage disable|false
         else if (args[0].equalsIgnoreCase("disable") || args[0].equalsIgnoreCase("false")) {
             ConfigEditor.set("JoinMessage", false);
             sender.sendMessage("§aThe custom join message is now §6disabled§a!");

@@ -19,6 +19,10 @@ import javax.annotation.Nonnull;
 
 public class GmcCmd implements CommandExecutor {
 
+    // Unbreakable (2023-12-30)
+    GameMode gameMode = GameMode.CREATIVE;
+    String gameModeName = gameMode.toString().toLowerCase();
+
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
                              @Nonnull String[] args) {
@@ -29,71 +33,66 @@ public class GmcCmd implements CommandExecutor {
             return true;
         }
 
-        switch (args.length) {
-            case 0:
-                // Specifies /gma
+        // /gmc
+        if (args.length == 0) {
 
-                // Sender player check
-                if (!(sender instanceof Player player)) {
-                    sender.sendMessage("§cYou are no player!");
-                    return true;
-                }
-
-                // Player gamemode check
-                if (player.getGameMode() == GameMode.CREATIVE) {
-                    player.sendMessage("§cYou are already in creative mode!");
-                    return true;
-                }
-
-                // Changes gamemode to creative
-                player.setGameMode(GameMode.CREATIVE);
-                player.sendMessage("§aYour gamemode has been set to §6creative§a!");
+            // Sender player check
+            if (!(sender instanceof Player player)) {
+                sender.sendMessage("§cYou are not a player!");
                 return true;
-            case 1:
-                // Specifies /gma [Player]
+            }
 
-                Player target = Bukkit.getPlayer(args[0]);
-
-                if (target != sender) {
-                    // The sender is not the target
-
-                    // Target online check
-                    if (target == null) {
-                        sender.sendMessage("§cThis player is not online!");
-                        return true;
-                    }
-
-                    // Target gamemode check
-                    if (target.getGameMode() == GameMode.CREATIVE) {
-                        sender.sendMessage("§cYour target is already in creative mode!");
-                        return true;
-                    }
-
-                    // Sets the target in creative mode
-                    target.setGameMode(GameMode.CREATIVE);
-                    target.sendMessage("§aYour gamemode has been set to §6creative§a!");
-                    sender.sendMessage("§6" + target.getName() + "§a's gamemode has been set to §6creative§a!");
-
-                } else {
-                    // The sender targets himself
-                    Player player = (Player) sender;
-
-                    // Player gamemode check
-                    if (player.getGameMode() == GameMode.CREATIVE) {
-                        sender.sendMessage("§cYou are already in creative mode!");
-                        return true;
-                    }
-
-                    // Sets the player in creative mode
-                    player.setGameMode(GameMode.CREATIVE);
-                    player.sendMessage("§aYour gamemode has been set to §6creative§a!");
-                }
+            // Player gamemode check
+            if (player.getGameMode() == gameMode) {
+                player.sendMessage("§cYou are already in " + gameModeName + " mode!");
                 return true;
+            }
 
-            default:
-                // Wrong amount of arguments
-                sender.sendMessage("§cWrong amount of arguments!");
-                return false;
+            // Changes gamemode
+            player.setGameMode(gameMode);
+            player.sendMessage("§aYour gamemode has been set to §6" + gameModeName + "§a!");
+            return true;
+        }
+
+        // /gmc [Player] ...
+
+        String targetName = args[0];
+        Player target = Bukkit.getPlayerExact(targetName);
+
+        if (target != sender) {
+
+            // Target online check
+            if (target == null) {
+                sender.sendMessage("§cPlayer §6" + targetName + "§c is not online!");
+                return true;
+            }
+
+            // Target gamemode check
+            if (target.getGameMode() == gameMode) {
+                sender.sendMessage("§6" + targetName + "§c is already in " + gameModeName + " mode!");
+                return true;
+            }
+
+            // Changes target's gamemode
+            target.setGameMode(gameMode);
+            target.sendMessage("§aYour gamemode has been set to §6" + gameModeName + "§a!");
+            sender.sendMessage("§6" + target.getName() + "§a's gamemode has been set to §6" + gameModeName + "§a!");
+            return true;
+        } else {
+            // The sender targets themselves
+
+            Player player = (Player) sender;
+
+            // Player gamemode check
+            if (player.getGameMode() == gameMode) {
+                sender.sendMessage("§cYou are already in " + gameModeName + " mode!");
+                return true;
+            }
+
+            // Changes player's gamemode
+            player.setGameMode(gameMode);
+            player.sendMessage("§aYour gamemode has been set to §6" + gameModeName + "§a!");
+            return true;
         }
 
     }

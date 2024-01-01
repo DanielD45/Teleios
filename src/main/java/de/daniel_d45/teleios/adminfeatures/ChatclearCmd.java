@@ -6,7 +6,7 @@
 
 package de.daniel_d45.teleios.adminfeatures;
 
-import de.daniel_d45.teleios.core.ConfigEditor;
+import de.daniel_d45.teleios.core.GlobalMethods;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,29 +14,24 @@ import org.bukkit.command.CommandSender;
 
 import javax.annotation.Nonnull;
 
-
 public class ChatclearCmd implements CommandExecutor {
 
+    // Unbreakable (2023-12-30)
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
                              @Nonnull String[] args) {
 
-        // Activation state check
-        if (!ConfigEditor.isActive("AdminFeatures.All")) {
-            sender.sendMessage("§cThis command is not active.");
-            return true;
-        }
+        if (GlobalMethods.cmdOffCheck("AdminFeatures.All", sender)) return true;
 
-        // Specifies /chatclear
+        // /chatclear
         for (int i = 0; i <= 60; ++i) {
             Bukkit.broadcastMessage("");
         }
 
+        Bukkit.broadcastMessage("§aThe chat has been cleared!");
         // Test room
 
         // End of test room
-
-        Bukkit.broadcastMessage("§aThe chat has been cleared!");
         return true;
     }
 

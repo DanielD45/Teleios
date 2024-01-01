@@ -9,7 +9,6 @@ package de.daniel_d45.teleios.core;
 import de.daniel_d45.teleios.adminfeatures.AdminFeatures;
 import de.daniel_d45.teleios.bettergameplay.BetterGameplay;
 import de.daniel_d45.teleios.core.main.Teleios;
-import de.daniel_d45.teleios.passiveskills.PassiveSkills;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -39,7 +38,7 @@ public class ConfigEditor {
 
         for (Player currentPlayer : Bukkit.getOnlinePlayers()) {
             BetterGameplay.initiateWarppouch(currentPlayer.getName());
-            PassiveSkills.initiatePlayerRecords(currentPlayer.getName());
+            //PassiveSkills.initiatePlayerRecords(currentPlayer.getName());
         }
 
         initiatePersonalLootChests();
@@ -62,7 +61,7 @@ public class ConfigEditor {
 
         Collections.addAll(paths, AdminFeatures.getActivationstatePaths());
         Collections.addAll(paths, BetterGameplay.getActivationstatePaths());
-        Collections.addAll(paths, PassiveSkills.getActivationstatePaths());
+        //Collections.addAll(paths, PassiveSkills.getActivationstatePaths());
 
         // Initiates the Activationstates for all the segments and functions
         for (String current : paths) {

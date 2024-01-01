@@ -1,14 +1,2 @@
-- Features:
-
-Done:
-
-
-WIP:
-
-
-Planned:
-0 create and delete worlds (command)
-0 command to teleport between worlds and dimensions
-0 Arena worlds (PvP/PvE)
-0 private (Skyblock) worlds
-0 world manipulation (set amount of ores...)
+- Description:
+Enables creating and managing multiple worlds/dimensions

@@ -35,7 +35,7 @@ public class OpeninventoryCmd implements CommandExecutor {
         }
 
         // TODO: get input, exception handling
-        // Specifies /openinventory [Player]
+        // /openinventory [Player]
         Player target = Bukkit.getPlayer(args[0]);
 
         if (target == null) {

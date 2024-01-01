@@ -6,82 +6,90 @@
 
 package de.daniel_d45.teleios.core;
 
-import com.google.errorprone.annotations.DoNotCall;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.common.reflection.qual.UnknownClass;
 
-
 /**
- * This class is only used for storing code samples to copy in its methods.
+ * This class is only used for storing code samples for copying in its methods.
  */
 @UnknownClass
-final class SampleCode {
+@SuppressWarnings("unused")
+interface SampleCode {
 
-    @DoNotCall
-    static void introduceParameterOLD(Player player, CommandSender sender, Command command, String label,
-                                      String[] args) {
-        /*
-         If a parameter can cause exceptions, introduce it using a try catch block.
-        Also test for valid values inside try{} and throw new exceptions that will be caught by its catch statement to
-        keep the parameter declaration and parameter "trimming" together.
-        Objects.requireNonNull() is only used to satisfy the IDE.
-        */
-
-        int storedEPs;
-        try {
-            storedEPs = (int) ConfigEditor.get("Warppouch." + player.getName());
-            if (storedEPs < 0) {
-                throw new IllegalArgumentException("The warp pouch stores a negative amount of ender pearls!");
-            }
-        } catch (NullPointerException | ClassCastException | IllegalArgumentException e) {
-            player.sendMessage("§cYour warp pouch is invalid!");
-            return;
-        }
+    @SuppressWarnings("ALL")
+    private static boolean cmdOffCheck(CommandSender sender) {
+        //
+        if (GlobalMethods.cmdOffCheck("AdminFeatures.All", sender)) return true;
+        //
+        return false;
     }
 
-    @DoNotCall
-    static boolean getUserInt(@NonNull CommandSender sender, @NonNull String[] args) {
-        /*
+    private static boolean wrongAmountofArgs(CommandSender sender) {
+        //
+        return GlobalMethods.wrongAmountofArgs(sender);
+        //
+    }
+
+    private static boolean senderPlayerCheck(CommandSender sender) {
+        //
+        if (GlobalMethods.senderPlayerCheck(sender)) return true;
+        Player player = (Player) sender;
+        //
+        return false;
+    }
+
+    @SuppressWarnings("ALL")
+    private static boolean getTarget(Player target, String[] args, CommandSender sender) {
+        //
+        target = GlobalMethods.getTarget(args[0], sender);
+        if (target == null) return true;
+        //
+        return false;
+    }
+
+    private static boolean getUserInt(String xINPUTx, int xMIN_VALUEx, int xMAX_VALUEx, CommandSender sender) {
+        //
         try {
-            int INPUTNAME = GlobalMethods.trimInt(Integer.parseInt(INPUT), MIN_VALUE, MAX_VALUE);
+            int xINPUTNAMEx = GlobalMethods.trimInt(Integer.parseInt(xINPUTx), xMIN_VALUEx, xMAX_VALUEx);
         } catch (NumberFormatException e) {
             // The input is not an int
-            sender.sendMessage("ERROR_MESSAGE");
-            return true;
+            sender.sendMessage("§cInvalid number!");
+            return false;
         }
-        */
+        //
         return true;
     }
 
-    @DoNotCall
-    static boolean getUserString(@NonNull CommandSender sender, @NonNull String[] args) {
-        /*
-        String userString = INPUT;
-        if (!GlobalMethods.stringUsable(userString, MIN_LENGTH, MAX_LENGTH)) {
+    // TODO: imp
+    private static boolean getUserDouble(String xINPUTx, double xMIN_VALUEx, double xMAX_VALUEx,
+                                         double xEXCLUDED_VALUEx, CommandSender sender) {
+        //
+        try {
+            double xINPUTNAMEx = GlobalMethods.trimDouble(Double.parseDouble(xINPUTx), xMIN_VALUEx, xMAX_VALUEx);
+            if (xINPUTNAMEx == xEXCLUDED_VALUEx) throw new NumberFormatException();
+        } catch (NumberFormatException e) {
+            // The input is not a suitable double
+            sender.sendMessage("§cInvalid number!");
+            return false;
+        }
+        //
+        return true;
+    }
+
+    // TODO: imp
+    private static boolean getUserString(String xINPUTx, int xMIN_LENGTHx, int xMAX_LENGTHx, CommandSender sender) {
+        //
+        if (GlobalMethods.stringNotUsable(xINPUTx, xMIN_LENGTHx, xMAX_LENGTHx)) {
             // The input is too long
-            sender.sendMessage("ERROR_MESSAGE");
+            sender.sendMessage("§6" + xINPUTx + "§c is too long!");
             return true;
         }
-        */
-
-        return true;
+        //
+        return false;
     }
 
-    static void markEntities() {
-    /*
-    Mark entities, deleted on server restart:
-    Entity?.setMetadata("Key",new FixedMetadataValue(Plugin.getInstance(), Value(Object)));
-
-    Mark entities:
-    Entity?.getPersistentDataContainer();
-     */
-    }
-
-    @DoNotCall
-    static void TabCompleter() {
+    private static void TabCompleter() {
         /*
         Class must extend TabCompleter.
         in method List<String> onTabComplete(...):
@@ -89,6 +97,16 @@ final class SampleCode {
             return empty list => no tab completion
             return null => TabCompleter for player names
          */
+    }
+
+    private static void markEntities() {
+    /*
+    Mark entities, deleted on server restart:
+    Entity?.setMetadata("Key",new FixedMetadataValue(Plugin.getInstance(), Value(Object)));
+
+    Mark entities:
+    Entity?.getPersistentDataContainer();
+     */
     }
 
 }

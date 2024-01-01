@@ -50,7 +50,7 @@ public class WarppouchCmd implements CommandExecutor {
                 return true;
             }
 
-            // Specifies /warppouch (view|show)
+            // /warppouch (view|show)
             if (args.length == 0 || args[0].equalsIgnoreCase("view") || args[0].equalsIgnoreCase("show")) {
                 if (storedEPs == 1) {
                     player.sendMessage("§aThere is §6" + storedEPs + " §aender pearl in your warp pouch.");
@@ -60,11 +60,11 @@ public class WarppouchCmd implements CommandExecutor {
                 return true;
             }
 
-            // Specifies /warppouch (deposit|put [Amount])
+            // /warppouch (deposit|put [Amount])
             if (args[0].equalsIgnoreCase("deposit") || args[0].equalsIgnoreCase("put")) {
                 int specifiedAmount = Integer.MAX_VALUE;
 
-                // Specifies /warppouch deposit|put [Amount]
+                // /warppouch deposit|put [Amount]
                 // Tries to get a specified amount of ender pearls
                 if (args.length >= 2) {
                     try {

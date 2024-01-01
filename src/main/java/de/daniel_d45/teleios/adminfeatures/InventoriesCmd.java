@@ -32,7 +32,7 @@ public class InventoriesCmd implements CommandExecutor {
 
         switch (args.length) {
             case 0:
-                // Specifies /inventories
+                // /inventories
                 args = new String[1];
                 args[0] = "list";
             case 1:
@@ -96,9 +96,9 @@ public class InventoriesCmd implements CommandExecutor {
                     return false;
                 }
             case 2:
-                // Specifies /inventories open|remove [Name]
+                // /inventories open|remove [Name]
                 if (args[0].equalsIgnoreCase("open")) {
-                    // Specifies /inventories remove [Name]
+                    // /inventories remove [Name]
 
                     if (!(sender instanceof Player player)) {
                         sender.sendMessage("§cYou are no player!");
@@ -115,7 +115,7 @@ public class InventoriesCmd implements CommandExecutor {
                     player.openInventory(inventory);
                     return true;
                 }
-                // Specifies /inventories remove [Name]
+                // /inventories remove [Name]
                 else if (args[0].equalsIgnoreCase("remove")) {
 
                     String name = args[1];
@@ -141,7 +141,7 @@ public class InventoriesCmd implements CommandExecutor {
                     return false;
                 }
             case 3:
-                // Specifies /inventories create [Name] [Rows]
+                // /inventories create [Name] [Rows]
                 if (args[0].equalsIgnoreCase("create")) {
 
                     String name = args[1];
@@ -166,10 +166,10 @@ public class InventoriesCmd implements CommandExecutor {
                     return false;
                 }
             case 4:
-                // Specifies /inventories modify access|name [InventoryName] [NewName]
+                // /inventories modify access|name [InventoryName] [NewName]
                 if (args[0].equalsIgnoreCase("modify")) {
 
-                    // Specifies /inventories modify access
+                    // /inventories modify access
                     if (args[0].equalsIgnoreCase("access")) {
                         // TODO: Implement
 

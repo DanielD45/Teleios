@@ -39,7 +39,7 @@ public class ConfigureteleporterCmd implements CommandExecutor {
             return true;
         }
 
-        // Specifies /ctp
+        // /ctp
         if (args.length == 0) return false;
 
         List<String> lorePl = Objects.requireNonNull(player.getInventory().getItemInMainHand().getItemMeta()).getLore();
@@ -54,11 +54,11 @@ public class ConfigureteleporterCmd implements CommandExecutor {
 
         ItemStack teleporter = player.getInventory().getItemInMainHand();
 
-        // Specifies /configureteleporter [Name]
+        // /configureteleporter [Name]
         String teleporterName = args[0];
         int minLen = 1;
         int maxLen = 30;
-        if (!GlobalMethods.stringUsable(teleporterName, minLen, maxLen)) {
+        if (GlobalMethods.stringNotUsable(teleporterName, minLen, maxLen)) {
             // The input is too long
             player.sendMessage("§cThe name must be §6" + minLen + "§c - §6" + maxLen + "§c characters long!");
             return true;

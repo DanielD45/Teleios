@@ -9,17 +9,13 @@ package de.daniel_d45.teleios.core;
 
 /**
  * This class contains java's main method.
- *
- * @author Daniel_D45
  */
 public class Boot {
 
     public static void main(String[] args) {
-
         // Program test room
 
         // End of program test room
-
     }
 
 }

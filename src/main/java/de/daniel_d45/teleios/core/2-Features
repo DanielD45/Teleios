@@ -1,0 +1,183 @@
+C-Done:
+1 manageteleios command
+
+AF-Done:
+1 warp command
+1 warppoint command
+1 heal command
+1 damage command
+1 chatclear command
+1 enderchest command
+1 invsee command
+1 mute command
+1 unmute command
+1 joinmessage command
+1 tphere command
+1 gmc command
+1 gmsp command
+1 gms command
+1 gma command
+
+BG-Done:
+1 Enderchest command
+1 Teleporters:
+    1 distance calculation with Pythagoras
+    1 left-clicking on teleporters opens the interactive inventory
+    1 case insensitive warping
+    1 the teleporter orientation is the player's orientation when placing it
+
+
+Implement this version:
+0 revise commands, [Player] -> <Player> ..., global methods simplifications
+0 introduce parameters correctly
+0 handle every input in commands
+0 make common parts methods (segment items...) (target online check)
+0 implement tab-completion
+0 move sbpp to MTL-inv
+0 set max teleporter name length using MTL-inv
+0 1.3: revise GitHub page (functionality)
+0 reduce exception handling to minimum
+0 listener event priorities
+0b ConfigEditor: change initiate wpp...
+0 organise ConfigEditor workflow:
+    0 optional: get & save previous value
+    0 test new value
+    if valid:
+        0 set new value
+    else:
+        0 test previous value
+        if valid:
+            0 store to config & notify console
+        else:
+            0 store default value
+
+
+C-Planned:
+0 move config to world folder
+0 integrated tutorials
+    0 players start with instruction book (you can get anytime using /howto?)?
+    0 clicking on teleporters starts chat prompt wth info?
+    0 /help Teleporter|Teleporters?
+    0 /help Teleios?
+0 command (or MTL inv) to de-implement commands to make space for other plugins' command names
+0 make only one instance of menu invs
+0 merge PassiveSkills segment into BetterGameplay
+
+
+AF-Planned:
+0a /opl list
+0a test invalid values for JoinMessage path
+0a /giveteleporter to give the teleporter item
+0a revise /inventories
+0a destructionmanager inventory to manage which entities (Creepers, Villagers, TNT...) can destroy what
+0a [world manager] (inv):
+    monsters:
+        0a change NBT data per monster type
+        0a monsters get stronger the more are killed (= regional difficulty in Vanilla?)
+    blocks:
+        drops: 0a make drops adaptable (multipliers)
+0a /repair: repairs the targeted player's items
+0a (terminal) command to make MTL inventory read-only to selected players to restrict admins from activating commands they are not meant to use
+0a print changes in variables (like blocksperpearl) to chat for admins
+0a /protect command to make yourself or another player invincible
+0a startinghelp function: monsters deal less damage to specified players
+0a /inventories command: make inventories case insensitive
+0a /spawnmob command: allows you to spawn <=100 entities at a time
+0a Guardian: for critical security
+    0a block usage of "/kill @e" and "/tp @e" without selectors
+0a Vision: simplify quests and structure building. Mode which can be entered using /vison cmd.
+   Player's state (location, inventory, health, xp...) is saved at entering, player is set to creative/spectator
+   (invisible)?, mode with temporal inv
+    0a easy Villager trades (redundant)
+    0a easy Villager dialogue (redundant)
+    0a make sure player doesn't get items from creative (dropping items on the ground, chests...)
+    0a teleporter use is free
+0a use arrows/snowballs... for marking (for commands?)
+0a AdminBook (limit to admins)
+
+BG-Planned:
+0b PLCs
+    0b personal invs: Bug: ConfigEditor.set();
+    0b barrels... too
+    0b restock PLCs after timer
+0b Villagers are easy to reroll when not traded with yet
+0b fix: remove loading time when listing a lot of teleporters? -> send message as one, reduce loading time
+1b Teleporters:
+    0b fix: yaw reset on interacton with teleporter
+    0b teleporters with restricted access
+    0b /w doesn't list teleporters you don't have access to (+ update cmd description)
+    0b list teleporters in grey if they are not reachable
+        1 obstructed
+        1 dimension
+        0b cost to high
+    0b /warp tells you how many additional ender pearls are needed
+    0b does teleporting to the End island start platform destroy teleporters placed there?
+    0b hinder teleporters to be placed in another teleporter's feet and head pos
+    0b bug hunter script (quickly after teleporter placement?):
+        0b search teleporter positions, if (cave) air: drop teleporter and delete from config
+0b vanity config cmd (tablist):
+/vanity
+    self:
+        arrows:
+            clear: 0b clear arrow effects
+            particle: 0b make all particles available
+        potions:
+            dimParticles?: 0b true/false
+    others: 0b swith other player's particles on/off
+0b right click on shulker boxes in inventory to open them
+0b collection of items the player obtained
+0b more stats:
+    0b /printstats command: prints the player's stats to the chat
+    0b durability used
+    0b list broken tools
+    0b strongest hit
+    0b % of crit hits
+    0b resources used for crafting
+    0b list items burned/destroyed (cactus, void) (global?)
+0b deconstructor block? which can salvage items/blocks (like wooden stairs)
+0b quarz blocks can be crafted into 9 quarz (+others?)
+0b possibility to get player heads and mini blocks for decorations (crafting recipe)
+0b rideable animals (horses, donkeys, pigs) level health?, speed and jump height through being ridden
+0b death:
+    0b tombstones which save your items on death
+    0b get a compass leading to point of death (see recovery compass)
+    0b corpse beacon
+0b Mending has multiple levels, higher levels repair more for the same amount of xp
+0b knockback doesn't knock back skeletons
+0b throwable item to build temporary floating blocks
+0b heal iron golems with iron
+0b craft dirt from bone meal and wood
+0b craft dirt from bone meal and wood
+0b colors in item names
+0b waypoints players can place
+0b weapons upgrade with damage dealt, unlocking a random element effect
+0b weapons level damage dealt to monsters they killed a lot of
+0b portals in special dimensions
+0b crit damage scales per distance fallen
+0b eliminate trading limits
+0b elytra's armor can be upgraded with nether stars
+0b loot chests with player-specific inventories
+0b enchantments:
+    0b higher levels than vanilla (unlockable?)
+    0b enchantments on items upgrade over time (e.g. Sharpness I->II) (xp collected?)
+    0b duplication (bows): chance to fire two arrows at once
+    0b (over)penetration (bows): arrows fly through x amount of blocks (material makes a difference?)
+    0b destruction (bows): arrows break blocks (material dependent)
+    0b homing (bows): homing arrows
+    0b speed (bows): arrows have more speed
+0b set a compass to anything (block/entity)
+0b paintable maps
+
+0b Flow: prevents unwanted gameplay
+    0b inventory for player-specific settings
+        0b reduce damage taken by monsters
+        0b prevent dropping iron tools and up from the hotbar when not in inventory screen
+        0b prevent crafting of multiple equipment items at once
+        0b prevent falling with the elytra in inventory?
+    0b when falling into the void with or dropping the dragon egg -> replaces the dragon egg
+
+0b Special Monsters:
+    0b Tanky Creeper (less knockback)
+    0b Magic Zombie (boosts nearby monsters)
+    0b Invisible Spider
+    0b Wizard Skeleton (every Skeleton uses special effect arrows)

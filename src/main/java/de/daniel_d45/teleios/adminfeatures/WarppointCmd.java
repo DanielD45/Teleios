@@ -31,7 +31,7 @@ public class WarppointCmd implements CommandExecutor {
 
             switch (args.length) {
                 case 1:
-                    // Specifies /warppoint list|clear
+                    // /warppoint list|clear
                     if (args[0].equalsIgnoreCase("list")) {
                         try {
 
@@ -98,9 +98,9 @@ public class WarppointCmd implements CommandExecutor {
                         return false;
                     }
                 case 2:
-                    // Specifies /warppoint add|remove|override ([Name])
+                    // /warppoint add|remove|override ([Name])
                     if (args[0].equalsIgnoreCase("add")) {
-                        // Specifies /warppoint add [Name]
+                        // /warppoint add [Name]
                         try {
 
                             // Sender player check
@@ -149,7 +149,7 @@ public class WarppointCmd implements CommandExecutor {
                             return false;
                         }
                     } else if (args[0].equalsIgnoreCase("remove")) {
-                        // Specifies /warppoint remove [Name]
+                        // /warppoint remove [Name]
                         try {
 
                             String warppointName = args[1];
@@ -168,7 +168,7 @@ public class WarppointCmd implements CommandExecutor {
                             return false;
                         }
                     } else if (args[0].equalsIgnoreCase("override")) {
-                        // Specifies /warppoint override [Name]
+                        // /warppoint override [Name]
                         try {
 
                             // Sender player check

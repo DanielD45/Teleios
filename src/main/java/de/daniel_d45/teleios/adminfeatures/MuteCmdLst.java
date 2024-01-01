@@ -49,7 +49,7 @@ public class MuteCmdLst implements CommandExecutor, Listener {
             return true;
         }
 
-        // Specifies /mute [Player]
+        // /mute [Player]
         try {
 
             Player target = Bukkit.getPlayer(args[0]);

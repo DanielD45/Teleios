@@ -108,21 +108,16 @@ public class BetterGameplay {
         }
     }
 
-    // TODO: Maybe change the switch activationstate system.
     public static void switchActivationstateBG() {
         if (ConfigEditor.isActive(getSegmentName() + ".All")) {
-
-            for (String current : activationstatePaths) {
+            for (String current : getActivationstatePaths()) {
                 ConfigEditor.set("Activationstates." + current, "OFF");
             }
-
             RecipeManager.enableTeleporterRecipe(false);
         } else {
-
-            for (String current : activationstatePaths) {
+            for (String current : getActivationstatePaths()) {
                 ConfigEditor.set("Activationstates." + current, "ON");
             }
-
             RecipeManager.enableTeleporterRecipe(true);
         }
     }

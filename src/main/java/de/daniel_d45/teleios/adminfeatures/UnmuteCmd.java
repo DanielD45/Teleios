@@ -34,7 +34,7 @@ public class UnmuteCmd implements CommandExecutor {
             return true;
         }
 
-        // Specifies /unmute [Player]
+        // /unmute [Player]
 
         Player target = Bukkit.getPlayer(args[0]);
 

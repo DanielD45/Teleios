@@ -28,7 +28,7 @@ public class OpListCmd implements CommandExecutor {
             return true;
         }
 
-        // Specifies /oplist
+        // /oplist
         if (args.length == 0) {
 
             // Sender player check
@@ -71,7 +71,7 @@ public class OpListCmd implements CommandExecutor {
             return true;
         }
 
-        // Specifies /oplist add [Name]
+        // /oplist add [Name]
         if (args.length >= 2 && args[0].equals("add")) {
 
             // Sender permission check
@@ -85,7 +85,7 @@ public class OpListCmd implements CommandExecutor {
             return true;
         }
 
-        // Specifies /oplist remove|delete [Name]
+        // /oplist remove|delete [Name]
         if (args.length >= 2 && (args[0].equals("remove") || args[0].equals("delete"))) {
 
             // Sender permission check

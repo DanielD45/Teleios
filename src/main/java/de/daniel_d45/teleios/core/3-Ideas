@@ -1,0 +1,180 @@
+C-Ideas:
+0 make more specialised listeners?
+
+AF-Ideas:
+0a /freezemobs: (toggle) sets all entities' NoAI argument to true (makes invulnerable?) and disables mob spawns
+0a command to prevent (certain) players from placing TNT, lava...
+0a undo command to undo the last run command (+ older commands?)
+0a admin profiles?
+    0a hotkeys for commands/functionality?
+    0a /profile command for profile setup (new server) and adaptation
+
+BG-Ideas:
+0b Upgrade Coins:
+    0b ? item
+    0b obtainable through:
+        0b killing
+        0b mining
+        0b loot chests
+        0b generated in the world (~ fairy souls)
+    0b /upgrade to open an upgrade inventory
+    0b can be used in upgrade inv to upgrade:
+        0b worse targeting by certain monsters
+        0b speed
+        0b health regen?
+        0b food consumption?
+        0b potion resistance?
+        0b potion affinity?
+        0b throwing power (ender pearls, snowballs... fly further)?
+0b [levelling system]:
+    0b every different material players collect gives them a reward?
+    0b collection system that unlocks crafting recipes?
+    0b armor with upgrades/modules?
+    0b get skill points to upgrade:
+        0b speed
+        0b health / resistance
+        0b damage
+        0b crit chance / crit damage
+        0b faster attack speed
+        0b hunger?
+        0b dodging
+        0b XP collected
+        0b higher chance for good enchantments?
+0b Emerald Weapons (option 1):
+    0b emerald ore sometimes drops "energised emerald" (enchanted emerald) used to craft equipment on diamond basis
+    0b emerald sword:
+        0b levels through killing slime with it
+        0b levelling increases chance of stunning targets on hit
+    0b emerald pickaxe:
+        0b levels luck through breaking emerald ore, limit: luck 5
+        0b luck 1: 10 ores, luck 2: +20 (30) ores, luck 3: +30 (60) ores, luck 4: +40 (100) ores, luck 5: +50 (150) ores ?
+    0b luck potion:
+        0b gives you the effects of luck and looting, combines with enchantments
+    0b emerald monsters:
+        0b drop "energised emerald"
+        0b spawn in random events
+        0b visible health bar / boss bar?
+        0b have a name tag
+        0b 3x health?
+        0b 3x damage?
+        0b 50% armor ignore?
+        0b emerald block in helmet slot
+            0b doesn't drop
+0b Emerald Weapons (option 2):
+    0b tools are charged by "energised emerald" and use charge when using their abilities
+    0b emerald monsters drop "energised emerald blocks"
+    0b tools' charge meter and charge rate can be upgraded by combining the tool with an "energised emerald block" in an anvil
+0b PassiveSkills:
+    1 save data to config
+    1 list all players with their skills
+    1 apply factor and increase BlockValue on block break
+    1 test for level-ups
+    1 increase the right value on level-up
+    1 /skill command to query skills
+    1 search and use config on plugin start
+    0b command to show skill leaderboards
+    0b command to remove players
+0b custom dungeons
+0b chickens rarely drop special loot instead of eggs?
+0b swords can be upgraded in material, keeping the enchantments (crafting recipe? high xp cost?)
+0b [automation]:
+    0b machines which can harvest crops
+    0b manufacturing/assembling blocks (arrangement of "atoms" is important)
+0b an item with charge building over time which is used to accelerate the player
+0b special noob mode?
+    0b certain players can be specified
+    0b less damage through monsters?
+    0b more durability?
+    0b less hunger?
+    0b faster health regen?
+    0b less monster target range?
+0b elytra with 8 armor value?
+0b special abilities/combos:
+    0b active power-up/ability which debuffs monsters for a limited time
+    0b tool abilities
+    0b passive abilities (speed)?
+0b faster arrows -> more damage
+0b Sniffers can lead to nearby structures
+0b implement Illusioners
+
+E-Ideas:
+0 integrate in MTL (subsegments = eras)
+0 Era of the Meteorite
+    0 meteorite event
+0 Story of Kalokairi:
+    0 an omniscient force sends you to different worlds to train you for a hostile world / boss fight (later project)
+    0 you learn something from every world (=server project) which is needed in the end project
+    0 you drop from the sky at start and when you die you get sent back to it
+    0 in the sky, the omniscient force talks to you and sends you back down, because you are not finished with this world yet
+One day, the world stood still as every inhabitant of the Overworld looked reverently at the big, flame-trailing asteroid getting closer and closer to the ground.
+The impact sent ripples through the earth for thousands of blocks and for three days, the sky went completely dark, blocking out every single ray of sunlight.
+When the dust settled, the Pillagers were the first ones to inspect the crater. And what they found, didn't mean good for the rest of the world.
+Just days after the asteroid hit, Pillagers harnessed the newly discovered power to disable all Iron Golems, rendering the Villages completely unprotected.
+This allowed them to finally start conquering villages all around the Overworld, forcing the surviving Villagers to flee and flee again,
+until they seeked shelter in the last remaining city, the capital "". The Villagers wanted nothing more than to get their homes back by defeating the Pillagers,
+but without the help of their Iron Golems, there is barely something they could do. Out of desperation, the capital's shaman suggested to ask a human for help.
+The next human visiting the city was you. When you agreed to help the Villagers, the shaman told you about his plans of using his powers to make you live through different scenarios in your head,
+forging your battle capabilities in the process. That way, you might be able to protect the last city and fight back the unprecedented menace that is the Pillagers.
+
+Server projects:
+Campaign 1: Restoring Balance
+0 playing through training worlds...
+0 protecting the last village
+0 taking down important Pillager outposts
+0 defeating the Pillager's headquarters and leader (Pillager raids?)
+
+Campaign 2: The new element
+0
+
+IP-Ideas:
+0 rotten flesh, spider eyes, poisonous potatoes, bamboo is compostable
+0 players get effects dependent on the biome they're in
+    0 Snowy biomes: faster hunger loss, slower movement, effects stronger in cold water
+    0 Forest biomes: regeneration
+    0 Desert biomes: mining fatigue (in the sun)
+    0 Villages: resistance?
+    0 The End: slowness (without full armor)
+0 hitting armor drops parts of its building materials over time
+0 some mobs don't attack right away / attack other mobs
+0 fighting Villagers
+0 villages get expanded
+0 villagers are effected by beacons
+0 sleeping regenerates health
+0 trees reproduce (e.g. apples dropped on the groud spawn saplings)
+0 non-nether wood burns in the Nether
+0 lightning bolts hit higher places
+0 lava transformes nearby cobblestone to stone
+0 spiders build nets
+0 throwable fire charges
+0 in the End, lava freezes to obsidian
+0 durability dependent on the mined block's strength
+0 small cows grow faster through feeding them milk
+0 zombies and skeletons build ruins
+0 everything has the chance not to loose durability (already in vanilla?)
+0 moss spreads (mossy cobblestone, mossy stone bricks...)
+0 randomness in damage when hitting mobs
+0 animals reproduce
+0 crippling effect when at low health (slower)
+0 animals are lured towards hay/food
+0 monsters always drop their equipment
+0 smelting armor gives more resources back, depending on durability
+0 animals sometimes fight back or are aggressive
+0 seasons (different length of days, temperature?)
+0 arrows can break glass... if fast enough
+0 Immersive Monsters:
+    0 some mobs spawn with different abilities? and drops
+    0 higher range of health, damage etc.
+    0 random events with special mobs and drops (trigger: listener for specific time? + randomness)
+    0 some monsters are neutral
+    0 some monsters fight each other
+    0 green witches which throw supporting potions
+0 blocks corrode?
+0 fire protection items can't burn
+0 broken tools remain & can be repaired
+
+WM-Ideas:
+0 create and delete worlds (command)
+0 command to teleport between worlds and dimensions
+0 Arena worlds (PvP/PvE)
+0 private (Skyblock) worlds
+0 world manipulation (set amount of ores...)

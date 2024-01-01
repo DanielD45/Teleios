@@ -13,7 +13,7 @@
 
     <groupId>io.github.Daniel_D45</groupId>
     <artifactId>Teleios</artifactId>
-    <!-- Update version -->
+    <!-- Plugin version -->
     <version>v1.3WIP</version>
 
     <properties>

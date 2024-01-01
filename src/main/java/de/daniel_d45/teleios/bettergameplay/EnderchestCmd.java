@@ -34,7 +34,7 @@ public class EnderchestCmd implements CommandExecutor {
                 return true;
             }
 
-            // Specifies /enderchest
+            // /enderchest
             player.openInventory(player.getEnderChest());
             return true;
         } catch (Exception e) {

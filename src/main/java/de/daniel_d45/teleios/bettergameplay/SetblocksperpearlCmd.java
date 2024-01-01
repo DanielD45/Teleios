@@ -29,7 +29,7 @@ public class SetblocksperpearlCmd implements CommandExecutor {
 
             switch (args.length) {
                 case 0:
-                    // Specifies /setblocksperpearl
+                    // /setblocksperpearl
                     int blocksPerPearl;
 
                     try {
@@ -43,7 +43,7 @@ public class SetblocksperpearlCmd implements CommandExecutor {
                     sender.sendMessage("§aYou can currently warp §6" + blocksPerPearl + "§a blocks per ender pearl.");
                     return true;
                 case 1:
-                    // Specifies /setblocksperpearl [Amount]
+                    // /setblocksperpearl [Amount]
                     try {
 
                         // Sender permission check

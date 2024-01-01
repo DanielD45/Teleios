@@ -6,190 +6,142 @@
 
 package de.daniel_d45.teleios.adminfeatures;
 
-import de.daniel_d45.teleios.core.ConfigEditor;
+import de.daniel_d45.teleios.core.GlobalMethods;
 import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
+import java.util.InputMismatchException;
 
 
 public class HealCmd implements CommandExecutor {
 
-    // TODO: Make doubles possible as input
+    // Unbreakable (2023-12-30)
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
                              @Nonnull String[] args) {
 
-        // Activation state check
-        if (!ConfigEditor.isActive("AdminFeatures.All")) {
-            sender.sendMessage("§cThis command is not active.");
-            return true;
+        if (GlobalMethods.cmdOffCheck("AdminFeatures.All", sender)) return true;
+
+        // /heal
+        if (args.length == 0) {
+
+            if (GlobalMethods.senderPlayerCheck(sender)) return true;
+            Player player = (Player) sender;
+
+            return healPlayer(player, player.getMaxHealth());
         }
 
-        switch (args.length) {
-            case 0:
-                // Specifies /heal
+        // /heal (<Amount>|<Player>)
+        if (args.length == 1) {
+            try {
+                double amount = GlobalMethods.trimDouble(Double.parseDouble(args[0]), 0, Double.MAX_VALUE);
+                if (amount == 0) throw new InputMismatchException();
+                // Input is a suitable double
+                // /heal [Amount]
 
-                // Sender player check
-                if (!(sender instanceof Player player)) {
-                    sender.sendMessage("§cYou are no player!");
-                    return true;
-                }
+                if (GlobalMethods.senderPlayerCheck(sender)) return true;
+                Player player = (Player) sender;
 
-                // Player gamemode check
-                if (wrongGamemode(player)) {
-                    player.sendMessage("§cCould not heal you as you are not in a suitable gamemode!");
-                    return true;
-                }
+                return healPlayer(player, amount);
+            } catch (InputMismatchException e) {
+                // Input is 0
+                sender.sendMessage("§cInvalid number!");
+                return false;
+            } catch (NumberFormatException e) {
+                // Input is not a double
+                // /heal <Player>
 
-                // Fully heals the player
-                player.setHealth(player.getMaxHealth());
-                player.sendMessage("§aYou've been fully healed!");
-
-                return true;
-
-            case 1:
-                // Specifies /heal [Player]
-                try {
-                    // TODO: heal the specified player, not the sender
-
-                    double amount = Double.parseDouble(args[0]);
-
-                    // Sender player check
-                    if (!(sender instanceof Player player)) {
-                        sender.sendMessage("§cYou are no player!");
-                        return true;
-                    }
-
-                    // Player gamemode check
-                    if (wrongGamemode(player)) {
-                        player.sendMessage("§cCould not heal you as you are not in a suitable mode!");
-                        return true;
-                    }
-
-                    // Heals the player
-                    if (player.getHealth() + amount > player.getMaxHealth()) {
-                        player.setHealth(player.getMaxHealth());
-                        player.sendMessage("§aYou fully healed yourself!");
-                    } else {
-                        player.setHealth(player.getHealth() + amount);
-                        player.sendMessage("§aYou healed yourself by §6" + amount + " §ahp!");
-                    }
-
-                    return true;
-                } catch (NumberFormatException e) {
-                    // Specifies /heal [Amount], args[0] is not a double.
-                    // Specifies /heal [Player]
-
-                    Player target = Bukkit.getPlayer(args[0]);
-
-                    // Target online check
-                    if (target == null) {
-                        sender.sendMessage("§cThis player is not online!");
-                        return true;
-                    }
-
-                    // Target sender check
-                    if (target != sender) {
-
-                        if (wrongGamemode(target)) {
-                            sender.sendMessage("§cCould not heal your target as it is not in a suitable gamemode!");
-                            return true;
-                        }
-
-                        target.setHealth(target.getMaxHealth());
-                        target.sendMessage("§aYou've been fully healed!");
-                        sender.sendMessage("§aYou fully healed §6" + target.getName() + "§a!");
-                    } else {
-                        // The sender himself is the target.
-
-                        Player player = (Player) sender;
-
-                        // Player gamemode check
-                        if (wrongGamemode(player)) {
-                            player.sendMessage("§cCould not heal you as you are not in a suitable gamemode!");
-                            return true;
-                        }
-
-                        // Heals the player
-                        player.setHealth(player.getMaxHealth());
-                        player.sendMessage("§aYou fully healed yourself!");
-                    }
-                }
-                return true;
-            case 2:
-                // Specifies /heal [Player]|[Amount]
-                // TODO: revise
-
-                Player target = Bukkit.getPlayer(args[0]);
-                double amount = Double.parseDouble(args[1]);
+                String targetName = args[0];
+                Player target = Bukkit.getPlayerExact(targetName);
 
                 // Target online check
                 if (target == null) {
-                    sender.sendMessage("§cThis player is not online!");
+                    sender.sendMessage("§cPlayer §6" + targetName + "§c is not online!");
                     return true;
                 }
 
-                // Target sender check
+                target = GlobalMethods.getTarget(args[0], sender);
+                if (target == null) return true;
+
                 if (target != sender) {
-
-                    if (wrongGamemode(target)) {
-                        sender.sendMessage("§cCould not heal your target as it is not in a suitable gamemode!");
-                        return true;
-                    }
-
-                    // Heals the target
-                    if (target.getHealth() + amount > target.getMaxHealth()) {
-                        target.setHealth(target.getMaxHealth());
-                        target.sendMessage("§aYou've been fully healed!");
-                        sender.sendMessage("§aYou fully healed §6" + target.getName() + "§a!");
-                    } else {
-                        target.setHealth(target.getHealth() + amount);
-                        target.sendMessage("§aYou've been healed by §6" + amount + " §ahp!");
-                        sender.sendMessage("§aYou healed " + target.getName() + " by §6" + amount + " §ahp!");
-                    }
-
+                    return healTarget(sender, target, target.getMaxHealth());
                 } else {
-                    // The sender is the target
+                    // The sender targets themselves
 
                     Player player = (Player) sender;
-
-                    if (wrongGamemode(player)) {
-                        sender.sendMessage("§cCould not heal you as you are not in a suitable gamemode!");
-                        return true;
-                    }
-
-                    if (player.getHealth() + amount > player.getMaxHealth()) {
-                        player.setHealth(player.getMaxHealth());
-                        player.sendMessage("§aYou fully healed yourself!");
-                    } else {
-                        player.setHealth(player.getHealth() + amount);
-                        player.sendMessage("§aYou healed yourself by §6" + amount + " §ahp!");
-                    }
-
+                    return healPlayer(player, player.getMaxHealth());
                 }
+            }
+        }
 
+        // /heal <Player> <Amount> ...
+        double amount;
+        try {
+            amount = GlobalMethods.trimDouble(Double.parseDouble(args[1]), 0, Double.MAX_VALUE);
+            if (amount == 0) throw new NumberFormatException();
+        } catch (NumberFormatException e) {
+            // The input is not a suitable double
+            sender.sendMessage("§cInvalid number!");
+            return false;
+        }
+
+        String targetName = args[0];
+        Player target = Bukkit.getPlayerExact(targetName);
+
+        if (target != sender) {
+
+            // Target online check
+            if (target == null) {
+                sender.sendMessage("§cPlayer §6" + targetName + "§c is not online!");
                 return true;
-            default:
-                // Wrong amount of arguments
-                sender.sendMessage("§cWrong amount of arguments!");
-                return false;
+            }
+
+            return healTarget(sender, target, amount);
+        } else {
+            Player player = (Player) sender;
+            return healPlayer(player, amount);
         }
 
     }
 
-    /**
-     * Returns whether the specified player is in the wrong gamemode for health manipulation.
-     *
-     * @param player [Player] The player to test the gamemode of.
-     * @return [boolean] Whether the specified player is not in survival or adventure mode.
-     */
-    private boolean wrongGamemode(Player player) {
-        return !(player.getGameMode() == GameMode.SURVIVAL || player.getGameMode() == GameMode.ADVENTURE);
+    @SuppressWarnings("SameReturnValue")
+    private boolean healPlayer(Player player, double amount) {
+        if (player.getHealth() == player.getMaxHealth()) {
+            player.sendMessage("§aYou are already at max health!");
+            return true;
+        }
+
+        if (player.getHealth() + amount >= player.getMaxHealth()) {
+            player.setHealth(player.getMaxHealth());
+            player.sendMessage("§aYou fully healed yourself!");
+        } else {
+            player.setHealth(player.getHealth() + amount);
+            player.sendMessage("§aYou healed yourself by §6" + amount + " §ahp!");
+        }
+        return true;
+    }
+
+    @SuppressWarnings("SameReturnValue")
+    private boolean healTarget(CommandSender sender, Player target, double amount) {
+        if (target.getHealth() == target.getMaxHealth()) {
+            sender.sendMessage("§6" + target.getName() + "§a is already at max health!");
+            return true;
+        }
+
+        if (target.getHealth() + amount >= target.getMaxHealth()) {
+            target.setHealth(target.getMaxHealth());
+            target.sendMessage("§aYou've been fully healed!");
+            sender.sendMessage("§aYou fully healed §6" + target.getName() + "§a!");
+        } else {
+            target.setHealth(target.getHealth() + amount);
+            target.sendMessage("§aYou've been healed by §6" + amount + "§a hp!");
+            sender.sendMessage("§aYou healed §6" + target.getName() + "§a by §6" + amount + "§a hp!");
+        }
+        return true;
     }
 
 }

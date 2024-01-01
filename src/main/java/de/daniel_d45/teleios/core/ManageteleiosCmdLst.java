@@ -35,7 +35,7 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
                 return true;
             }
 
-            // Specifies /mtl
+            // /mtl
             player.openInventory(InventoryManager.getManageTeleiosInventory());
             return true;
         } catch (Exception e) {
