@@ -6,7 +6,6 @@
 
 package de.daniel_d45.teleios.bettergameplay;
 
-import de.daniel_d45.teleios.core.ConfigEditor;
 import de.daniel_d45.teleios.core.GlobalMethods;
 import de.daniel_d45.teleios.core.ItemBuilder;
 import de.daniel_d45.teleios.core.RecipeManager;
@@ -24,27 +23,18 @@ import java.util.Objects;
 public class ConfigureteleporterCmd implements CommandExecutor {
 
     @Override
-    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
-                             @Nonnull String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
-        // Activation state check
-        if (!ConfigEditor.isActive("BetterGameplay.Teleporters")) {
-            sender.sendMessage("§cThis function is not active!");
-            return true;
-        }
+        if (GlobalMethods.cmdOffCheck("BetterGameplay.Teleporters", sender)) return true;
 
-        // Sender player check
-        if (!(sender instanceof Player player)) {
-            sender.sendMessage("§cYou are no player!");
-            return true;
-        }
+        if (GlobalMethods.senderPlayerCheck(sender)) return true;
+        Player player = (Player) sender;
 
         // /ctp
         if (args.length == 0) return false;
 
         List<String> lorePl = Objects.requireNonNull(player.getInventory().getItemInMainHand().getItemMeta()).getLore();
-        List<String> loreTel = Objects.requireNonNull(RecipeManager.getTeleporterRecipe().getResult().getItemMeta()).
-                getLore();
+        List<String> loreTel = Objects.requireNonNull(RecipeManager.getTeleporterRecipe().getResult().getItemMeta()).getLore();
 
         // Player is holding teleporter check
         if (!Objects.equals(lorePl, loreTel)) {

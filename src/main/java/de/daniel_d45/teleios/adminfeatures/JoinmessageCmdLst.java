@@ -7,6 +7,7 @@
 package de.daniel_d45.teleios.adminfeatures;
 
 import de.daniel_d45.teleios.core.ConfigEditor;
+import de.daniel_d45.teleios.core.GlobalMethods;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -28,8 +29,7 @@ public class JoinmessageCmdLst implements CommandExecutor, Listener {
 
             // TODO: Make individual ActivationState for command
             // Tests if the joinmessage is enabled and the command is active
-            if (ConfigEditor.hasValue("JoinMessage", true) &&
-                    ConfigEditor.isActive("AdminFeatures.All")) {
+            if (ConfigEditor.hasValue("JoinMessage", true) && ConfigEditor.isActive("AdminFeatures.All")) {
 
                 // Sends join message
                 Player player = event.getPlayer();
@@ -42,14 +42,9 @@ public class JoinmessageCmdLst implements CommandExecutor, Listener {
     }
 
     @Override
-    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
-                             @Nonnull String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
-        // Activation state check
-        if (!ConfigEditor.isActive("AdminFeatures.All")) {
-            sender.sendMessage("§cThis command is not active.");
-            return true;
-        }
+        if (GlobalMethods.cmdOffCheck("AdminFeatures.All", sender)) return true;
 
         // /joinmessage
         if (args.length == 0) {
@@ -58,7 +53,8 @@ public class JoinmessageCmdLst implements CommandExecutor, Listener {
 
             if (joinMessageEnabled) {
                 sender.sendMessage("§aThe custom join message is §6enabled§a.");
-            } else {
+            }
+            else {
                 sender.sendMessage("§aThe custom join message is §6disabled§a.");
             }
 

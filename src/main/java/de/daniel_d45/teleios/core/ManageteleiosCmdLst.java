@@ -25,15 +25,11 @@ import javax.annotation.Nonnull;
 public class ManageteleiosCmdLst implements CommandExecutor, Listener {
 
     @Override
-    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
-                             @Nonnull String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
         try {
 
-            // Sender player check
-            if (!(sender instanceof Player player)) {
-                sender.sendMessage("§cYou are no player!");
-                return true;
-            }
+            if (GlobalMethods.senderPlayerCheck(sender)) return true;
+            Player player = (Player) sender;
 
             // /mtl
             player.openInventory(InventoryManager.getManageTeleiosInventory());
@@ -75,7 +71,8 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
                         AdminFeatures.switchActivationstateAF();
                         player.openInventory(InventoryManager.getManageTeleiosInventory());
                         return;
-                    } else if (clickType == ClickType.RIGHT || clickType == ClickType.SHIFT_RIGHT) {
+                    }
+                    else if (clickType == ClickType.RIGHT || clickType == ClickType.SHIFT_RIGHT) {
                         //player.openInventory(InventoryManager.getManageAFInventory());
                         return;
                     }
@@ -89,7 +86,8 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
                         BetterGameplay.switchActivationstateBG();
                         player.openInventory(InventoryManager.getManageTeleiosInventory());
                         return;
-                    } else if (clickType == ClickType.RIGHT || clickType == ClickType.SHIFT_RIGHT) {
+                    }
+                    else if (clickType == ClickType.RIGHT || clickType == ClickType.SHIFT_RIGHT) {
                         player.openInventory(InventoryManager.getManageBGInventory());
                         return;
                     }
@@ -127,7 +125,8 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
                 if (item.equals(InventoryManager.getBackItem())) {
                     player.openInventory(InventoryManager.getManageTeleiosInventory());
                     return;
-                } else {
+                }
+                else {
                     return;
                 }
 
@@ -152,7 +151,8 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
                     player.openInventory(InventoryManager.getManageTeleiosInventory());
                     return;
 
-                } else {
+                }
+                else {
                     return;
                 }
 

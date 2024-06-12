@@ -8,6 +8,9 @@ AF-Ideas:
 0a admin profiles?
     0a hotkeys for commands/functionality?
     0a /profile command for profile setup (new server) and adaptation
+0a command to randomly get a player name
+0a upgrade /invsee to also see/manipulate armor slots?
+-
 
 BG-Ideas:
 0b Upgrade Coins:
@@ -96,6 +99,8 @@ BG-Ideas:
 0b faster arrows -> more damage
 0b Sniffers can lead to nearby structures
 0b implement Illusioners
+0b interconnected chests like ender chests
+-
 
 E-Ideas:
 0 integrate in MTL (subsegments = eras)
@@ -125,6 +130,7 @@ Campaign 1: Restoring Balance
 
 Campaign 2: The new element
 0
+-
 
 IP-Ideas:
 0 rotten flesh, spider eyes, poisonous potatoes, bamboo is compostable
@@ -171,6 +177,7 @@ IP-Ideas:
 0 blocks corrode?
 0 fire protection items can't burn
 0 broken tools remain & can be repaired
+-
 
 WM-Ideas:
 0 create and delete worlds (command)
@@ -178,3 +185,4 @@ WM-Ideas:
 0 Arena worlds (PvP/PvE)
 0 private (Skyblock) worlds
 0 world manipulation (set amount of ores...)
+-

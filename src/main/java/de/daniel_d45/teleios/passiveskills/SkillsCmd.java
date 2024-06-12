@@ -6,7 +6,7 @@
 
 package de.daniel_d45.teleios.passiveskills;
 
-import de.daniel_d45.teleios.core.ConfigEditor;
+import de.daniel_d45.teleios.core.GlobalMethods;
 import de.daniel_d45.teleios.core.InventoryManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -22,26 +22,19 @@ import javax.annotation.Nonnull;
 public class SkillsCmd implements CommandExecutor {
 
     @Override
-    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
-                             @Nonnull String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
         try {
 
-            // Activationstate check
-            if (!ConfigEditor.isActive("PassiveSkills.All")) {
-                sender.sendMessage("§cThis command is not active!");
-                return true;
-            }
+            if (GlobalMethods.cmdOffCheck("PassiveSkills.All", sender)) return true;
 
-            // Sender player check
-            if (!(sender instanceof Player player)) {
-                sender.sendMessage("§cYou are no player!");
-                return true;
-            }
+            if (GlobalMethods.senderPlayerCheck(sender)) return true;
+            Player player = (Player) sender;
 
             // Only runs when a skill is activated
             if (!PassiveSkills.usedSkills.isEmpty()) {
                 player.openInventory(getSkillsInventory(player));
-            } else {
+            }
+            else {
                 player.sendMessage("§eNo skill is beeing used!");
             }
 
@@ -73,7 +66,8 @@ public class SkillsCmd implements CommandExecutor {
                 if (PassiveSkills.usedSkills.size() % 2 == 0 && slot == 12) {
                     // Skips the middle (13.) slot when the amount of used skills is even
                     slot += 2;
-                } else {
+                }
+                else {
                     ++slot;
                 }
 

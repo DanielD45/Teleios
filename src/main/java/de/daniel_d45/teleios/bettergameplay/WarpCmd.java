@@ -26,22 +26,18 @@ import java.util.Set;
 public class WarpCmd implements CommandExecutor, TabCompleter {
 
     @Override
-    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
-                             @Nonnull String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
         try {
 
             // Activation state check
-            if (!ConfigEditor.isActive("BetterGameplay.All") ||
-                    !ConfigEditor.isActive("BetterGameplay.Teleporters")) {
+            if (!ConfigEditor.isActive("BetterGameplay.All") || !ConfigEditor.isActive("BetterGameplay.Teleporters")) {
                 sender.sendMessage("§cThis command is not active.");
                 return true;
             }
 
-            // Sender player check (for computing if teleporters are unreachable)
-            if (!(sender instanceof Player player)) {
-                sender.sendMessage("§cYou are no player!");
-                return true;
-            }
+            // for computing if teleporters are unreachable
+            if (GlobalMethods.senderPlayerCheck(sender)) return true;
+            Player player = (Player) sender;
 
             // Checks for warppoints and teleporters
             Set<String> wps = ConfigEditor.getSectionKeys("Warppoints");
@@ -104,7 +100,8 @@ public class WarpCmd implements CommandExecutor, TabCompleter {
                         if (((FeetMat == Material.AIR || FeetMat == Material.CAVE_AIR) && (HeadMat == Material.AIR || HeadMat == Material.CAVE_AIR)) && currentTPLoc.getWorld() == playerLoc.getWorld()) {
                             // Lists the teleporter in gold
                             listMessage.append("§6").append(teleporters[i]);
-                        } else {
+                        }
+                        else {
                             // Lists the teleporter in grey
                             listMessage.append("§7").append(teleporters[i]);
                         }
@@ -114,9 +111,6 @@ public class WarpCmd implements CommandExecutor, TabCompleter {
                             listMessage.append("§a, ");
                         }
 
-                        // Resets the values (active bug fix)
-                        // loc1List.setY(loc1List.getY() - 1);
-                        // loc2List.setY(loc2List.getY() - 2);
                     }
 
                     listMessage.append("\n§a--------------------");
@@ -215,12 +209,6 @@ public class WarpCmd implements CommandExecutor, TabCompleter {
 
                         // Teleporter obstruction check
                         if ((feetLoc.getBlock().getType() != Material.AIR && feetLoc.getBlock().getType() != Material.CAVE_AIR) || (headLoc.getBlock().getType() != Material.AIR && headLoc.getBlock().getType() != Material.CAVE_AIR)) {
-
-                            // TODO: Necessary?
-                            // Resets the values
-                            //feetLoc.setY(feetLoc.getY() - 1);
-                            //headLoc.setY(headLoc.getY() - 2);
-
                             player.sendMessage("§cThis teleporter is obstructed!");
                             return true;
                         }
@@ -231,13 +219,6 @@ public class WarpCmd implements CommandExecutor, TabCompleter {
                         // Removes the required amount of ender pearls
                         ConfigEditor.set("Warppouch." + player.getName(), possessedPearls - requiredPearls);
                         player.teleport(teleportLoc);
-
-                        // TODO: Necessary?
-                        // Resets the values.
-                        //tpLoc.setX(tpLoc.getX() - 0.5);
-                        //tpLoc.setY(tpLoc.getY() - 1);
-                        //tpLoc.setZ(tpLoc.getZ() - 0.5);
-                        //ConfigEditor.set("Teleporters." + currentTP, TPLoc);
 
                         player.sendMessage("§aYou have been warped to §6" + currentTP + " §afor §6" + requiredPearls + " ender pearl(s).");
                         return true;
@@ -251,6 +232,7 @@ public class WarpCmd implements CommandExecutor, TabCompleter {
             sender.sendMessage("§cWrong arguments!");
             return false;
         } catch (Exception e) {
+            // TODO
             GlobalMethods.sendErrorFeedbackCmd(sender);
             return false;
         }
@@ -281,8 +263,7 @@ public class WarpCmd implements CommandExecutor, TabCompleter {
     }
 
     @Override
-    public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull Command c, @Nonnull String s,
-                                      String[] args) {
+    public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull Command c, @Nonnull String s, String[] args) {
 
         List<String> options = new ArrayList<>();
 

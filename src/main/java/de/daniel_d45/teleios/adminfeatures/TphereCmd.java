@@ -6,7 +6,7 @@
 
 package de.daniel_d45.teleios.adminfeatures;
 
-import de.daniel_d45.teleios.core.ConfigEditor;
+import de.daniel_d45.teleios.core.GlobalMethods;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -19,21 +19,12 @@ import javax.annotation.Nonnull;
 public class TphereCmd implements CommandExecutor {
 
     @Override
-    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
-                             @Nonnull String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
-        // Activation state check
-        if (!ConfigEditor.isActive("AdminFeatures.All")) {
-            sender.sendMessage("§cThis command is not active.");
-            return true;
-        }
+        if (GlobalMethods.cmdOffCheck("AdminFeatures.All", sender)) return true;
 
-        // Sender player check
-        if (!(sender instanceof Player player)) {
-            sender.sendMessage("§cYou are no player!");
-            return true;
-        }
-
+        if (GlobalMethods.senderPlayerCheck(sender)) return true;
+        Player player = (Player) sender;
         // /tphere [Player]
         try {
 

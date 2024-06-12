@@ -6,7 +6,7 @@
 
 package de.daniel_d45.teleios.adminfeatures;
 
-import de.daniel_d45.teleios.core.ConfigEditor;
+import de.daniel_d45.teleios.core.GlobalMethods;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
@@ -24,14 +24,9 @@ public class GmcCmd implements CommandExecutor {
     String gameModeName = gameMode.toString().toLowerCase();
 
     @Override
-    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
-                             @Nonnull String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
-        // Activation state check
-        if (!ConfigEditor.isActive("AdminFeatures.All")) {
-            sender.sendMessage("§cThis command is not active.");
-            return true;
-        }
+        if (GlobalMethods.cmdOffCheck("AdminFeatures.All", sender)) return true;
 
         // /gmc
         if (args.length == 0) {
@@ -78,7 +73,8 @@ public class GmcCmd implements CommandExecutor {
             target.sendMessage("§aYour gamemode has been set to §6" + gameModeName + "§a!");
             sender.sendMessage("§6" + target.getName() + "§a's gamemode has been set to §6" + gameModeName + "§a!");
             return true;
-        } else {
+        }
+        else {
             // The sender targets themselves
 
             Player player = (Player) sender;

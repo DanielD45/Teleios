@@ -18,6 +18,7 @@ AF-Done:
 1 gms command
 1 gma command
 
+
 BG-Done:
 1 Enderchest command
 1 Teleporters:
@@ -28,14 +29,19 @@ BG-Done:
 
 
 Implement this version:
-0 revise commands, [Player] -> <Player> ..., global methods simplifications
+0 revise commands, [Player] -> <Player> ..., global methods simplifications:
+
+if (GlobalMethods.cmdOffCheck("AdminFeatures.All", sender)) return true;
+
+if (GlobalMethods.senderPlayerCheck(sender)) return true;
+            Player player = (Player) sender;
+
 0 introduce parameters correctly
 0 handle every input in commands
 0 make common parts methods (segment items...) (target online check)
 0 implement tab-completion
 0 move sbpp to MTL-inv
 0 set max teleporter name length using MTL-inv
-0 1.3: revise GitHub page (functionality)
 0 reduce exception handling to minimum
 0 listener event priorities
 0b ConfigEditor: change initiate wpp...
@@ -50,6 +56,7 @@ Implement this version:
             0 store to config & notify console
         else:
             0 store default value
+0 revise GitHub page (functionality)
 
 
 C-Planned:
@@ -94,6 +101,7 @@ AF-Planned:
     0a teleporter use is free
 0a use arrows/snowballs... for marking (for commands?)
 0a AdminBook (limit to admins)
+
 
 BG-Planned:
 0b PLCs
@@ -167,6 +175,7 @@ BG-Planned:
     0b speed (bows): arrows have more speed
 0b set a compass to anything (block/entity)
 0b paintable maps
+0b possibility to move chests
 
 0b Flow: prevents unwanted gameplay
     0b inventory for player-specific settings

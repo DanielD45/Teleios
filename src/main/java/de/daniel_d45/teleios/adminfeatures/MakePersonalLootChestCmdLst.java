@@ -7,6 +7,7 @@
 package de.daniel_d45.teleios.adminfeatures;
 
 import de.daniel_d45.teleios.core.ConfigEditor;
+import de.daniel_d45.teleios.core.GlobalMethods;
 import de.daniel_d45.teleios.core.InventoryManager;
 import de.daniel_d45.teleios.core.ItemBuilder;
 import org.bukkit.*;
@@ -38,14 +39,9 @@ public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
     ArrayList<UUID> playersInAssignMode = new ArrayList<>();
 
     @Override
-    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
-                             @Nonnull String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
-        // Activation state check
-        if (!ConfigEditor.isActive("AdminFeatures.All")) {
-            sender.sendMessage("§cThis command is not active.");
-            return true;
-        }
+        if (GlobalMethods.cmdOffCheck("AdminFeatures.All", sender)) return true;
 
         // Sender player check
         if (!(sender instanceof Player player)) {
@@ -57,10 +53,10 @@ public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
         if (playersInAssignMode.contains(player.getUniqueId())) {
             playersInAssignMode.remove(player.getUniqueId());
             player.sendMessage("§aAssigning mode has been §6deactivated§a.");
-        } else {
+        }
+        else {
             playersInAssignMode.add(player.getUniqueId());
-            player.sendMessage("§aThe next chest you click will turn into a personal loot chest. " +
-                    "You can also cancel this assigning mode by using the command again.");
+            player.sendMessage("§aThe next chest you click will turn into a personal loot chest. " + "You can also cancel this assigning mode by using the command again.");
         }
         return true;
     }
@@ -127,7 +123,8 @@ public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
             // Ends the assigning mode
             playersInAssignMode.remove(player.getUniqueId());
             player.sendMessage("§aAssigning mode has been §6deactivated§a.");
-        } else {
+        }
+        else {
             // Player is not in assigning mode
             Action action = event.getAction();
 
@@ -223,7 +220,8 @@ public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
                     }
                 }
 
-            } else if (item.equals(InventoryManager.getNoItem())) {
+            }
+            else if (item.equals(InventoryManager.getNoItem())) {
                 // NO ITEM
                 player.closeInventory();
                 return;

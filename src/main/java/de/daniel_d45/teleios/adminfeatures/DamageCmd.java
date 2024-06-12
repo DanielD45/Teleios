@@ -43,7 +43,7 @@ public class DamageCmd implements CommandExecutor {
                 return false;
             }
 
-            GlobalMethods.getDouble(args[0],);
+            GlobalMethods.getDouble(args[0], );
 
             // Sender player check
             if (!(sender instanceof Player player)) {

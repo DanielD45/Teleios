@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class GlobalMethods {
 
     /**
@@ -22,11 +23,6 @@ public class GlobalMethods {
         if (object1 == null && object2 == null) return true;
         if (object1 == null || object2 == null) return false;
         return object1.equals(object2);
-    }
-
-    // TODO: delete
-    public static void sendErrorFeedbackCmd(CommandSender recipient) {
-        recipient.sendMessage("§cError occurred while running command!");
     }
 
     public static boolean intUsable(int i, int minValue, int maxValue) {
@@ -100,4 +96,5 @@ public class GlobalMethods {
         if (target == null) sender.sendMessage("§cPlayer §6" + targetName + "§c is not online!");
         return target;
     }
+
 }

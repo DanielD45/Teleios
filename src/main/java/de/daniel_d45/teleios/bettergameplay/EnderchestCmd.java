@@ -6,7 +6,7 @@
 
 package de.daniel_d45.teleios.bettergameplay;
 
-import de.daniel_d45.teleios.core.ConfigEditor;
+import de.daniel_d45.teleios.core.GlobalMethods;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,21 +18,13 @@ import javax.annotation.Nonnull;
 public class EnderchestCmd implements CommandExecutor {
 
     @Override
-    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
-                             @Nonnull String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
         try {
 
-            // Activation state check
-            if (!ConfigEditor.isActive("BetterGameplay.EnderchestCommand")) {
-                sender.sendMessage("§cThis command is not active.");
-                return true;
-            }
-
-            // Sender player check
-            if (!(sender instanceof Player player)) {
-                sender.sendMessage("§cYou are no player!");
-                return true;
-            }
+            if (GlobalMethods.cmdOffCheck("BetterGameplay.EnderchestCommand", sender)) return true;
+            
+            if (GlobalMethods.senderPlayerCheck(sender)) return true;
+            Player player = (Player) sender;
 
             // /enderchest
             player.openInventory(player.getEnderChest());

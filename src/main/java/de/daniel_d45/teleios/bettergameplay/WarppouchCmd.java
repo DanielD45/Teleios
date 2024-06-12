@@ -23,21 +23,13 @@ import java.util.Objects;
 public class WarppouchCmd implements CommandExecutor {
 
     @Override
-    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
-                             @Nonnull String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
         try {
 
-            // Activationstate check
-            if (!ConfigEditor.isActive("BetterGameplay.Teleporters")) {
-                sender.sendMessage("§cThis command is not active.");
-                return true;
-            }
+            if (GlobalMethods.cmdOffCheck("BetterGameplay.Teleporters", sender)) return true;
 
-            // Sender player check
-            if (!(sender instanceof Player player)) {
-                sender.sendMessage("§cYou are no player!");
-                return true;
-            }
+            if (GlobalMethods.senderPlayerCheck(sender)) return true;
+            Player player = (Player) sender;
 
             int storedEPs;
             try {
@@ -54,7 +46,8 @@ public class WarppouchCmd implements CommandExecutor {
             if (args.length == 0 || args[0].equalsIgnoreCase("view") || args[0].equalsIgnoreCase("show")) {
                 if (storedEPs == 1) {
                     player.sendMessage("§aThere is §6" + storedEPs + " §aender pearl in your warp pouch.");
-                } else {
+                }
+                else {
                     player.sendMessage("§aThere are §6" + storedEPs + " §aender pearls in your warp pouch.");
                 }
                 return true;
@@ -104,7 +97,8 @@ public class WarppouchCmd implements CommandExecutor {
 
                 if (specifiedAmount == 1) {
                     player.sendMessage("§aDeposited §6" + actualAmount + " §aender pearl.");
-                } else {
+                }
+                else {
                     player.sendMessage("§aDeposited §6" + actualAmount + " §aender pearls.");
                 }
 

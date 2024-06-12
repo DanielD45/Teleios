@@ -7,6 +7,7 @@
 package de.daniel_d45.teleios.adminfeatures;
 
 import de.daniel_d45.teleios.core.ConfigEditor;
+import de.daniel_d45.teleios.core.GlobalMethods;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,15 +20,10 @@ import java.util.Set;
 public class WarppointCmd implements CommandExecutor {
 
     @Override
-    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
-                             @Nonnull String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
         try {
 
-            // Activationstate check
-            if (!ConfigEditor.isActive("AdminFeatures.All")) {
-                sender.sendMessage("§cThis command is not active.");
-                return true;
-            }
+            if (GlobalMethods.cmdOffCheck("AdminFeatures.All", sender)) return true;
 
             switch (args.length) {
                 case 1:
@@ -72,7 +68,8 @@ public class WarppointCmd implements CommandExecutor {
                             return false;
                         }
 
-                    } else if (args[0].equalsIgnoreCase("clear")) {
+                    }
+                    else if (args[0].equalsIgnoreCase("clear")) {
                         try {
 
                             // Warppoints existance check
@@ -92,7 +89,8 @@ public class WarppointCmd implements CommandExecutor {
                             sender.sendMessage("§cCould not clear all warppoints!");
                             return false;
                         }
-                    } else {
+                    }
+                    else {
                         // Wrong arguments
                         sender.sendMessage("§cWrong arguments!");
                         return false;
@@ -103,11 +101,8 @@ public class WarppointCmd implements CommandExecutor {
                         // /warppoint add [Name]
                         try {
 
-                            // Sender player check
-                            if (!(sender instanceof Player player)) {
-                                sender.sendMessage("§cYou are no player!");
-                                return true;
-                            }
+                            if (GlobalMethods.senderPlayerCheck(sender)) return true;
+                            Player player = (Player) sender;
 
                             Set<String> warppointNames = ConfigEditor.getSectionKeys("Warppoints");
                             Set<String> teleporterNames = ConfigEditor.getSectionKeys("Teleporters");
@@ -148,7 +143,8 @@ public class WarppointCmd implements CommandExecutor {
                             sender.sendMessage("§cCould not add the warppoint!");
                             return false;
                         }
-                    } else if (args[0].equalsIgnoreCase("remove")) {
+                    }
+                    else if (args[0].equalsIgnoreCase("remove")) {
                         // /warppoint remove [Name]
                         try {
 
@@ -167,15 +163,13 @@ public class WarppointCmd implements CommandExecutor {
                             sender.sendMessage("§cCould not remove the warppoint §e" + args[1] + "§c!");
                             return false;
                         }
-                    } else if (args[0].equalsIgnoreCase("override")) {
+                    }
+                    else if (args[0].equalsIgnoreCase("override")) {
                         // /warppoint override [Name]
                         try {
 
-                            // Sender player check
-                            if (!(sender instanceof Player player)) {
-                                sender.sendMessage("§cYou are no player!");
-                                return true;
-                            }
+                            if (GlobalMethods.senderPlayerCheck(sender)) return true;
+                            Player player = (Player) sender;
 
                             String warppointName = args[1];
 
@@ -194,7 +188,8 @@ public class WarppointCmd implements CommandExecutor {
                             sender.sendMessage("§cCould not override the warppoint §e" + args[1] + "§c!");
                             return false;
                         }
-                    } else {
+                    }
+                    else {
                         sender.sendMessage("§cWrong arguments!");
                         return false;
                     }
