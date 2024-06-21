@@ -28,14 +28,14 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
         try {
 
-            if (GlobalMethods.senderPlayerCheck(sender)) return true;
+            if (GlobalFunctions.introduceSenderAsPlayer(sender)) return true;
             Player player = (Player) sender;
 
             // /mtl
             player.openInventory(InventoryManager.getManageTeleiosInventory());
             return true;
         } catch (Exception e) {
-            GlobalMethods.sendErrorFeedbackCmd(sender);
+            GlobalFunctions.sendErrorFeedbackCmd(sender);
             return false;
         }
     }

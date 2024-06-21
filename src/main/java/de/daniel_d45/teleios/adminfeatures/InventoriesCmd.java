@@ -7,7 +7,7 @@
 package de.daniel_d45.teleios.adminfeatures;
 
 import de.daniel_d45.teleios.core.ConfigEditor;
-import de.daniel_d45.teleios.core.GlobalMethods;
+import de.daniel_d45.teleios.core.GlobalFunctions;
 import de.daniel_d45.teleios.core.InventoryManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -24,7 +24,7 @@ public class InventoriesCmd implements CommandExecutor {
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
-        if (GlobalMethods.cmdOffCheck("AdminFeatures.All", sender)) return true;
+        if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
 
         switch (args.length) {
             case 0:

@@ -6,7 +6,7 @@
 
 package de.daniel_d45.teleios.bettergameplay;
 
-import de.daniel_d45.teleios.core.GlobalMethods;
+import de.daniel_d45.teleios.core.GlobalFunctions;
 import de.daniel_d45.teleios.core.ItemBuilder;
 import de.daniel_d45.teleios.core.RecipeManager;
 import org.bukkit.command.Command;
@@ -25,9 +25,9 @@ public class ConfigureteleporterCmd implements CommandExecutor {
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
-        if (GlobalMethods.cmdOffCheck("BetterGameplay.Teleporters", sender)) return true;
+        if (GlobalFunctions.cmdOffCheck("BetterGameplay.Teleporters", sender)) return true;
 
-        if (GlobalMethods.senderPlayerCheck(sender)) return true;
+        if (GlobalFunctions.introduceSenderAsPlayer(sender)) return true;
         Player player = (Player) sender;
 
         // /ctp
@@ -48,7 +48,7 @@ public class ConfigureteleporterCmd implements CommandExecutor {
         String teleporterName = args[0];
         int minLen = 1;
         int maxLen = 30;
-        if (GlobalMethods.stringNotUsable(teleporterName, minLen, maxLen)) {
+        if (GlobalFunctions.stringNotUsable(teleporterName, minLen, maxLen)) {
             // The input is too long
             player.sendMessage("§cThe name must be §6" + minLen + "§c - §6" + maxLen + "§c characters long!");
             return true;

@@ -7,7 +7,7 @@
 package de.daniel_d45.teleios.bettergameplay;
 
 import de.daniel_d45.teleios.core.ConfigEditor;
-import de.daniel_d45.teleios.core.GlobalMethods;
+import de.daniel_d45.teleios.core.GlobalFunctions;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -21,7 +21,7 @@ public class SetblocksperpearlCmd implements CommandExecutor {
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
         try {
 
-            if (GlobalMethods.cmdOffCheck("AdminFeatures.All", sender)) return true;
+            if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
 
             switch (args.length) {
                 case 0:

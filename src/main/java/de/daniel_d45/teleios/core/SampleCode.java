@@ -1,86 +1,54 @@
 /*
- 2020-2023
+ 2020-2024
  Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
  Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
 
 package de.daniel_d45.teleios.core;
 
+import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.checkerframework.common.reflection.qual.UnknownClass;
+
 
 /**
  * This class is only used for storing code samples for copying in its methods.
  */
 @UnknownClass
-@SuppressWarnings("unused")
 interface SampleCode {
 
-    @SuppressWarnings("ALL")
-    private static boolean cmdOffCheck(CommandSender sender) {
-        //
-        if (GlobalMethods.cmdOffCheck("AdminFeatures.All", sender)) return true;
-        //
-        return false;
-    }
+    private static boolean commandSamples(CommandSender sender, Player player, String xINPUT_TO_INTRODUCEx, double xMIN_VALUEx, double xMAX_VALUEx) {
+        // invalid input (an input value is wrong)
+        return GlobalFunctions.invalidNumber(sender);
+        // wrong amount of arguments
+        return GlobalFunctions.wrongAmountofArgs(sender);
 
-    private static boolean wrongAmountofArgs(CommandSender sender) {
-        //
-        return GlobalMethods.wrongAmountofArgs(sender);
-        //
-    }
+        // is active check
+        if (GlobalFunctions.cmdOffCheck("xSUB_PATHx", sender)) return true;
+        // player in wrong gamemode check
+        if (GlobalFunctions.invalidGamemodePlayer(player, GameMode.SPECTATOR)) return true;
 
-    private static boolean senderPlayerCheck(CommandSender sender) {
-        //
-        if (GlobalMethods.senderPlayerCheck(sender)) return true;
-        Player player = (Player) sender;
-        //
-        return false;
-    }
-
-    @SuppressWarnings("ALL")
-    private static boolean getTarget(Player target, String[] args, CommandSender sender) {
-        //
-        target = GlobalMethods.getTarget(args[0], sender);
+        // introduce sender as player
+        Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
+        if (player == null) return true;
+        // introduce target player
+        Player target = GlobalFunctions.introduceTargetPlayer(xINPUT_TO_INTRODUCEx, sender);
         if (target == null) return true;
-        //
-        return false;
+        // introduce int
+        // TODO
+        // introduce double
+        double xDOUBLE_NAMEx = GlobalFunctions.introduceDouble(xINPUT_TO_INTRODUCEx, xMIN_VALUEx, xMAX_VALUEx, sender);
+        if (xDOUBLE_NAMEx == Double.NEGATIVE_INFINITY) return false;
+        if (xDOUBLE_NAMEx == 0) return GlobalFunctions.invalidNumber(sender); // filters out special values
+        // introduce string
+        // TODO
     }
 
-    private static boolean getUserInt(String xINPUTx, int xMIN_VALUEx, int xMAX_VALUEx, CommandSender sender) {
-        //
-        try {
-            int xINPUTNAMEx = GlobalMethods.trimInt(Integer.parseInt(xINPUTx), xMIN_VALUEx, xMAX_VALUEx);
-        } catch (NumberFormatException e) {
-            // The input is not an int
-            sender.sendMessage("§cInvalid number!");
-            return false;
-        }
-        //
-        return true;
-    }
-
-    // TODO: imp
-    private static boolean getUserDouble(String xINPUTx, double xMIN_VALUEx, double xMAX_VALUEx,
-                                         double xEXCLUDED_VALUEx, CommandSender sender) {
-        //
-        try {
-            double xINPUTNAMEx = GlobalMethods.trimDouble(Double.parseDouble(xINPUTx), xMIN_VALUEx, xMAX_VALUEx);
-            if (xINPUTNAMEx == xEXCLUDED_VALUEx) throw new NumberFormatException();
-        } catch (NumberFormatException e) {
-            // The input is not a suitable double
-            sender.sendMessage("§cInvalid number!");
-            return false;
-        }
-        //
-        return true;
-    }
-
-    // TODO: imp
+    // TODO: overhaul
     private static boolean getUserString(String xINPUTx, int xMIN_LENGTHx, int xMAX_LENGTHx, CommandSender sender) {
         //
-        if (GlobalMethods.stringNotUsable(xINPUTx, xMIN_LENGTHx, xMAX_LENGTHx)) {
+        if (GlobalFunctions.stringNotUsable(xINPUTx, xMIN_LENGTHx, xMAX_LENGTHx)) {
             // The input is too long
             sender.sendMessage("§6" + xINPUTx + "§c is too long!");
             return true;

@@ -6,7 +6,7 @@
 
 package de.daniel_d45.teleios.bettergameplay;
 
-import de.daniel_d45.teleios.core.GlobalMethods;
+import de.daniel_d45.teleios.core.GlobalFunctions;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -21,9 +21,9 @@ public class EnderchestCmd implements CommandExecutor {
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
         try {
 
-            if (GlobalMethods.cmdOffCheck("BetterGameplay.EnderchestCommand", sender)) return true;
-            
-            if (GlobalMethods.senderPlayerCheck(sender)) return true;
+            if (GlobalFunctions.cmdOffCheck("BetterGameplay.EnderchestCommand", sender)) return true;
+
+            if (GlobalFunctions.introduceSenderAsPlayer(sender)) return true;
             Player player = (Player) sender;
 
             // /enderchest

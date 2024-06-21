@@ -7,7 +7,7 @@
 package de.daniel_d45.teleios.bettergameplay;
 
 import de.daniel_d45.teleios.core.ConfigEditor;
-import de.daniel_d45.teleios.core.GlobalMethods;
+import de.daniel_d45.teleios.core.GlobalFunctions;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -29,14 +29,10 @@ public class WarpCmd implements CommandExecutor, TabCompleter {
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
         try {
 
-            // Activation state check
-            if (!ConfigEditor.isActive("BetterGameplay.All") || !ConfigEditor.isActive("BetterGameplay.Teleporters")) {
-                sender.sendMessage("§cThis command is not active.");
-                return true;
-            }
+            if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
 
             // for computing if teleporters are unreachable
-            if (GlobalMethods.senderPlayerCheck(sender)) return true;
+            if (GlobalFunctions.introduceSenderAsPlayer(sender)) return true;
             Player player = (Player) sender;
 
             // Checks for warppoints and teleporters
@@ -233,7 +229,7 @@ public class WarpCmd implements CommandExecutor, TabCompleter {
             return false;
         } catch (Exception e) {
             // TODO
-            GlobalMethods.sendErrorFeedbackCmd(sender);
+            GlobalFunctions.sendErrorFeedbackCmd(sender);
             return false;
         }
     }
@@ -280,7 +276,7 @@ public class WarpCmd implements CommandExecutor, TabCompleter {
             if (tps != null && !tps.isEmpty()) {
                 options.addAll(tps);
             }
-            options = GlobalMethods.getFittingOptions(args[0], options);
+            options = GlobalFunctions.getFittingOptions(args[0], options);
         }
         return options;
     }

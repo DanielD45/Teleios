@@ -183,7 +183,8 @@ public class InventoryManager {
                     restAmount -= currentItem.getAmount();
                     // Removes the ItemStack
                     inv.setItem(currentSlot, null);
-                } else {
+                }
+                else {
                     currentItem.setAmount(currentItem.getAmount() - restAmount);
                     return amount;
                 }
@@ -216,7 +217,7 @@ public class InventoryManager {
     public static boolean isSameItemType(ItemStack itemStack1, ItemStack itemStack2) {
         try {
 
-            return GlobalMethods.betterEquals(itemStack1.getType(), itemStack2.getType()) && GlobalMethods.betterEquals(itemStack1.getEnchantments(), itemStack2.getEnchantments()) && GlobalMethods.betterEquals(itemStack1.getItemMeta().getAttributeModifiers(), itemStack2.getItemMeta().getAttributeModifiers()) && GlobalMethods.betterEquals(itemStack1.getItemMeta().getDisplayName(), itemStack2.getItemMeta().getDisplayName()) && GlobalMethods.betterEquals(itemStack1.getItemMeta().getEnchants(), itemStack2.getItemMeta().getEnchants()) && GlobalMethods.betterEquals(itemStack1.getItemMeta().getItemFlags(), itemStack2.getItemMeta().getItemFlags()) && GlobalMethods.betterEquals(itemStack1.getItemMeta().getLore(), itemStack2.getItemMeta().getLore());
+            return GlobalFunctions.betterEquals(itemStack1.getType(), itemStack2.getType()) && GlobalFunctions.betterEquals(itemStack1.getEnchantments(), itemStack2.getEnchantments()) && GlobalFunctions.betterEquals(itemStack1.getItemMeta().getAttributeModifiers(), itemStack2.getItemMeta().getAttributeModifiers()) && GlobalFunctions.betterEquals(itemStack1.getItemMeta().getDisplayName(), itemStack2.getItemMeta().getDisplayName()) && GlobalFunctions.betterEquals(itemStack1.getItemMeta().getEnchants(), itemStack2.getItemMeta().getEnchants()) && GlobalFunctions.betterEquals(itemStack1.getItemMeta().getItemFlags(), itemStack2.getItemMeta().getItemFlags()) && GlobalFunctions.betterEquals(itemStack1.getItemMeta().getLore(), itemStack2.getItemMeta().getLore());
         } catch (NullPointerException e) {
             return false;
         }
@@ -234,7 +235,7 @@ public class InventoryManager {
      * @return -
      */
     public static Inventory createNoInteractionInventory(int rows, String name, Inventory predecessorInventory) {
-        rows = GlobalMethods.trimInt(rows, 1, 6);
+        rows = GlobalFunctions.trimInt(rows, 1, 6);
         return Bukkit.createInventory(new NoInteractionInventories(predecessorInventory), rows * 9, name);
     }
 

@@ -7,7 +7,7 @@
 package de.daniel_d45.teleios.bettergameplay;
 
 import de.daniel_d45.teleios.core.ConfigEditor;
-import de.daniel_d45.teleios.core.GlobalMethods;
+import de.daniel_d45.teleios.core.GlobalFunctions;
 import de.daniel_d45.teleios.core.InventoryManager;
 import de.daniel_d45.teleios.core.RecipeManager;
 import org.bukkit.Location;
@@ -45,7 +45,7 @@ public class TeleporterPlaceLst implements Listener {
         String standardName = InventoryManager.getCleanString(RecipeManager.getTeleporterRecipe().getResult().getItemMeta().getDisplayName());
 
         // Item lore check
-        if (!GlobalMethods.betterEquals(RecipeManager.getTeleporterRecipe().getResult().getItemMeta().getLore(), itemLore)) {
+        if (!GlobalFunctions.betterEquals(RecipeManager.getTeleporterRecipe().getResult().getItemMeta().getLore(), itemLore)) {
             return;
         }
 

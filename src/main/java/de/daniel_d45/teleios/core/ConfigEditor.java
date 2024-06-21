@@ -116,7 +116,8 @@ public class ConfigEditor {
     public static void switchActivationstate(String subPath) {
         if (isActive(subPath)) {
             set("Activationstates." + subPath, "OFF");
-        } else {
+        }
+        else {
             set("Activationstates." + subPath, "ON");
         }
     }
@@ -173,7 +174,7 @@ public class ConfigEditor {
      */
     public static boolean hasValue(String path, Object value) {
         Object foundValue = get(path);
-        return GlobalMethods.betterEquals(foundValue, value);
+        return GlobalFunctions.betterEquals(foundValue, value);
     }
 
     /**

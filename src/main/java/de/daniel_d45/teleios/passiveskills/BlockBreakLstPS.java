@@ -22,7 +22,7 @@ import org.bukkit.inventory.ItemStack;
 public class BlockBreakLstPS implements Listener {
 
     /**
-     * Method fires when a player breaks a block, checks if the broken block is listed in a skill's
+     * Method fires when a player breaks a block, checks whether the broken block is listed in a skill's
      * listedBlocks ArrayList and increases the connected BonusMultiplier of the connected skill. Value
      * of getDrops() when you break a redstone ore block: [ItemStack{REDSTONE x 4}].
      *
@@ -31,10 +31,7 @@ public class BlockBreakLstPS implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onBlockBreakPS(BlockBreakEvent event) {
 
-        // Activationstate check
-        if (!ConfigEditor.isActive("PassiveSkills.All")) {
-            return;
-        }
+        if (!ConfigEditor.isActive("PassiveSkills.All")) return;
 
         int preLevel;
         int postLevel;
@@ -66,7 +63,8 @@ public class BlockBreakLstPS implements Listener {
                 // TODO: Check functionality
                 String entryName = block.getWorld().getName() + "," + block.getX() + "," + block.getY() + "," + block.getZ();
                 ConfigEditor.clearPath("PlacedBlocks." + entryName);
-            } else {
+            }
+            else {
 
                 // Player survival mode check
                 if (player.getGameMode() != GameMode.SURVIVAL) {

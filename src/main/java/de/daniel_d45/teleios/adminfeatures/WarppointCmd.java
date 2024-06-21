@@ -7,7 +7,7 @@
 package de.daniel_d45.teleios.adminfeatures;
 
 import de.daniel_d45.teleios.core.ConfigEditor;
-import de.daniel_d45.teleios.core.GlobalMethods;
+import de.daniel_d45.teleios.core.GlobalFunctions;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -23,7 +23,7 @@ public class WarppointCmd implements CommandExecutor {
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
         try {
 
-            if (GlobalMethods.cmdOffCheck("AdminFeatures.All", sender)) return true;
+            if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
 
             switch (args.length) {
                 case 1:
@@ -101,7 +101,7 @@ public class WarppointCmd implements CommandExecutor {
                         // /warppoint add [Name]
                         try {
 
-                            if (GlobalMethods.senderPlayerCheck(sender)) return true;
+                            if (GlobalFunctions.introduceSenderAsPlayer(sender)) return true;
                             Player player = (Player) sender;
 
                             Set<String> warppointNames = ConfigEditor.getSectionKeys("Warppoints");
@@ -168,7 +168,7 @@ public class WarppointCmd implements CommandExecutor {
                         // /warppoint override [Name]
                         try {
 
-                            if (GlobalMethods.senderPlayerCheck(sender)) return true;
+                            if (GlobalFunctions.introduceSenderAsPlayer(sender)) return true;
                             Player player = (Player) sender;
 
                             String warppointName = args[1];

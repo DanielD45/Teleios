@@ -6,7 +6,7 @@
 
 package de.daniel_d45.teleios.adminfeatures;
 
-import de.daniel_d45.teleios.core.GlobalMethods;
+import de.daniel_d45.teleios.core.GlobalFunctions;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
@@ -26,16 +26,12 @@ public class GmaCmd implements CommandExecutor {
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
-        if (GlobalMethods.cmdOffCheck("AdminFeatures.All", sender)) return true;
+        if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
 
         // /gma
         if (args.length == 0) {
 
-            // Sender player check
-            if (!(sender instanceof Player player)) {
-                sender.sendMessage("§cYou are not a player!");
-                return true;
-            }
+            GlobalFunctions.introduceSenderAsPlayer(sender);
 
             // Player gamemode check
             if (player.getGameMode() == gameMode) {

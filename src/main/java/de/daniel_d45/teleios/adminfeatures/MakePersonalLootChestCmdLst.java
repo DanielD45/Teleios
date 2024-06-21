@@ -7,7 +7,7 @@
 package de.daniel_d45.teleios.adminfeatures;
 
 import de.daniel_d45.teleios.core.ConfigEditor;
-import de.daniel_d45.teleios.core.GlobalMethods;
+import de.daniel_d45.teleios.core.GlobalFunctions;
 import de.daniel_d45.teleios.core.InventoryManager;
 import de.daniel_d45.teleios.core.ItemBuilder;
 import org.bukkit.*;
@@ -41,13 +41,10 @@ public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
-        if (GlobalMethods.cmdOffCheck("AdminFeatures.All", sender)) return true;
+        if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
 
-        // Sender player check
-        if (!(sender instanceof Player player)) {
-            sender.sendMessage("§cYou are no player!");
-            return true;
-        }
+        if (GlobalFunctions.introduceSenderAsPlayer(sender)) return true;
+        Player player = (Player) sender;
 
         // TODO: implement Timer
         if (playersInAssignMode.contains(player.getUniqueId())) {

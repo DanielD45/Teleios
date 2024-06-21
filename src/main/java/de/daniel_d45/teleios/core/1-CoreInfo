@@ -1,11 +1,13 @@
 - Plugin name:
 greek: Téleios (Τέλειος) = english: complete
 pronunciation: pronounced like TELL-e-os
+.
 
 
 - File Naming Notes:
 Cmd = Command
 Lst = Listener
+.
 
 
 - Interesting classes and methods:
@@ -16,17 +18,21 @@ Player
 ItemStack
     serialize()
 ItemMeta
+.
 
 
 - Chat message / command feedback colors:
 green (§a) 	/ gold (§6): success message
 yellow (§e) / gold (§6): info message
 red (§c) 	/ gold (§6): fail message
+.
 
 
-- Exception handling:
-try-catch blocks for inputs
+- Conventions:
 avoid exceptions using if statements
+Sample statements can be found in SampleCode
+don't use Double.NEGATIVE_INFINITY as it is a messenger value in GlobalFunctions
+.
 
 
 - Data structure for the plugin.yml:
@@ -47,6 +53,7 @@ permissions:
    teleios.segmentName1.commandName2:
       description: Allows use of the commandName2 command.
       default: op
+.
 
 
 - Config structure:
@@ -67,3 +74,5 @@ Players
 		MinerSkill
 			BlockValue = 1280.0
 			BonusMultiplier = 1.0
+.
+

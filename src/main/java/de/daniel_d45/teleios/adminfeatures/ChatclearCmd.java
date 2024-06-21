@@ -6,7 +6,7 @@
 
 package de.daniel_d45.teleios.adminfeatures;
 
-import de.daniel_d45.teleios.core.GlobalMethods;
+import de.daniel_d45.teleios.core.GlobalFunctions;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,14 +14,14 @@ import org.bukkit.command.CommandSender;
 
 import javax.annotation.Nonnull;
 
+
 public class ChatclearCmd implements CommandExecutor {
 
     // Unbreakable (2023-12-30)
     @Override
-    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label,
-                             @Nonnull String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
-        if (GlobalMethods.cmdOffCheck("AdminFeatures.All", sender)) return true;
+        if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
 
         // /chatclear
         for (int i = 0; i <= 60; ++i) {

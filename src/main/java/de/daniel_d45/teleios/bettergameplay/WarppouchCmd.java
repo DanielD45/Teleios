@@ -7,7 +7,7 @@
 package de.daniel_d45.teleios.bettergameplay;
 
 import de.daniel_d45.teleios.core.ConfigEditor;
-import de.daniel_d45.teleios.core.GlobalMethods;
+import de.daniel_d45.teleios.core.GlobalFunctions;
 import de.daniel_d45.teleios.core.InventoryManager;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -26,9 +26,9 @@ public class WarppouchCmd implements CommandExecutor {
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
         try {
 
-            if (GlobalMethods.cmdOffCheck("BetterGameplay.Teleporters", sender)) return true;
+            if (GlobalFunctions.cmdOffCheck("BetterGameplay.Teleporters", sender)) return true;
 
-            if (GlobalMethods.senderPlayerCheck(sender)) return true;
+            if (GlobalFunctions.introduceSenderAsPlayer(sender)) return true;
             Player player = (Player) sender;
 
             int storedEPs;
@@ -109,7 +109,7 @@ public class WarppouchCmd implements CommandExecutor {
             player.sendMessage("§cWrong arguments!");
             return false;
         } catch (Exception e) {
-            GlobalMethods.sendErrorFeedbackCmd(sender);
+            GlobalFunctions.sendErrorFeedbackCmd(sender);
             return false;
         }
     }

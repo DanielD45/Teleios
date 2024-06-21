@@ -27,10 +27,8 @@ public class BlockPlaceLstPS implements Listener {
     public void onBlockPlacePS(BlockPlaceEvent event) {
 
         // TODO: Only log a limited amount of blocks at a time and override?
-        // Activationstate check
-        if (!ConfigEditor.isActive("PassiveSkills.All")) {
-            return;
-        }
+        if (!ConfigEditor.isActive("PassiveSkills.All")) return;
+
 
         Block block = event.getBlockPlaced();
         String entryName = block.getWorld().getName() + "," + block.getX() + "," + block.getY() + "," + block.getZ();

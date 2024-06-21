@@ -6,7 +6,7 @@
 
 package de.daniel_d45.teleios.passiveskills;
 
-import de.daniel_d45.teleios.core.GlobalMethods;
+import de.daniel_d45.teleios.core.GlobalFunctions;
 import de.daniel_d45.teleios.core.InventoryManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -25,9 +25,9 @@ public class SkillsCmd implements CommandExecutor {
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
         try {
 
-            if (GlobalMethods.cmdOffCheck("PassiveSkills.All", sender)) return true;
+            if (GlobalFunctions.cmdOffCheck("PassiveSkills.All", sender)) return true;
 
-            if (GlobalMethods.senderPlayerCheck(sender)) return true;
+            if (GlobalFunctions.introduceSenderAsPlayer(sender)) return true;
             Player player = (Player) sender;
 
             // Only runs when a skill is activated
