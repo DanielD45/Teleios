@@ -29,33 +29,24 @@ public class AdminFeatures {
     // TODO: Hide Enchants
     public static ItemStack getSegmentItem() {
         ItemStack item;
-        ItemFlag[] flags = {ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_DESTROYS,
-                ItemFlag.HIDE_DYE, ItemFlag.HIDE_PLACED_ON, ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_UNBREAKABLE,
-                /*ItemFlag.HIDE_ARMOR_TRIM*/};
+        ItemFlag[] flags = {ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_DYE};
 
         if (ConfigEditor.isActive(getSegmentName() + ".All")) {
-            // The segment is ON
-            item = new ItemBuilder(Material.NETHER_STAR, 1).setName("§o§5AdminFeatures").setLore(
-                            "§eActivationstate: §aON", "§fadds admin-only commands", "§7Left click to deactivate",
-                            "§7Right click for more options").addEnchant(Enchantment.VANISHING_CURSE, 1)
-                    .addItemFlags(flags).build();
-        } else {
-            // The segment is OFF
-            item = new ItemBuilder(Material.NETHER_STAR, 1).setName("§o§5AdminFeatures").setLore(
-                    "§eActivationstate: §cOFF", "§fadds admin-only commands", "§7Left click to activate",
-                    "§7Right click for more options").addItemFlags(flags).build();
+            item = new ItemBuilder(Material.NETHER_STAR, 1).setName("§o§5AdminFeatures").setLore("§eActivationstate: §aON", "§fadds admin-only commands", "§7Left click to deactivate", "§7Right click for more options").addEnchant(Enchantment.VANISHING_CURSE, 1).addItemFlags(flags).build();
+        }
+        else {
+            item = new ItemBuilder(Material.NETHER_STAR, 1).setName("§o§5AdminFeatures").setLore("§eActivationstate: §cOFF", "§fadds admin-only commands", "§7Left click to activate", "§7Right click for more options").addItemFlags(flags).build();
         }
         return item;
     }
 
     public static void switchActivationstateAF() {
         if (ConfigEditor.isActive(getSegmentName() + ".All")) {
-
             for (String current : activationstatePaths) {
                 ConfigEditor.set("Activationstates." + current, "OFF");
             }
-        } else {
-
+        }
+        else {
             for (String current : activationstatePaths) {
                 ConfigEditor.set("Activationstates." + current, "ON");
             }

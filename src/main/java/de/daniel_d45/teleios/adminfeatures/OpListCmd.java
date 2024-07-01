@@ -27,8 +27,8 @@ public class OpListCmd implements CommandExecutor {
         // /oplist
         if (args.length == 0) {
 
-            if (GlobalFunctions.introduceSenderAsPlayer(sender)) return true;
-            Player player = (Player) sender;
+            Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
+            if (player == null) return true;
 
             // Sender already op check
             if (player.isOp()) {

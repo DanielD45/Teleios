@@ -33,7 +33,7 @@
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <!-- Spigot version -->
-            <version>1.20.1-R0.1-SNAPSHOT</version>
+            <version>1.20.6-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -46,7 +46,7 @@
                 <version>3.2.0</version>
                 <configuration>
                     <!-- This path is visible when uploaded! -->
-                    <outputDirectory>C:\Users\danie\OneDrive\Daniel\Gaming\Minecraft\Servers\Spigot_1.20.1\plugins
+                    <outputDirectory>C:\Users\danie\OneDrive\Daniel\Gaming\Minecraft\Servers\Spigot_1.20.6\plugins
                     </outputDirectory>
                 </configuration>
             </plugin>

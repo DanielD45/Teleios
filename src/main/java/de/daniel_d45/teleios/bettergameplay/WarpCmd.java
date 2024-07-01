@@ -27,211 +27,206 @@ public class WarpCmd implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
-        try {
 
-            if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
+        if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
 
-            // for computing if teleporters are unreachable
-            if (GlobalFunctions.introduceSenderAsPlayer(sender)) return true;
-            Player player = (Player) sender;
+        // for computing if teleporters are unreachable
+        Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
+        if (player == null) return true;
 
-            // Checks for warppoints and teleporters
-            Set<String> wps = ConfigEditor.getSectionKeys("Warppoints");
-            Set<String> tps = ConfigEditor.getSectionKeys("Teleporters");
+        // Checks for warppoints and teleporters
+        Set<String> wps = ConfigEditor.getSectionKeys("Warppoints");
+        Set<String> tps = ConfigEditor.getSectionKeys("Teleporters");
 
-            // Are there warppoints or teleporters check
-            if (wps == null && tps == null) {
-                sender.sendMessage("§eThere are no warppoints or teleporters yet!");
-                return true;
-            }
+        // Are there warppoints or teleporters check
+        if (wps == null && tps == null) {
+            sender.sendMessage("§eThere are no warppoints or teleporters yet!");
+            return true;
+        }
 
-            // /warp (list)
-            if (args.length == 0 || args[0].equalsIgnoreCase("list")) {
+        // /warp (list)
+        if (args.length == 0 || args[0].equalsIgnoreCase("list")) {
 
-                StringBuilder listMessage = new StringBuilder();
+            StringBuilder listMessage = new StringBuilder();
 
-                // Adds warppoints to the listMessage
-                if (wps != null) {
-                    String[] warppoints = wps.toArray(new String[0]);
-                    listMessage.append("§a--------------------\n");
-                    listMessage.append("§aExisting warppoints:\n");
-
-                    // Iterates through the warppoints
-                    for (int i = 0; i < warppoints.length; ++i) {
-
-                        listMessage.append("§6").append(warppoints[i]);
-                        // Only adds commas if it's not the last name
-                        if (i < (warppoints.length - 1)) {
-                            listMessage.append("§a, ");
-                        }
-                    }
-
-                    listMessage.append("\n§a--------------------\n");
-                }
-
-                // TODO: Check whether the teleporter is reachable (dimension, cost)
-                // Adds teleporters to the listMessage
-                if (tps != null) {
-
-                    String[] teleporters = tps.toArray(new String[0]);
-                    listMessage.append("§a--------------------\n");
-                    listMessage.append("§aExisting teleporters:\n");
-
-                    // Iterates through the teleporters
-                    for (int i = 0; i < teleporters.length; ++i) {
-
-                        //TODO: Improve
-                        Location currentTPLoc;
-                        try {
-                            currentTPLoc = Objects.requireNonNull((Location) ConfigEditor.get("Teleporters." + teleporters[i]));
-                        } catch (NullPointerException e) {
-                            return true;
-                        }
-
-                        Material FeetMat = new Location(currentTPLoc.getWorld(), currentTPLoc.getX(), currentTPLoc.getY() + 1, currentTPLoc.getZ()).getBlock().getType();
-                        Material HeadMat = new Location(currentTPLoc.getWorld(), currentTPLoc.getX(), currentTPLoc.getY() + 2, currentTPLoc.getZ()).getBlock().getType();
-                        Location playerLoc = player.getLocation();
-
-                        // Teleporter unobstructed check
-                        if (((FeetMat == Material.AIR || FeetMat == Material.CAVE_AIR) && (HeadMat == Material.AIR || HeadMat == Material.CAVE_AIR)) && currentTPLoc.getWorld() == playerLoc.getWorld()) {
-                            // Lists the teleporter in gold
-                            listMessage.append("§6").append(teleporters[i]);
-                        }
-                        else {
-                            // Lists the teleporter in grey
-                            listMessage.append("§7").append(teleporters[i]);
-                        }
-
-                        // Only adds commas if it's not the last name
-                        if (i < teleporters.length - 1) {
-                            listMessage.append("§a, ");
-                        }
-
-                    }
-
-                    listMessage.append("\n§a--------------------");
-
-                }
-
-                sender.sendMessage(listMessage.toString());
-                return true;
-
-            }
-
-            // /warp [WarppointName]
+            // Adds warppoints to the listMessage
             if (wps != null) {
                 String[] warppoints = wps.toArray(new String[0]);
+                listMessage.append("§a--------------------\n");
+                listMessage.append("§aExisting warppoints:\n");
 
                 // Iterates through the warppoints
-                for (String currentWP : warppoints) {
+                for (int i = 0; i < warppoints.length; ++i) {
 
-                    // Warppoint match check
-                    if (args[0].equalsIgnoreCase(currentWP)) {
-
-                        Location WPLoc;
-                        // Checks if the warppoint's location is valid
-                        try {
-                            WPLoc = Objects.requireNonNull((Location) ConfigEditor.get("Warppoints." + currentWP));
-                        } catch (NullPointerException e) {
-                            player.sendMessage("§cThe warppoint's location is invalid");
-                            return true;
-                        }
-
-                        // Teleports the player to the warppoint
-                        player.teleport(WPLoc);
-                        player.sendMessage("§aYou have been warped to §6" + currentWP + "§a.");
-                        return true;
+                    listMessage.append("§6").append(warppoints[i]);
+                    // Only adds commas if it's not the last name
+                    if (i < (warppoints.length - 1)) {
+                        listMessage.append("§a, ");
                     }
                 }
-                // No warppoint match, code continues
+
+                listMessage.append("\n§a--------------------\n");
             }
 
-            // /warp [TeleporterName]
+            // TODO: Check whether the teleporter is reachable (dimension, cost)
+            // Adds teleporters to the listMessage
             if (tps != null) {
+
                 String[] teleporters = tps.toArray(new String[0]);
+                listMessage.append("§a--------------------\n");
+                listMessage.append("§aExisting teleporters:\n");
 
                 // Iterates through the teleporters
-                for (String currentTP : teleporters) {
+                for (int i = 0; i < teleporters.length; ++i) {
 
-                    // Teleporter match check
-                    if (args[0].equalsIgnoreCase(currentTP)) {
-
-                        Location playerLoc = player.getLocation();
-                        Location TPLoc;
-                        // Is teleporter location valid check
-                        try {
-                            TPLoc = Objects.requireNonNull((Location) ConfigEditor.get("Teleporters." + currentTP));
-                        } catch (NullPointerException e) {
-                            player.sendMessage("§cThat teleporter's location is invalid!");
-                            return false;
-                        }
-
-                        // Warping only works intradimensional
-                        if (!player.getWorld().equals(TPLoc.getWorld())) {
-                            player.sendMessage("§cYou are not in the same dimension as this teleporter!");
-                            return true;
-                        }
-
-                        int requiredPearls;
-                        // requiredPearls invalid check
-                        try {
-                            requiredPearls = getRequiredPearls(TPLoc, playerLoc);
-                            if (requiredPearls <= 0) {
-                                throw new IllegalArgumentException("requiredPearls is negative!");
-                            }
-                        } catch (IllegalArgumentException e) {
-                            return false;
-                        }
-
-                        int possessedPearls;
-                        // Possessed pearls invalid check
-                        try {
-                            possessedPearls = Integer.parseInt(Objects.requireNonNull(ConfigEditor.get("Warppouch." + player.getName())).toString());
-                            if (possessedPearls < 0) {
-                                throw new NullPointerException("possessedPearls is invalid");
-                            }
-                        } catch (NullPointerException e) {
-                            return true;
-                        }
-
-                        // Enough ender pearls check
-                        if (possessedPearls < requiredPearls) {
-                            player.sendMessage("§cYou don't have enough ender pearls in your warppouch! Use §6/warppouch deposit [Amount]§c to put ender pearls in your warp pouch.");
-                            return true;
-                        }
-
-                        Location feetLoc = new Location(TPLoc.getWorld(), TPLoc.getX(), TPLoc.getY() + 1, TPLoc.getZ());
-                        Location headLoc = new Location(TPLoc.getWorld(), TPLoc.getX(), TPLoc.getY() + 2, TPLoc.getZ());
-
-                        // Teleporter obstruction check
-                        if ((feetLoc.getBlock().getType() != Material.AIR && feetLoc.getBlock().getType() != Material.CAVE_AIR) || (headLoc.getBlock().getType() != Material.AIR && headLoc.getBlock().getType() != Material.CAVE_AIR)) {
-                            player.sendMessage("§cThis teleporter is obstructed!");
-                            return true;
-                        }
-
-                        // The location to teleport the player to
-                        Location teleportLoc = new Location(TPLoc.getWorld(), TPLoc.getX() + 0.5, TPLoc.getY() + 1, TPLoc.getZ() + 0.5, TPLoc.getYaw(), TPLoc.getPitch());
-
-                        // Removes the required amount of ender pearls
-                        ConfigEditor.set("Warppouch." + player.getName(), possessedPearls - requiredPearls);
-                        player.teleport(teleportLoc);
-
-                        player.sendMessage("§aYou have been warped to §6" + currentTP + " §afor §6" + requiredPearls + " ender pearl(s).");
+                    //TODO: Improve
+                    Location currentTPLoc;
+                    try {
+                        currentTPLoc = Objects.requireNonNull((Location) ConfigEditor.get("Teleporters." + teleporters[i]));
+                    } catch (NullPointerException e) {
                         return true;
                     }
+
+                    Material FeetMat = new Location(currentTPLoc.getWorld(), currentTPLoc.getX(), currentTPLoc.getY() + 1, currentTPLoc.getZ()).getBlock().getType();
+                    Material HeadMat = new Location(currentTPLoc.getWorld(), currentTPLoc.getX(), currentTPLoc.getY() + 2, currentTPLoc.getZ()).getBlock().getType();
+                    Location playerLoc = player.getLocation();
+
+                    // Teleporter unobstructed check
+                    if (((FeetMat == Material.AIR || FeetMat == Material.CAVE_AIR) && (HeadMat == Material.AIR || HeadMat == Material.CAVE_AIR)) && currentTPLoc.getWorld() == playerLoc.getWorld()) {
+                        // Lists the teleporter in gold
+                        listMessage.append("§6").append(teleporters[i]);
+                    }
+                    else {
+                        // Lists the teleporter in grey
+                        listMessage.append("§7").append(teleporters[i]);
+                    }
+
+                    // Only adds commas if it's not the last name
+                    if (i < teleporters.length - 1) {
+                        listMessage.append("§a, ");
+                    }
+
                 }
-                // No warppoint or teleporter match
-                sender.sendMessage("§cThere is no warppoint or teleporter with this name!");
-                return true;
+
+                listMessage.append("\n§a--------------------");
+
             }
-            // Wrong arguments
-            sender.sendMessage("§cWrong arguments!");
-            return false;
-        } catch (Exception e) {
-            // TODO
-            GlobalFunctions.sendErrorFeedbackCmd(sender);
-            return false;
+
+            sender.sendMessage(listMessage.toString());
+            return true;
+
         }
+
+        // /warp [WarppointName]
+        if (wps != null) {
+            String[] warppoints = wps.toArray(new String[0]);
+
+            // Iterates through the warppoints
+            for (String currentWP : warppoints) {
+
+                // Warppoint match check
+                if (args[0].equalsIgnoreCase(currentWP)) {
+
+                    Location WPLoc;
+                    // Checks if the warppoint's location is valid
+                    try {
+                        WPLoc = Objects.requireNonNull((Location) ConfigEditor.get("Warppoints." + currentWP));
+                    } catch (NullPointerException e) {
+                        player.sendMessage("§cThe warppoint's location is invalid");
+                        return true;
+                    }
+
+                    // Teleports the player to the warppoint
+                    player.teleport(WPLoc);
+                    player.sendMessage("§aYou have been warped to §6" + currentWP + "§a.");
+                    return true;
+                }
+            }
+            // No warppoint match, code continues
+        }
+
+        // /warp [TeleporterName]
+        if (tps != null) {
+            String[] teleporters = tps.toArray(new String[0]);
+
+            // Iterates through the teleporters
+            for (String currentTP : teleporters) {
+
+                // Teleporter match check
+                if (args[0].equalsIgnoreCase(currentTP)) {
+
+                    Location playerLoc = player.getLocation();
+                    Location TPLoc;
+                    // Is teleporter location valid check
+                    try {
+                        TPLoc = Objects.requireNonNull((Location) ConfigEditor.get("Teleporters." + currentTP));
+                    } catch (NullPointerException e) {
+                        player.sendMessage("§cThat teleporter's location is invalid!");
+                        return false;
+                    }
+
+                    // Warping only works intradimensional
+                    if (!player.getWorld().equals(TPLoc.getWorld())) {
+                        player.sendMessage("§cYou are not in the same dimension as this teleporter!");
+                        return true;
+                    }
+
+                    int requiredPearls;
+                    // requiredPearls invalid check
+                    try {
+                        requiredPearls = getRequiredPearls(TPLoc, playerLoc);
+                        if (requiredPearls <= 0) {
+                            throw new IllegalArgumentException("requiredPearls is negative!");
+                        }
+                    } catch (IllegalArgumentException e) {
+                        return false;
+                    }
+
+                    int possessedPearls;
+                    // Possessed pearls invalid check
+                    try {
+                        possessedPearls = Integer.parseInt(Objects.requireNonNull(ConfigEditor.get("Warppouch." + player.getName())).toString());
+                        if (possessedPearls < 0) {
+                            throw new NullPointerException("possessedPearls is invalid");
+                        }
+                    } catch (NullPointerException e) {
+                        return true;
+                    }
+
+                    // Enough ender pearls check
+                    if (possessedPearls < requiredPearls) {
+                        player.sendMessage("§cYou don't have enough ender pearls in your warppouch! Use §6/warppouch deposit [Amount]§c to put ender pearls in your warp pouch.");
+                        return true;
+                    }
+
+                    Location feetLoc = new Location(TPLoc.getWorld(), TPLoc.getX(), TPLoc.getY() + 1, TPLoc.getZ());
+                    Location headLoc = new Location(TPLoc.getWorld(), TPLoc.getX(), TPLoc.getY() + 2, TPLoc.getZ());
+
+                    // Teleporter obstruction check
+                    if ((feetLoc.getBlock().getType() != Material.AIR && feetLoc.getBlock().getType() != Material.CAVE_AIR) || (headLoc.getBlock().getType() != Material.AIR && headLoc.getBlock().getType() != Material.CAVE_AIR)) {
+                        player.sendMessage("§cThis teleporter is obstructed!");
+                        return true;
+                    }
+
+                    // The location to teleport the player to
+                    Location teleportLoc = new Location(TPLoc.getWorld(), TPLoc.getX() + 0.5, TPLoc.getY() + 1, TPLoc.getZ() + 0.5, TPLoc.getYaw(), TPLoc.getPitch());
+
+                    // Removes the required amount of ender pearls
+                    ConfigEditor.set("Warppouch." + player.getName(), possessedPearls - requiredPearls);
+                    player.teleport(teleportLoc);
+
+                    player.sendMessage("§aYou have been warped to §6" + currentTP + " §afor §6" + requiredPearls + " ender pearl(s).");
+                    return true;
+                }
+            }
+            // No warppoint or teleporter match
+            sender.sendMessage("§cThere is no warppoint or teleporter with this name!");
+            return true;
+        }
+        // Wrong arguments
+        sender.sendMessage("§cWrong arguments!");
+        return false;
+
     }
 
     private int getRequiredPearls(Location tpLoc, Location playerLoc) {

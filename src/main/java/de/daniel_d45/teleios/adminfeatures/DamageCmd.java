@@ -38,7 +38,7 @@ public class DamageCmd implements CommandExecutor {
             Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
             if (player == null) return true;
 
-            if (GlobalFunctions.invalidGamemodePlayer(player, GameMode.CREATIVE, GameMode.SPECTATOR)) return true;
+            if (GlobalFunctions.invalidGamemodePlayer(player, "", GameMode.CREATIVE, GameMode.SPECTATOR)) return true;
 
             // Reduces player health
             if (player.getHealth() - amount <= 0) {
@@ -63,7 +63,7 @@ public class DamageCmd implements CommandExecutor {
         if (amount == 0) return GlobalFunctions.invalidNumber(sender);
 
         if (target == sender) {
-            if (GlobalFunctions.invalidGamemodePlayer(target, GameMode.CREATIVE, GameMode.SPECTATOR)) return true;
+            if (GlobalFunctions.invalidGamemodePlayer(target, "", GameMode.CREATIVE, GameMode.SPECTATOR)) return true;
 
             // Reduces player health
             if (target.getHealth() - amount <= 0) {
@@ -76,7 +76,7 @@ public class DamageCmd implements CommandExecutor {
             }
         }
         else {
-            if (GlobalFunctions.invalidGamemodeTarget(sender, target, GameMode.CREATIVE, GameMode.SPECTATOR)) return true;
+            if (GlobalFunctions.invalidGamemodeTarget(sender, target, "", GameMode.CREATIVE, GameMode.SPECTATOR)) return true;
 
             // Reduces target health
             if (target.getHealth() - amount <= 0) {

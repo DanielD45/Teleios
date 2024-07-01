@@ -51,22 +51,33 @@ public class GlobalFunctions {
         }
     }
 
-    public static boolean invalidGamemodePlayer(Player player, GameMode... gameModes) {
+    public static boolean invalidGamemodePlayer(Player player, String specialMessage, GameMode... gameModes) {
         GameMode playerGM = player.getGameMode();
         for (GameMode currentGM : gameModes) {
             if (playerGM.equals(currentGM)) {
-                player.sendMessage("§cYou are not in a suitable gamemode!");
+                if (specialMessage.isEmpty()) {
+                    player.sendMessage("§cYou are not in a suitable gamemode!");
+                }
+                else {
+                    player.sendMessage(specialMessage);
+                }
                 return true;
+
             }
         }
         return false;
     }
 
-    public static boolean invalidGamemodeTarget(CommandSender sender, Player target, GameMode... gameModes) {
+    public static boolean invalidGamemodeTarget(CommandSender sender, Player target, String specialMessage, GameMode... gameModes) {
         GameMode targetGM = target.getGameMode();
         for (GameMode currentGM : gameModes) {
             if (targetGM.equals(currentGM)) {
-                sender.sendMessage("§cYour target ist not in a suitable gamemode!");
+                if (specialMessage.isEmpty()) {
+                    sender.sendMessage("§cYour target ist not in a suitable gamemode!");
+                }
+                else {
+                    sender.sendMessage(specialMessage);
+                }
                 return true;
             }
         }

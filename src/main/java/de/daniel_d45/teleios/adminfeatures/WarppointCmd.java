@@ -101,8 +101,8 @@ public class WarppointCmd implements CommandExecutor {
                         // /warppoint add [Name]
                         try {
 
-                            if (GlobalFunctions.introduceSenderAsPlayer(sender)) return true;
-                            Player player = (Player) sender;
+                            Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
+                            if (player == null) return true;
 
                             Set<String> warppointNames = ConfigEditor.getSectionKeys("Warppoints");
                             Set<String> teleporterNames = ConfigEditor.getSectionKeys("Teleporters");
@@ -168,8 +168,8 @@ public class WarppointCmd implements CommandExecutor {
                         // /warppoint override [Name]
                         try {
 
-                            if (GlobalFunctions.introduceSenderAsPlayer(sender)) return true;
-                            Player player = (Player) sender;
+                            Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
+                            if (player == null) return true;
 
                             String warppointName = args[1];
 

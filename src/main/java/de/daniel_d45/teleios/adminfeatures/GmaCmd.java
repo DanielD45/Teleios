@@ -7,7 +7,6 @@
 package de.daniel_d45.teleios.adminfeatures;
 
 import de.daniel_d45.teleios.core.GlobalFunctions;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -20,24 +19,22 @@ import javax.annotation.Nonnull;
 public class GmaCmd implements CommandExecutor {
 
     // Unbreakable (2023-12-30)
-    GameMode gameMode = GameMode.ADVENTURE;
-    String gameModeName = gameMode.toString().toLowerCase();
-
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
         if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
 
+        // variables for easy copying between /gmx commands
+        GameMode gameMode = GameMode.ADVENTURE;
+        String gameModeName = gameMode.toString();
+
         // /gma
         if (args.length == 0) {
 
-            GlobalFunctions.introduceSenderAsPlayer(sender);
+            Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
+            if (player == null) return true;
 
-            // Player gamemode check
-            if (player.getGameMode() == gameMode) {
-                player.sendMessage("§cYou are already in " + gameModeName + " mode!");
-                return true;
-            }
+            if (GlobalFunctions.invalidGamemodePlayer(player, "§cYou are already in " + gameModeName + " mode!", gameMode)) return true;
 
             // Changes gamemode
             player.setGameMode(gameMode);
@@ -45,48 +42,32 @@ public class GmaCmd implements CommandExecutor {
             return true;
         }
 
+
         // /gma [Player] ...
+        Player target = GlobalFunctions.introduceTargetPlayer(args[0], sender);
+        if (target == null) return true;
 
-        String targetName = args[0];
-        Player target = Bukkit.getPlayerExact(targetName);
+        if (target == sender) {
 
-        if (target != sender) {
+            if (GlobalFunctions.invalidGamemodePlayer(target, "§cYou are already in " + gameModeName + " mode!", gameMode)) return true;
 
-            // Target online check
-            if (target == null) {
-                sender.sendMessage("§cPlayer §6" + targetName + "§c is not online!");
-                return true;
-            }
-
-            // Target gamemode check
-            if (target.getGameMode() == gameMode) {
-                sender.sendMessage("§6" + targetName + "§c is already in " + gameModeName + " mode!");
-                return true;
-            }
-
-            // Changes target's gamemode
+            // changes gamemode
             target.setGameMode(gameMode);
             target.sendMessage("§aYour gamemode has been set to §6" + gameModeName + "§a!");
-            sender.sendMessage("§6" + target.getName() + "§a's gamemode has been set to §6" + gameModeName + "§a!");
-            return true;
         }
         else {
-            // The sender targets themselves
 
-            Player player = (Player) sender;
+            String targetName = target.getName();
 
-            // Player gamemode check
-            if (player.getGameMode() == gameMode) {
-                sender.sendMessage("§cYou are already in " + gameModeName + " mode!");
+            if (GlobalFunctions.invalidGamemodeTarget(sender, target, "§6" + targetName + "§c is already in " + gameModeName + " mode!", gameMode))
                 return true;
-            }
 
-            // Changes player's gamemode
-            player.setGameMode(gameMode);
-            player.sendMessage("§aYour gamemode has been set to §6" + gameModeName + "§a!");
-            return true;
+            // changes target's gamemode
+            target.setGameMode(gameMode);
+            target.sendMessage("§aYour gamemode has been set to §6" + gameModeName + "§a!");
+            sender.sendMessage("§6" + targetName + "§a's gamemode has been set to §6" + gameModeName + "§a!");
         }
-
+        return true;
     }
 
 }

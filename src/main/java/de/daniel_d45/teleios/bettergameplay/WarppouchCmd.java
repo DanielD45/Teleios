@@ -24,94 +24,91 @@ public class WarppouchCmd implements CommandExecutor {
 
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
+
+        // TODO: exception handling
+        if (GlobalFunctions.cmdOffCheck("BetterGameplay.Teleporters", sender)) return true;
+
+        Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
+        if (player == null) return true;
+
+        int storedEPs;
         try {
-
-            if (GlobalFunctions.cmdOffCheck("BetterGameplay.Teleporters", sender)) return true;
-
-            if (GlobalFunctions.introduceSenderAsPlayer(sender)) return true;
-            Player player = (Player) sender;
-
-            int storedEPs;
-            try {
-                storedEPs = (int) Objects.requireNonNull(ConfigEditor.get("Warppouch." + player.getName()));
-                if (storedEPs < 0) {
-                    throw new IllegalArgumentException("The warp pouch stores a negative amount of ender pearls!");
-                }
-            } catch (NullPointerException | ClassCastException | IllegalArgumentException e) {
-                player.sendMessage("§cYour warp pouch is invalid!");
-                return true;
+            storedEPs = (int) Objects.requireNonNull(ConfigEditor.get("Warppouch." + player.getName()));
+            if (storedEPs < 0) {
+                throw new IllegalArgumentException("The warp pouch stores a negative amount of ender pearls!");
             }
+        } catch (NullPointerException | ClassCastException | IllegalArgumentException e) {
+            player.sendMessage("§cYour warp pouch is invalid!");
+            return true;
+        }
 
-            // /warppouch (view|show)
-            if (args.length == 0 || args[0].equalsIgnoreCase("view") || args[0].equalsIgnoreCase("show")) {
-                if (storedEPs == 1) {
-                    player.sendMessage("§aThere is §6" + storedEPs + " §aender pearl in your warp pouch.");
-                }
-                else {
-                    player.sendMessage("§aThere are §6" + storedEPs + " §aender pearls in your warp pouch.");
-                }
-                return true;
+        // /warppouch (view|show)
+        if (args.length == 0 || args[0].equalsIgnoreCase("view") || args[0].equalsIgnoreCase("show")) {
+            if (storedEPs == 1) {
+                player.sendMessage("§aThere is §6" + storedEPs + " §aender pearl in your warp pouch.");
             }
+            else {
+                player.sendMessage("§aThere are §6" + storedEPs + " §aender pearls in your warp pouch.");
+            }
+            return true;
+        }
 
-            // /warppouch (deposit|put [Amount])
-            if (args[0].equalsIgnoreCase("deposit") || args[0].equalsIgnoreCase("put")) {
-                int specifiedAmount = Integer.MAX_VALUE;
+        // /warppouch (deposit|put [Amount])
+        if (args[0].equalsIgnoreCase("deposit") || args[0].equalsIgnoreCase("put")) {
+            int specifiedAmount = Integer.MAX_VALUE;
 
-                // /warppouch deposit|put [Amount]
-                // Tries to get a specified amount of ender pearls
-                if (args.length >= 2) {
-                    try {
-                        specifiedAmount = Integer.parseInt(args[1]);
-                        // Is specifiedAmount valid check
-                        if (specifiedAmount <= 0) {
-                            player.sendMessage("§cInvalid amount of ender pearls!");
-                            return true;
-                        }
-                    } catch (NumberFormatException e) {
-                        specifiedAmount = Integer.MAX_VALUE;
-                    }
-                }
-
-                // TODO: move?
-                // Warp pouch size is limited to 1'000'000 ender pearls
-                if ((storedEPs + specifiedAmount) > 1000000) {
-                    specifiedAmount = 1000000 - storedEPs;
+            // /warppouch deposit|put [Amount]
+            // Tries to get a specified amount of ender pearls
+            if (args.length >= 2) {
+                try {
+                    specifiedAmount = Integer.parseInt(args[1]);
                     // Is specifiedAmount valid check
                     if (specifiedAmount <= 0) {
                         player.sendMessage("§cInvalid amount of ender pearls!");
                         return true;
                     }
+                } catch (NumberFormatException e) {
+                    specifiedAmount = Integer.MAX_VALUE;
                 }
+            }
 
-                // Tries to remove the specified amount of ender pearls from the player's inventory and returns the actual amount of items removed
-                int actualAmount = InventoryManager.removeItemsPlayerSoft(player.getInventory(), new ItemStack(Material.ENDER_PEARL), specifiedAmount);
-
-                // Ender pearl amount check
-                if (actualAmount == 0) {
-                    player.sendMessage("§cYou don't have enough ender pearls in your inventory!");
+            // TODO: move?
+            // Warp pouch size is limited to 1'000'000 ender pearls
+            if ((storedEPs + specifiedAmount) > 1000000) {
+                specifiedAmount = 1000000 - storedEPs;
+                // Is specifiedAmount valid check
+                if (specifiedAmount <= 0) {
+                    player.sendMessage("§cInvalid amount of ender pearls!");
                     return true;
                 }
+            }
 
-                // Adds the specified amount of ender pearls to the player's warp pouch
-                ConfigEditor.set("Warppouch." + player.getName(), (int) ConfigEditor.get("Warppouch." + player.getName()) + actualAmount);
+            // Tries to remove the specified amount of ender pearls from the player's inventory and returns the actual amount of items removed
+            int actualAmount = InventoryManager.removeItemsPlayerSoft(player.getInventory(), new ItemStack(Material.ENDER_PEARL), specifiedAmount);
 
-                if (specifiedAmount == 1) {
-                    player.sendMessage("§aDeposited §6" + actualAmount + " §aender pearl.");
-                }
-                else {
-                    player.sendMessage("§aDeposited §6" + actualAmount + " §aender pearls.");
-                }
-
-                player.sendMessage("§aYou now have §6" + ConfigEditor.get("Warppouch." + player.getName()) + " §aender pearls in your warp pouch.");
+            // Ender pearl amount check
+            if (actualAmount == 0) {
+                player.sendMessage("§cYou don't have enough ender pearls in your inventory!");
                 return true;
             }
 
-            player.sendMessage("§cWrong arguments!");
-            return false;
-        } catch (Exception e) {
-            GlobalFunctions.sendErrorFeedbackCmd(sender);
-            return false;
+            // Adds the specified amount of ender pearls to the player's warp pouch
+            ConfigEditor.set("Warppouch." + player.getName(), (int) ConfigEditor.get("Warppouch." + player.getName()) + actualAmount);
+
+            if (specifiedAmount == 1) {
+                player.sendMessage("§aDeposited §6" + actualAmount + " §aender pearl.");
+            }
+            else {
+                player.sendMessage("§aDeposited §6" + actualAmount + " §aender pearls.");
+            }
+
+            player.sendMessage("§aYou now have §6" + ConfigEditor.get("Warppouch." + player.getName()) + " §aender pearls in your warp pouch.");
+            return true;
         }
+
+        player.sendMessage("§cWrong arguments!");
+        return false;
+
     }
 
 }

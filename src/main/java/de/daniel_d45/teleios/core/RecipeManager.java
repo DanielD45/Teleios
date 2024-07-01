@@ -30,11 +30,9 @@ public final class RecipeManager implements Listener {
     @Nonnull
     public static ShapedRecipe getTeleporterRecipe() {
 
-        ItemStack teleporter = new ItemBuilder(Material.END_PORTAL_FRAME).setName("§5Teleporter").setLore
-                ("§fChange this teleporter's name", "§fby using the §6/configureteleporter§f command§r").build();
+        ItemStack teleporter = new ItemBuilder(Material.END_PORTAL_FRAME).setName("§5Teleporter").setLore("§fChange this teleporter's name", "§fby using the §6/configureteleporter§f command§r").build();
 
-        ShapedRecipe teleporterRecipe = new ShapedRecipe
-                (new NamespacedKey(Teleios.getPlugin(), "Teleporter"), teleporter);
+        ShapedRecipe teleporterRecipe = new ShapedRecipe(new NamespacedKey(Teleios.getPlugin(), "Teleporter"), teleporter);
         teleporterRecipe.shape("ESE", "SBS", "ESE");
         teleporterRecipe.setIngredient('E', Material.ENDER_PEARL);
         teleporterRecipe.setIngredient('S', Material.SANDSTONE);
@@ -52,7 +50,8 @@ public final class RecipeManager implements Listener {
                     player.discoverRecipe(getTeleporterRecipe().getKey());
                 }
             }
-        } else {
+        }
+        else {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (player.hasDiscoveredRecipe(getTeleporterRecipe().getKey())) {
                     player.undiscoverRecipe(getTeleporterRecipe().getKey());
@@ -70,7 +69,8 @@ public final class RecipeManager implements Listener {
             if (!player.hasDiscoveredRecipe(getTeleporterRecipe().getKey())) {
                 player.discoverRecipe(getTeleporterRecipe().getKey());
             }
-        } else {
+        }
+        else {
             if (player.hasDiscoveredRecipe(getTeleporterRecipe().getKey())) {
                 player.undiscoverRecipe(getTeleporterRecipe().getKey());
             }
@@ -80,28 +80,22 @@ public final class RecipeManager implements Listener {
     @DoNotCall
     public static void registerTestRecipes() {
 
-        ItemStack superPaper = new ItemBuilder(Material.PAPER, 1).setName(ChatColor.GOLD + "Super Paper")
-                .addEnchant(Enchantment.DAMAGE_ALL, 1).addItemFlags(ItemFlag.HIDE_ENCHANTS).build();
+        ItemStack superPaper = new ItemBuilder(Material.PAPER, 1).setName(ChatColor.GOLD + "Super Paper").addEnchant(Enchantment.SHARPNESS, 1).addItemFlags(ItemFlag.HIDE_ENCHANTS).build();
 
-        ShapelessRecipe recipe0 = new ShapelessRecipe(new NamespacedKey(Teleios.getPlugin(), "SuperPaperRecipe"),
-                superPaper);
+        ShapelessRecipe recipe0 = new ShapelessRecipe(new NamespacedKey(Teleios.getPlugin(), "SuperPaperRecipe"), superPaper);
         recipe0.addIngredient(3, Material.BOOK);
         Bukkit.addRecipe(recipe0);
 
 
-        ItemStack weirdSword = new ItemBuilder(Material.WOODEN_SWORD).setName
-                (ChatColor.GRAY + "Weird Sword").setLore("Test").build();
+        ItemStack weirdSword = new ItemBuilder(Material.WOODEN_SWORD).setName(ChatColor.GRAY + "Weird Sword").setLore("Test").build();
 
-        FurnaceRecipe recipe1 = new FurnaceRecipe(new NamespacedKey(Teleios.getPlugin(), "WeirdSword"), weirdSword,
-                new RecipeChoice.ExactChoice(superPaper), 2, 20);
+        FurnaceRecipe recipe1 = new FurnaceRecipe(new NamespacedKey(Teleios.getPlugin(), "WeirdSword"), weirdSword, new RecipeChoice.ExactChoice(superPaper), 2, 20);
         Bukkit.addRecipe(recipe1);
 
 
-        ItemStack laserpointer = new ItemBuilder(Material.END_ROD).setName(ChatColor.DARK_RED + "Laser Pointer").
-                build();
+        ItemStack laserpointer = new ItemBuilder(Material.END_ROD).setName(ChatColor.DARK_RED + "Laser Pointer").build();
 
-        ShapedRecipe recipe2 = new ShapedRecipe(new NamespacedKey(Teleios.getPlugin(), "LaserPointerRecipe"),
-                laserpointer);
+        ShapedRecipe recipe2 = new ShapedRecipe(new NamespacedKey(Teleios.getPlugin(), "LaserPointerRecipe"), laserpointer);
         recipe2.shape(" S ", "SBS", " S ");
         recipe2.setIngredient('S', new RecipeChoice.ExactChoice(weirdSword));
         recipe2.setIngredient('B', Material.BOOK);

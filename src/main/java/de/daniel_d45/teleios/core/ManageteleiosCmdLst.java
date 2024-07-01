@@ -7,8 +7,6 @@
 package de.daniel_d45.teleios.core;
 
 import de.daniel_d45.teleios.adminfeatures.AdminFeatures;
-import de.daniel_d45.teleios.bettergameplay.BetterGameplay;
-import de.daniel_d45.teleios.passiveskills.PassiveSkills;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -26,48 +24,47 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
 
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
-        try {
 
-            if (GlobalFunctions.introduceSenderAsPlayer(sender)) return true;
-            Player player = (Player) sender;
+        // /mtl ...
+        Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
+        if (player == null) return true;
 
-            // /mtl
-            player.openInventory(InventoryManager.getManageTeleiosInventory());
-            return true;
-        } catch (Exception e) {
-            GlobalFunctions.sendErrorFeedbackCmd(sender);
-            return false;
-        }
+        player.openInventory(InventoryManager.getManageTeleiosInventory());
+        return true;
     }
 
     /**
      * Implements the functionality when clicking on an item in the ManageTeleios inventory.
      */
-    @EventHandler
+    @EventHandler//(priority = EventPriority.LOW)
     public void onManageTeleiosInventoryClick(InventoryClickEvent event) {
 
-        Player player = (Player) event.getWhoClicked();
         ItemStack item = event.getCurrentItem();
+        if (item == null) return;
+
+        Player player = (Player) event.getWhoClicked();
         ClickType clickType = event.getClick();
         String invName = event.getView().getTitle();
 
-        ItemStack item_AF = AdminFeatures.getSegmentItem();
-        ItemStack item_BG = BetterGameplay.getSegmentItem();
-        ItemStack item_PS = PassiveSkills.getSegmentItem();
-
-        // Item null check
-        if (item == null) {
-            return;
+        if (invName.equals("§0Manage Teleios functionality") && item.equals(AdminFeatures.getSegmentItem())) {
+            if (ConfigEditor.get("Activationstates.AdminFeatures.All") == "ON") {
+                ConfigEditor.set("Activationstates.AdminFeatures.All", "OFF");
+            }
+            else {
+                ConfigEditor.set("Activationstates.AdminFeatures.All", "ON");
+            }
         }
 
+/*
         switch (invName) {
             // 1. MANAGETELEIOS INVENTORY
             case "§0Manage Teleios functionality":
 
                 // ADMINFEATURES ITEM
-                if (item.equals(item_AF)) {
+                if (item.equals(AdminFeatures.getSegmentItem())) {
 
                     if (clickType == ClickType.LEFT || clickType == ClickType.SHIFT_LEFT) {
+                        System.out.println("§aEVENT POSITIVE");
                         AdminFeatures.switchActivationstateAF();
                         player.openInventory(InventoryManager.getManageTeleiosInventory());
                         return;
@@ -80,7 +77,7 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
                 }
 
                 // BETTERGAMEPLAY ITEM
-                else if (item.equals(item_BG)) {
+                else if (item.equals(BetterGameplay.getSegmentItem())) {
 
                     if (clickType == ClickType.LEFT || clickType == ClickType.SHIFT_LEFT) {
                         BetterGameplay.switchActivationstateBG();
@@ -93,29 +90,6 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
                     }
 
                 }
-
-                // PASSIVESKILLS ITEM
-/*
-                else if (item.equals(item_PS)) {
-
-                    if (clickType == ClickType.LEFT) {
-                        PassiveSkills.switchActivationstatePS();
-                        player.openInventory(InventoryManager.getManageTeleiosInventory());
-                        return;
-
-                    }
-                    else if (clickType == ClickType.RIGHT) {
-                        player.openInventory(InventoryManager.getManagePSInventory());
-                        return;
-                    }
-                }
-*/
-                else {
-                    return;
-                }
-
-                // WORLDMASTER ITEM
-
                 break;
 
             // 1.1 ADMINFEATURES INVENTORY
@@ -124,14 +98,10 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
                 // BACK ITEM
                 if (item.equals(InventoryManager.getBackItem())) {
                     player.openInventory(InventoryManager.getManageTeleiosInventory());
-                    return;
                 }
-                else {
-                    return;
-                }
+                return;
 
-
-                // 1.2 BETTERGAMEPLAY INVENTORY
+            // 1.2 BETTERGAMEPLAY INVENTORY
             case "§0Manage BetterGameplay":
 
                 // ENDERCHESTCOMMAND ITEM
@@ -156,41 +126,9 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
                     return;
                 }
 
-                // 1.3 PASSIVESKILLS INVENTORY
-            case "§0Manage PassiveSkills":
-/*
-                // TODO
-
-                // BACK ITEM
-                if (item.equals(InventoryManager.getBackItem())) {
-                    player.openInventory(InventoryManager.getManageTeleiosInventory());
-                    return;
-
-                }
-                else {
-*/
-                return;
-            //} break;
-
-            // 1.4 WORLDMASTER INVENTORY
-            case "§0Manage WorldMaster":
-/*
-                // TODO
-
-                // BACK ITEM
-                if (item.equals(InventoryManager.getBackItem())) {
-                    player.openInventory(InventoryManager.getManageTeleiosInventory());
-                    return;
-
-                }
-                else {
-*/
-                return;
-            //} break
-
             default:
-                // Clicked inv is not one of the cases
         }
+*/
     }
 
 }

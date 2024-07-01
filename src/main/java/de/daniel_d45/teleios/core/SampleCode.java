@@ -6,19 +6,15 @@
 
 package de.daniel_d45.teleios.core;
 
-import org.bukkit.GameMode;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.checkerframework.common.reflection.qual.UnknownClass;
 
 
-/**
- * This class is only used for storing code samples for copying in its methods.
- */
+// This class is only used for storing code samples for copying in its methods.
 @UnknownClass
 interface SampleCode {
 
-    private static boolean commandSamples(CommandSender sender, Player player, String xINPUT_TO_INTRODUCEx, double xMIN_VALUEx, double xMAX_VALUEx) {
+    /*
+    private static boolean commandSamples(CommandSender sender, Player player, Player target, GameMode gameMode, String xINPUT_TO_INTRODUCEx, double xMIN_VALUEx, double xMAX_VALUEx) {
         // invalid input (an input value is wrong)
         return GlobalFunctions.invalidNumber(sender);
         // wrong amount of arguments
@@ -27,8 +23,9 @@ interface SampleCode {
         // is active check
         if (GlobalFunctions.cmdOffCheck("xSUB_PATHx", sender)) return true;
         // player in wrong gamemode check
-        if (GlobalFunctions.invalidGamemodePlayer(player, GameMode.SPECTATOR)) return true;
-
+        if (GlobalFunctions.invalidGamemodePlayer(target, "", gameMode)) return true;
+        // target in wrong gamemode check
+        if (GlobalFunctions.invalidGamemodeTarget(sender, target, "", gameMode)) return true;
         // introduce sender as player
         Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
         if (player == null) return true;
@@ -57,6 +54,7 @@ interface SampleCode {
         return false;
     }
 
+    */
     private static void TabCompleter() {
         /*
         Class must extend TabCompleter.

@@ -22,10 +22,9 @@ public class OpeninventoryCmd implements CommandExecutor {
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
         if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
-
-
-        if (GlobalFunctions.introduceSenderAsPlayer(sender)) return true;
-        Player player = (Player) sender;
+        
+        Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
+        if (player == null) return true;
 
         // TODO: get input, exception handling
         // /openinventory [Player]

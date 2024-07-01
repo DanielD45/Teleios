@@ -20,7 +20,7 @@ import java.util.Set;
 
 
 /**
- * This class creates the needed config file for the plugin, reads and manipulates it.
+ * This class creates the config file needed as the plugin's storage, reads and manipulates it.
  *
  * @author Daniel_D45
  */
@@ -46,11 +46,15 @@ public class ConfigEditor {
 
     private static void initiateJoinMessage() {
         // Initiates JoinMessage
+        Object activationstate = ConfigEditor.get("JoinMessage");
+        if (activationstate == null) {
+            ConfigEditor.set("JoinMessage", false);
+        }
         if (!ConfigEditor.containsPath("JoinMessage")) {
             ConfigEditor.set("JoinMessage", false);
             return;
         }
-        // Verifies JoinMessage value
+
         if (!ConfigEditor.get("JoinMessage").equals(true)) {
             ConfigEditor.set("JoinMessage", false);
         }
@@ -65,9 +69,7 @@ public class ConfigEditor {
 
         // Initiates the Activationstates for all the segments and functions
         for (String current : paths) {
-            if (!isActive(current)) {
-                set("Activationstates." + current, "OFF");
-            }
+            if (!isActive(current)) set("Activationstates." + current, "OFF");
         }
         RecipeManager.enableTeleporterRecipe(isActive("BetterGameplay.Teleporters"));
     }
@@ -107,9 +109,9 @@ public class ConfigEditor {
      * failed.
      */
     public static boolean isActive(String subPath) {
-        if (get("Activationstates." + subPath) == null) {
-            return false;
-        }
+        //TODO: rem, activating segments doesn't work
+        System.out.println(subPath + " active? " + get("Activationstates." + subPath).equals("ON"));
+        if (get("Activationstates." + subPath) == null) return false;
         return get("Activationstates." + subPath).equals("ON");
     }
 
@@ -134,7 +136,7 @@ public class ConfigEditor {
     }
 
     /**
-     * Gets the value of the specified path in the config file.
+     * Gets the value stored under the specified path in the config file.
      *
      * @param path [String] The path to get the value from.
      */

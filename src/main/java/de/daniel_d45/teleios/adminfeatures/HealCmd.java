@@ -28,8 +28,8 @@ public class HealCmd implements CommandExecutor {
         // /heal
         if (args.length == 0) {
 
-            if (GlobalFunctions.introduceSenderAsPlayer(sender)) return true;
-            Player player = (Player) sender;
+            Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
+            if (player == null) return true;
 
             return healPlayer(player, player.getMaxHealth());
         }
@@ -42,8 +42,8 @@ public class HealCmd implements CommandExecutor {
                 // Input is a suitable double
                 // /heal [Amount]
 
-                if (GlobalFunctions.introduceSenderAsPlayer(sender)) return true;
-                Player player = (Player) sender;
+                Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
+                if (player == null) return true;
 
                 return healPlayer(player, amount);
             } catch (InputMismatchException e) {

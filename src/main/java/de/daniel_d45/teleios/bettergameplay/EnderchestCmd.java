@@ -23,8 +23,8 @@ public class EnderchestCmd implements CommandExecutor {
 
             if (GlobalFunctions.cmdOffCheck("BetterGameplay.EnderchestCommand", sender)) return true;
 
-            if (GlobalFunctions.introduceSenderAsPlayer(sender)) return true;
-            Player player = (Player) sender;
+            Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
+            if (player == null) return true;
 
             // /enderchest
             player.openInventory(player.getEnderChest());

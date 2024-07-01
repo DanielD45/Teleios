@@ -24,8 +24,8 @@ public class UnmuteCmd implements CommandExecutor {
 
         if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
 
-        if (GlobalFunctions.introduceSenderAsPlayer(sender)) return true;
-        Player player = (Player) sender;
+        Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
+        if (player == null) return true;
 
         // /unmute [Player]
 

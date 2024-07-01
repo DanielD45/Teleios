@@ -31,11 +31,15 @@ BG-Done:
 
 
 Implement this version:
-0 revise commands & docs: [parameter] -> <parameter> ..., GlobalFunctions simplifications, CONTINUE: /gma
-    0 test: /damage (can still kill other players?)
+0 revise commands using GlobalFunctions simplifications, CONTINUE: /gma
+0 revise docs: [parameter] -> <parameter> ...
+0 test:
+    0 /damage (can still kill other players?)
+    0 /gma (output ok?) & copy to /gmx
+    0 /joinmessage permission
 0 introduce parameters correctly (more GlobalFunctions functions)
 0 handle every input in commands
-0 make common parts methods (segment items...) (target online check)
+0 make common parts methods (segment items...)
 0 implement tab-completion
 0 move sbpp to MTL-inv
 0 set max teleporter name length using MTL-inv

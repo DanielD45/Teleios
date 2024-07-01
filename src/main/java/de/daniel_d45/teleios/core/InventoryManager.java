@@ -59,8 +59,6 @@ public class InventoryManager {
         inv.setItem(12, BetterGameplay.getSegmentItem());
         // PassiveSkills segment.
         //inv.setItem(14, PassiveSkills.getSegmentItem());
-        // WorldMaster segment.
-        //inv.setItem(15, WorldMaster.getSegmentItem());
 
         InventoryManager.fillEmptySlots(inv);
         return inv;
@@ -79,11 +77,6 @@ public class InventoryManager {
     public static Inventory getManagePSInventory() {
         // TODO: Add Items
         return createSegmentInventory("PassiveSkills");
-    }
-
-    public static Inventory getManageWMInventory() {
-        // TODO: Add Items
-        return createSegmentInventory("WorldMaster");
     }
 
     /**

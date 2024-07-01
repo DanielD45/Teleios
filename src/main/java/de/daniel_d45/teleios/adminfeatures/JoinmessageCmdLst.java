@@ -26,7 +26,6 @@ public class JoinmessageCmdLst implements CommandExecutor, Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
         try {
-
             // TODO: Make individual ActivationState for command
             // Tests if the joinmessage is enabled and the command is active
             if (ConfigEditor.hasValue("JoinMessage", true) && ConfigEditor.isActive("AdminFeatures.All")) {
@@ -61,19 +60,12 @@ public class JoinmessageCmdLst implements CommandExecutor, Listener {
             return true;
         }
 
-        // Sender permission check
-        if (!sender.hasPermission("teleios.adminfeatures.joinmessage")) {
-            sender.sendMessage("§cMissing Permissions!");
-            return true;
-        }
-
         // /joinmessage enable|true
         if (args[0].equalsIgnoreCase("enable") || args[0].equalsIgnoreCase("true")) {
             ConfigEditor.set("JoinMessage", true);
             sender.sendMessage("§aThe custom join message is now §6enabled§a!");
             return true;
         }
-
         // /joinmessage disable|false
         else if (args[0].equalsIgnoreCase("disable") || args[0].equalsIgnoreCase("false")) {
             ConfigEditor.set("JoinMessage", false);

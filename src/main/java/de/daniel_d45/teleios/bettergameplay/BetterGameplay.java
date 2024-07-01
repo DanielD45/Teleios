@@ -33,21 +33,17 @@ public class BetterGameplay {
         try {
 
             ItemStack item;
-            ItemFlag[] flags = {ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_DESTROYS,
-                    ItemFlag.HIDE_DYE, ItemFlag.HIDE_PLACED_ON, ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_UNBREAKABLE,
+            ItemFlag[] flags = {ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_DYE, ItemFlag.HIDE_PLACED_ON, /*ItemFlag.HIDE_POTION_EFFECTS,*/ ItemFlag.HIDE_UNBREAKABLE,
                     /*ItemFlag.HIDE_ARMOR_TRIM*/};
 
             if (ConfigEditor.isActive(getSegmentName() + ".All")) {
                 // The segment is activated.
-                item = new ItemBuilder(Material.IRON_PICKAXE, 1).setName("§o§5BetterGameplay").setLore(
-                        "§eActivationstate: §aON", "§fadds features for a", "§fbetter survival experience",
-                        "§7Left click to deactivate", "§7Right click for more options").addItemFlags(flags).build();
-                item.addEnchantment(Enchantment.DURABILITY, 2);
-            } else {
+                item = new ItemBuilder(Material.IRON_PICKAXE, 1).setName("§o§5BetterGameplay").setLore("§eActivationstate: §aON", "§fadds features for a", "§fbetter survival experience", "§7Left click to deactivate", "§7Right click for more options").addItemFlags(flags).build();
+                item.addEnchantment(Enchantment.UNBREAKING, 2);
+            }
+            else {
                 // The segment is deactivated.
-                item = new ItemBuilder(Material.IRON_PICKAXE, 1).setName("§o§5BetterGameplay").setLore(
-                        "§eActivationstate: §cOFF", "§fadds features for a", "§fbetter survival experience",
-                        "§7Left click to activate", "§7Right click for more options").addItemFlags(flags).build();
+                item = new ItemBuilder(Material.IRON_PICKAXE, 1).setName("§o§5BetterGameplay").setLore("§eActivationstate: §cOFF", "§fadds features for a", "§fbetter survival experience", "§7Left click to activate", "§7Right click for more options").addItemFlags(flags).build();
 
             }
             return item;
@@ -62,17 +58,11 @@ public class BetterGameplay {
 
             if (ConfigEditor.isActive("BetterGameplay.EnderchestCommand")) {
                 // The command is ON
-                item = new ItemBuilder(Material.ENDER_CHEST, 1).setName("§o§9Enderchest command").
-                        setLore("§eActivationstate: §aON", "§fThe enderchest command lets every player",
-                                "§fopen their enderchest from anywhere.", "§7Left click to deactivate the command.")
-                        .addEnchant(Enchantment.VANISHING_CURSE, 1).addItemFlags(ItemFlag.HIDE_ENCHANTS)
-                        .build();
-            } else {
+                item = new ItemBuilder(Material.ENDER_CHEST, 1).setName("§o§9Enderchest command").setLore("§eActivationstate: §aON", "§fThe enderchest command lets every player", "§fopen their enderchest from anywhere.", "§7Left click to deactivate the command.").addEnchant(Enchantment.VANISHING_CURSE, 1).addItemFlags(ItemFlag.HIDE_ENCHANTS).build();
+            }
+            else {
                 // The command is OFF
-                item = new ItemBuilder(Material.ENDER_CHEST, 1).setName("§o§9Enderchest command").
-                        setLore("§eActivationstate: §cOFF", "§fThe enderchest command lets every player",
-                                "§fopen their enderchest from anywhere.", "§7Left click to activate the command.")
-                        .build();
+                item = new ItemBuilder(Material.ENDER_CHEST, 1).setName("§o§9Enderchest command").setLore("§eActivationstate: §cOFF", "§fThe enderchest command lets every player", "§fopen their enderchest from anywhere.", "§7Left click to activate the command.").build();
             }
 
             return item;
@@ -88,18 +78,11 @@ public class BetterGameplay {
 
             if (ConfigEditor.isActive("BetterGameplay.Teleporters")) {
                 // The function is activated.
-                item = new ItemBuilder(Material.END_PORTAL_FRAME, 1).setName("§o§9Teleporters").
-                        setLore("§eActivationstate: §aON", "§fYou can craft teleporters", "§fto which you can teleport",
-                                "§ffrom everywhere.", "§fTeleporting costs ender pearls", "§fstored in your warppouch.",
-                                "§7Left click to deactivate the function.").
-                        addEnchant(Enchantment.VANISHING_CURSE, 1).addItemFlags(ItemFlag.HIDE_ENCHANTS)
-                        .build();
-            } else {
+                item = new ItemBuilder(Material.END_PORTAL_FRAME, 1).setName("§o§9Teleporters").setLore("§eActivationstate: §aON", "§fYou can craft teleporters", "§fto which you can teleport", "§ffrom everywhere.", "§fTeleporting costs ender pearls", "§fstored in your warppouch.", "§7Left click to deactivate the function.").addEnchant(Enchantment.VANISHING_CURSE, 1).addItemFlags(ItemFlag.HIDE_ENCHANTS).build();
+            }
+            else {
                 // The function is deactivated.
-                item = new ItemBuilder(Material.END_PORTAL_FRAME, 1).setName("§o§9Teleporters").
-                        setLore("§eActivationstate: §cOFF", "§fYou can craft teleporters", "§fto which you can teleport",
-                                "§ffrom everywhere.", "§fTeleporting costs ender pearls", "§fstored in your warppouch.",
-                                "§7Left click to activate the function.").build();
+                item = new ItemBuilder(Material.END_PORTAL_FRAME, 1).setName("§o§9Teleporters").setLore("§eActivationstate: §cOFF", "§fYou can craft teleporters", "§fto which you can teleport", "§ffrom everywhere.", "§fTeleporting costs ender pearls", "§fstored in your warppouch.", "§7Left click to activate the function.").build();
             }
 
             return item;
@@ -114,7 +97,8 @@ public class BetterGameplay {
                 ConfigEditor.set("Activationstates." + current, "OFF");
             }
             RecipeManager.enableTeleporterRecipe(false);
-        } else {
+        }
+        else {
             for (String current : getActivationstatePaths()) {
                 ConfigEditor.set("Activationstates." + current, "ON");
             }
@@ -127,7 +111,8 @@ public class BetterGameplay {
 
             ConfigEditor.set("Activationstates." + getSegmentName() + ".Teleporters", "OFF");
             RecipeManager.enableTeleporterRecipe(false);
-        } else {
+        }
+        else {
             ConfigEditor.set("Activationstates." + getSegmentName() + ".Teleporters", "ON");
             RecipeManager.enableTeleporterRecipe(true);
         }
