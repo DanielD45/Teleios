@@ -26,16 +26,14 @@ public class AdminFeatures {
         return activationstatePaths;
     }
 
-    // TODO: Hide Enchants
     public static ItemStack getSegmentItem() {
         ItemStack item;
-        ItemFlag[] flags = {ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_DYE};
 
         if (ConfigEditor.isActive(getSegmentName() + ".All")) {
-            item = new ItemBuilder(Material.NETHER_STAR, 1).setName("§o§5AdminFeatures").setLore("§eActivationstate: §aON", "§fadds admin-only commands", "§7Left click to deactivate", "§7Right click for more options").addEnchant(Enchantment.VANISHING_CURSE, 1).addItemFlags(flags).build();
+            item = new ItemBuilder(Material.NETHER_STAR, 1).setName("§o§5AdminFeatures").setLore("§eActivationstate: §aON", "§fadds admin-only commands", "§7Left click to deactivate", "§7Right click for more options").addEnchant(Enchantment.VANISHING_CURSE, 1).addItemFlags(ItemFlag.HIDE_ENCHANTS).build();
         }
         else {
-            item = new ItemBuilder(Material.NETHER_STAR, 1).setName("§o§5AdminFeatures").setLore("§eActivationstate: §cOFF", "§fadds admin-only commands", "§7Left click to activate", "§7Right click for more options").addItemFlags(flags).build();
+            item = new ItemBuilder(Material.NETHER_STAR, 1).setName("§o§5AdminFeatures").setLore("§eActivationstate: §cOFF", "§fadds admin-only commands", "§7Left click to activate", "§7Right click for more options").addItemFlags(ItemFlag.HIDE_ATTRIBUTES).build();
         }
         return item;
     }

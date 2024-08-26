@@ -1,5 +1,6 @@
 C-Done:
 1 manageteleios command
+.
 
 AF-Done:
 1 warp command
@@ -31,8 +32,8 @@ BG-Done:
 
 
 Implement this version:
-0 revise commands using GlobalFunctions simplifications, CONTINUE: /gma
-0 revise docs: [parameter] -> <parameter> ...
+0 revise commands using GlobalFunctions simplifications, CONTINUE: /heal
+0 Player getMaxHealth() -> getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue() or getValue()
 0 test:
     0 /damage (can still kill other players?)
     0 /gma (output ok?) & copy to /gmx

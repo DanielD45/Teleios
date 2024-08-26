@@ -152,7 +152,7 @@ public class PlayerInteractWithTeleporterLst implements Listener {
     private Inventory getPickupTeleporterInventory(String teleporterName) {
         try {
 
-            Inventory inv = InventoryManager.createNoInteractionInventory(1, "§0Pick up teleporter?", null);
+            Inventory inv = InventoryManager.createNoInteractionInv(1, "§0Pick up teleporter?");
 
             inv.setItem(0, InventoryManager.getYesItem());
             inv.setItem(4, getTeleporterItem(teleporterName));

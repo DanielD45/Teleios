@@ -16,16 +16,6 @@ import org.checkerframework.checker.nullness.qual.NonNull;
  */
 public class NoInteractionInventories implements InventoryHolder {
 
-    Inventory predecessor;
-
-    public NoInteractionInventories(Inventory predecessorInventory) {
-        predecessor = predecessorInventory;
-    }
-
-    Inventory getPredecessor() {
-        return predecessor;
-    }
-
     // unused
     @NonNull
     @Override

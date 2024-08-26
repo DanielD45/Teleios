@@ -33,18 +33,12 @@ public class BetterGameplay {
         try {
 
             ItemStack item;
-            ItemFlag[] flags = {ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_DYE, ItemFlag.HIDE_PLACED_ON, /*ItemFlag.HIDE_POTION_EFFECTS,*/ ItemFlag.HIDE_UNBREAKABLE,
-                    /*ItemFlag.HIDE_ARMOR_TRIM*/};
 
             if (ConfigEditor.isActive(getSegmentName() + ".All")) {
-                // The segment is activated.
-                item = new ItemBuilder(Material.IRON_PICKAXE, 1).setName("§o§5BetterGameplay").setLore("§eActivationstate: §aON", "§fadds features for a", "§fbetter survival experience", "§7Left click to deactivate", "§7Right click for more options").addItemFlags(flags).build();
-                item.addEnchantment(Enchantment.UNBREAKING, 2);
+                item = new ItemBuilder(Material.IRON_PICKAXE, 1).setName("§o§5BetterGameplay").setLore("§eActivationstate: §aON", "§fadds features for a", "§fbetter survival experience", "§7Left click to deactivate", "§7Right click for more options").addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS).addEnchant(Enchantment.VANISHING_CURSE, 1).build();
             }
             else {
-                // The segment is deactivated.
-                item = new ItemBuilder(Material.IRON_PICKAXE, 1).setName("§o§5BetterGameplay").setLore("§eActivationstate: §cOFF", "§fadds features for a", "§fbetter survival experience", "§7Left click to activate", "§7Right click for more options").addItemFlags(flags).build();
-
+                item = new ItemBuilder(Material.IRON_PICKAXE, 1).setName("§o§5BetterGameplay").setLore("§eActivationstate: §cOFF", "§fadds features for a", "§fbetter survival experience", "§7Left click to activate", "§7Right click for more options").addItemFlags(ItemFlag.HIDE_ATTRIBUTES).build();
             }
             return item;
         } catch (Exception e) {

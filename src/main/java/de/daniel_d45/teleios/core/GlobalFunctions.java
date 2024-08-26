@@ -26,12 +26,18 @@ public class GlobalFunctions {
         return object1.equals(object2);
     }
 
+    /**
+     * Forces the provided int inside the provided bounds and returns it.
+     */
     public static int trimInt(int i, int minValue, int maxValue) {
         if (i < minValue) i = minValue;
         else if (i > maxValue) i = maxValue;
         return i;
     }
 
+    /**
+     * Forces the provided double inside the provided bounds and returns it.
+     */
     public static double trimDouble(double d, double minValue, double maxValue) {
         if (d < minValue) d = minValue;
         else if (d > maxValue) d = maxValue;
@@ -39,7 +45,8 @@ public class GlobalFunctions {
     }
 
     /**
-     * minValue and maxValue are the valid interval's inclusive borders.
+     * Forces a double provided by the sender between the Interval from minValue (inclusive) to maxValue (inclusive).
+     * Returns Double.NEGATIVE_INFINITY and informs sender if input is not a double.
      */
     public static double introduceDouble(String inputValue, double minValue, double maxValue, CommandSender sender) {
         try {
@@ -51,6 +58,10 @@ public class GlobalFunctions {
         }
     }
 
+    /**
+     * Tests and informs the provided player whether they are in an invalid gamemode.
+     * Make specialMessage = "" to use standard message to player.
+     */
     public static boolean invalidGamemodePlayer(Player player, String specialMessage, GameMode... gameModes) {
         GameMode playerGM = player.getGameMode();
         for (GameMode currentGM : gameModes) {
@@ -62,12 +73,15 @@ public class GlobalFunctions {
                     player.sendMessage(specialMessage);
                 }
                 return true;
-
             }
         }
         return false;
     }
 
+    /**
+     * Tests whether the provided target is in an invalid gamemode and informs the provided sender.
+     * Make specialMessage = "" to use standard message to sender.
+     */
     public static boolean invalidGamemodeTarget(CommandSender sender, Player target, String specialMessage, GameMode... gameModes) {
         GameMode targetGM = target.getGameMode();
         for (GameMode currentGM : gameModes) {
@@ -113,18 +127,25 @@ public class GlobalFunctions {
         return false;
     }
 
+    /**
+     * Informs the sender that they provided a wrong amount of arguments.
+     */
     public static boolean wrongAmountofArgs(CommandSender sender) {
         sender.sendMessage("§cWrong amount of arguments!");
         return false;
     }
 
+    /**
+     * Informs the sender that they provided an invalid number.
+     */
     public static boolean invalidNumber(CommandSender sender) {
         sender.sendMessage("§cInvalid number!");
         return false;
     }
 
-    // TODO: invalidString?
-
+    /**
+     * Tests and informs the sender whether they are a player.
+     */
     public static Player introduceSenderAsPlayer(CommandSender sender) {
         if (!(sender instanceof Player player)) {
             sender.sendMessage("§cYou are not a player!");
@@ -133,6 +154,10 @@ public class GlobalFunctions {
         return player;
     }
 
+    /**
+     * Returns the player with the provided name and informs the sender if the target is offline.
+     * Returns null if player is offline.
+     */
     public static Player introduceTargetPlayer(String targetName, CommandSender sender) {
         Player target = Bukkit.getPlayerExact(targetName);
         // target online check

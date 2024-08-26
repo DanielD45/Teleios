@@ -109,10 +109,15 @@ public class ConfigEditor {
      * failed.
      */
     public static boolean isActive(String subPath) {
-        //TODO: rem, activating segments doesn't work
-        System.out.println(subPath + " active? " + get("Activationstates." + subPath).equals("ON"));
+
+        // TODO: rem, activating segments doesn't work
+        // System.out.println(subPath + " active? " + get("Activationstates." + subPath).equals("ON"));
+
         if (get("Activationstates." + subPath) == null) return false;
         return get("Activationstates." + subPath).equals("ON");
+
+        // TODO: Is null check working?
+        //return get("Activationstates." + subPath) != null && get("Activationstates." + subPath).equals("ON");
     }
 
     public static void switchActivationstate(String subPath) {

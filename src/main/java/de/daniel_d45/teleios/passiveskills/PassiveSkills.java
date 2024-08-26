@@ -18,6 +18,8 @@ import java.util.ArrayList;
 
 public class PassiveSkills {
 
+    // TODO: revamp
+
     private static final String[] activationstatePaths = {"PassiveSkills.All"};
     // An ArrayList with an object of every skill class in it
     // TODO: Move to config
@@ -48,7 +50,8 @@ public class PassiveSkills {
                 ConfigEditor.set("Activationstates." + current, "OFF");
             }
 
-        } else {
+        }
+        else {
             for (String current : activationstatePaths) {
                 ConfigEditor.set("Activationstates." + current, "ON");
             }
@@ -62,20 +65,12 @@ public class PassiveSkills {
         if (ConfigEditor.isActive(getSegmentName() + ".All")) {
             // The segment is activated
 
-            item = new ItemBuilder(Material.SPRUCE_LOG, 1).setName("§o§5PassiveSkills").
-                    setLore("§eActivationstate: §aON", "§fThe PassiveSkills segment adds skills",
-                            "§fyou can level up by breaking blocks.", "§fYou can use this segment for",
-                            "§fa better survival experience.", "§7Left click to deactivate the segment.",
-                            "§7Right click for more options.").addEnchant(Enchantment.VANISHING_CURSE, 1)
-                    .addItemFlags(ItemFlag.HIDE_ENCHANTS).build();
+            item = new ItemBuilder(Material.SPRUCE_LOG, 1).setName("§o§5PassiveSkills").setLore("§eActivationstate: §aON", "§fThe PassiveSkills segment adds skills", "§fyou can level up by breaking blocks.", "§fYou can use this segment for", "§fa better survival experience.", "§7Left click to deactivate the segment.", "§7Right click for more options.").addEnchant(Enchantment.VANISHING_CURSE, 1).addItemFlags(ItemFlag.HIDE_ENCHANTS).build();
 
-        } else {
+        }
+        else {
             // The segment is deactivated
-            item = new ItemBuilder(Material.SPRUCE_LOG, 1).setName("§o§5PassiveSkills").setLore(
-                    "§eActivationstate: §cOFF", "§fThe PassiveSkills segment adds skills",
-                    "§fyou can level up by breaking blocks.", "§fYou can use this segment for",
-                    "§fa better survival experience.", "§7Left click to activate the segment.",
-                    "§7Right click for more options.").build();
+            item = new ItemBuilder(Material.SPRUCE_LOG, 1).setName("§o§5PassiveSkills").setLore("§eActivationstate: §cOFF", "§fThe PassiveSkills segment adds skills", "§fyou can level up by breaking blocks.", "§fYou can use this segment for", "§fa better survival experience.", "§7Left click to activate the segment.", "§7Right click for more options.").build();
 
         }
         return item;
@@ -256,7 +251,8 @@ public class PassiveSkills {
 
                 // The level limit is every 64 BlockValue
                 level = (int) Math.floor(getBlockValue(playerName, skillName) / 64) + 1;
-            } else {
+            }
+            else {
                 // The getBlockValue() method failed
                 level = -1;
             }

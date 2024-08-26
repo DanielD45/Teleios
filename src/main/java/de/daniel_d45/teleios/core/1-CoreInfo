@@ -29,6 +29,7 @@ red (§c) 	/ gold (§6): fail message
 
 
 - Conventions:
+mark current problem with // FIXME: ...
 avoid exceptions using if statements
 Sample statements can be found in SampleCode
 don't use Double.NEGATIVE_INFINITY as it is a messenger value in GlobalFunctions

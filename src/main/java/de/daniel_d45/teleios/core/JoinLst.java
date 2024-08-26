@@ -7,7 +7,6 @@
 package de.daniel_d45.teleios.core;
 
 import de.daniel_d45.teleios.bettergameplay.BetterGameplay;
-import de.daniel_d45.teleios.passiveskills.PassiveSkills;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -18,7 +17,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 public class JoinLst implements Listener {
 
     /**
-     * Method fires when a player joins and initiate the player's paths in the config file if the player
+     * Method fires when a player joins and initiates the player's paths in the config file if the player
      * is not yet listed.
      *
      * @param event [PlayerJoinEvent]
@@ -30,7 +29,7 @@ public class JoinLst implements Listener {
         // BetterGameplay segment
         BetterGameplay.initiateWarppouch(player.getName());
         // PassiveSkills segment
-        PassiveSkills.initiatePlayerRecords(player.getName());
+        //PassiveSkills.initiatePlayerRecords(player.getName());
     }
 
 }

@@ -257,7 +257,7 @@ public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
     private Inventory getDestroyPLCInventory(Block plc) {
         try {
 
-            Inventory inv = InventoryManager.createNoInteractionInventory(1, "§0Destroy Personal Loot Chest?", null);
+            Inventory inv = InventoryManager.createNoInteractionInv(1, "§0Destroy Personal Loot Chest?");
 
             inv.setItem(0, InventoryManager.getYesItem());
             inv.setItem(4, getPLCItem(plc));

@@ -7,6 +7,8 @@
 package de.daniel_d45.teleios.core;
 
 import de.daniel_d45.teleios.adminfeatures.AdminFeatures;
+import de.daniel_d45.teleios.bettergameplay.BetterGameplay;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,12 +17,16 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 
 
 public class ManageteleiosCmdLst implements CommandExecutor, Listener {
+
+    final String MTL_INV_NAME = "§0Manage Teleios functionality";
+    final String AF_INV_NAME = "§0Manage AdminFeatures";
+    final String BG_INV_NAME = "§0Manage BetterGameplay";
 
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
@@ -29,7 +35,7 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
         Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
         if (player == null) return true;
 
-        player.openInventory(InventoryManager.getManageTeleiosInventory());
+        player.openInventory(InventoryManager.getCurrMTLInv());
         return true;
     }
 
@@ -39,96 +45,104 @@ public class ManageteleiosCmdLst implements CommandExecutor, Listener {
     @EventHandler//(priority = EventPriority.LOW)
     public void onManageTeleiosInventoryClick(InventoryClickEvent event) {
 
-        ItemStack item = event.getCurrentItem();
-        if (item == null) return;
+        String itemName;
+        try {
+            itemName = Objects.requireNonNull(Objects.requireNonNull(event.getCurrentItem()).getItemMeta()).getDisplayName();
+        } catch (NullPointerException e) {
+            return;
+        }
 
         Player player = (Player) event.getWhoClicked();
         ClickType clickType = event.getClick();
         String invName = event.getView().getTitle();
 
-        if (invName.equals("§0Manage Teleios functionality") && item.equals(AdminFeatures.getSegmentItem())) {
-            if (ConfigEditor.get("Activationstates.AdminFeatures.All") == "ON") {
-                ConfigEditor.set("Activationstates.AdminFeatures.All", "OFF");
-            }
-            else {
-                ConfigEditor.set("Activationstates.AdminFeatures.All", "ON");
-            }
-        }
-
-/*
         switch (invName) {
-            // 1. MANAGETELEIOS INVENTORY
-            case "§0Manage Teleios functionality":
+            case MTL_INV_NAME:
 
                 // ADMINFEATURES ITEM
-                if (item.equals(AdminFeatures.getSegmentItem())) {
-
+                if (itemName.equals(Objects.requireNonNull(AdminFeatures.getSegmentItem().getItemMeta()).getDisplayName())) {
                     if (clickType == ClickType.LEFT || clickType == ClickType.SHIFT_LEFT) {
-                        System.out.println("§aEVENT POSITIVE");
                         AdminFeatures.switchActivationstateAF();
-                        player.openInventory(InventoryManager.getManageTeleiosInventory());
+                        refreshInv(MTL_INV_NAME);
                         return;
                     }
                     else if (clickType == ClickType.RIGHT || clickType == ClickType.SHIFT_RIGHT) {
-                        //player.openInventory(InventoryManager.getManageAFInventory());
+                        player.openInventory(InventoryManager.getCurrAFInv());
                         return;
                     }
-
                 }
 
                 // BETTERGAMEPLAY ITEM
-                else if (item.equals(BetterGameplay.getSegmentItem())) {
-
+                else if (itemName.equals(Objects.requireNonNull(BetterGameplay.getSegmentItem().getItemMeta()).getDisplayName())) {
                     if (clickType == ClickType.LEFT || clickType == ClickType.SHIFT_LEFT) {
                         BetterGameplay.switchActivationstateBG();
-                        player.openInventory(InventoryManager.getManageTeleiosInventory());
+                        refreshInv(MTL_INV_NAME);
                         return;
                     }
                     else if (clickType == ClickType.RIGHT || clickType == ClickType.SHIFT_RIGHT) {
-                        player.openInventory(InventoryManager.getManageBGInventory());
+                        player.openInventory(InventoryManager.getCurrBGInv());
                         return;
                     }
-
                 }
                 break;
-
-            // 1.1 ADMINFEATURES INVENTORY
-            case "§0Manage AdminFeatures":
+            case AF_INV_NAME:
 
                 // BACK ITEM
-                if (item.equals(InventoryManager.getBackItem())) {
-                    player.openInventory(InventoryManager.getManageTeleiosInventory());
+                if (itemName.equals(Objects.requireNonNull(InventoryManager.getBackItem().getItemMeta()).getDisplayName())) {
+                    player.openInventory(InventoryManager.getCurrMTLInv());
                 }
                 return;
-
-            // 1.2 BETTERGAMEPLAY INVENTORY
-            case "§0Manage BetterGameplay":
+            case BG_INV_NAME:
 
                 // ENDERCHESTCOMMAND ITEM
-                if (item.equals(BetterGameplay.getEnderchestCmdItem())) {
+                if (itemName.equals(Objects.requireNonNull(BetterGameplay.getEnderchestCmdItem().getItemMeta()).getDisplayName())) {
                     ConfigEditor.switchActivationstate("BetterGameplay.EnderchestCommand");
-                    player.openInventory(InventoryManager.getManageBGInventory());
+                    refreshInv(BG_INV_NAME);
                     return;
                 }
                 // TELEPORTERS ITEM
-                else if (item.equals(BetterGameplay.getTeleportersItem())) {
+                else if (itemName.equals(Objects.requireNonNull(BetterGameplay.getTeleportersItem().getItemMeta()).getDisplayName())) {
                     BetterGameplay.switchActivationstateTeleporters();
-                    player.openInventory(InventoryManager.getManageBGInventory());
+                    refreshInv(BG_INV_NAME);
                     return;
                 }
                 // BACK ITEM
-                else if (item.equals(InventoryManager.getBackItem())) {
-                    player.openInventory(InventoryManager.getManageTeleiosInventory());
+                else if (itemName.equals(Objects.requireNonNull(InventoryManager.getBackItem().getItemMeta()).getDisplayName())) {
+                    player.openInventory(InventoryManager.getCurrMTLInv());
                     return;
-
                 }
                 else {
                     return;
                 }
-
-            default:
         }
-*/
+
+    }
+
+    private void refreshInv(String title) {
+        // redundant code but players get latest version of the inventory
+        switch (title) {
+            case MTL_INV_NAME:
+                for (Player currentPlayer : Bukkit.getOnlinePlayers()) {
+                    if (currentPlayer.getOpenInventory().getTitle().equals(title)) {
+                        currentPlayer.openInventory(InventoryManager.getCurrMTLInv());
+                    }
+                }
+                break;
+            case AF_INV_NAME:
+                for (Player currentPlayer : Bukkit.getOnlinePlayers()) {
+                    if (currentPlayer.getOpenInventory().getTitle().equals(title)) {
+                        currentPlayer.openInventory(InventoryManager.getCurrAFInv());
+                    }
+                }
+                break;
+            case BG_INV_NAME:
+                for (Player currentPlayer : Bukkit.getOnlinePlayers()) {
+                    if (currentPlayer.getOpenInventory().getTitle().equals(title)) {
+                        currentPlayer.openInventory(InventoryManager.getCurrBGInv());
+                    }
+                }
+                break;
+        }
     }
 
 }

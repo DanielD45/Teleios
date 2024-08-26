@@ -9,12 +9,12 @@ package de.daniel_d45.teleios.core;
 import org.checkerframework.common.reflection.qual.UnknownClass;
 
 
-// This class is only used for storing code samples for copying in its methods.
+// This class is only used for storing code samples to copy.
 @UnknownClass
 interface SampleCode {
 
     /*
-    private static boolean commandSamples(CommandSender sender, Player player, Player target, GameMode gameMode, String xINPUT_TO_INTRODUCEx, double xMIN_VALUEx, double xMAX_VALUEx) {
+    private static boolean commandSamples(CommandSender sender, GameMode gameMode, String xINPUT_TO_INTRODUCEx, double xMIN_VALUEx, double xMAX_VALUEx) {
         // invalid input (an input value is wrong)
         return GlobalFunctions.invalidNumber(sender);
         // wrong amount of arguments
@@ -54,25 +54,20 @@ interface SampleCode {
         return false;
     }
 
-    */
     private static void TabCompleter() {
-        /*
         Class must extend TabCompleter.
         in method List<String> onTabComplete(...):
             return the list of options to complete
             return empty list => no tab completion
             return null => TabCompleter for player names
-         */
     }
 
     private static void markEntities() {
-    /*
-    Mark entities, deleted on server restart:
-    Entity?.setMetadata("Key",new FixedMetadataValue(Plugin.getInstance(), Value(Object)));
+        Mark entities, deleted on server restart:
+        Entity?.setMetadata("Key",new FixedMetadataValue(Plugin.getInstance(), Value(Object)));
 
-    Mark entities:
-    Entity?.getPersistentDataContainer();
-     */
+        Mark entities:
+        Entity?.getPersistentDataContainer();
     }
-
+    */
 }

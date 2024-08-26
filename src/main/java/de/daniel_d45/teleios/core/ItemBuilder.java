@@ -43,7 +43,6 @@ public class ItemBuilder {
         return item;
     }
 
-    // used?
     public ItemBuilder setAmount(int amount) {
         item.setAmount(amount);
         return this;

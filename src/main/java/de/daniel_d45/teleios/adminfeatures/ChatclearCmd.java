@@ -11,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
 
@@ -30,7 +31,9 @@ public class ChatclearCmd implements CommandExecutor {
 
         Bukkit.broadcastMessage("§aThe chat has been cleared!");
         // Test room
-        
+        Player player = (Player) sender;
+        player.sendMessage("player.getHealth(): " + player.getHealth());
+        player.sendMessage("player.getAbsorptionAmount(): " + player.getAbsorptionAmount());
         // End of test room
         return true;
     }

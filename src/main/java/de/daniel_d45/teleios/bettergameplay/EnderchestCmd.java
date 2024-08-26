@@ -21,6 +21,8 @@ public class EnderchestCmd implements CommandExecutor {
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
         try {
 
+            // TODO: not working
+            
             if (GlobalFunctions.cmdOffCheck("BetterGameplay.EnderchestCommand", sender)) return true;
 
             Player player = GlobalFunctions.introduceSenderAsPlayer(sender);

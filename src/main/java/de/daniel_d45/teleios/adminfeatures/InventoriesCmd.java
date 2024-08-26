@@ -154,7 +154,7 @@ public class InventoriesCmd implements CommandExecutor {
                     int rows = Integer.parseInt(args[2]);
 
                     // Creates the inventory
-                    Inventory inventory = InventoryManager.createNormalInventory(rows, name);
+                    Inventory inventory = InventoryManager.createNormalInv(rows, name);
                     ConfigEditor.set("Inventories." + name, inventory);
 
                     sender.sendMessage("§aCreated inventory §6" + name + "§a!");

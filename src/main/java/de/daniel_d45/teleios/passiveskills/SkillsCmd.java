@@ -52,7 +52,7 @@ public class SkillsCmd implements CommandExecutor {
             // Sets the start slot. Only works fine up to 9 skills
             int slot = (int) (13 - Math.floor(PassiveSkills.usedSkills.size() / 2.0));
             // TODO: Dynamically adjust the inventory's rows.
-            Inventory inventory = InventoryManager.createNoInteractionInventory(3, "Your Skills", null);
+            Inventory inventory = InventoryManager.createNoInteractionInv(3, "Your Skills");
 
             // Iterates through the used skills
             for (Skill currentSkill : PassiveSkills.usedSkills) {

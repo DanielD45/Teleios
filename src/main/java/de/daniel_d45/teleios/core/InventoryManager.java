@@ -24,8 +24,8 @@ public class InventoryManager {
     }
 
     public static Inventory getErrorInventory() {
-        Inventory inv = InventoryManager.createNoInteractionInventory(1, "§cInventory creation failed!", null);
-        InventoryManager.fillInventory(inv, getErrorItem(), getErrorItem(), getErrorItem(), getErrorItem(), getErrorItem(), getErrorItem(), getErrorItem(), getErrorItem(), getErrorItem());
+        Inventory inv = InventoryManager.createNoInteractionInv(1, "§cInventory creation failed!"/*, null*/);
+        InventoryManager.fillInv(inv, getErrorItem(), getErrorItem(), getErrorItem(), getErrorItem(), getErrorItem(), getErrorItem(), getErrorItem(), getErrorItem(), getErrorItem());
         return inv;
     }
 
@@ -46,76 +46,94 @@ public class InventoryManager {
     }
 
     public static ItemStack getBackItem() {
-        return new ItemBuilder(Material.HOPPER, 1).setName("§7<- Previous page").build();
+        return new ItemBuilder(Material.HOPPER, 1).setName("§7↓ go back").build();
     }
 
-    public static Inventory getManageTeleiosInventory() {
-        Inventory inv = InventoryManager.createNoInteractionInventory(3, "§0Manage Teleios functionality", null);
-
-        // TODO: make list and dynamically arrange icons in inventory
-        // AdminFeatures segment.
-        inv.setItem(11, AdminFeatures.getSegmentItem());
-        // BetterGameplay segment.
-        inv.setItem(12, BetterGameplay.getSegmentItem());
-        // PassiveSkills segment.
-        //inv.setItem(14, PassiveSkills.getSegmentItem());
-
+    public static Inventory getCurrMTLInv() {
+        Inventory inv = InventoryManager.createNoInteractionInv(3, "§0Manage Teleios functionality");
+        fillInvCentered(inv, AdminFeatures.getSegmentItem(), BetterGameplay.getSegmentItem(), getErrorItem(), getErrorItem(), getErrorItem(), getErrorItem());
         InventoryManager.fillEmptySlots(inv);
         return inv;
     }
 
-    public static Inventory getManageAFInventory() {
+    public static Inventory getCurrAFInv() {
         // TODO: Add Items
-        return createSegmentInventory("AdminFeatures");
+        return createSegmentInv("AdminFeatures");
     }
 
-    public static Inventory getManageBGInventory() {
+    public static Inventory getCurrBGInv() {
         // TODO: Add Items
-        return createSegmentInventory("BetterGameplay", BetterGameplay.getEnderchestCmdItem(), BetterGameplay.getTeleportersItem());
+        return createSegmentInv("BetterGameplay", BetterGameplay.getEnderchestCmdItem(), BetterGameplay.getTeleportersItem());
     }
 
     public static Inventory getManagePSInventory() {
-        // TODO: Add Items
-        return createSegmentInventory("PassiveSkills");
+        return createSegmentInv("PassiveSkills");
     }
 
     /**
-     * Fills a specified inventory's unoccupied slots with black stained glass panes.
-     *
-     * @param inventory [Inventory] The modified inventory
+     * Fills the given inventory's unoccupied slots with black stained glass panes.
      */
     public static void fillEmptySlots(Inventory inventory) {
         for (int slot = 0; slot < inventory.getSize(); ++slot) {
+            ItemStack filler = new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE, 1).setName(" ").build();
             // Adds a black stained glass pane in every empty slot
             if (inventory.getItem(slot) == null) {
-                // TODO: Possible to reference the same variable?
-                inventory.setItem(slot, new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE, 1).setName(" ").build());
+                inventory.setItem(slot, filler);
             }
         }
     }
 
-    public static void fillInventory(Inventory inventory, ItemStack... itemStacks) {
+    /**
+     * Fills the given inventory with the given ItemStacks if possible.
+     */
+    public static void fillInv(Inventory inventory, ItemStack... itemStacks) {
         ArrayList<Integer> emptySlots = new ArrayList<>();
 
-        // Saves the empty slots in the ArrayList
+        // Saves the empty slots to the ArrayList
         for (int slot = 0; slot < inventory.getSize(); ++slot) {
-            if (inventory.getItem(slot) == null) {
-                emptySlots.add(slot);
-            }
+            if (inventory.getItem(slot) == null) emptySlots.add(slot);
         }
 
-        if (emptySlots.size() >= itemStacks.length) {
-            int i = 0;
+        if (emptySlots.size() < itemStacks.length) return;
 
-            for (int currentSlot : emptySlots) {
-                if (i == itemStacks.length) {
-                    break;
-                }
-                inventory.setItem(currentSlot, itemStacks[i]);
-                ++i;
-            }
+        int i = 0;
+        for (ItemStack item : itemStacks) {
+            inventory.setItem(emptySlots.get(i), item);
+            ++i;
         }
     }
+
+    // TODO: manage multiple rows
+
+    /**
+     * Fills the given empty inventory with the given ItemStacks with centered alignment, if possible.
+     */
+    public static void fillInvCentered(Inventory inventory, ItemStack... itemStacks) {
+        if (!inventory.isEmpty()) return;
+        if (inventory.getSize() < itemStacks.length) return;
+
+        // FIXME: manage multiple rows
+        /*
+          0000+0000 000+0+000 000+++000 V
+
+          000000000 000000000 0000+0000 0000+0000 0000+0000 0000+0000 000+0+000 000+++000 00++0++00 00+++++00
+          0000+0000 000+0+000 000+0+000 000+++000 00++0++00 00+++++00 00+++++00 00+++++00 00+++++00 00+++++00
+         */
+
+        int rows = (int) Math.ceil(itemStacks.length / 9.0);
+
+
+        int slot = (int) (13 - Math.floor(itemStacks.length / 2.0));
+
+        for (ItemStack currentItem : itemStacks) {
+            inventory.setItem(slot, currentItem);
+            if (itemStacks.length % 2 == 0 && slot == 12) {
+                ++slot;
+            }
+            ++slot;
+        }
+    }
+
 
     // TODO: Exception handling
 
@@ -201,54 +219,45 @@ public class InventoryManager {
     // TODO: Handle NullPointerExceptions better
 
     /**
-     * This method compares the specified ItemStacks by material, enchantments, name, flags and lore.
+     * compares the specified ItemStacks by material, enchantments, name, flags and lore.
      *
-     * @param itemStack1 [ItemStack] The first ItemStack
-     * @param itemStack2 [ItemStack] The second ItemStack
+     * @param itemStack1 [ItemStack]
+     * @param itemStack2 [ItemStack]
      * @return [boolean] Whether the specified ItemStacks are equal.
      */
     public static boolean isSameItemType(ItemStack itemStack1, ItemStack itemStack2) {
         try {
-
             return GlobalFunctions.betterEquals(itemStack1.getType(), itemStack2.getType()) && GlobalFunctions.betterEquals(itemStack1.getEnchantments(), itemStack2.getEnchantments()) && GlobalFunctions.betterEquals(itemStack1.getItemMeta().getAttributeModifiers(), itemStack2.getItemMeta().getAttributeModifiers()) && GlobalFunctions.betterEquals(itemStack1.getItemMeta().getDisplayName(), itemStack2.getItemMeta().getDisplayName()) && GlobalFunctions.betterEquals(itemStack1.getItemMeta().getEnchants(), itemStack2.getItemMeta().getEnchants()) && GlobalFunctions.betterEquals(itemStack1.getItemMeta().getItemFlags(), itemStack2.getItemMeta().getItemFlags()) && GlobalFunctions.betterEquals(itemStack1.getItemMeta().getLore(), itemStack2.getItemMeta().getLore());
         } catch (NullPointerException e) {
             return false;
         }
     }
 
-    public static Inventory createNormalInventory(int rows, String name) {
+    public static Inventory createNormalInv(int rows, String name) {
         return Bukkit.createInventory(null, 9 * rows, name);
     }
 
-
-    /**
-     * @param rows                 Corrected to fit interval [1;6]
-     * @param name                 -
-     * @param predecessorInventory -
-     * @return -
-     */
-    public static Inventory createNoInteractionInventory(int rows, String name, Inventory predecessorInventory) {
+    public static Inventory createNoInteractionInv(int rows, String name) {
         rows = GlobalFunctions.trimInt(rows, 1, 6);
-        return Bukkit.createInventory(new NoInteractionInventories(predecessorInventory), rows * 9, name);
+        return Bukkit.createInventory(new NoInteractionInventories(), rows * 9, name);
     }
 
-    public static Inventory createSegmentInventory(String segmentName, ItemStack... itemStacks) {
-        try {
+    public static Inventory createSegmentInv(String segmentName, ItemStack... itemStacks) {
 
-            // TODO: dynamically adjust number of rows to fit amount of itemStacks
-            int rows = 3;
-            Inventory inv = InventoryManager.createNoInteractionInventory(rows, "§0Manage " + segmentName, null/*getManageTeleiosInventory()*/);
-            inv.setItem((rows * 9) - 5, InventoryManager.getBackItem());
-
-            if (itemStacks != null) {
-                InventoryManager.fillInventory(inv, itemStacks);
-            }
-
-            InventoryManager.fillEmptySlots(inv);
-            return inv;
-        } catch (Exception e) {
-            return InventoryManager.getErrorInventory();
+        // TODO: accomodate for >? items (multiple pages?)
+        int rows;
+        if (itemStacks == null) {
+            rows = 1;
         }
+        else {
+            rows = (int) (Math.ceil(itemStacks.length / 9.0) + 1);
+        }
+
+        Inventory inv = InventoryManager.createNoInteractionInv(rows, "§0Manage " + segmentName);
+        if (itemStacks != null) InventoryManager.fillInv(inv, itemStacks);
+        inv.setItem((rows * 9) - 5, InventoryManager.getBackItem());
+        InventoryManager.fillEmptySlots(inv);
+        return inv;
     }
 
 }

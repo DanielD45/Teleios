@@ -28,35 +28,21 @@ public class GmaCmd implements CommandExecutor {
         GameMode gameMode = GameMode.ADVENTURE;
         String gameModeName = gameMode.toString();
 
-        // /gma
+        // /gmx
         if (args.length == 0) {
-
             Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
             if (player == null) return true;
-
-            if (GlobalFunctions.invalidGamemodePlayer(player, "§cYou are already in " + gameModeName + " mode!", gameMode)) return true;
-
-            // Changes gamemode
-            player.setGameMode(gameMode);
-            player.sendMessage("§aYour gamemode has been set to §6" + gameModeName + "§a!");
-            return true;
+            return changeGamemode(player, gameModeName, gameMode);
         }
 
-
-        // /gma [Player] ...
+        // /gmx <Player> ...
         Player target = GlobalFunctions.introduceTargetPlayer(args[0], sender);
         if (target == null) return true;
 
         if (target == sender) {
-
-            if (GlobalFunctions.invalidGamemodePlayer(target, "§cYou are already in " + gameModeName + " mode!", gameMode)) return true;
-
-            // changes gamemode
-            target.setGameMode(gameMode);
-            target.sendMessage("§aYour gamemode has been set to §6" + gameModeName + "§a!");
+            return changeGamemode(target, gameModeName, gameMode);
         }
         else {
-
             String targetName = target.getName();
 
             if (GlobalFunctions.invalidGamemodeTarget(sender, target, "§6" + targetName + "§c is already in " + gameModeName + " mode!", gameMode))
@@ -66,7 +52,17 @@ public class GmaCmd implements CommandExecutor {
             target.setGameMode(gameMode);
             target.sendMessage("§aYour gamemode has been set to §6" + gameModeName + "§a!");
             sender.sendMessage("§6" + targetName + "§a's gamemode has been set to §6" + gameModeName + "§a!");
+            return true;
         }
+    }
+
+    @SuppressWarnings("SameReturnValue")
+    private boolean changeGamemode(Player player, String gameModeName, GameMode gameMode) {
+        if (GlobalFunctions.invalidGamemodePlayer(player, "§cYou are already in " + gameModeName + " mode!", gameMode)) return true;
+
+        // Changes gamemode
+        player.setGameMode(gameMode);
+        player.sendMessage("§aYour gamemode has been set to §6" + gameModeName + "§a!");
         return true;
     }
 
