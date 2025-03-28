@@ -1,21 +1,17 @@
 /*
- 2020-2023
+ 2020-2024
  Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
  Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
-
 package de.daniel_d45.teleios.adminfeatures;
-
+// TODO: assign mode -> create by targeting PLC + /makeplc or specify coords
+/*
 import de.daniel_d45.teleios.core.ConfigEditor;
-import de.daniel_d45.teleios.core.GlobalFunctions;
 import de.daniel_d45.teleios.core.InventoryManager;
 import de.daniel_d45.teleios.core.ItemBuilder;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -27,36 +23,12 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import javax.annotation.Nonnull;
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
 
 
-public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
+public class LootChestLst implements Listener {
 
-    ArrayList<UUID> playersInAssignMode = new ArrayList<>();
-
-    @Override
-    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
-
-        if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
-
-        Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
-        if (player == null) return true;
-
-        // TODO: implement Timer
-        if (playersInAssignMode.contains(player.getUniqueId())) {
-            playersInAssignMode.remove(player.getUniqueId());
-            player.sendMessage("§aAssigning mode has been §6deactivated§a.");
-        }
-        else {
-            playersInAssignMode.add(player.getUniqueId());
-            player.sendMessage("§aThe next chest you click will turn into a personal loot chest. " + "You can also cancel this assigning mode by using the command again.");
-        }
-        return true;
-    }
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerInteractPLC(PlayerInteractEvent event) {
@@ -69,7 +41,7 @@ public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
 
         Chest chest = (Chest) block.getState();
         String chestKey = chest.getX() + ", " + chest.getY() + ", " + chest.getZ();
-        Set<String> plcKeys = ConfigEditor.getSectionKeys("PersonalLootChests");
+        Set<String> plcKeys = ConfigEditor.getSectionKeys("LootChests");
 
         // Are there PLCs check
         if (plcKeys == null) return;
@@ -91,7 +63,7 @@ public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
             if (match) {
                 // This block is already a PLC
                 event.setCancelled(true);
-                player.sendMessage("§cThis block is already a Personal Loot Chest!");
+                player.sendMessage("§cThis block is already a Loot Chest!");
                 playersInAssignMode.remove(player.getUniqueId());
                 player.sendMessage("§aAssigning mode has been §6deactivated§a.");
                 return;
@@ -110,13 +82,13 @@ public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
             String key = chest.getX() + ", " + chest.getY() + ", " + chest.getZ();
             // Saves new PLC to config
             // TODO: Save full location?
-            ConfigEditor.set("PersonalLootChests." + key + ".CoreInventory.Size", chest.getBlockInventory().getSize());
-            ConfigEditor.set("PersonalLootChests." + key + ".CoreInventory.Contents", chest.getBlockInventory().getContents());
+            ConfigEditor.set("LootChests." + key + ".CoreInventory.Size", chest.getBlockInventory().getSize());
+            ConfigEditor.set("LootChests." + key + ".CoreInventory.Contents", chest.getBlockInventory().getContents());
 
             // TODO: remove
             System.out.println("COREINV SAVED!");
 
-            player.sendMessage("§aThis chest is now a Personal Loot Chest.");
+            player.sendMessage("§aThis chest is now a Loot Chest.");
             // Ends the assigning mode
             playersInAssignMode.remove(player.getUniqueId());
             player.sendMessage("§aAssigning mode has been §6deactivated§a.");
@@ -139,7 +111,7 @@ public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
             if (action.equals(Action.RIGHT_CLICK_BLOCK)) {
                 boolean playerAlreadySaved = false;
                 try {
-                    playerAlreadySaved = ConfigEditor.containsPath("PersonalLootChests." + chestKey + "." + player.getName());
+                    playerAlreadySaved = ConfigEditor.containsPath("LootChests." + chestKey + "." + player.getName());
                 } catch (Exception e) {
                     // Player is not yet saved
                     // TODO: create player path
@@ -150,18 +122,18 @@ public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
                     // TODO: Exception handling if queried inv is invalid
                     // Creates new personal inventory as a copy of the core inventory
                     Object newPersInv;
-                    newPersInv = ConfigEditor.get("PersonalLootChests." + chestKey + ".CoreInventory");
-                    ConfigEditor.set("PersonalLootChests." + chestKey + "." + player.getName(), newPersInv);
+                    newPersInv = ConfigEditor.get("LootChests." + chestKey + ".CoreInventory");
+                    ConfigEditor.set("LootChests." + chestKey + "." + player.getName(), newPersInv);
                     // TODO!!!
                     System.out.println("NEW INV SAVED!");
                 }
 
                 // Opens the personal inventory
-                int size = (int) ConfigEditor.get("PersonalLootChests." + chest.getX() + ", " + chest.getY() + ", " + chest.getZ() + "." + "CoreInventory.Size");
+                int size = (int) ConfigEditor.get("LootChests." + chest.getX() + ", " + chest.getY() + ", " + chest.getZ() + "." + "CoreInventory.Size");
                 // TODO: works?
-                ItemStack[] contents = (ItemStack[]) ConfigEditor.get("PersonalLootChests." + chest.getX() + ", " + chest.getY() + ", " + chest.getZ() + "." + "CoreInventory.Contents");
+                ItemStack[] contents = (ItemStack[]) ConfigEditor.get("LootChests." + chest.getX() + ", " + chest.getY() + ", " + chest.getZ() + "." + "CoreInventory.Contents");
 
-                Inventory inv = Bukkit.createInventory(null, size, player.getName() + " §0personal loot chest: " + chestKey);
+                Inventory inv = Bukkit.createInventory(null, size, player.getName() + " §0loot chest: " + chestKey);
                 inv.setContents(contents);
                 player.openInventory(inv);
                 return;
@@ -187,14 +159,14 @@ public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
         }
 
         // TODO: Make more specific? (&& event.getInventory() instanceof ArtificialInventory)
-        if (event.getView().getTitle().equals("§0Destroy Personal Loot Chest?")) {
+        if (event.getView().getTitle().equals("§0Destroy Loot Chest?")) {
             String plcKey = InventoryManager.getCleanString(Objects.requireNonNull(Objects.requireNonNull(inventory.getItem(4)).getItemMeta()).getDisplayName());
 
             if (item.equals(InventoryManager.getYesItem())) {
                 // YES ITEM
 
                 // Iterates through the PLCs
-                for (String current : Objects.requireNonNull(ConfigEditor.getSectionKeys("PersonalLootChests"))) {
+                for (String current : Objects.requireNonNull(ConfigEditor.getSectionKeys("LootChests"))) {
 
                     assert plcKey != null;
                     if (plcKey.equals(current)) {
@@ -209,7 +181,7 @@ public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
                         Location location = new Location(world, plcX, plcY, plcZ);
 
                         // Deletes the PLC config entry
-                        ConfigEditor.clearPath("PersonalLootChests." + current);
+                        ConfigEditor.clearPath("LootChests." + current);
                         // Destroys the teleporter
                         location.getBlock().setType(Material.AIR);
                         player.closeInventory();
@@ -226,16 +198,16 @@ public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
 
         }
 
-        if (event.getView().getTitle().startsWith(player.getName() + " §0personal loot chest: ")) {
+        if (event.getView().getTitle().startsWith(player.getName() + " §0loot chest: ")) {
             // works?
             String key = event.getView().getTitle().split(": ")[1];
-            // TODO: rem + BUG IS HERE! Saving inv overwrites all paths of "PersonalLootChests.[key]".
+            // TODO: rem + BUG IS HERE! Saving inv overwrites all paths of "LootChests.[key]".
             //  TEST SINGLE ITEMSTACK RELOAD CONSISTENCY. PROBLEM WITH RELOADS. TEST WITH MULTIPLE PLCS.
             // Saves the inventory contents
-            //ConfigEditor.set("PersonalLootChests." + key + "." + player.getName() + ".Contents", event.getInventory().getContents());
+            //ConfigEditor.set("LootChests." + key + "." + player.getName() + ".Contents", event.getInventory().getContents());
             //player.getName();
-            //ConfigEditor.set("PersonalLootChests.Test", "TestValue");
-            System.out.println("PERSINV UPDATED! Path: PersonalLootChests." + key + "." + player.getName() + ".Contents");
+            //ConfigEditor.set("LootChests.Test", "TestValue");
+            System.out.println("PERSINV UPDATED! Path: LootChests." + key + "." + player.getName() + ".Contents");
             return;
         }
 
@@ -245,10 +217,10 @@ public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
     public void onPLCInventoryClose(InventoryCloseEvent event) {
         Player player = (Player) event.getPlayer();
 
-        if (event.getView().getTitle().startsWith(player.getName() + " §0personal loot chest: ")) {
+        if (event.getView().getTitle().startsWith(player.getName() + " §0loot chest: ")) {
             String key = event.getView().getTitle().split(": ")[1];
             // Saves the inventory contents
-            ConfigEditor.set("PersonalLootChests." + key + "." + player.getName() + ".Contents", event.getInventory().getContents());
+            ConfigEditor.set("LootChests." + key + "." + player.getName() + ".Contents", event.getInventory().getContents());
             // TODO!!!
             System.out.println("PERSINV SAVED (INVCLOSE)!");
         }
@@ -257,7 +229,7 @@ public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
     private Inventory getDestroyPLCInventory(Block plc) {
         try {
 
-            Inventory inv = InventoryManager.createNoInteractionInv(1, "§0Destroy Personal Loot Chest?");
+            Inventory inv = InventoryManager.createNoInteractionInv(1, "§0Destroy Loot Chest?");
 
             inv.setItem(0, InventoryManager.getYesItem());
             inv.setItem(4, getPLCItem(plc));
@@ -281,3 +253,4 @@ public class MakePersonalLootChestCmdLst implements CommandExecutor, Listener {
     }
 
 }
+*/

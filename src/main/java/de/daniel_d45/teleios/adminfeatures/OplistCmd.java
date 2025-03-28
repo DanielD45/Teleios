@@ -17,7 +17,7 @@ import javax.annotation.Nonnull;
 import java.util.Set;
 
 
-public class OpListCmd implements CommandExecutor {
+public class OplistCmd implements CommandExecutor {
 
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {

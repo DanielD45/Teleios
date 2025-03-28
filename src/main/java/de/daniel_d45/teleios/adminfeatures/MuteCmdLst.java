@@ -8,12 +8,12 @@ package de.daniel_d45.teleios.adminfeatures;
 
 import de.daniel_d45.teleios.core.ConfigEditor;
 import de.daniel_d45.teleios.core.GlobalFunctions;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
@@ -22,9 +22,8 @@ import javax.annotation.Nonnull;
 
 public class MuteCmdLst implements CommandExecutor, Listener {
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onMutedChat(AsyncPlayerChatEvent event) {
-
         Player player = event.getPlayer();
 
         if (ConfigEditor.containsPath("MutedPlayers." + player.getName())) {
@@ -39,36 +38,23 @@ public class MuteCmdLst implements CommandExecutor, Listener {
 
         if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
 
-        Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
-        if (player == null) return true;
+        if (args.length == 0) return GlobalFunctions.wrongAmountofArgs(sender);
 
-        // /mute [Player]
-        try {
+        // /mute <Player>
+        Player target = GlobalFunctions.introduceTargetPlayer(args[0], sender);
+        if (target == null) return true;
 
-            Player target = Bukkit.getPlayer(args[0]);
-
-            // Target online check
-            if (target == null) {
-                player.sendMessage("§cThis player is not online!");
-                return true;
-            }
-
-            // Player already muted check
-            if (ConfigEditor.containsPath("MutedPlayers." + player.getName())) {
-                player.sendMessage("§6" + target.getName() + " §ais already muted!");
-                return true;
-            }
-
-            // Adds the target to the muted players list
-            ConfigEditor.set("MutedPlayers." + target.getName(), "1");
-            player.sendMessage("§aMuted §6" + target.getName() + "§a!");
-            target.sendMessage("§cYou have been muted!");
-
+        // Player already muted check
+        if (ConfigEditor.containsPath("MutedPlayers." + target.getName())) {
+            sender.sendMessage("§6" + target.getName() + " §ais already muted!");
             return true;
-        } catch (Exception e) {
-            player.sendMessage("§cWrong arguments!");
-            return false;
         }
+
+        // Adds the target to the muted players list
+        ConfigEditor.set("MutedPlayers." + target.getName(), "1");
+        sender.sendMessage("§aMuted §6" + target.getName() + "§a!");
+        target.sendMessage("§cYou have been muted!");
+        return true;
     }
 
 }

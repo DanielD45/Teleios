@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * Provides standard code for introducing input, adapting input and other helpful functions
+ */
 public class GlobalFunctions {
 
     /**
@@ -52,14 +55,26 @@ public class GlobalFunctions {
         try {
             double d = Double.parseDouble(inputValue);
             return trimDouble(d, minValue, maxValue);
-        } catch (ClassCastException e) {
+        } catch (NumberFormatException e) {
             invalidNumber(sender);
             return Double.NEGATIVE_INFINITY;
         }
     }
 
     /**
-     * Tests and informs the provided player whether they are in an invalid gamemode.
+     * Returns whether input is a double. input can still be null.
+     */
+    public static boolean isDouble(String input) {
+        try {
+            Double.parseDouble(input);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Tests and informs the provided player whether they are in one of the provided invalid gamemodes.
      * Make specialMessage = "" to use standard message to player.
      */
     public static boolean invalidGamemodePlayer(Player player, String specialMessage, GameMode... gameModes) {
@@ -129,6 +144,8 @@ public class GlobalFunctions {
 
     /**
      * Informs the sender that they provided a wrong amount of arguments.
+     *
+     * @return false
      */
     public static boolean wrongAmountofArgs(CommandSender sender) {
         sender.sendMessage("§cWrong amount of arguments!");
@@ -136,7 +153,19 @@ public class GlobalFunctions {
     }
 
     /**
+     * Informs the sender that they provided an invalid argument.
+     *
+     * @return false
+     */
+    public static boolean invalidArg(CommandSender sender) {
+        sender.sendMessage("§cInvalid argument!");
+        return false;
+    }
+
+    /**
      * Informs the sender that they provided an invalid number.
+     *
+     * @return false
      */
     public static boolean invalidNumber(CommandSender sender) {
         sender.sendMessage("§cInvalid number!");

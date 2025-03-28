@@ -20,6 +20,7 @@ import javax.annotation.Nonnull;
 
 public class InventoriesCmd implements CommandExecutor {
 
+    // TODO: sample code
     // TODO: Fix inventory is not recognised when reloading
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
@@ -94,9 +95,9 @@ public class InventoriesCmd implements CommandExecutor {
                     return false;
                 }
             case 2:
-                // /inventories open|remove [Name]
+                // /inventories open|remove <Name>
                 if (args[0].equalsIgnoreCase("open")) {
-                    // /inventories remove [Name]
+                    // /inventories remove <Name>
 
                     if (!(sender instanceof Player player)) {
                         sender.sendMessage("§cYou are no player!");
@@ -113,7 +114,7 @@ public class InventoriesCmd implements CommandExecutor {
                     player.openInventory(inventory);
                     return true;
                 }
-                // /inventories remove [Name]
+                // /inventories remove <Name>
                 else if (args[0].equalsIgnoreCase("remove")) {
 
                     String name = args[1];
@@ -140,7 +141,7 @@ public class InventoriesCmd implements CommandExecutor {
                     return false;
                 }
             case 3:
-                // /inventories create [Name] [Rows]
+                // /inventories create <Name> <Rows>
                 if (args[0].equalsIgnoreCase("create")) {
 
                     String name = args[1];
@@ -166,7 +167,7 @@ public class InventoriesCmd implements CommandExecutor {
                     return false;
                 }
             case 4:
-                // /inventories modify access|name [InventoryName] [NewName]
+                // /inventories modify access|name <InventoryName> <NewName>
                 if (args[0].equalsIgnoreCase("modify")) {
 
                     // /inventories modify access

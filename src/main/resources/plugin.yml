@@ -8,145 +8,151 @@ author: Daniel_D45
 website: https://github.com/DanielD45/Teleios/
 
 commands:
+  # one line per argument tree (f.e. /team list, /team add)
+  # optional argument: [ ]
+  # placeholder: < >
+  # choice: |
 
   # AdminFeatures commands
   chatclear:
-    aliases: [ cc ] #, CC ]
+    aliases: [ cc ]
     permission: teleios.adminfeatures.chatclear
     description: Clears the chat.
     usage: /chatclear
 
   damage:
-    aliases: [ d ] #, D ]
+    aliases: [ d ]
     permission: teleios.adminfeatures.damage
     description: Damages you or another player.
-    usage: /damage <Amount>, /damage <Player> <Amount>
+    usage: /damage <Amount>,
+      /damage <Player> <Amount>
 
   gma:
-    #aliases: [ GMA ]
     permission: teleios.adminfeatures.gma
     description: Sets you or another player in adventure mode.
     usage: /gma, /gma <Player>
 
   gmc:
-    #aliases: [ GMC ]
     permission: teleios.adminfeatures.gmc
     description: Sets you or another player in creative mode.
     usage: /gmc, /gmc <Player>
 
   gms:
-    #aliases: [ GMS ]
     permission: teleios.adminfeatures.gms
     description: Sets you or another player in survival mode.
     usage: /gms, /gms <Player>
 
   gmsp:
-    #aliases: [ GMSP ]
     permission: teleios.adminfeatures.gmsp
     description: Sets you or another player in spectator mode.
     usage: /gmsp, /gmsp <Player>
 
   heal:
-    aliases: [ h ] #, H ]
+    aliases: [ h ]
     permission: teleios.adminfeatures.heal
     description: Heals you or another player.
     usage: /heal, /heal <Amount>, /heal <Player>, /heal <Player> <Amount>
 
   inventories:
-    aliases: [ invs ] #, INVS ]
+    aliases: [ invs ]
     permission: teleios.adminfeatures.inventories
     description: Let's you create, open and manage custom inventories with an amount of rows lower than 7.
     usage: /invs list|clear, /invs open|remove, /invs create <Name>, /invs create <Name> <Rows>
 
   joinmessage:
-    aliases: [ jm ] #, JM ]
+    aliases: [ jm ]
     permission: teleios.adminfeatures.joinmessageRead
     description: Lets you enable or disable the custom join message.
     usage: /joinmessage enable|true|disable|false
 
-  makepersonallootchest:
-    aliases: [ plc, makeplc ] #, PLC, MAKEPLC ]
-    permission: teleios.adminfeatures.makepersonallootchest
-    description: Lets you change a chest into a personal loot chest.
-    usage: /makepersonallootchest
-
+  lootchest:
+    aliases: [ lc ]
+    permission: teleios.adminfeatures.lootchest
+    description: Lets you change the container you are looking at to a loot chest. Alternatively, you can use the container's coordinates.
+      individual true = every player can loot the chest themselves. refill is the time until the loot chest refills its contents.
+    usage: /lootchest here|<x> <y> <z> [individual],
+      /lootchest (<x> <y> <z>) option individual true|false,
+      /lootchest (<x> <y> <z>) option refill false|<seconds>,
+      /lootchest (<x> <y> <z>) option inventory,
+      /lootchest default individual true|false,
+      /lootchest default refill <seconds>,
   mute:
-    aliases: [ m ] #, M ]
+    aliases: [ m ]
     permission: teleios.adminfeatures.mute
     description: Lets you mute players.
     usage: /mute <Player>
 
   openinventory:
-    aliases: [ oi ] #, OI ]
+    aliases: [ oi ]
     permission: teleios.adminfeatures.openinventory
     description: Opens the specified player's inventory.
     usage: /openinventory <Player>
 
   oplist:
-    aliases: [ opl ] #, OPL ]
+    aliases: [ opl ]
     permission: teleios.adminfeatures.oplist
     description: Lets you store ops on a list. These people can op themselves anytime.
-    usage: /oplist , /oplist add <Name>
+    usage: /oplist, /oplist add <Name>
 
   tphere:
-    aliases: [ tph ] #, TPH ]
+    aliases: [ tph ]
     permission: teleios.adminfeatures.tphere
     description: Teleports another player to you.
     usage: /tphere <Player>
 
   unmute:
-    aliases: [ um ] #, UM ]
+    aliases: [ um ]
     permission: teleios.adminfeatures.unmute
     description: Lets you unmute players.
     usage: /unmute <Player>
 
   warppoint:
-    aliases: [ wp ] #, WP ]
+    aliases: [ wp ]
     permission: teleios.adminfeatures.warppoint
     description: Lets you modify warppoints.
     usage: /warppoint list|clear, /warppoint add|remove|override <Name>
 
   # BetterGameplay commands
   configureteleporter:
-    aliases: [ ctp ] #, CTP ]
+    aliases: [ ctp ]
     permission: teleios.bettergameplay.configureteleporter
     description: Lets you change the name of a teleporter you hold in your hand.
     usage: /configureteleporter <Name>
 
   enderchest:
-    aliases: [ ec ] #, EC ]
+    aliases: [ ec ]
     permission: teleios.bettergameplay.enderchest
     description: Opens your enderchest.
     usage: /enderchest
 
   setblocksperpearl:
-    aliases: [ sbpp ] #, SBPP ]
+    aliases: [ bpp ]
     permission: teleios.bettergameplay.setblocksperpearlRead
     description: Lets you change the amount of blocks you can travel per ender pearl when warping to a teleporter.
     usage: /setblocksperpearl, /setblocksperpearl <Amount>
 
   warp:
-    aliases: [ w ] #, W ]
+    aliases: [ w ]
     permission: teleios.bettergameplay.warp
     description: Lists available teleporters and warppoints and warps you there.
     usage: /warp , /warp list|<Teleporter>|<Warppoint>
 
   warppouch:
-    aliases: [ wpp ] #, WPP ]
+    aliases: [ wpp ]
     permission: teleios.bettergameplay.warppouch
     description: Lets you see and deposit ender pearls in your warppouch.
     usage: /warppouch, /warppouch view|show, /warppouch deposit|put, /warppouch deposit|put <Amount>
 
   # Core commands
   manageteleios:
-    aliases: [ mtl ] #, MTL ]
+    aliases: [ mtl, teleios ]
     permission: teleios.adminfeatures.manageteleios
     description: Let's you enable and disable the plugin segments and functionality.
     usage: /manageteleios
 
   # PassiveSkills commands
   skills:
-    aliases: [ s ] #, S ]
+    aliases: [ s ]
     permission: teleios.passiveskills.skills
     description: Shows your skills in an inventory.
     usage: /skills
@@ -195,8 +201,8 @@ permissions:
     description: Allows use of the joinmessage command.
     default: op
 
-  teleios.adminfeatures.makepersonallootchest:
-    description: Allows use of the makepersonallootchest command.
+  teleios.adminfeatures.lootchest:
+    description: Allows use of the lootchest command.
     default: op
 
   teleios.adminfeatures.mute:

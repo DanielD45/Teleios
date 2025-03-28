@@ -7,7 +7,6 @@
 package de.daniel_d45.teleios.adminfeatures;
 
 import de.daniel_d45.teleios.core.GlobalFunctions;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,20 +21,14 @@ public class OpeninventoryCmd implements CommandExecutor {
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
         if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
-        
+
         Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
         if (player == null) return true;
 
-        // TODO: get input, exception handling
         // /openinventory [Player]
-        Player target = Bukkit.getPlayer(args[0]);
-
-        if (target == null) {
-            player.sendMessage("§cThis player is not online!");
-            return true;
-        }
-
-        // TODO: Change inventory name to the target's name
+        Player target = GlobalFunctions.introduceTargetPlayer(args[0], sender);
+        if (target == null) return true;
+        
         player.openInventory(target.getInventory());
         return true;
     }

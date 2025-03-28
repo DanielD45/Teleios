@@ -41,7 +41,7 @@ public class ConfigEditor {
             //PassiveSkills.initiatePlayerRecords(currentPlayer.getName());
         }
 
-        initiatePersonalLootChests();
+        initiateLootChests();
     }
 
     private static void initiateJoinMessage() {
@@ -94,10 +94,10 @@ public class ConfigEditor {
         }
     }
 
-    private static void initiatePersonalLootChests() {
-        if (!ConfigEditor.containsPath("PersonalLootChests")) {
-            ConfigEditor.set("PersonalLootChests.Setup", "setup");
-            ConfigEditor.set("PersonalLootChests.Setup", null);
+    private static void initiateLootChests() {
+        if (!ConfigEditor.containsPath("LootChests")) {
+            ConfigEditor.set("LootChests.Setup", "setup");
+            ConfigEditor.set("LootChests.Setup", null);
         }
     }
 

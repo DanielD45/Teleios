@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
 
 public class DamageCmd implements CommandExecutor {
 
-    // Unbreakable (2023-12-30)
+    // Unbreakable (2024-08-28)
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 

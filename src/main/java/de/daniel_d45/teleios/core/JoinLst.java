@@ -17,10 +17,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 public class JoinLst implements Listener {
 
     /**
-     * Method fires when a player joins and initiates the player's paths in the config file if the player
-     * is not yet listed.
-     *
-     * @param event [PlayerJoinEvent]
+     * Method fires when a player joins and initiates the player's paths in the config file if the player isn't listed yet.
      */
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerJoin(PlayerJoinEvent event) {

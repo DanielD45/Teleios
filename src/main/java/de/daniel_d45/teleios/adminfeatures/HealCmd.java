@@ -19,7 +19,7 @@ import java.util.Objects;
 
 public class HealCmd implements CommandExecutor {
 
-    // TODO: does fully healed work?
+    // Unbreakable (2024-08-27)
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
@@ -35,30 +35,27 @@ public class HealCmd implements CommandExecutor {
 
         // /heal <Amount>|<Player>
         if (args.length == 1) {
-            try {
-                // tests whether args[0] is a double
+            // /heal <Amount>
+            if (GlobalFunctions.isDouble(args[0])) {
                 double amount = GlobalFunctions.trimDouble(Double.parseDouble(args[0]), 0, Double.MAX_VALUE);
                 if (amount == 0) return GlobalFunctions.invalidNumber(sender);
-                // Input is a suitable double
-                // /heal <Amount>
 
                 Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
                 if (player == null) return true;
-                return healPlayer(player, amount);
-            } catch (NumberFormatException e) {
-                // Input is not a double
-                // /heal <Player>
 
+                return healPlayer(player, amount);
+            }
+            // /heal <Player>
+            else {
                 Player target = GlobalFunctions.introduceTargetPlayer(args[0], sender);
                 if (target == null) return true;
 
-                if (target != sender) {
-                    return healTarget(sender, target, getMaxHealth(target));
-                }
-                else {
-                    // The sender targets themselves
+                if (target == sender) {
                     Player player = (Player) sender;
                     return healPlayer(player, getMaxHealth(player));
+                }
+                else {
+                    return healTarget(sender, target, getMaxHealth(target));
                 }
             }
         }
@@ -71,12 +68,12 @@ public class HealCmd implements CommandExecutor {
         Player target = GlobalFunctions.introduceTargetPlayer(args[0], sender);
         if (target == null) return true;
 
-        if (target != sender) {
-            return healTarget(sender, target, amount);
-        }
-        else {
+        if (target == sender) {
             Player player = (Player) sender;
             return healPlayer(player, amount);
+        }
+        else {
+            return healTarget(sender, target, amount);
         }
 
     }

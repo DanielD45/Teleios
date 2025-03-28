@@ -1,5 +1,6 @@
 C-Done:
 1 manageteleios command
+1 Player getMaxHealth() -> getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()
 .
 
 AF-Done:
@@ -22,22 +23,29 @@ AF-Done:
 
 
 BG-Done:
-1 Enderchest command
-1 Teleporters:
-    1 distance calculation with Pythagoras
-    1 left-clicking on teleporters opens the interactive inventory
+1 /enderchest
+1 /sbpp
+1 /w
+1 Warppoints:
+    1 admins can create
+    1 everyone can warp to them freely using /w
+1 teleporters:
+    1 teleporter crafting recipe
+    1 /ctp to rename teleporters
+    1 left-clicking on teleporters opens the interactive inventory to destroy it
     1 case insensitive warping
     1 the teleporter orientation is the player's orientation when placing it
 .
 
 
 Implement this version:
-0 revise commands using GlobalFunctions simplifications, CONTINUE: /heal
-0 Player getMaxHealth() -> getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue() or getValue()
+0 revise commands using SampleCode simplifications, CONTINUE: OplistCmd
 0 test:
     0 /damage (can still kill other players?)
     0 /gma (output ok?) & copy to /gmx
     0 /joinmessage permission
+    0 /teleios
+    0 /help damage
 0 introduce parameters correctly (more GlobalFunctions functions)
 0 handle every input in commands
 0 make common parts methods (segment items...)
@@ -76,6 +84,8 @@ C-Planned:
 
 
 AF-Planned:
+0a remove JoinMessageCmdLst?
+0a /openinv: change inventory name to the target's name
 0a /opl list
 0a test invalid values for JoinMessage path
 0a /giveteleporter to give the teleporter item
@@ -110,20 +120,30 @@ AF-Planned:
 
 BG-Planned:
 0b PLCs
+    0b create by targeting them before /makeplc or specifing coords
     0b personal invs: Bug: ConfigEditor.set();
     0b barrels... too
     0b restock PLCs after timer
+    0b if loot chest function not active you can't open loot chests
 0b Villagers are easy to reroll when not traded with yet
 0b fix: remove loading time when listing a lot of teleporters? -> send message as one, reduce loading time
 1b Teleporters:
     0b fix: yaw reset on interacton with teleporter
-    0b teleporters with restricted access
-    0b /w doesn't list teleporters you don't have access to (+ update cmd description)
+    0b teleporters with restricted access:
+        0 /ctp x => /ctp name x
+        0 /ctp access
+        0 /ctp access allow x
+        0 /ctp access deny x
+        0 /ctp access public
+        0 /ctp access clear
+        0 check access in /w, /w x
+        0 adapt plugin.yml
+        0 Show on teleporter
     0b list teleporters in grey if they are not reachable
         1 obstructed
         1 dimension
         0b cost to high
-    0b /warp tells you how many additional ender pearls are needed
+    0b /w tells you how many additional ender pearls are needed
     0b does teleporting to the End island start platform destroy teleporters placed there?
     0b hinder teleporters to be placed in another teleporter's feet and head pos
     0b bug hunter script (quickly after teleporter placement?):
@@ -152,14 +172,13 @@ BG-Planned:
 0b possibility to get player heads and mini blocks for decorations (crafting recipe)
 0b rideable animals (horses, donkeys, pigs) level health?, speed and jump height through being ridden
 0b death:
-    0b tombstones which save your items on death
+    0b tombstones which saves your items on death
     0b get a compass leading to point of death (see recovery compass)
     0b corpse beacon
-0b Mending has multiple levels, higher levels repair more for the same amount of xp
-0b knockback doesn't knock back skeletons
+0b Mending has multiple levels, higher levels repair more for the same amount of xp?
+0b Knockback doesn't knock back skeletons
 0b throwable item to build temporary floating blocks
 0b heal iron golems with iron
-0b craft dirt from bone meal and wood
 0b craft dirt from bone meal and wood
 0b colors in item names
 0b waypoints players can place

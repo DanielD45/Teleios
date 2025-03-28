@@ -24,8 +24,6 @@ import java.util.Objects;
 
 /**
  * The plugin's main class as Singleton.
- *
- * @author Daniel_D45
  */
 public class Teleios extends JavaPlugin {
 
@@ -66,7 +64,7 @@ public class Teleios extends JavaPlugin {
         MuteCmdLst muteCmdLst = new MuteCmdLst();
         JoinmessageCmdLst joinmessageCmdLst = new JoinmessageCmdLst();
         ManageteleiosCmdLst manageteleiosCmdLst = new ManageteleiosCmdLst();
-        MakePersonalLootChestCmdLst makePersonalLootChestCmdLst = new MakePersonalLootChestCmdLst();
+        // TODO: LootChestCmd lootChestCmdLst = new LootChestCmd();
 
         // Config setup
         ConfigEditor.setupConfig();
@@ -83,10 +81,10 @@ public class Teleios extends JavaPlugin {
         Objects.requireNonNull(getCommand("heal")).setExecutor(new HealCmd());
         Objects.requireNonNull(getCommand("inventories")).setExecutor(new InventoriesCmd());
         Objects.requireNonNull(getCommand("joinmessage")).setExecutor(joinmessageCmdLst);
-        Objects.requireNonNull(getCommand("makepersonallootchest")).setExecutor(makePersonalLootChestCmdLst);
+        // TODO: Objects.requireNonNull(getCommand("lootchest")).setExecutor(lootChestCmdLst);
         Objects.requireNonNull(getCommand("mute")).setExecutor(muteCmdLst);
         Objects.requireNonNull(getCommand("openinventory")).setExecutor(new OpeninventoryCmd());
-        Objects.requireNonNull(getCommand("oplist")).setExecutor(new OpListCmd());
+        Objects.requireNonNull(getCommand("oplist")).setExecutor(new OplistCmd());
         Objects.requireNonNull(getCommand("tphere")).setExecutor(new TphereCmd());
         Objects.requireNonNull(getCommand("unmute")).setExecutor(new UnmuteCmd());
         Objects.requireNonNull(getCommand("warppoint")).setExecutor(new WarppointCmd());
@@ -106,7 +104,7 @@ public class Teleios extends JavaPlugin {
 
         // AdminFeatures Listeners
         pluginManager.registerEvents(joinmessageCmdLst, plugin);
-        pluginManager.registerEvents(makePersonalLootChestCmdLst, plugin);
+        // TODO: pluginManager.registerEvents(lootChestCmdLst, plugin);
         pluginManager.registerEvents(muteCmdLst, plugin);
         // BetterGameplay Listeners
         pluginManager.registerEvents(new PlayerInteractWithTeleporterLst(), plugin);
@@ -126,7 +124,7 @@ public class Teleios extends JavaPlugin {
         // PROGRAM TEST ROOM
         //FileConfiguration testConfig = plugin.getConfig();
         //testConfig.load("teleios");
-        
+
         //RecipeManager.registerTestRecipes();
         // END OF PROGRAM TEST ROOM
     }
