@@ -1,65 +1,48 @@
 /*
- 2020-2024
+ 2020-2025
  Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
  Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
 
 package de.daniel_d45.teleios.core;
 
-import org.checkerframework.common.reflection.qual.UnknownClass;
-
-
 /**
  * This class is only used for storing code samples to copy.
  */
-@UnknownClass
 interface SampleCode {
 
     ///*
-    private static boolean commandSamples(CommandSender sender, GameMode gameMode, String xINPUT_TO_INTRODUCEx, double xMIN_VALUEx, double xMAX_VALUEx) {
+    // Changes => update version of sample code (SC-1 -> SC-2)
+    private static boolean commandSamples() {
         // USER FEEDBACK
-        // invalid text argument
-        return GlobalFunctions.invalidArg(sender);
-        // invalid number (an input value is wrong)
-        return GlobalFunctions.invalidNumber(sender);
-        // wrong amount of arguments
+        // Invalid number (an input value is wrong) SC-1
+        return GlobalFunctions.invalidNumber(sender, args[xINDEXx]);
+        // Wrong amount of arguments SC-1
         return GlobalFunctions.wrongAmountofArgs(sender);
 
         // CHECKS
-        // is active check
+        // Is active check SC-1
         if (GlobalFunctions.cmdOffCheck("xSUB_PATHx", sender)) return true;
-        // player in wrong gamemode check
+        // Sender permission check SC-1
+        if (GlobalFunctions.permissionCheck(sender, "xSUB_PATHx")) return true;
+        // Player in wrong gamemode check SC-1
         if (GlobalFunctions.invalidGamemodePlayer(target, "", gameMode)) return true;
-        // target in wrong gamemode check
+        // Target in wrong gamemode check SC-1
         if (GlobalFunctions.invalidGamemodeTarget(sender, target, "", gameMode)) return true;
 
-        // INTRODUCTIONS
-        // introduce sender as player
+        // VARIABLE INTRODUCTIONS
+        // sender -> player SC-1
         Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
         if (player == null) return true;
-        // introduce target player
+        // Gets target player SC-1
         Player target = GlobalFunctions.introduceTargetPlayer(xINPUT_TO_INTRODUCEx, sender);
         if (target == null) return true;
-        // introduce int
+        // Gets int SC-1
         // TODO
-        // introduce double
+        // Force-gets double SC-1
         double xDOUBLE_NAMEx = GlobalFunctions.introduceDouble(xINPUT_TO_INTRODUCEx, xMIN_VALUEx, xMAX_VALUEx, sender);
         if (xDOUBLE_NAMEx == Double.NEGATIVE_INFINITY) return false;
-        if (xDOUBLE_NAMEx == 0) return GlobalFunctions.invalidNumber(sender); // filters out special values
-        // introduce string
-        // TODO
-    }
-
-    // TODO: overhaul
-    private static boolean getUserString(String xINPUTx, int xMIN_LENGTHx, int xMAX_LENGTHx, CommandSender sender) {
-        //
-        if (GlobalFunctions.stringNotUsable(xINPUTx, xMIN_LENGTHx, xMAX_LENGTHx)) {
-            // The input is too long
-            sender.sendMessage("§6" + xINPUTx + "§c is too long!");
-            return true;
-        }
-        //
-        return false;
+        if (xDOUBLE_NAMEx == 0) return GlobalFunctions.invalidNumber(sender, args[xINPUT_TO_INTRODUCEx]); // filters out special values
     }
 
     private static void TabCompleter() {
@@ -72,10 +55,10 @@ interface SampleCode {
 
     private static void markEntities() {
         Mark entities, deleted on server restart:
-        Entity?.setMetadata("Key",new FixedMetadataValue(Plugin.getInstance(), Value(Object)));
+        Entity ?.setMetadata("Key", new FixedMetadataValue(Plugin.getInstance(), Value(Object)));
 
         Mark entities:
-        Entity?.getPersistentDataContainer();
+        Entity ?.getPersistentDataContainer();
     }
     */
 }

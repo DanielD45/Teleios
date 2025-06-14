@@ -83,7 +83,7 @@ commands:
     usage: /mute <Player>
 
   openinventory:
-    aliases: [ oi ]
+    aliases: [ oi, openinv ]
     permission: teleios.adminfeatures.openinventory
     description: Opens the specified player's inventory.
     usage: /openinventory <Player>

@@ -1,5 +1,5 @@
 /*
- 2020-2023
+ 2020-2025
  Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
  Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
@@ -23,10 +23,12 @@ public class HealCmd implements CommandExecutor {
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
+        // Is active check SC-1
         if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
 
         // /heal
         if (args.length == 0) {
+            // sender -> player SC-1
             Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
             if (player == null) return true;
 
@@ -38,7 +40,7 @@ public class HealCmd implements CommandExecutor {
             // /heal <Amount>
             if (GlobalFunctions.isDouble(args[0])) {
                 double amount = GlobalFunctions.trimDouble(Double.parseDouble(args[0]), 0, Double.MAX_VALUE);
-                if (amount == 0) return GlobalFunctions.invalidNumber(sender);
+                if (amount == 0) return GlobalFunctions.invalidNumber(sender, args[0]);
 
                 Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
                 if (player == null) return true;
@@ -63,7 +65,7 @@ public class HealCmd implements CommandExecutor {
         // /heal <Player> <Amount> ...
         double amount = GlobalFunctions.introduceDouble(args[1], 0, Double.MAX_VALUE, sender);
         if (amount == Double.NEGATIVE_INFINITY) return false;
-        if (amount == 0) return GlobalFunctions.invalidNumber(sender);
+        if (amount == 0) return GlobalFunctions.invalidNumber(sender, args[1]);
 
         Player target = GlobalFunctions.introduceTargetPlayer(args[0], sender);
         if (target == null) return true;

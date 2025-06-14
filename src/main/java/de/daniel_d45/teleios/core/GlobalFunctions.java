@@ -1,5 +1,5 @@
 /*
- 2020-2024
+ 2020-2025
  Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
  Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
@@ -56,7 +56,7 @@ public class GlobalFunctions {
             double d = Double.parseDouble(inputValue);
             return trimDouble(d, minValue, maxValue);
         } catch (NumberFormatException e) {
-            invalidNumber(sender);
+            invalidNumber(sender, inputValue);
             return Double.NEGATIVE_INFINITY;
         }
     }
@@ -74,7 +74,7 @@ public class GlobalFunctions {
     }
 
     /**
-     * Tests and informs the provided player whether they are in one of the provided invalid gamemodes.
+     * Tests and informs the given player whether they are in one of the given invalid gamemodes.
      * Make specialMessage = "" to use standard message to player.
      */
     public static boolean invalidGamemodePlayer(Player player, String specialMessage, GameMode... gameModes) {
@@ -113,7 +113,6 @@ public class GlobalFunctions {
         return false;
     }
 
-    // TODO: introduceString
     public static boolean stringNotUsable(String string, int lengthMin, int lengthMax) {
         if (string == null) return true;
         if (string.length() < lengthMin) return true;
@@ -143,22 +142,15 @@ public class GlobalFunctions {
     }
 
     /**
-     * Informs the sender that they provided a wrong amount of arguments.
+     * Returns true and informs the given sender if they don't have the given permission. False means permission is ok
      *
-     * @return false
+     * @param subPath The permission's path after "teleios.", e.g. "adminfeatures.oplistAdd"
      */
-    public static boolean wrongAmountofArgs(CommandSender sender) {
-        sender.sendMessage("§cWrong amount of arguments!");
-        return false;
-    }
-
-    /**
-     * Informs the sender that they provided an invalid argument.
-     *
-     * @return false
-     */
-    public static boolean invalidArg(CommandSender sender) {
-        sender.sendMessage("§cInvalid argument!");
+    public static boolean permissionCheck(CommandSender sender, String subPath) {
+        if (!sender.hasPermission("teleios." + subPath)) {
+            sender.sendMessage("§cMissing permissions!");
+            return true;
+        }
         return false;
     }
 
@@ -167,8 +159,8 @@ public class GlobalFunctions {
      *
      * @return false
      */
-    public static boolean invalidNumber(CommandSender sender) {
-        sender.sendMessage("§cInvalid number!");
+    public static boolean invalidNumber(CommandSender sender, String invalidInput) {
+        sender.sendMessage("§6" + invalidInput + "§c is an invalid number!");
         return false;
     }
 

@@ -1,5 +1,5 @@
 /*
- 2020-2023
+ 2020-2025
  Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
  Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
@@ -59,47 +59,36 @@ public class OplistCmd implements CommandExecutor {
                 return true;
             }
 
+            // Makes player an op
             player.setOp(true);
             player.sendMessage("§aYou are now an operator!");
             return true;
         }
 
-        // /oplist add [Name]
+        // /oplist add <Name>
         if (args.length >= 2 && args[0].equals("add")) {
 
-            // Sender permission check
-            if (!sender.hasPermission("teleios.adminfeatures.oplistAdd")) {
-                sender.sendMessage("§cMissing permissions!");
-                return true;
-            }
+            if (GlobalFunctions.permissionCheck(sender, "adminfeatures.oplistAdd")) return true;
 
+            // Adds player to op list
             ConfigEditor.set("OPList." + args[1], 1);
             sender.sendMessage("§aAdded §6" + args[1] + "§a to the OP list.");
             return true;
         }
 
-        // /oplist remove|delete [Name]
+        // /oplist remove|delete <Name>
         if (args.length >= 2 && (args[0].equals("remove") || args[0].equals("delete"))) {
 
-            // Sender permission check
-            if (!sender.hasPermission("teleios.adminfeatures.oplistAdd")) {
-                sender.sendMessage("§cMissing permissions!");
-                return true;
-            }
+            if (GlobalFunctions.permissionCheck(sender, "adminfeatures.oplistAdd")) return true;
 
-            // TODO: input, exception handling
             // Target on OP list check
             if (ConfigEditor.get("OPList." + args[1]) == null) {
-                sender.sendMessage("§cThis player is not on the OP list!");
+                sender.sendMessage("§cPlayer §6" + args[1] + "§c is not on the OP list!");
                 return true;
             }
 
-            try {
-                ConfigEditor.set("OPList." + args[1], null);
-            } catch (Exception e) {
-                sender.sendMessage("§6" + args[1] + "§c is not on the OP list!");
-                return true;
-            }
+            // Removes player from op list
+            ConfigEditor.set("OPList." + args[1], null);
             sender.sendMessage("§aRemoved §6" + args[1] + "§a from the OP list.");
             return true;
         }

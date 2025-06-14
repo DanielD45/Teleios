@@ -1,5 +1,5 @@
 /*
- 2020-2023
+ 2020-2025
  Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
  Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
@@ -38,7 +38,7 @@ public class MuteCmdLst implements CommandExecutor, Listener {
 
         if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
 
-        if (args.length == 0) return GlobalFunctions.wrongAmountofArgs(sender);
+        if (args.length == 0) return false;
 
         // /mute <Player>
         Player target = GlobalFunctions.introduceTargetPlayer(args[0], sender);

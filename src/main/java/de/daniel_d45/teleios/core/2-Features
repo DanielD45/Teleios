@@ -3,33 +3,35 @@ C-Done:
 1 Player getMaxHealth() -> getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()
 .
 
+
 AF-Done:
-1 warp command
-1 warppoint command
-1 heal command
-1 damage command
-1 chatclear command
-1 enderchest command
-1 invsee command
-1 mute command
-1 unmute command
-1 joinmessage command
-1 tphere command
-1 gmc command
-1 gmsp command
-1 gms command
-1 gma command
+1 /chatclear
+1 /damage
+1 /gma
+1 /gmc
+1 /gms
+1 /gmsp
+1 /heal
+1 /inventories
+1 /joinmessage
+1 /mute
+1 /openinventory
+1 /oplist
+1 /tphere
+1 /unmute
+1 /warppoint
+1 Warppoints:
+    1 admins can create using /warppoint
+    1 everyone can warp to them freely using /warp
 .
 
 
 BG-Done:
 1 /enderchest
-1 /sbpp
-1 /w
-1 Warppoints:
-    1 admins can create
-    1 everyone can warp to them freely using /w
-1 teleporters:
+1 /setblocksperpearl
+1 /warp
+1 /warppouch
+1 Teleporters:
     1 teleporter crafting recipe
     1 /ctp to rename teleporters
     1 left-clicking on teleporters opens the interactive inventory to destroy it
@@ -39,13 +41,14 @@ BG-Done:
 
 
 Implement this version:
-0 revise commands using SampleCode simplifications, CONTINUE: OplistCmd
+0 revise commands using SampleCode simplifications with version name (SC-1), CONTINUE: HealCmd, (OplistCmd)
 0 test:
     0 /damage (can still kill other players?)
     0 /gma (output ok?) & copy to /gmx
     0 /joinmessage permission
     0 /teleios
     0 /help damage
+    0 /ec
 0 introduce parameters correctly (more GlobalFunctions functions)
 0 handle every input in commands
 0 make common parts methods (segment items...)
@@ -67,6 +70,7 @@ Implement this version:
         else:
             0 store default value
 0 revise GitHub page (functionality)
+0 use WIP and master branch in the future
 .
 
 
@@ -138,7 +142,10 @@ BG-Planned:
         0 /ctp access clear
         0 check access in /w, /w x
         0 adapt plugin.yml
-        0 Show on teleporter
+        0 show on teleporter
+        0 change teleporter item description in RecipeManager
+    0b admin only: /ctp interact allow/deny
+        0b TeleporterInteractEvent check interact
     0b list teleporters in grey if they are not reachable
         1 obstructed
         1 dimension
@@ -148,6 +155,7 @@ BG-Planned:
     0b hinder teleporters to be placed in another teleporter's feet and head pos
     0b bug hunter script (quickly after teleporter placement?):
         0b search teleporter positions, if (cave) air: drop teleporter and delete from config
+    0b /ctp name x access x x interact x
 0b vanity config cmd (tablist):
 /vanity
     self:

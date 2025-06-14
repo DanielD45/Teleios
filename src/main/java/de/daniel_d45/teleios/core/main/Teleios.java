@@ -90,7 +90,7 @@ public class Teleios extends JavaPlugin {
         Objects.requireNonNull(getCommand("warppoint")).setExecutor(new WarppointCmd());
         // BetterGameplay commands
         Objects.requireNonNull(getCommand("configureteleporter")).setExecutor(new ConfigureteleporterCmd());
-        // TODO: Objects.requireNonNull(getCommand("enderchest")).setExecutor(new EnderchestCmd());
+        Objects.requireNonNull(getCommand("enderchest")).setExecutor(new EnderchestCmd());
         Objects.requireNonNull(getCommand("setblocksperpearl")).setExecutor(new SetblocksperpearlCmd());
         Objects.requireNonNull(getCommand("warp")).setExecutor(new WarpCmd());
         Objects.requireNonNull(getCommand("warppouch")).setExecutor(new WarppouchCmd());
