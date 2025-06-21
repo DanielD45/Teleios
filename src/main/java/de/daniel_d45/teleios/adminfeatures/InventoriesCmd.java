@@ -16,6 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 import javax.annotation.Nonnull;
+import java.util.Set;
 
 
 public class InventoriesCmd implements CommandExecutor {
@@ -25,75 +26,65 @@ public class InventoriesCmd implements CommandExecutor {
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
+        // Is active check SC-1
         if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
 
+        // /inventories, /inventories list
+        if (args.length == 0 || args[0].equalsIgnoreCase("list")) {
+
+            Set<String> existing_invs = ConfigEditor.getSectionKeys("Inventories");
+
+            // Inventories exist check
+            if (existing_invs == null || existing_invs.isEmpty()) {
+                sender.sendMessage("§eThere are no inventories yet! Add one by using §6/inventories create <name> <rows>§e!");
+                return true;
+            }
+
+            StringBuilder message = new StringBuilder("§bExisting inventories: ");
+
+            int i = 0;
+            for (String curr_inv_name : existing_invs) {
+                i++;
+                message.append("§6").append(curr_inv_name);
+
+                if (i < existing_invs.size()) {
+                    message.append("§b, ");
+                }
+            }
+
+            sender.sendMessage(message.toString());
+            return true;
+        }
+
+        // /inventories clear
+        if (args.length == 1 && args[0].equalsIgnoreCase("clear")) {
+
+            sender.sendMessage("§aDo you really want to §6remove all inventories§a? Then use §6/inventories clear yes§a.");
+            return true;
+        }
+
+        // /inventories clear yes
+        if (args.length == 2 && args[0].equalsIgnoreCase("clear") && args[1].equalsIgnoreCase("yes")) {
+
+            Set<String> existing_invs = ConfigEditor.getSectionKeys("Inventories");
+
+            // Inventories exist check
+            if (existing_invs == null || existing_invs.isEmpty()) {
+                sender.sendMessage("§eThere are no inventories!");
+                return true;
+            }
+
+            // Iterates through the inventories
+            for (String curr_inv : existing_invs) {
+                ConfigEditor.clearPath("Inventories." + curr_inv);
+            }
+
+            sender.sendMessage("§aAll inventories have been removed!");
+            return true;
+        }
+
+        // TODO: continue
         switch (args.length) {
-            case 0:
-                // /inventories
-                args = new String[1];
-                args[0] = "list";
-            case 1:
-                // Specifes /inventories list|clear|remove
-                if (args[0].equalsIgnoreCase("list") || args[0].equalsIgnoreCase("remove")) {
-                    try {
-
-                        String[] inventories = ConfigEditor.getSectionKeys("Inventories").toArray(new String[0]);
-
-                        // Inventory existance check
-                        if (inventories.length <= 0) {
-                            sender.sendMessage("§eThere are no inventories yet! Add one by using §6/inventories create [name] [rows]§e!");
-                        }
-
-                        // Creates a string of inventories
-                        sender.sendMessage("§a--------------------");
-                        sender.sendMessage("§aExisting inventories:");
-
-                        StringBuilder message = new StringBuilder();
-
-                        // Iterates through the inventories
-                        for (int i = 0; i < inventories.length; i++) {
-
-                            message.append("§6").append(inventories[i]);
-
-                            if (i < inventories.length - 1) {
-                                message.append("§a, ");
-                            }
-                        }
-
-                        sender.sendMessage(message.toString());
-                        sender.sendMessage("§a--------------------");
-
-                        return true;
-                    } catch (NullPointerException e) {
-                        sender.sendMessage("§eThere are no inventories yet! Add one by using §6/inventories create [name] [rows]§e!");
-                        return true;
-                    }
-                }
-                else if (args[0].equalsIgnoreCase("clear")) {
-                    try {
-
-                        // Inventories existance check
-                        if (ConfigEditor.getSectionKeys("Inventories") == null) {
-                            sender.sendMessage("§cThere are no inventories!");
-                            return true;
-                        }
-
-                        // Iterates through the inventories
-                        for (String current : ConfigEditor.getSectionKeys("Inventories")) {
-                            ConfigEditor.clearPath("Inventories." + current);
-                        }
-
-                        sender.sendMessage("§aAll inventories have been removed!");
-                        return true;
-                    } catch (Exception e) {
-                        sender.sendMessage("§cCould not clear all inventories!");
-                        return false;
-                    }
-                }
-                else {
-                    sender.sendMessage("§cWrong arguments!");
-                    return false;
-                }
             case 2:
                 // /inventories open|remove <Name>
                 if (args[0].equalsIgnoreCase("open")) {

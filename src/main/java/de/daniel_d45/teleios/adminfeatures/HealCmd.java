@@ -19,7 +19,7 @@ import java.util.Objects;
 
 public class HealCmd implements CommandExecutor {
 
-    // Unbreakable (2024-08-27)
+    // TODO: Test /heal <Amount>|<Player> & /heal <Player> <Amount> ...
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
@@ -39,9 +39,12 @@ public class HealCmd implements CommandExecutor {
         if (args.length == 1) {
             // /heal <Amount>
             if (GlobalFunctions.isDouble(args[0])) {
-                double amount = GlobalFunctions.trimDouble(Double.parseDouble(args[0]), 0, Double.MAX_VALUE);
+                // Force-gets double SC-1
+                double amount = GlobalFunctions.introduceDouble(args[0], 0, Double.MAX_VALUE, sender);
+                if (amount == Double.NEGATIVE_INFINITY) return false;
                 if (amount == 0) return GlobalFunctions.invalidNumber(sender, args[0]);
 
+                // sender -> player SC-1
                 Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
                 if (player == null) return true;
 
@@ -49,6 +52,7 @@ public class HealCmd implements CommandExecutor {
             }
             // /heal <Player>
             else {
+                // Gets target player SC-1
                 Player target = GlobalFunctions.introduceTargetPlayer(args[0], sender);
                 if (target == null) return true;
 
@@ -63,10 +67,12 @@ public class HealCmd implements CommandExecutor {
         }
 
         // /heal <Player> <Amount> ...
+        // Force-gets double SC-1
         double amount = GlobalFunctions.introduceDouble(args[1], 0, Double.MAX_VALUE, sender);
         if (amount == Double.NEGATIVE_INFINITY) return false;
         if (amount == 0) return GlobalFunctions.invalidNumber(sender, args[1]);
 
+        // Gets target player SC-1
         Player target = GlobalFunctions.introduceTargetPlayer(args[0], sender);
         if (target == null) return true;
 
@@ -81,7 +87,7 @@ public class HealCmd implements CommandExecutor {
     }
 
     private double getMaxHealth(Player player) {
-        return Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue();
+        return Objects.requireNonNull(player.getAttribute(Attribute.MAX_HEALTH)).getValue();
     }
 
     @SuppressWarnings("SameReturnValue")

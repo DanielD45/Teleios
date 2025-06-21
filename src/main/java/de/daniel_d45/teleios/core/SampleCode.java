@@ -11,7 +11,7 @@ package de.daniel_d45.teleios.core;
  */
 interface SampleCode {
 
-    ///*
+    /*
     // Changes => update version of sample code (SC-1 -> SC-2)
     private static boolean commandSamples() {
         // USER FEEDBACK
@@ -35,14 +35,15 @@ interface SampleCode {
         Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
         if (player == null) return true;
         // Gets target player SC-1
-        Player target = GlobalFunctions.introduceTargetPlayer(xINPUT_TO_INTRODUCEx, sender);
+        Player target = GlobalFunctions.introduceTargetPlayer(args[xINPUT_TO_INTRODUCEx], sender);
         if (target == null) return true;
         // Gets int SC-1
         // TODO
         // Force-gets double SC-1
-        double xDOUBLE_NAMEx = GlobalFunctions.introduceDouble(xINPUT_TO_INTRODUCEx, xMIN_VALUEx, xMAX_VALUEx, sender);
+        double xDOUBLE_NAMEx = GlobalFunctions.introduceDouble(args[xINPUT_TO_INTRODUCEx], xMIN_VALUEx, xMAX_VALUEx, sender);
         if (xDOUBLE_NAMEx == Double.NEGATIVE_INFINITY) return false;
-        if (xDOUBLE_NAMEx == 0) return GlobalFunctions.invalidNumber(sender, args[xINPUT_TO_INTRODUCEx]); // filters out special values
+        if (xDOUBLE_NAMEx == 0) return GlobalFunctions.invalidNumber(sender, args[xINPUT_TO_INTRODUCEx]);
+        // ^ filters out special values
     }
 
     private static void TabCompleter() {

@@ -2,7 +2,7 @@
 name: Teleios
 version: 1.3WIP
 main: de.daniel_d45.teleios.core.main.Teleios
-description: "Adds miscellaneous features which can be switched on and off using the /manageteleios command."
+description: Adds miscellaneous features which can be switched on and off using the /manageteleios command.
 api-version: 1.21
 author: Daniel_D45
 website: https://github.com/DanielD45/Teleios/
@@ -57,7 +57,7 @@ commands:
     aliases: [ invs ]
     permission: teleios.adminfeatures.inventories
     description: Let's you create, open and manage custom inventories with an amount of rows lower than 7.
-    usage: /invs list|clear, /invs open|remove, /invs create <Name>, /invs create <Name> <Rows>
+    usage: /inventories [list], /inventories clear [yes], /inventories open|remove|create <Name>, /inventories create <Name> <Rows>
 
   joinmessage:
     aliases: [ jm ]

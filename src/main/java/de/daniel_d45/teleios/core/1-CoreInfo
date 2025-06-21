@@ -22,8 +22,9 @@ ItemMeta
 
 
 - Chat message / command feedback colors:
-green (§a) 	/ gold (§6): success message
-yellow (§e) / gold (§6): info message
+green (§a) 	/ gold (§6): success message (changed something)
+aqua (§b)   / gold (§6): info message (answer to query)
+yellow (§e) / gold (§6): demanding message (something should be done)
 red (§c) 	/ gold (§6): fail message
 .
 

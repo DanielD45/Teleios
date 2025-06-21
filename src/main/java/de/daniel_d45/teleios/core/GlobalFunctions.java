@@ -48,7 +48,7 @@ public class GlobalFunctions {
     }
 
     /**
-     * Forces a double provided by the sender between the Interval from minValue (inclusive) to maxValue (inclusive).
+     * Forces a double provided by the sender between the interval from minValue (inclusive) to maxValue (inclusive).
      * Returns Double.NEGATIVE_INFINITY and informs sender if input is not a double.
      */
     public static double introduceDouble(String inputValue, double minValue, double maxValue, CommandSender sender) {
