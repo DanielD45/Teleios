@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -36,6 +37,20 @@ public class GlobalFunctions {
         if (i < minValue) i = minValue;
         else if (i > maxValue) i = maxValue;
         return i;
+    }
+
+    /**
+     * Forces a given int between the interval from minValue (inclusive) to maxValue (inclusive).
+     * Returns Integer.MIN_VALUE and informs sender if input is not an int.
+     */
+    public static int introduceInt(String inputValue, int minValue, int maxValue, CommandSender sender) {
+        try {
+            int i = Integer.parseInt(inputValue);
+            return trimInt(i, minValue, maxValue);
+        } catch (NumberFormatException e) {
+            invalidNumber(sender, inputValue);
+            return Integer.MIN_VALUE;
+        }
     }
 
     /**
@@ -184,6 +199,30 @@ public class GlobalFunctions {
         // target online check
         if (target == null) sender.sendMessage("§cPlayer §6" + targetName + "§c is not online!");
         return target;
+    }
+
+    /**
+     * Gets objects from given config path. If object is null, sends given message to the given sender. Returns object.
+     */
+    public static Object getConfigEntry(String configPath, String nullMessage, CommandSender sender) {
+        Object object = ConfigEditor.get(configPath);
+
+        if (object == null) {
+            sender.sendMessage(nullMessage);
+        }
+        return object;
+    }
+
+    /**
+     * Gets section keys from given config path. If keys are null, sends given message to the given sender. Returns keys.
+     */
+    public static Set<String> getConfigKeys(String configPath, String nullMessage, CommandSender sender) {
+        Set<String> keys = ConfigEditor.getSectionKeys(configPath);
+
+        if (keys == null) {
+            sender.sendMessage(nullMessage);
+        }
+        return keys;
     }
 
 }

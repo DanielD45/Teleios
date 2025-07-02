@@ -83,102 +83,78 @@ public class InventoriesCmd implements CommandExecutor {
             return true;
         }
 
-        // TODO: continue
-        switch (args.length) {
-            case 2:
-                // /inventories open|remove <Name>
-                if (args[0].equalsIgnoreCase("open")) {
-                    // /inventories remove <Name>
+        // /inventories open <Name>
+        if (args.length >= 2 && args[0].equalsIgnoreCase("open")) {
 
-                    if (!(sender instanceof Player player)) {
-                        sender.sendMessage("§cYou are no player!");
-                        return true;
-                    }
+            // sender -> player SC-1
+            Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
+            if (player == null) return true;
 
-                    Inventory inventory = (Inventory) ConfigEditor.get("Inventories." + args[1]);
+            // Try-gets config entry SC-1
+            Inventory inventory = (Inventory) GlobalFunctions.getConfigEntry("Inventories." + args[1], "§cCould not find the inventory §6" + args[1] + "§c!", player);
+            if (inventory == null) return true;
 
-                    if (inventory == null) {
-                        player.sendMessage("§cCould not find the inventory §6" + args[1] + "§c!");
-                        return true;
-                    }
-
-                    player.openInventory(inventory);
-                    return true;
-                }
-                // /inventories remove <Name>
-                else if (args[0].equalsIgnoreCase("remove")) {
-
-                    String name = args[1];
-
-                    if (ConfigEditor.getSectionKeys("Inventories") == null) {
-                        sender.sendMessage("§cThere are no inventories!");
-                        return true;
-                    }
-
-                    // Iterates through the inventory names
-                    for (String current : ConfigEditor.getSectionKeys("Inventories")) {
-                        if (current.equals(name)) {
-                            ConfigEditor.clearPath("Inventories." + name);
-                            sender.sendMessage("§aRemoved the inventory §6" + name + "§a!");
-                            return true;
-                        }
-                    }
-
-                    sender.sendMessage("§cCould not find the inventory §6" + name + "§c!");
-                    return true;
-                }
-                else {
-                    sender.sendMessage("§cWrong arguments!");
-                    return false;
-                }
-            case 3:
-                // /inventories create <Name> <Rows>
-                if (args[0].equalsIgnoreCase("create")) {
-
-                    String name = args[1];
-
-                    // Inventory unique name check
-                    if (ConfigEditor.containsPath("Inventories." + name)) {
-                        sender.sendMessage("§cAn inventory with this name already exists!");
-                        return true;
-                    }
-
-                    int rows = Integer.parseInt(args[2]);
-
-                    // Creates the inventory
-                    Inventory inventory = InventoryManager.createNormalInv(rows, name);
-                    ConfigEditor.set("Inventories." + name, inventory);
-
-                    sender.sendMessage("§aCreated inventory §6" + name + "§a!");
-                    return true;
-
-                }
-                else {
-                    sender.sendMessage("§cWrong arguments!");
-                    return false;
-                }
-            case 4:
-                // /inventories modify access|name <InventoryName> <NewName>
-                if (args[0].equalsIgnoreCase("modify")) {
-
-                    // /inventories modify access
-                    if (args[0].equalsIgnoreCase("access")) {
-                        // TODO: Implement
-
-                    }
-                    else {
-
-                    }
-                }
-                else {
-                    sender.sendMessage("§cWrong arguments!");
-                    return false;
-                }
-                break;
-            default:
-                sender.sendMessage("§cWrong amount of arguments!");
-                return false;
+            player.openInventory(inventory);
+            return true;
         }
+
+        // /inventories remove <Name>
+        if (args.length >= 2 && args[0].equalsIgnoreCase("remove")) {
+
+            // Try-gets config section keys SC-1
+            Set<String> allInvs = GlobalFunctions.getConfigKeys("Inventories", "§cThere are no inventories!", sender);
+            if (allInvs == null) return true;
+
+            String name = args[1];
+
+            // Iterates through the inventories
+            for (String currInv : allInvs) {
+                if (currInv.equals(name)) {
+                    ConfigEditor.clearPath("Inventories." + name);
+                    sender.sendMessage("§aRemoved the inventory §6" + name + "§a!");
+                    return true;
+                }
+
+                sender.sendMessage("§cCould not find the inventory §6" + name + "§c!");
+                return true;
+            }
+        }
+
+        // /inventories create <Name> <Rows>
+        if (args.length >= 3 && args[0].equalsIgnoreCase("create")) {
+
+            String name = args[1];
+
+            // Inventory unique name check
+            if (ConfigEditor.containsPath("Inventories." + name)) {
+                sender.sendMessage("§cAn inventory with the name §6" + name + "§c already exists!");
+                return true;
+            }
+
+            // Force-Gets int SC-1
+            int rows = GlobalFunctions.introduceInt(args[2], 1, Integer.MAX_VALUE, sender);
+            if (rows == Integer.MIN_VALUE) return false;
+
+            // Creates the inventory
+            Inventory inventory = InventoryManager.createNormalInv(rows, name);
+            ConfigEditor.set("Inventories." + name, inventory);
+
+            sender.sendMessage("§aCreated inventory §6" + name + "§a with §6" + rows + "§a rows!");
+            return true;
+        }
+
+        // TODO
+        /*
+        // /inventories modify <InventoryName> name <NewName>
+        if (args.length >= 4 && args[0].equalsIgnoreCase("modify") && args[2].equalsIgnoreCase("name")) {
+
+        }
+        */
+
+        // /inventories modify <InventoryName> access add <PlayerName|@a>
+
+        // /inventories modify <InventoryName> access remove <PlayerName|@a>
+
         return false;
     }
 

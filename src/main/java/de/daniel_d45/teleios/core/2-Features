@@ -41,7 +41,7 @@ BG-Done:
 
 
 Implement this version:
-0 revise commands using SampleCode simplifications with version name (SC-1), CONTINUE: InventoriesCmd, (OplistCmd)
+0 revise commands using SampleCode simplifications with version name (SC-1), CONTINUE: JoinMessageCmdLst, (OplistCmd)
 0 test:
     0 /damage (can still kill other players?)
     0 /gma (output ok?) & copy to /gmx

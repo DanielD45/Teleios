@@ -180,6 +180,19 @@ IP-Ideas:
 0 blocks corrode?
 0 fire protection items can't burn
 0 broken tools remain & can be repaired
+0 Living world:
+    0 Foxes dig dens
+    0 Wolfs make groups
+    0 Animals need to eat grass, apples, leaves, mushrooms, saplings, crops
+    0 Animals die when not enough food
+    0 Animals reproduce when enough food and other animals around
+    0 When animals eat apples, they spawn a sapling at their pos 30sec afterwards
+    0 Animals have food priorities
+    0 During storms, leaves fall down
+    0 Leaves regrow?
+    0 Oaks drop apples
+    0 Saplings need light and rain / adjacent water to grow
+    0 Villagers develop technology depending on amount of emeralds (better golems, )
 .
 
 WM-Ideas:
