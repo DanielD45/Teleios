@@ -26,42 +26,41 @@ public class JoinmessageCmdLst implements CommandExecutor, Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         // TODO: Make individual ActivationState for command
         // Tests whether the joinmessage is enabled and the command is active
-        if (ConfigEditor.hasValue("JoinMessage", true) && ConfigEditor.isActive("AdminFeatures.All")) {
+        if (ConfigEditor.hasValue("JoinMessage", true) && ConfigEditor.isActive("AdminFeatures.JoinmessageCmd")) {
             Player player = event.getPlayer();
-            event.setJoinMessage("§6" + player.getName() + " §9joined the server.");
+            event.setJoinMessage("§6" + player.getName() + "§b joined the server.");
         }
     }
 
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
-        if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
+
+        // Is active check SC-1
+        if (GlobalFunctions.cmdOffCheck("AdminFeatures.JoinmessageCmd", sender)) return true;
 
         // /joinmessage
         if (args.length == 0) {
 
-            Object joinMessageValue = ConfigEditor.get("JoinMessage");
+            // Gets or repairs config entry SC-1
+            boolean joinMessageEnabled = false;
+            Object[] temp = GlobalFunctions.getConfigObjectFix("JoinMessage", joinMessageEnabled);
+            if ((boolean) temp[0]) joinMessageEnabled = (boolean) temp[1];
 
-            // TODO: test whether instanceof is appropriate
-            if (!(joinMessageValue instanceof Boolean)) {
-                ConfigEditor.set("JoinMessage", false);
-                return true;
-            }
-
-            boolean joinMessageEnabled = (boolean) ConfigEditor.get("JoinMessage");
-
-            if (joinMessageEnabled) sender.sendMessage("§aThe custom join message is §6enabled§a.");
-            else sender.sendMessage("§aThe custom join message is §6disabled§a.");
+            String s = "dis";
+            if (joinMessageEnabled) s = "en";
+            sender.sendMessage("§bThe custom join message is §6" + s + "abled§b.");
             return true;
         }
 
-        // /joinmessage enable|true ...
-        if (args[0].equalsIgnoreCase("enable") || args[0].equalsIgnoreCase("true")) {
+        // /joinmessage enable|true|1 ...
+        if (args[0].equalsIgnoreCase("enable") || args[0].equalsIgnoreCase("true") || args[0].equalsIgnoreCase("1")) {
             ConfigEditor.set("JoinMessage", true);
             sender.sendMessage("§aThe custom join message is now §6enabled§a!");
             return true;
         }
-        // /joinmessage disable|false ...
-        else if (args[0].equalsIgnoreCase("disable") || args[0].equalsIgnoreCase("false")) {
+
+        // /joinmessage disable|false|0 ...
+        else if (args[0].equalsIgnoreCase("disable") || args[0].equalsIgnoreCase("false") || args[0].equalsIgnoreCase("0")) {
             ConfigEditor.set("JoinMessage", false);
             sender.sendMessage("§aThe custom join message is now §6disabled§a!");
             return true;

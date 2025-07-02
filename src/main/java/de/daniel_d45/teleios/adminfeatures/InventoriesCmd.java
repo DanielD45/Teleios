@@ -91,7 +91,7 @@ public class InventoriesCmd implements CommandExecutor {
             if (player == null) return true;
 
             // Try-gets config entry SC-1
-            Inventory inventory = (Inventory) GlobalFunctions.getConfigEntry("Inventories." + args[1], "§cCould not find the inventory §6" + args[1] + "§c!", player);
+            Inventory inventory = (Inventory) GlobalFunctions.getConfigObject("Inventories." + args[1], "§cCould not find the inventory §6" + args[1] + "§c!", player);
             if (inventory == null) return true;
 
             player.openInventory(inventory);

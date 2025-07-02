@@ -24,8 +24,7 @@ commands:
     aliases: [ d ]
     permission: teleios.adminfeatures.damage
     description: Damages you or another player.
-    usage: /damage <Amount>,
-      /damage <Player> <Amount>
+    usage: /damage <Amount>, /damage <Player> <Amount>
 
   gma:
     permission: teleios.adminfeatures.gma
@@ -63,7 +62,7 @@ commands:
     aliases: [ jm ]
     permission: teleios.adminfeatures.joinmessageRead
     description: Lets you enable or disable the custom join message.
-    usage: /joinmessage enable|true|disable|false
+    usage: /joinmessage enable|true|1|disable|false|0
 
   lootchest:
     aliases: [ lc ]

@@ -204,13 +204,28 @@ public class GlobalFunctions {
     /**
      * Gets objects from given config path. If object is null, sends given message to the given sender. Returns object.
      */
-    public static Object getConfigEntry(String configPath, String nullMessage, CommandSender sender) {
+    public static Object getConfigObject(String configPath, String nullMessage, CommandSender sender) {
         Object object = ConfigEditor.get(configPath);
 
         if (object == null) {
             sender.sendMessage(nullMessage);
         }
         return object;
+    }
+
+    /**
+     * Gets objects from given config path. Sets config value to fixValue if object from config is invalid (null or different type as fixValue).
+     * Returns Object[2] where [0] is whether the object is valid and [1] is the object.
+     */
+    public static Object[] getConfigObjectFix(String configPath, Object fixValue) {
+        Object object = ConfigEditor.get(configPath);
+        boolean valid = object != null && object.getClass() == fixValue.getClass();
+
+        if (!valid) {
+            ConfigEditor.set(configPath, fixValue);
+        }
+
+        return new Object[]{valid, object};
     }
 
     /**

@@ -31,6 +31,7 @@ public class ChatclearCmd implements CommandExecutor {
 
         Bukkit.broadcastMessage("§aThe chat has been cleared!");
         // Test room
+        
         // End of test room
         return true;
     }

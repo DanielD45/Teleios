@@ -36,11 +36,13 @@ public class MuteCmdLst implements CommandExecutor, Listener {
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
+        // Is active check SC-1
         if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
 
         if (args.length == 0) return false;
 
         // /mute <Player>
+        // Gets target player SC-1
         Player target = GlobalFunctions.introduceTargetPlayer(args[0], sender);
         if (target == null) return true;
 
