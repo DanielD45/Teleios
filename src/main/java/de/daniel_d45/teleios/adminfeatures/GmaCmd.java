@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
 
 public class GmaCmd implements CommandExecutor {
 
-    // Unbreakable (2024-08-28)
+    // TODO: Unbreakable (2024-08-28)
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
         return onGmxCommand(sender, args, GameMode.ADVENTURE);
@@ -26,8 +26,8 @@ public class GmaCmd implements CommandExecutor {
 
     public static boolean onGmxCommand(CommandSender sender, String[] args, GameMode gameMode) {
 
-        // Is active check SC-1
-        if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
+        // Is command active check SC-1
+        if (GlobalFunctions.inactiveCmdCheck("AdminFeatures.All", sender)) return true;
 
         String gameModeName = gameMode.toString().toLowerCase();
 
@@ -64,6 +64,7 @@ public class GmaCmd implements CommandExecutor {
 
     @SuppressWarnings("SameReturnValue")
     private static boolean changeGamemodePlayer(Player player, String gameModeName, GameMode gameMode) {
+
         // Player in wrong gamemode check SC-1
         if (GlobalFunctions.invalidGamemodePlayer(player, "§cYou are already in §6" + gameModeName + "§c mode!", gameMode)) return true;
 

@@ -1,5 +1,5 @@
 /*
- 2020-2023
+ 2020-2025
  Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
  Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
@@ -25,7 +25,7 @@ public class SkillsCmd implements CommandExecutor {
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
         try {
 
-            if (GlobalFunctions.cmdOffCheck("PassiveSkills.All", sender)) return true;
+            if (GlobalFunctions.inactiveCmdCheck("PassiveSkills.All", sender)) return true;
 
             Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
             if (player == null) return true;

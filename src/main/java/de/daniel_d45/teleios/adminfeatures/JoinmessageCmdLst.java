@@ -24,7 +24,10 @@ public class JoinmessageCmdLst implements CommandExecutor, Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
-        // TODO: Make individual ActivationState for command
+
+        // Is function active check SC-1
+        if (!ConfigEditor.isActive("AdminFeatures.JoinmessageCmd")) return;
+
         // Tests whether the joinmessage is enabled and the command is active
         if (ConfigEditor.hasValue("JoinMessage", true) && ConfigEditor.isActive("AdminFeatures.JoinmessageCmd")) {
             Player player = event.getPlayer();
@@ -35,8 +38,8 @@ public class JoinmessageCmdLst implements CommandExecutor, Listener {
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
-        // Is active check SC-1
-        if (GlobalFunctions.cmdOffCheck("AdminFeatures.JoinmessageCmd", sender)) return true;
+        // Is command active check SC-1
+        if (GlobalFunctions.inactiveCmdCheck("AdminFeatures.JoinmessageCmd", sender)) return true;
 
         // /joinmessage
         if (args.length == 0) {

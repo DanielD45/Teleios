@@ -17,21 +17,21 @@ import javax.annotation.Nonnull;
 
 public class ChatclearCmd implements CommandExecutor {
 
-    // Unbreakable (2024-08-28)
+    // TODO: Unbreakable (2024-08-28)
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
-        // Is active check SC-1
-        if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
+        // Is command active check SC-1
+        if (GlobalFunctions.inactiveCmdCheck("AdminFeatures.All", sender)) return true;
 
-        // /chatclear
+        // /chatclear ...
         for (int i = 0; i <= 60; ++i) {
             Bukkit.broadcastMessage("");
         }
 
         Bukkit.broadcastMessage("§aThe chat has been cleared!");
         // Test room
-        
+
         // End of test room
         return true;
     }

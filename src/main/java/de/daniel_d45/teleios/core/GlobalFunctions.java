@@ -148,7 +148,7 @@ public class GlobalFunctions {
         return fittingOptions;
     }
 
-    public static boolean cmdOffCheck(String subPath, CommandSender sender) {
+    public static boolean inactiveCmdCheck(String subPath, CommandSender sender) {
         if (!ConfigEditor.isActive(subPath)) {
             sender.sendMessage("§cThis command is not active.");
             return true;

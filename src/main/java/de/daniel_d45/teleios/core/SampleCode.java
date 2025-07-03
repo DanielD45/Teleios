@@ -22,8 +22,11 @@ interface SampleCode {
         return GlobalFunctions.wrongAmountofArgs(sender);
 
         // CHECKS
-        // Is active check SC-1
-        if (GlobalFunctions.cmdOffCheck("xSUB_PATHx", sender)) return true;
+        // Is command active check SC-1
+        if (GlobalFunctions.inactiveCmdCheck("xSUB_PATHx", sender)) return true;
+
+        // Is function active check SC-1
+        if (!ConfigEditor.isActive("xSUB_PATHx")) return;
 
         // Sender permission check SC-1
         if (GlobalFunctions.permissionCheck(sender, "xSUB_PATHx")) return true;

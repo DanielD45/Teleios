@@ -25,7 +25,7 @@ public class ConfigureteleporterCmd implements CommandExecutor {
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
-        if (GlobalFunctions.cmdOffCheck("BetterGameplay.Teleporters", sender)) return true;
+        if (GlobalFunctions.inactiveCmdCheck("BetterGameplay.Teleporters", sender)) return true;
 
         Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
         if (player == null) return true;

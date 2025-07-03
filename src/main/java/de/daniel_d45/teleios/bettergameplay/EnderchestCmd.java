@@ -23,7 +23,7 @@ public class EnderchestCmd implements CommandExecutor {
 
             // TODO: not working
 
-            if (GlobalFunctions.cmdOffCheck("BetterGameplay.EnderchestCommand", sender)) return true;
+            if (GlobalFunctions.inactiveCmdCheck("BetterGameplay.EnderchestCommand", sender)) return true;
 
             Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
             if (player == null) return true;

@@ -28,7 +28,7 @@ public class WarpCmd implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
-        if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
+        if (GlobalFunctions.inactiveCmdCheck("AdminFeatures.All", sender)) return true;
 
         // for computing if teleporters are unreachable
         Player player = GlobalFunctions.introduceSenderAsPlayer(sender);

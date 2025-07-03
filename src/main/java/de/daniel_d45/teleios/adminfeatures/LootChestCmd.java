@@ -19,8 +19,8 @@ public class LootChestCmd implements CommandExecutor {
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
-        // Is active check SC-1
-        if (GlobalFunctions.cmdOffCheck("BetterGameplay.All", sender)) return true;
+        // Is command active check SC-1
+        if (GlobalFunctions.inactiveCmdCheck("BetterGameplay.All", sender)) return true;
 
         // /lootchest (<x> <y> <z>)
 

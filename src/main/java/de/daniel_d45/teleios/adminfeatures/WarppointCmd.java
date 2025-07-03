@@ -23,7 +23,7 @@ public class WarppointCmd implements CommandExecutor {
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
         try {
 
-            if (GlobalFunctions.cmdOffCheck("AdminFeatures.All", sender)) return true;
+            if (GlobalFunctions.inactiveCmdCheck("AdminFeatures.All", sender)) return true;
 
             switch (args.length) {
                 case 1:
