@@ -11,15 +11,12 @@ package de.daniel_d45.teleios.core;
  */
 interface SampleCode {
 
-    // /*
+     /*
     // Changes: update version of sample code (SC-1 -> SC-2)
     private static boolean commandSamples() {
         // USER FEEDBACK
         // Invalid number (an input value is wrong) SC-1
         return GlobalFunctions.invalidNumber(sender, args[xINDEXx]);
-
-        // Wrong amount of arguments SC-1
-        return GlobalFunctions.wrongAmountofArgs(sender);
 
         // CHECKS
         // Is command active check SC-1
@@ -56,13 +53,18 @@ interface SampleCode {
         if ((boolean) temp[0]) xVARIABLEx = (xDATA_TYPEx) temp[1];
 
         // Try-gets config section keys SC-1
-        Set<String> xVARIABLEx = GlobalFunctions.getConfigKeys(xCONFIG_PATHx, xNULL_MESSAGEx, xSENDERx);
+        Set<String> xVARIABLEx = GlobalFunctions.getConfigKeys("xCONFIG_PATHx", "xNULL_MESSAGEx", xSENDERx);
         if (xVARIABLEx == null) return true;
 
         // Force-Gets int SC-1
         int xINT_NAMEx = GlobalFunctions.introduceInt(args[xINPUT_TO_INTRODUCEx], xMIN_VALUEx, xMAX_VALUEx, sender);
         if (xINT_NAMEx == Integer.MIN_VALUE) return false;
         if (xINT_NAMEx == 0) return GlobalFunctions.invalidNumber(sender, args[xINPUT_TO_INTRODUCEx]);
+
+        // Force-Gets float SC-1
+        float xFLOAT_NAMEx = GlobalFunctions.introduceFloat(args[xINPUT_TO_INTRODUCEx], xMIN_VALUEx, xMAX_VALUEx, sender);
+        if (xFLOAT_NAMEx == Float.MIN_VALUE) return false;
+        if (xFLOAT_NAMEx == 0) return GlobalFunctions.invalidNumber(sender, args[xINPUT_TO_INTRODUCEx]);
 
         // Force-gets double SC-1
         double xDOUBLE_NAMEx = GlobalFunctions.introduceDouble(args[xINPUT_TO_INTRODUCEx], xMIN_VALUEx, xMAX_VALUEx, sender);

@@ -19,34 +19,26 @@ import java.util.Set;
 
 public class OplistCmd implements CommandExecutor {
 
+    // Unbreakable 2025-07-03
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
+        // Is command active check SC-1
         if (GlobalFunctions.inactiveCmdCheck("AdminFeatures.All", sender)) return true;
 
         // /oplist
         if (args.length == 0) {
 
+            // sender -> player SC-1
             Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
             if (player == null) return true;
 
-            // Sender already op check
-            if (player.isOp()) {
-                player.sendMessage("§cYou are already an operator!");
-                return true;
-            }
-
-            Set<String> keys = ConfigEditor.getSectionKeys("OPList");
-            // OP list empty check
-            if (keys == null) {
-                player.sendMessage("§cThe OP list is empty!");
-                return true;
-            }
-
-            String[] listedOps = keys.toArray(new String[0]);
+            // Try-gets config section keys SC-1
+            Set<String> keys = GlobalFunctions.getConfigKeys("OPList", "§cYou are not on the OP list!", sender);
+            if (keys == null) return true;
 
             boolean match = false;
-            for (String current : listedOps) {
+            for (String current : keys) {
                 if (current.equals(player.getName())) {
                     match = true;
                     break;
@@ -59,15 +51,22 @@ public class OplistCmd implements CommandExecutor {
                 return true;
             }
 
+            // Sender already op check
+            if (player.isOp()) {
+                player.sendMessage("§cYou are already an operator!");
+                return true;
+            }
+
             // Makes player an op
             player.setOp(true);
             player.sendMessage("§aYou are now an operator!");
             return true;
         }
 
-        // /oplist add <Name>
+        // /oplist add <Name> ...
         if (args.length >= 2 && args[0].equals("add")) {
 
+            // Sender permission check SC-1
             if (GlobalFunctions.permissionCheck(sender, "adminfeatures.oplistAdd")) return true;
 
             // Adds player to op list
@@ -76,9 +75,10 @@ public class OplistCmd implements CommandExecutor {
             return true;
         }
 
-        // /oplist remove|delete <Name>
+        // /oplist remove|delete <Name> ...
         if (args.length >= 2 && (args[0].equals("remove") || args[0].equals("delete"))) {
 
+            // Sender permission check SC-1
             if (GlobalFunctions.permissionCheck(sender, "adminfeatures.oplistAdd")) return true;
 
             // Target on OP list check

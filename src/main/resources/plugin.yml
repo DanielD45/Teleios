@@ -74,7 +74,14 @@ commands:
       /lootchest (<x> <y> <z>) option refill false|<seconds>,
       /lootchest (<x> <y> <z>) option inventory,
       /lootchest default individual true|false,
-      /lootchest default refill <seconds>,
+      /lootchest default refill <seconds>
+
+  miniature:
+    aliases: [ min ]
+    permission: teleios.adminfeatures.miniature
+    description: Spawns a miniature of the world around you.
+    usage: /miniature <scale> <x_max> <y_max> <z_max>
+
   mute:
     aliases: [ m ]
     permission: teleios.adminfeatures.mute
@@ -91,7 +98,7 @@ commands:
     aliases: [ opl ]
     permission: teleios.adminfeatures.oplist
     description: Lets you store ops on a list. These people can op themselves anytime.
-    usage: /oplist, /oplist add <Name>
+    usage: /oplist, /oplist add <Name>, /oplist remove|delete <Name>
 
   tphere:
     aliases: [ tph ]
@@ -202,6 +209,10 @@ permissions:
 
   teleios.adminfeatures.lootchest:
     description: Allows use of the lootchest command.
+    default: op
+
+  teleios.adminfeatures.miniature:
+    description: Allows use of the miniature command.
     default: op
 
   teleios.adminfeatures.mute:

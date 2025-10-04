@@ -54,6 +54,29 @@ public class GlobalFunctions {
     }
 
     /**
+     * Forces the given float inside the given bounds and returns it.
+     */
+    public static float trimFloat(float i, float minValue, float maxValue) {
+        if (i < minValue) i = minValue;
+        else if (i > maxValue) i = maxValue;
+        return i;
+    }
+
+    /**
+     * Forces a given float between the interval from minValue (inclusive) to maxValue (inclusive).
+     * Returns Float.MIN_VALUE and informs sender if input is not a float.
+     */
+    public static float introduceFloat(String inputValue, float minValue, float maxValue, CommandSender sender) {
+        try {
+            float i = Float.parseFloat(inputValue);
+            return trimFloat(i, minValue, maxValue);
+        } catch (NumberFormatException e) {
+            invalidNumber(sender, inputValue);
+            return Float.MIN_VALUE;
+        }
+    }
+
+    /**
      * Forces the provided double inside the provided bounds and returns it.
      */
     public static double trimDouble(double d, double minValue, double maxValue) {
@@ -234,9 +257,8 @@ public class GlobalFunctions {
     public static Set<String> getConfigKeys(String configPath, String nullMessage, CommandSender sender) {
         Set<String> keys = ConfigEditor.getSectionKeys(configPath);
 
-        if (keys == null) {
-            sender.sendMessage(nullMessage);
-        }
+        if (keys == null && nullMessage != null && !nullMessage.isEmpty()) sender.sendMessage(nullMessage);
+
         return keys;
     }
 

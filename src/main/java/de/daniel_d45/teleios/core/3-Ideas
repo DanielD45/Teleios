@@ -30,6 +30,15 @@ BG-Ideas:
         0b potion resistance?
         0b potion affinity?
         0b throwing power (ender pearls, snowballs... fly further)?
+        0b fire arrows faster -> more damage
+        0b attack speed
+        0b attack damage
+        0b attack knockback?
+        0b stagger attack?
+0b special abilities/combos:
+    0b active power-up/ability which debuffs monsters for a limited time
+    0b tool abilities
+    0b passive abilities (speed)?
 0b [levelling system]:
     0b every different material players collect gives them a reward?
     0b collection system that unlocks crafting recipes?
@@ -93,15 +102,11 @@ BG-Ideas:
     0b faster health regen?
     0b less monster target range?
 0b elytra with 8 armor value?
-0b special abilities/combos:
-    0b active power-up/ability which debuffs monsters for a limited time
-    0b tool abilities
-    0b passive abilities (speed)?
-0b faster arrows -> more damage
 0b Sniffers can lead to nearby structures
 0b implement Illusioners
 0b interconnected chests like ender chests
 0b DnD-like dice rolls for every action
+0b ability to spawn a miniature of the world around you
 .
 
 E-Ideas:

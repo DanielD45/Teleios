@@ -17,12 +17,15 @@ import javax.annotation.Nonnull;
 
 public class OpeninventoryCmd implements CommandExecutor {
 
-    // TODO: Unbreakable
+    // Unbreakable 2025-07-03
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
         // Is command active check SC-1
         if (GlobalFunctions.inactiveCmdCheck("AdminFeatures.All", sender)) return true;
+
+        // /openinventory
+        if (args.length == 0) return false;
 
         // sender -> player SC-1
         Player player = GlobalFunctions.introduceSenderAsPlayer(sender);

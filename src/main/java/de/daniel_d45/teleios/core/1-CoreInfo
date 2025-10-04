@@ -33,8 +33,19 @@ red (§c) 	/ gold (§6): fail message
 mark current problem with // FIXME: ...
 avoid exceptions using if statements
 Sample statements can be found in SampleCode
-don't use Double.NEGATIVE_INFINITY as it is a messenger value in GlobalFunctions
+don't use Double.NEGATIVE_INFINITY operationally as it is a messenger value in GlobalFunctions
 .
+
+
+- Add commands:
+Add command and permission entries to plugin.yml.
+Register command in onEnable():
+getCommand("x_CommandName_x").setExecutor(x_CommandClassObject_x());
+
+
+- Add listeners:
+add to onEnable():
+x_PluginManagerObject_x.registerEvents(new x_ListenerClassName_x(), this);
 
 
 - Data structure for the plugin.yml:

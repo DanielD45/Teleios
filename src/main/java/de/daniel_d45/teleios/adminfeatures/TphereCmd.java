@@ -7,7 +7,6 @@
 package de.daniel_d45.teleios.adminfeatures;
 
 import de.daniel_d45.teleios.core.GlobalFunctions;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,37 +17,34 @@ import javax.annotation.Nonnull;
 
 public class TphereCmd implements CommandExecutor {
 
+    // TODO: Unbreakable
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
+        // Is command active check SC-1
         if (GlobalFunctions.inactiveCmdCheck("AdminFeatures.All", sender)) return true;
 
+        // /tphere
+        if (args.length == 0) return false;
+
+        // /tphere <Player> ...
+        // sender -> player SC-1
         Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
         if (player == null) return true;
-        // /tphere [Player]
-        try {
 
-            // TODO: input
-            Player target = Bukkit.getPlayer(args[0]);
+        // Gets target player SC-1
+        Player target = GlobalFunctions.introduceTargetPlayer(args[0], sender);
+        if (target == null) return true;
 
-            // Target online check
-            if (target == null) {
-                sender.sendMessage("§cThis player is not online!");
-                return true;
-            }
-
-            // Target sender check
-            if (target == sender) {
-                player.sendMessage("§cCan't teleport you to yourself!");
-                return true;
-            }
-
-            target.teleport(player.getLocation());
-            player.sendMessage("§aTeleported §6" + target.getName() + "§a to you!");
+        // Target sender check
+        if (target == sender) {
+            player.sendMessage("§cCan't teleport you to yourself!");
             return true;
-        } catch (Exception e) {
-            return false;
         }
+
+        target.teleport(player.getLocation());
+        player.sendMessage("§aTeleported §6" + target.getName() + "§a to you!");
+        return true;
     }
 
 }

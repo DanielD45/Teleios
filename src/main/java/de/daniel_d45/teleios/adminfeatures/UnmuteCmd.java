@@ -8,7 +8,6 @@ package de.daniel_d45.teleios.adminfeatures;
 
 import de.daniel_d45.teleios.core.ConfigEditor;
 import de.daniel_d45.teleios.core.GlobalFunctions;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,33 +18,51 @@ import javax.annotation.Nonnull;
 
 public class UnmuteCmd implements CommandExecutor {
 
+    // Unbreakable 2025-07-03
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
+        // Is command active check SC-1
         if (GlobalFunctions.inactiveCmdCheck("AdminFeatures.All", sender)) return true;
 
-        Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
-        if (player == null) return true;
+        // /unmute
+        if (args.length == 0) {
 
-        // /unmute [Player]
+            // sender -> player SC-1
+            Player player = GlobalFunctions.introduceSenderAsPlayer(sender);
+            if (player == null) return true;
 
-        Player target = Bukkit.getPlayer(args[0]);
+            String name = player.getName();
 
-        // Target online check
-        if (target == null) {
-            player.sendMessage("§cThis player is not online!");
+            // Is player muted check
+            if (!ConfigEditor.containsPath("MutedPlayers." + name)) {
+                player.sendMessage("§bYou are not muted.");
+                return true;
+            }
+
+            // Removes the player from the muted players list
+            ConfigEditor.set("MutedPlayers." + name, null);
+            player.sendMessage("§aYou have been unmuted!");
             return true;
         }
 
+        // /unmute <Player> ...
+
+        // Gets target player SC-1
+        Player target = GlobalFunctions.introduceTargetPlayer(args[0], sender);
+        if (target == null) return true;
+
+        String name = target.getName();
+
         // Is target muted check
-        if (!ConfigEditor.containsPath("MutedPlayers." + player.getName())) {
-            player.sendMessage("§6" + target.getName() + " §ais not muted!");
+        if (!ConfigEditor.containsPath("MutedPlayers." + name)) {
+            sender.sendMessage("§6" + name + " §cis not muted!");
             return true;
         }
 
         // Removes the player from the muted players list
-        ConfigEditor.set("MutedPlayers." + target.getName(), null);
-        player.sendMessage("§aUnmuted §6" + target.getName() + "§a!");
+        ConfigEditor.set("MutedPlayers." + name, null);
+        sender.sendMessage("§aUnmuted §6" + name + "§a!");
         target.sendMessage("§aYou have been unmuted!");
         return true;
     }

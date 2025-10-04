@@ -52,7 +52,7 @@ public class MuteCmdLst implements CommandExecutor, Listener {
 
         // Player already muted check
         if (ConfigEditor.containsPath("MutedPlayers." + target.getName())) {
-            sender.sendMessage("§6" + target.getName() + " §ais already muted!");
+            sender.sendMessage("§6" + target.getName() + "§c is already muted.");
             return true;
         }
 

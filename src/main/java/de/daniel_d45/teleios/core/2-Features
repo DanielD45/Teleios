@@ -41,7 +41,7 @@ BG-Done:
 
 
 Implement this version:
-0 revise commands using SampleCode simplifications with version name (SC-1), CONTINUE: JoinMessageCmdLst, (OplistCmd)
+0 revise commands using SampleCode simplifications with version name (SC-1), CONTINUE: WarppointCmd
 0 test:
     0 /damage (can still kill other players?)
     0 /gma (output ok?)
@@ -70,6 +70,7 @@ Implement this version:
             0 store to config & notify console
         else:
             0 store default value
+1a /miniature
 0↻ revise GitHub page (functionality)
 .
 

@@ -1,5 +1,5 @@
 /*
- 2020-2023
+ 2020-2025
  Teleios by Daniel_D45 <https://github.com/DanielD45> is marked with CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0>.
  Feel free to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes. Just respect the origin. :)
  */
@@ -29,8 +29,8 @@ public class Teleios extends JavaPlugin {
 
     private static Teleios plugin;
     private static Server server;
-    static String pluginPrefix;
     private static FileConfiguration config;
+    static String pluginPrefix = "§5[Teleios]§r ";
 
     @NonNull
     public static Teleios getPlugin() {
@@ -57,7 +57,6 @@ public class Teleios extends JavaPlugin {
         // Variable instantiation
         plugin = this;
         server = plugin.getServer();
-        pluginPrefix = "§5[Teleios Plugin]§r ";
         config = plugin.getConfig();
         PluginManager pluginManager = Bukkit.getPluginManager();
         // Variables for multi-use
@@ -82,6 +81,7 @@ public class Teleios extends JavaPlugin {
         Objects.requireNonNull(getCommand("inventories")).setExecutor(new InventoriesCmd());
         Objects.requireNonNull(getCommand("joinmessage")).setExecutor(joinmessageCmdLst);
         // TODO: Objects.requireNonNull(getCommand("lootchest")).setExecutor(lootChestCmdLst);
+        Objects.requireNonNull(getCommand("miniature")).setExecutor(new MiniatureCmd());
         Objects.requireNonNull(getCommand("mute")).setExecutor(muteCmdLst);
         Objects.requireNonNull(getCommand("openinventory")).setExecutor(new OpeninventoryCmd());
         Objects.requireNonNull(getCommand("oplist")).setExecutor(new OplistCmd());
