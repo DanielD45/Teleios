@@ -96,7 +96,7 @@ This is a history of the past changes coming with the respective versions. "WIP"
 - the DebugLevel has been removed. The plugin will now only output the exception stacktrace and, <br/>
   when an error occurres while running a command, the sender will be notified of the error
 - added /oplist (/opl): lets you store ops on a list. These people can op themselves anytime as long as the AdminFeatures segment is active.
-- Teleios is now public domain and runs under the CC0 license, meaning I withdraw my copyright of this project
+- Teleios is now public domain and runs under the CC0 license, meaning I withdraw my copyright of this project to a major degree.
 - /w now has a tabcompleter
 - unimplemented functionality has been removed from the manage Teleios inventory (see /mtl)
 - the Activationstates of the unimplemented segments "PassiveSkills" and "WorldMaster" have been removed from the config
